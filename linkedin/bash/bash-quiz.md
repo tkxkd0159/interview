@@ -971,11 +971,11 @@ This is line 3.
 ```bash
 #!/bin/bash
 
-echo 123446789 > out. txt
-exec 3<> out. txt
-read -n 4 <&3
-echo -n 5 >&3
-exec 3>&-
+echo 123446789 > out.txt
+exec 3<> out.txt
+read -n 4 <&3  # 4 byte 
+echo -n 5 >&3  
+exec 3>&-     # fd 3 삭제
 ```
 
 - [ ] 123446789
