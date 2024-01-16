@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Overview" id="Overview" help-id="TOC">
+
+
+    <section-starting-page>
+        <title>Knowledge base for SE</title>
+        <description>
+            Aggregate resources to prepare future job interviews
+        </description>
+
+        <spotlight>
+            <a href="Data-structures.topic" type="documents" summary="TBD">Data Structures</a>
+            <a href="Algorithms.topic" type="documents" summary="TBD">Algorithms</a>
+        </spotlight>
+
+        <primary>
+            <title>Computer science</title>
+            <a href="Operating-system.topic" summary="With a custom card summary">Operating System</a>
+            <a href="Database.topic" summary="With a custom card summary">Database</a>
+            <a href="Network.topic" summary="With a custom card summary">Network</a>
+            <a href="Compiler.topic" summary="With a custom card summary">Compiler</a>
+            <a href="Software-engineering.topic" summary="With a custom card summary">Software Engineering</a>
+
+        </primary>
+
+        <!--    Add several topics that are less important or are relevant only for advanced/experienced users.    -->
+        <secondary>
+            <title>Dev</title>
+            <a href="Design-pattern.topic" summary="With a custom card summary">Design Patterns</a>
+            <a href="System-design.topic" summary="With a custom card summary">System Design</a>
+            <a href="IaC.topic" summary="Infrastructure as Code">IaC</a>
+            <a href="Security.topic" summary="Cryptography, Web">Security</a>
+        </secondary>
+
+        <!--    Optionally add additional cards and links to topics that are not in this section but may be relevant.    -->
+        <misc>
+            <cards>
+                <title>Others</title>
+                <a href="Interview.topic" summary="TBD">Interviews</a>
+            </cards>
+        </misc>
+    </section-starting-page>
+
+</topic>
