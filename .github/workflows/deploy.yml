@@ -4,7 +4,9 @@ on:
   push:
     tags:
       - v[1-9]+.[0-9]+
-  # Specify to run a workflow manually from the Actions tab on GitHub
+    branches:
+      - main
+      # Specify to run a workflow manually from the Actions tab on GitHub
   workflow_dispatch:
 
 permissions:
