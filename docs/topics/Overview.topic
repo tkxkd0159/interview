@@ -32,12 +32,17 @@
             <title>Dev</title>
             <a href="Design-pattern.topic" summary="With a custom card summary">Design Patterns</a>
             <a href="System-design.topic" summary="With a custom card summary">System Design</a>
-            <a href="IaC.topic" summary="Infrastructure as Code">IaC</a>
             <a href="Security.topic" summary="Cryptography, Web">Security</a>
         </secondary>
 
         <!--    Optionally add additional cards and links to topics that are not in this section but may be relevant.    -->
         <misc>
+            <cards><title>DevOps</title>
+                <a href="Docker.topic" summary="">Docker</a>
+                <a href="Kubernetes.topic" summary="">Kubernetes</a>
+                <a href="IaC.topic" summary="Infrastructure as Code">IaC</a>
+                <a href="MLOps.topic" summary="">MLOps</a>
+            </cards>
             <cards>
                 <title>Others</title>
                 <a href="Interview.topic" summary="TBD">Interviews</a>

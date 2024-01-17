@@ -20,9 +20,16 @@
     <toc-element toc-title="Dev">
         <toc-element topic="Design-pattern.topic"/>
         <toc-element topic="System-design.topic"/>
-        <toc-element topic="IaC.topic"/>
         <toc-element topic="Security.topic"/>
     </toc-element>
+
+    <toc-element toc-title="DevOps">
+        <toc-element topic="Kubernetes.topic"/>
+        <toc-element topic="Docker.topic"/>
+        <toc-element topic="IaC.topic"/>
+        <toc-element topic="MLOps.topic"/>
+    </toc-element>
+
     <toc-element topic="Interview.topic"/>
 
 </instance-profile>
