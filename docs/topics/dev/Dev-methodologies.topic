@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Dev methodologies" id="Dev-methodologies">
+
+    <show-structure depth="3"/>
+
+
+    <chapter title="OOP">
+        <chapter title="features">
+            <deflist>
+                <def title="Abstraction">Separate interface and implementation. In other words, it hides complicate internal logic and client implement their logic based on interface.
+                </def>
+                <def title="Encapsulation">Do not allow to access properties directly. Combining the properties of an object with the behavior of using them(private property, setter, getter)
+                    <code-block lang="java" collapsible="true">
+                        class Citizen:
+                        drinking_age = 19
+
+                        def __init__(self, name, age, resident_id):
+                        self.name = name
+                        self.__age = age
+                        self.__resident_id = resident_id
+
+                        def authenticate(self, id_field):
+                        return self.__resident_id == id_field
+
+                        def can_drink(self):
+                        return self.__age >= Citizen.drinking_age
+
+                        def __str__(self):
+                        return self.name + "is" + str(self.__age) + "old"
+
+                        young = Citizen("random", 18, "87654321")
+                        print(young.__str__())
+                        print(young.__authenticate("87654321")) Error
+                    </code-block>
+                </def>
+                <def title="Inheritance">
+                    <list>
+                        <li><b>Method overloading:</b> the method name are same but parameters are different.</li>
+                        <li><b>Method overriding:</b> Same method name, parameters but different logic</li>
+                    </list>
+                    <code-block lang="java" collapsible="true">
+                        class Parent {
+
+                            void display() { System.out.println("Parent class: display()"); }
+
+                        }
+
+                        class Child extends Parent {
+                            void display() { System.out.println("Child class: display()"); } // Override
+                            void display(String str) { System.out.println(str); } // Overload
+                        }
+
+                        public class Inheritance06 {
+                            public static void main(String[] args) {
+                            Child ch = new Child();
+                            ch.display();
+                            ch.display("");
+                            }
+                        }
+                    </code-block>
+                </def>
+                <def title="Polymorphism">The property of allowing each element of a programming language (constants, variables, objects, methods, etc.) to belong to various data types. In general, in OOP, polymorphism refers to the fact that one object can have multiple data types.
+                    Below is an example of the method. The internal logic of the <code>StringValue()</code> varies depending on the data type to which it is connected. In other words, it belongs to various data types. The monomorphism approach requires implementing a separately named function for each transformation.
+                    <code-block>
+                        // monomorphism
+                        string = StringFromNumber(number);
+                        string = StringFromDate(date);
+
+                        // polymorphism
+                        string = number.StringValue();
+                        string = date.StringValue();
+                    </code-block>
+                </def>
+            </deflist>
+        </chapter>
+
+        <chapter title="SOLID design">
+            <deflist>
+                <def title="Single Responsibility Principle">단일 책임 원칙은 같이 수정해야될 것들은 묶고, 따로 수정해야될 것들은 분리하는 것. 즉, 모든 클래스는 단 한가지 책임만을 가지고 클래스 안에 정의되어 있는 모든 기능은 이 하나의 책임을 수행하는 데 집중해야 함.
+                <code-block lang="python" collapsible="true">
+                    class Ship:
+                        def __init__(self, fuel, fuel_per_hour, num_crew):
+                            self.fuel_tank = FuelTank(fuel)
+                            self.crew_manager = CrewManager(num_crew)
+                            self.engine = Engine(self.fuel_tank, fuel_per_hour)
+
+
+                    class FuelTank:
+                        def __init__(self, fuel):
+                            self.fuel = fuel
+
+                        def load_fuel(self, amount):
+                            self.fuel += amount
+
+                        def use_fuel(self, amount):
+                            if self.fuel - amount >= 0:
+                                self.fuel -= amount
+                                return True
+                            print("running out of fuel!")
+                            return False
+
+                        def report_fuel(self):
+                            print("Current fuel remaining is {}L".format(self.fuel))
+
+                    class Engine:
+                        def __init__(self, fuel_tank, fuel_per_hour):
+                            self.fuel_tank = fuel_tank
+                            self.fuel_per_hour = fuel_per_hour
+
+                        def run_for_hours(self, hours):
+                            if self.fuel_tank.use_fuel(self.fuel_per_hour * hours):
+                                print("Operating the engine for {} hours".format(hours))
+                                return True
+                            print("The engine cannot be started because it is low on fuel")
+                            return False
+
+                    class CrewManager:
+                        def __init__(self, num_crew):
+                            self.num_crew = num_crew
+
+                        def load_crew(self, number):
+                            self.num_crew += number
+
+                        def report_crew(self):
+                            print("There are currently {} crew members".format(self.num_crew))
+                </code-block>
+                </def>
+                <def title="Open-Closed Principle">클래스는 확장에는 열려있어야 되고 수정에는 닫혀있어야 함. 즉, 새로운 코드를 작성해서 기존 기능을 확장할 수는 있지만 기존 한번 작성한 코드는 바꿀 필요는 없는 상황을 만들어야 함. 대부분 다형성을 이용해 구현.
+                    <code-block lang="python" collapsible="true">
+                        <![CDATA[
+                        class MessageNotificationManager:
+                            def __init__(self):
+                                self.message_notifications = []
+
+                            def add_new_message(self, new_message):
+                                self.message_notifications.append(new_message)
+
+                            def display_message_notifications(self):
+                                print("new messages")
+                                for message in self.message_notifications:
+                                print(message.short_message() + "\n")
+
+                        class FacebookMessage:
+                            notification_message_max_len = 15
+
+                            def __init__(self, sent_by, location, time, content):
+                                self.sent_by = sent_by
+                                self.location = location
+                                self.time = time
+                                self.content = content
+
+                            def short_message(self):
+                                res_str = "{}\n{}\n{}\n".format(self.time, self.sent_by, self.location)
+                                res_str += (
+                                self.content
+                                if len(self.content) <= FacebookMessage.notification_message_max_len
+                                else self.content[: FacebookMessage.notification_message_max_len] + "..."
+                                )
+
+                        return res_str
+
+
+                        class TextMessage:
+                            notification_message_max_len = 12
+
+                            def __init__(self, sent_by, time, content):
+                                self.sent_by = sent_by
+                                self.time = time
+                                self.content = content
+
+                        def short_message(self):
+                            noti_string = "{}, {}\n".format(self.sent_by, self.time)
+                            noti_string += (
+                            self.content
+                            if len(self.content) <= TextMessage.notification_message_max_len
+                            else self.content[: TextMessage.notification_message_max_len] + "..."
+                            )
+                            return noti_string
+
+
+                        message_notification_manager = MessageNotificationManager()
+                        facebook_message = FacebookMessage(
+                        "Jay", "Seoul", "2019.02.10 15:30", "dummy"
+                        )
+                        text_message = TextMessage("Emily", "2019.02.10 15:50", "dummy")
+
+                        message_notification_manager.add_new_message(facebook_message)
+                        message_notification_manager.add_new_message(text_message)
+
+                        message_notification_manager.display_message_notifications()
+                        ]]>
+                    </code-block>
+                </def>
+                <def title="Liskov Substitution Principle"><p>
+                    부모 클래스의 인스턴스를 사용하는 위치에 자식 클래스의 인스턴스를 대신 사용했을 때 코드가 원래 의도대로 작동해야 한다. 새로 정의하는 메소드가 아닌 상속된 메소드는 왠만하면 그대로 쓸 수 있게 설계돼야 함 (새로운 정의가 아닌 확장의 개념으로 상속).
+                    아래는 리스코프 치환 원칙을 위반한 2가지 예시
+                </p>
+                    <list>
+                        <li>
+                            자식 클래스가 부모 클래스의 변수의 타입을 바꾸거나 메소드의 파라미터 또는 타입/갯수를 바꾸는 경우
+                            <code-block lang="python" collapsible="true">
+                                class Employee:
+                                    company_name = "Macdonalds"
+                                    raise_percentage = 1.03
+
+                                    def __init__(self, name, wage):
+                                        self.name = name
+                                        self._wage = wage
+
+                                    def raise_pay(self):
+                                        self._wage *= self.raise_percentage
+
+                                    @property
+                                    def wage(self):
+                                        return self._wage
+
+                                    def __str__(self):
+                                        return Employee.company_name + " 직원: " + self.name
+
+
+                                class Cashier(Employee):
+                                    """리스코프 치환 원칙을 지키지 않는 계산대 직원 클래스"""
+                                    burger_price = 4000
+
+                                    def __init__(self, name, wage, number_sold=0): # 파라미터 개수 달라짐
+                                        super().__init__(name, wage)
+                                        self.number_sold = number_sold
+
+                                    def raise_pay(self, raise_amount):             # 파라미터 개수 달라짐
+                                        self.wage += self.raise_amount
+
+                                    @property
+                                    def wage(self):
+                                        return "시급 정보를 알려줄 수 없습니다"
+                            </code-block>
+                        </li>
+                        <li>
+                            자식 클래스가 부모 클래스의 의도와 다르게 메소드를 오버라이딩 하는 경우
+                            <code-block lang="python" collapsible="true">
+                                class Rectangle:
+
+                                    def __init__(self, width, height):
+                                        self.width = width
+                                        self.height = height
+
+                                    def area(self):
+                                        return self.width * self.height
+
+                                    @property
+                                    def width(self):
+                                        return self._width
+
+                                    @width.setter
+                                    def width(self, value):
+                                        self._width = value if value > 0 else 1
+
+                                    @property
+                                    def height(self):
+                                        return self._height
+
+                                    @height.setter
+                                    def height(self, value):
+                                        self._height = value if value > 0 else 1
+
+                                class Square(Rectangle):
+                                    def __init__(self, side):
+                                        super().__init__(side, side)
+
+                                    @property
+                                    def width(self):
+                                        return self._width
+
+                                    @width.setter
+                                    def width(self, value):
+                                        self._width = value if value > 0 else 1
+                                        self._height = value if value > 0 else 1
+
+                                    @property
+                                    def height(self):
+                                        return self._height
+
+                                    @height.setter
+                                    def height(self, value):
+                                        self._width = value if value > 0 else 1
+                                        self._height = value if value > 0 else 1
+                            </code-block>
+                        </li>
+                    </list>
+                </def>
+                <def title="Interface Segregation Principle"></def>
+                <def title="Dependency Inversion Principle"></def>
+            </deflist>
+        </chapter>
+    </chapter>
+</topic>
