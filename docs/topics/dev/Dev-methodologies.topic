@@ -8,8 +8,8 @@
     <show-structure depth="3"/>
 
 
-    <chapter title="OOP">
-        <chapter title="features">
+    <chapter title="Object-oriented Programming(OOP)">
+        <chapter title="Features">
             <deflist>
                 <def title="Abstraction">Separate interface and implementation. In other words, it hides complicate internal logic and client implement their logic based on interface.
                 </def>
@@ -129,70 +129,61 @@
                             print("There are currently {} crew members".format(self.num_crew))
                 </code-block>
                 </def>
-                <def title="Open-Closed Principle">클래스는 확장에는 열려있어야 되고 수정에는 닫혀있어야 함. 즉, 새로운 코드를 작성해서 기존 기능을 확장할 수는 있지만 기존 한번 작성한 코드는 바꿀 필요는 없는 상황을 만들어야 함. 대부분 다형성을 이용해 구현.
-                    <code-block lang="python" collapsible="true">
-                        <![CDATA[
-                        class MessageNotificationManager:
-                            def __init__(self):
-                                self.message_notifications = []
+                <def title="Open-Closed Principle">
+                    클래스는 확장에는 열려있어야 되고 수정에는 닫혀있어야 함. 즉, 새로운 코드를 작성해서 기존 기능을 확장할 수는 있지만 기존 한번 작성한 코드는 바꿀 필요는 없는 상황을 만들어야 함. 아래 예시를 보면 <code>Triangle</code> 을 새롭게 구현할 때 기존의 <code>Shape</code>, <code>Circle</code>, <code>Rectangle</code> 의 코드를 변경할 필요 없음.
+                    <code-block lang="java" collapsible="true">
+                        // Base class
+                        abstract class Shape {
+                            abstract double calculateArea();
+                        }
 
-                            def add_new_message(self, new_message):
-                                self.message_notifications.append(new_message)
+                        // Concrete class
+                        class Circle extends Shape {
+                            private double radius;
+때
+                            Circle(double radius) {
+                                this.radius = radius;
+                            }
 
-                            def display_message_notifications(self):
-                                print("new messages")
-                                for message in self.message_notifications:
-                                print(message.short_message() + "\n")
+                            @Override
+                            double calculateArea() {
+                                return Math.PI * radius * radius;
+                            }
+                        }
 
-                        class FacebookMessage:
-                            notification_message_max_len = 15
+                        // Another concrete class
+                        class Rectangle extends Shape {
+                            private double width;
+                            private double height;
 
-                            def __init__(self, sent_by, location, time, content):
-                                self.sent_by = sent_by
-                                self.location = location
-                                self.time = time
-                                self.content = content
+                            Rectangle(double width, double height) {
+                                this.width = width;
+                                this.height = height;
+                            }
 
-                            def short_message(self):
-                                res_str = "{}\n{}\n{}\n".format(self.time, self.sent_by, self.location)
-                                res_str += (
-                                self.content
-                                if len(self.content) <= FacebookMessage.notification_message_max_len
-                                else self.content[: FacebookMessage.notification_message_max_len] + "..."
-                                )
+                            @Override
+                            double calculateArea() {
+                                return width * height;
+                            }
+                        }
 
-                        return res_str
+                        // New concrete class
+                        class Triangle extends Shape {
+                            private double base;
+                            private double height;
 
+                            Triangle(double base, double height) {
+                                this.base = base;
+                                this.height = height;
+                            }
 
-                        class TextMessage:
-                            notification_message_max_len = 12
-
-                            def __init__(self, sent_by, time, content):
-                                self.sent_by = sent_by
-                                self.time = time
-                                self.content = content
-
-                        def short_message(self):
-                            noti_string = "{}, {}\n".format(self.sent_by, self.time)
-                            noti_string += (
-                            self.content
-                            if len(self.content) <= TextMessage.notification_message_max_len
-                            else self.content[: TextMessage.notification_message_max_len] + "..."
-                            )
-                            return noti_string
+                            @Override
+                            double calculateArea() {
+                                return 0.5 * base * height;
+                            }
+                        }
 
 
-                        message_notification_manager = MessageNotificationManager()
-                        facebook_message = FacebookMessage(
-                        "Jay", "Seoul", "2019.02.10 15:30", "dummy"
-                        )
-                        text_message = TextMessage("Emily", "2019.02.10 15:50", "dummy")
-
-                        message_notification_manager.add_new_message(facebook_message)
-                        message_notification_manager.add_new_message(text_message)
-
-                        message_notification_manager.display_message_notifications()
-                        ]]>
                     </code-block>
                 </def>
                 <def title="Liskov Substitution Principle"><p>
@@ -291,9 +282,202 @@
                         </li>
                     </list>
                 </def>
-                <def title="Interface Segregation Principle"></def>
-                <def title="Dependency Inversion Principle"></def>
+                <def title="Interface Segregation Principle"><p>
+                    인터페이스는 추상클래스와 비슷하지만 다름. 추상 클래스 안에는 일반 메소드도 선언할 수 있고 이건 자식클래스에서 무조건 구현하지 않고 그대로 상속받아도 되지만 인터페이스는 꼭 지켜야하는 규약이라 무조건 해당 규칙대로 구현해야 함.
+                    인터페이스 분리 원칙은 클래스가 사용하지 않을 메소드에 의존할 것을 강요하면 안 되는것. 따라서 인터페이스는 기능이나 역할별로 쪼갤 수 있으면 쪼개는 게 좋음
+                </p>
+                    <list>
+                        <li>
+                            아래에서 메모는 <code>send</code> 기능이 필요없는데도 불구하고 추상메소드(인터페이스)에 의해 구현을 강요당함. 따라서 이런 상황이 발생하지 않게 인터페이스를 더 잘게 쪼개야 함.
+                            /<code-block lang="python" collapsible="true">
+                            from abc import ABC, abstractmethod
+
+
+                            class IMessage(ABC):
+                                @property
+                                @abstractmethod
+                                def content(self):
+                                    pass
+
+                                @abstractmethod
+                                def edit_content(self, new_content: str) -> None:
+                                    pass
+
+                                @abstractmethod
+                                def send(self, destination: str) -> bool:
+                                    pass
+
+                            class Email(IMessage):
+                                def __init__(self, content, owner_email):
+                                self._content = content
+                                self.owner_email = owner_email
+
+                                @property
+                                def content(self):
+                                    return self._content
+
+                                def edit_content(self, new_content):
+                                    self._content = self.owner_email + "님의 메일\n" + new_content
+
+                                def send(self, destination):
+                                    print("{}에서 {}로 이메일 전송!\n내용: {}").format(self.owner_email, destination, self._content)
+                                    return True
+
+
+                            class Memo(IMessage):
+                                def __init__(self, content):
+                                    self._content = content
+
+                                @property
+                                def content(self):
+                                    return self._content
+
+                                def edit_content(self, new_content):
+                                    self._content = new_content
+
+                                def send(self, destination):
+                                    """You can't not send memo"""
+                                    return False
+
+                                class TextReader:
+
+                                def __init__(self):
+                                    self.texts = []
+
+                                def add_text(self, text: IMessage):
+                                    self.texts.append(text)
+
+                                def read_all_texts(self):
+                                    for text in self.texts:
+                                    print(text.content)
+                            </code-block>
+                        </li>
+                        <li>
+                            아래는 기능에 따라 인터페이스를 분리한 예시
+                            <code-block lang="python" collapsible="true">
+                                from abc import ABC, abstractmethod
+
+                                class IPrinter(ABC):
+                                    @abstractmethod
+                                    def print_file(self, file:str) -> bool:
+                                        pass
+
+
+                                class IScanner(ABC):
+                                    @abstractmethod
+                                    def scan(self, content:str) -> bool:
+                                        pass
+
+                                class SamsungPrinter(IPrinter, IScanner):
+                                    def __init__(self, has_ink, has_paper, is_connected):
+                                        self.has_ink = has_ink
+                                        self.has_paper = has_paper
+                                        self.is_connected = is_connected
+
+                                    def print_file(self, file):
+                                        if self.has_ink and self.has_paper and self.is_connected:
+                                            print("문서 {}을/를 출력 중입니다!".format(file))
+                                            return True
+                                        return False
+
+                                    def scan(self, content):
+                                        if self.is_connected:
+                                            print("{}을/를 이미지 파일로 저장합니다.".format(content))
+                                            return True
+                                        return False
+
+
+                                class LGPrinter(IPrinter):
+                                    def __init__(self, has_ink, has_paper, is_connected):
+                                        self.has_ink = has_ink
+                                        self.has_paper = has_paper
+                                        self.is_connected = is_connected
+
+                                    def print_file(self, file):
+                                        if self.has_ink and self.has_paper and self.is_connected:
+                                            print("문서 {}을/를 출력합니다.".format(file))
+                                            return True
+                                        return False
+
+                                samsung_printer = SamsungPrinter(True, True, True)
+                                lg_printer = LGPrinter(True, True, True)
+
+                                samsung_printer.print_file("4월 보고서.docx")
+                                lg_printer.print_file("4월 보고서.docx")
+
+                                samsung_printer.scan("스캔 테스트 문서")
+
+                                print(SamsungPrinter.mro())
+                                print(LGPrinter.mro())
+                            </code-block>
+                        </li>
+                    </list>
+                </def>
+                <def title="Dependency Inversion Principle">
+                    <p> 의존 관계 역전 원칙은 상위 모듈이 하위 모듈을 사용할 때 직접 인스턴스를 가져다가 쓰지 말라는 뜻이다. 왜냐하면 인스턴스를 바로 가져다가 쓴다는 말은
+                        하위 모듈의 구체적인 내용에 상위 모듈이 의존하게 되어 하위 모듈에 변화가 있을 때마다 상위 모듈의 코드를 바꿔줘야 하기 때문이다.
+                        이에 대한 해결책은 추상 클래스(or 인터페이스)로 상위 모듈과 하위 모듈 사이에 추상화 레이어를 만드는 것. 이렇게 할 경우 상위 모듈에는 추상 클래스의 자식 클래스의
+                        인스턴스를 사용한다는 가정 하에 코드를 작성해두면 되고 하위 모듈은 추상 클래스의 추상 메소드(또는 인터페이스)들을 구현만 하면 된다.
+                        의존 관계 역전 원칙은 개방-폐쇄 원칙을 지키기 위한 하나의 방법으로도 볼 수 있다. 이 원칙은 <code>Dependency injection</code> 이랑 묶여서 잘 사용됨(유지보수와 테스트 쉬워짐)</p>
+
+                    <p>
+                        아래는 구현 예시. <code>SwitchController</code> 가 직접 <code>LampSwitch</code> 를 파라미터로 사용하는 것이 아니라 <code>Switchable</code> 이라는 인터페이스를 매개 삼아서 사용함. 따라서 이후 인터페이스대로 구현된 <code>BulbSwitch</code> 도 상위 모듈 변경없이 바로 사용 가능.
+                    </p>
+                    <code-block lang="java" collapsible="true">
+                        // Low-level module
+                        class LampSwitch {
+                            void turnOn() {
+                                System.out.println("Light is ON");
+                            }
+
+                            void turnOff() {
+                                System.out.println("Light is OFF");
+                            }
+                        }
+
+                        // Abstraction (Interface)
+                        interface Switchable {
+                            void turnOn();
+
+                            void turnOff();
+                        }
+
+                        // High-level module
+                        class SwitchController {
+                            private Switchable device;
+
+                            // Constructor injection to set the dependency
+                            SwitchController(Switchable device) {
+                                this.device = device;
+                        }
+
+                            void turnOnDevice() {
+                                device.turnOn();
+                            }
+
+                            void turnOffDevice() {
+                                device.turnOff();
+                            }
+                        }
+
+                        // Concrete implementation of Switchable
+                        class BulbSwitch implements Switchable {
+                            @Override
+                            public void turnOn() {
+                                System.out.println("Light is ON");
+                            }
+
+                            @Override
+                            public void turnOff() {
+                                System.out.println("Light is OFF");
+                            }
+                        }
+                    </code-block>
+                </def>
             </deflist>
         </chapter>
+    </chapter>
+    <chapter title="Aspect Oriented Programming(AOP)">
+
     </chapter>
 </topic>
