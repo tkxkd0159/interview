@@ -5,5 +5,11 @@
        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
        title="Compiler" id="Compiler">
 
-    <p>Start typing here...</p>
+    <p>The most popular design for a traditional static compiler (like most C compilers) is the three phase design whose major components are the frontend, the optimizer and the backend.
+        The <b>frontend</b> parses source code, checking it for errors, and builds a language-specific Abstract Syntax Tree (AST) to represent the input code.
+        The AST is optionally converted to a new representation for optimization, and the optimizer and back end are run on the code.
+        The <b>optimizer</b> is responsible for doing a broad variety of transformations to try to improve the code's running time, such as eliminating redundant computations, and is usually more or less independent of language and target.
+        The <b>backend</b> (also known as the code generator) then maps the code onto the target instruction set. In addition to making correct code, it is responsible for generating good code that takes advantage of unusual features of the supported architecture. Common parts of a compiler back end include instruction selection, register allocation, and instruction scheduling.
+    </p>
+
 </topic>

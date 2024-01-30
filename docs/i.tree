@@ -14,7 +14,10 @@
         <toc-element topic="Network.topic"/>
         <toc-element topic="Database.topic"/>
         <toc-element topic="Software-engineering.topic"/>
-        <toc-element topic="Compiler.topic"/>
+        <toc-element topic="Compiler.topic">
+            <toc-element topic="Compiler-Opti.topic"/>
+            <toc-element topic="Compiler-LLVM.topic"/>
+        </toc-element>
     </toc-element>
 
     <toc-element toc-title="Dev">
