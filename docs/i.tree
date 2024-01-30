@@ -19,7 +19,9 @@
 
     <toc-element toc-title="Dev">
         <toc-element topic="Dev-methodologies.topic"/>
-        <toc-element topic="Design-pattern.topic"/>
+        <toc-element topic="Design-pattern.topic">
+            <toc-element topic="web-dp.topic"/>
+        </toc-element>
         <toc-element topic="System-design.topic"/>
         <toc-element topic="Security.topic"/>
     </toc-element>

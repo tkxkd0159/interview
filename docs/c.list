@@ -2,5 +2,6 @@
 <!DOCTYPE categories
         SYSTEM "https://resources.jetbrains.com/writerside/1.0/categories.dtd">
 <categories>
-    <category id="wrs" name="Writerside documentation" order="1"/>
+    <category id="refs" name="References" order="1"/>
+    <category id="diy" name="DIY" order="2"/>
 </categories>

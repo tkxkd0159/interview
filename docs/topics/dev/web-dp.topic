@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Web" id="web-dp">
+
+    <note>
+        아래 패턴에 너무 얽매이지 말고 model은 데이터 핸들링(스키마 정의 및 DB 관련 쿼리/트랜잭션 처리), controller는 비지니스 로직 처리로 바라보면 된다.
+        Controller를 좀 더 추상화하고 싶은 경우 service폴더를 따로 분리해서 비지니스 상세 로직을 구현하고 이를 controller에서는 조합만 하는 방식을 사용할 수도 있음.
+    </note>
+    <chapter title="MVC">
+            <p>
+                MVC (Model-View-Controller) is a pattern in software design commonly used to implement user interfaces, data, and controlling logic. It emphasizes a separation between the software's business logic and display.
+                이전에는 무조건 백엔드로 넘겨서 데이터를 처리했지만 요즘은 HTTP cookie 이외에도 <tooltip term="web-storage">Web Storage API</tooltip>, <tooltip term="indexdb">IndexedDB API</tooltip> 같은 새로운 client-side storage가 제공되서 해당 구조를 정석대로 따르지는 않음.
+                MVC에서 View가 업데이트되는 방법은 1)View가 Model을 직접 이용 2)Model에서 View에게 Notify 3)View가 Polling으로 주기적으로 Model의 변경을 감지.
+            </p>
+        <list type="decimal">
+            <li>Model: Manages data and business logic.
+                The model defines what data the app should contain.
+                If the state of this data changes, then the model will usually notify the view (so the display can change as needed) and sometimes the controller (if different logic is needed to control the updated view).
+            </li>
+            <li>View: Handles layout and display.
+            </li>
+            <li>Controller: Routes commands to the model and view parts (Controller는 여러개의 View를 선택할 수 있는 1:n 구조).
+                The controller contains logic that updates the model and/or view in response to input from the users of the app.
+            </li>
+        </list>
+        <img src="$WRS_MODULE$/images/dev/mvc.png" alt="mvc-arch"/>
+        
+        <deflist>
+            <def title="MVP (Model-View-Presenter)"><p>
+                MVC 한계를 극복하기 위해 나온 패턴. MVC에서 Model과 View가 tightly coupling 되는 것을 Presenter라는 communication channel을 둠으로써 해결. View와 Presenter는 1-to-1.
+            </p>
+                <img src="$WRS_MODULE$/images/dev/dp-mpv.png" alt="MVP pattern"/>
+                <list>
+                <li><b>Model</b>: Layer for storing data. It is responsible for handling the domain logic(real-world business rules) and communication with the database and network layers.
+                </li>
+                <li>
+                    <b>View</b>: UI layer. It provides the visualization of the data and keep a track of the user’s action in order to notify the Presenter.
+                </li>
+                <li>
+                    <b>Presenter</b>: Fetch the data from the model and applies the UI logic to decide what to display. It manages the state of the View and takes actions according to the user’s input notification from the View.
+
+                </li>
+            </list>
+            </def>
+            <def title="MVVM (Model-View-ViewModel)"><p>
+                MVP 패턴의 단점을 보완하기 위해 나옴. View와 ViewModel의 관계가 one-to-many이고 Binder를 통해 연결한다. 이를 통해 MVC, MVP와 달리 완벽하게 View와 business logic을 분리함(easy to test).
+                View에서 직접 GUI code가 작성되지 않고 XAML같은 markup language를 사용하고 여기에 데이터를 바인딩함. 단점은 ViewModel 설계가 까다롭다.
+            </p>
+                <img src="$WRS_MODULE$/images/dev/mvvm.png" alt="MVVM pattern"/>
+                <list>
+                    <li><b>Model</b>: This layer is responsible for the abstraction of the data sources. Model and ViewModel work together to get and save the data.
+                    </li>
+                    <li>
+                        <b>View</b>: The purpose of this layer is to inform the ViewModel about the user’s action. This layer observes the ViewModel and does not contain any kind of application logic.
+                    </li>
+                    <li>
+                        <b>ViewModel</b>: It exposes those data streams which are relevant to the View. Moreover, it servers as a link between the Model and the View.
+                    </li>
+                </list>
+                <code-block lang="xml">
+                    <![CDATA[
+                    <book>
+                        <title>Java Programming</title>
+                        <author>John Doe</author>
+                        <price>29.99</price>
+                    </book>
+                    ]]>
+                </code-block>
+                <code-block lang="java">
+                    @XmlRootElement
+                    public class Book {
+                        private String title;
+                        private String author;
+                        private double price;
+
+                        // Default constructor (required by JAXB)
+                        public Book() {}
+
+                        public Book(String title, String author, double price) {
+                            this.title = title;
+                            this.author = author;
+                            this.price = price;
+                        }
+
+                        @XmlElement
+                        public String getTitle() {
+                            return title;
+                        }
+
+                        public void setTitle(String title) {
+                            this.title = title;
+                    }
+                </code-block>
+            </def>
+        </deflist>
+    </chapter>
+</topic>

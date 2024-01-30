@@ -13,16 +13,16 @@
         </description>
 
         <spotlight>
-            <a href="Data-structures.topic" type="documents" summary="TBD">Data Structures</a>
-            <a href="Algorithms.topic" type="documents" summary="TBD">Algorithms</a>
+            <a href="Data-structures.topic" type="documents" summary="Data structure is a data organization, management, and storage format that is usually chosen for efficient access to data.">Data Structures</a>
+            <a href="Algorithms.topic" type="documents" summary="Algorithm is a finite sequence of rigorous instructions, typically used to solve a class of specific problems or to perform a computation.">Algorithms</a>
         </spotlight>
 
         <primary>
             <title>Computer science</title>
-            <a href="Operating-system.topic" summary="With a custom card summary">Operating System</a>
-            <a href="Database.topic" summary="With a custom card summary">Database</a>
-            <a href="Network.topic" summary="With a custom card summary">Network</a>
-            <a href="Compiler.topic" summary="With a custom card summary">Compiler</a>
+            <a href="Operating-system.topic" summary="Operating system is system software that manages computer hardware and software resources, and provides common services for computer programs.">Operating System</a>
+            <a href="Database.topic" summary="Database is an organized collection of data or a type of data store based on the use of a database management system, the software that interacts with end users, applications, and the database itself to capture and analyze the data.">Database</a>
+            <a href="Network.topic" summary="Computer network is a set of computers sharing resources located on or provided by network nodes. Computers use common communication protocols over digital interconnections to communicate with each other. ">Network</a>
+            <a href="Compiler.topic" summary="Compiler is a computer program that translates computer code written in one programming language into another language.">Compiler</a>
             <a href="Software-engineering.topic" summary="With a custom card summary">Software Engineering</a>
 
         </primary>
@@ -38,14 +38,14 @@
         <!--    Optionally add additional cards and links to topics that are not in this section but may be relevant.    -->
         <misc>
             <cards><title>DevOps</title>
-                <a href="Docker.topic" summary="">Docker</a>
-                <a href="Kubernetes.topic" summary="">Kubernetes</a>
+                <a href="Docker.topic" summary="Docker is a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers.">Docker</a>
+                <a href="Kubernetes.topic" summary="Kubernetes is an open-source container orchestration system for automating software deployment, scaling, and management.">Kubernetes</a>
                 <a href="IaC.topic" summary="Infrastructure as Code">IaC</a>
-                <a href="MLOps.topic" summary="">MLOps</a>
+                <a href="MLOps.topic" summary="MLOps is a paradigm that aims to deploy and maintain machine learning models in production reliably and efficiently.">MLOps</a>
             </cards>
             <cards>
                 <title>Others</title>
-                <a href="Interview.topic" summary="TBD">Interviews</a>
+                <a href="Interview.topic" summary="Tips for SE interview">Interviews</a>
             </cards>
         </misc>
     </section-starting-page>
