@@ -1,5 +1,12 @@
 # Algorithms and Data Structures
-tbd
+* Books
+  * [Tech Interview Handbook](https://www.techinterviewhandbook.org/) 
+* Platforms
+  * [Algo Expert](https://www.algoexpert.io/product) : USA
+  * [LeetCode](https://leetcode.com/) : USA
+  * [Interview Cake](https://www.interviewcake.com/) : USA
+  * [AlgoMonster](https://algo.monster/?sscid=11k8_6n0eu&) : Canada
+  * [InterviewBit](https://www.interviewbit.com/) : India
 
 # Computer Architecture
 tbd
@@ -17,4 +24,8 @@ tbd
 tbd
 
 # Distributed Systems
+tbd
+
+------
+# Tech Stacks
 tbd
