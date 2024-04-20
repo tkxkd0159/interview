@@ -28,4 +28,6 @@ tbd
 
 ------
 # Tech Stacks
-tbd
+
+## Programming Languages
+[Refs](https://gitlab.com/ljspg/lang)
