@@ -23,6 +23,9 @@
     <toc-element toc-title="Dev">
         <toc-element topic="Dev-methodologies.topic"/>
         <toc-element topic="Design-pattern.topic">
+            <toc-element topic="Behavioral-Patterns.topic"/>
+            <toc-element topic="Structural-Patterns.topic"/>
+            <toc-element topic="Creational-Patterns.topic"/>
             <toc-element topic="web-dp.topic"/>
         </toc-element>
         <toc-element topic="System-design.topic"/>

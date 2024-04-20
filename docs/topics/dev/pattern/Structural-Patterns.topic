@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Structural Patterns" id="Structural-Patterns">
+
+    <p>These patterns explain how to assemble objects and classes into larger structures while keeping these structures
+        flexible and efficient.</p>
+
+    <chapter title="Adapter" id="sp-1"></chapter>
+    <chapter title="Bridge" id="sp-2"></chapter>
+    <chapter title="Composite" id="sp-3"></chapter>
+    <chapter title="Decorator" id="sp-4"></chapter>
+    <chapter title="Facade" id="sp-5"></chapter>
+    <chapter title="Flyweight" id="sp-6"></chapter>
+    <chapter title="Proxy" id="sp-7"></chapter>
+
+</topic>
