@@ -10,7 +10,11 @@
     <toc-element toc-title="Computer science">
         <toc-element topic="Data-structures.topic"/>
         <toc-element topic="Algorithms.topic"/>
-        <toc-element topic="Operating-system.topic"/>
+        <toc-element topic="Operating-system.topic">
+            <toc-element topic="os-persistence.topic"/>
+            <toc-element topic="os-concurrency.topic"/>
+            <toc-element topic="os-virtualization.topic"/>
+        </toc-element>
         <toc-element topic="Network.topic"/>
         <toc-element topic="Database.topic"/>
         <toc-element topic="Software-engineering.topic"/>

@@ -8,7 +8,7 @@
         <product-web-url>https://tkxkd0159.github.io/interview</product-web-url>
         <download-title>Contribute to this docs</download-title>
         <download-page>https://github.com/tkxkd0159/interview</download-page>
-        <showDownloadButton>true</showDownloadButton>
+        <showDownloadButton>false</showDownloadButton>
         <noindex-content>false</noindex-content>
     </variables>
 
