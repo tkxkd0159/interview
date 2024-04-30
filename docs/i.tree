@@ -3,11 +3,12 @@
         SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
 
 <instance-profile id="i"
-                 name="interview"
-                 start-page="Overview.topic">
+                  name="interview"
+                  start-page="Overview.topic">
 
     <toc-element topic="Overview.topic"/>
     <toc-element toc-title="Computer science">
+        <toc-element topic="Computer-architecture.topic"/>
         <toc-element topic="Data-structures.topic">
             <toc-element topic="ds-rwp.topic"/>
         </toc-element>
@@ -21,11 +22,12 @@
         </toc-element>
         <toc-element topic="Network.topic"/>
         <toc-element topic="Database.topic"/>
-        <toc-element topic="Software-engineering.topic"/>
+        <toc-element topic="Distributed-computing.topic"/>
         <toc-element topic="Compiler.topic">
             <toc-element topic="Compiler-Opti.topic"/>
             <toc-element topic="Compiler-LLVM.topic"/>
         </toc-element>
+        <toc-element topic="Software-engineering.topic"/>
     </toc-element>
 
     <toc-element toc-title="Dev">
