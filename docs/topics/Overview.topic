@@ -3,7 +3,7 @@
         SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
 <topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="Overview" id="Overview" help-id="TOC">
+       title="Overview" id="Overview">
 
 
     <section-starting-page>
@@ -13,11 +13,12 @@
         </description>
 
         <spotlight>
-            <a href="Data-structures.topic" type="documents"
-               summary="Data structure is a data organization, management, and storage format that is usually chosen for efficient access to data.">Data
-                Structures</a>
-            <a href="Algorithms.topic" type="documents"
-               summary="Algorithm is a finite sequence of rigorous instructions, typically used to solve a class of specific problems or to perform a computation.">Algorithms</a>
+            <a href="DS-Algo-Intro.topic" type="documents"
+               summary="Data structure is a data organization, management, and storage format that is usually chosen for efficient access to data.
+               Algorithm is a finite sequence of rigorous instructions, typically used to solve a class of specific problems or to perform a computation.">Algorithms</a>
+            <a href="Operating-system.topic" type="documents"
+               summary="Operating system is system software that manages computer hardware and software resources, and provides common services for computer programs.">Operating
+                System</a>
         </spotlight>
 
         <primary>
@@ -25,9 +26,6 @@
             <a href="Computer-architecture.topic"
                summary="This discipline focuses on the study, design, implementation and operation of a computer system. Architecture focuses on how the design of hardware like computers, storage devices and network connection components store programs, transmit data and facilitate connections with other devices.">Computer
                 Architecture</a>
-            <a href="Operating-system.topic"
-               summary="Operating system is system software that manages computer hardware and software resources, and provides common services for computer programs.">Operating
-                System</a>
             <a href="Database.topic"
                summary="Database is an organized collection of data or a type of data store based on the use of a database management system, the software that interacts with end users, applications, and the database itself to capture and analyze the data.">Database</a>
             <a href="Network.topic"

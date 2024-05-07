@@ -9,11 +9,8 @@
     <toc-element topic="Overview.topic"/>
     <toc-element toc-title="Computer science">
         <toc-element topic="Computer-architecture.topic"/>
-        <toc-element topic="Data-structures.topic">
-            <toc-element topic="ds-rwp.topic"/>
-        </toc-element>
-        <toc-element topic="Algorithms.topic">
-            <toc-element topic="algo-rwp.topic"/>
+        <toc-element topic="DS-Algo-Intro.topic">
+            <toc-element topic="dsalgo-rwp.topic"/>
         </toc-element>
         <toc-element topic="Operating-system.topic">
             <toc-element topic="os-persistence.topic"/>

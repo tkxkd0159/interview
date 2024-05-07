@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Data Structures &amp; Algorithms" id="DS-Algo-Intro">
+
+    <p>
+        <i>Data structures</i> are used for efficient management of data. Efficient data structure can be different depending on the
+        goal. <i>Algorithms</i> are finite list of well-defined instructions for accomplishing some task. Efficient sequence of action (from
+        initial state to end-state)
+    </p>
+
+    <chapter title="Algorithm Specification" id="algo-intro-spec">
+        <tabs>
+            <tab title="Finite-State Machine">
+                <img src="$WRS_MODULE$/images/dev/dsalgo/dsalgo-1.png" alt="Finite-State Machine"/>
+            </tab>
+            <tab title="Petri Net">
+                동그란 원을 Place, 안에 들어있는 검은 점을 Token, 사각형을 Transition, Place와 Transition을 연결하는 화살표를 Arc라 한다. token을 가지고 있는 place는 이것을 소비시켜
+                transition을 실행시킬 수 있음.
+                <img src="$WRS_MODULE$/images/dev/dsalgo/dsalgo-2.png" alt="Petri Net 1"/>
+                <img src="$WRS_MODULE$/images/dev/dsalgo/dsalgo-3.png" alt="Petri Net 2"/>
+            </tab>
+            <tab title="Pseudo Code">
+                <img src="$WRS_MODULE$/images/dev/dsalgo/dsalgo-4.png" alt="Pseudo Code"/>
+            </tab>
+        </tabs>
+
+        <chapter title="Verification">
+            위와 같은 구조를 통해 algorithm을 설계하면 이에 대한 correctness를 검증(verification) 해야함. (e.g. time complexity, memory usage, # of disk operations)
+            <list style="decimal">
+                <li>Induction(귀납법): 입력 1 ~ n에 대해 성립함을 보이고 입력 n+1에 대해 성립함을 증명하면 이것은 모든 n에 대하여 성립</li>
+                <li>Counter example(반례)</li>
+                <li>Proof of Contradiction(귀류법): 증명하고 싶은 어떤 사실의 반대가 옳다고 가정. 이것이 성립하지 않음을 보임으로써 참을 증명</li>
+                <li>Recursion: 정의 단계에서 자신을 재참조하는 함수. <i>stack overflow</i>가 발생하지 않게 해당 함수가 종료되는 base case를 설정해줘야 함. 두개 이상의 함수가 cycle 내에서 서로를
+                    호출하는 경우는
+                    <i>mutual recursion</i>이라고 한다.
+                    <code-block lang="python">
+                        <![CDATA[
+                    def is_even(n):
+                      if (n == 0)
+                        return true;
+                      else
+                        return is_odd(n - 1)
+
+                    def is_odd(n):
+                      if (n == 0)
+                        return false;
+                      else
+                        return is_even(n - 1)
+                    ]]>
+                    </code-block>
+                    recusrion을 사용하는 경우 아래와 같은 function call overhead가 발생한다.
+                    <list>
+                        <li>Save caller's state (return address)</li>
+                        <li>Allocate stack space for arguments and local variables</li>
+                        <li>At exit (return), release resources and restore caller's environment</li>
+                        <li>Resume execution of caller</li>
+                    </list>
+                </li>
+            </list>
+        </chapter>
+    </chapter>
+
+    <chapter title="Complexity">
+        <table style="header-row">
+            <tr>
+                <td>Name</td>
+                <td>Notation</td>
+                <td>Formal definition</td>
+                <td>Limit</td>
+            </tr>
+            <tr>
+                <td>Big O</td>
+                <td>
+                    <code-block lang="tex">
+                        \begin{equation}
+                        f(n) = O(g(n))
+                        \end{equation}
+                    </code-block>
+                </td>
+                <td>
+                    <code-block lang="tex">
+                        <![CDATA[
+                        \begin{equation}
+                          \exists k > 0 \, \exists n_{0} \, \forall n > n_{0} : |f(n)| \leq k \cdot g(n)
+                        \end{equation}
+                        ]]>
+                    </code-block>
+                </td>
+                <td>
+                    <code-block lang="tex">
+                        <![CDATA[
+                        \begin{equation}
+                          \limsup_{n \to \infty} \frac{f(n)}{g(n)} < \infty
+                        \end{equation}
+                    ]]>
+                    </code-block>
+                </td>
+            </tr>
+            <tr>
+                <td>Big Theta</td>
+                <td>
+                    <code-block lang="tex">
+                        \begin{equation}
+                        f(n) = \Theta(g(n))
+                        \end{equation}
+                    </code-block>
+                </td>
+                <td>
+                    <code-block lang="tex">
+                        <![CDATA[
+                        \begin{equation}
+                        \exists k_{1} > 0 \, \exists k_{2} > 0 \, \exists n_{0} \, \forall n > n_{0} : k_{1} \cdot g(n) \leq f(n) \leq k_{2} \cdot g(n)
+                        \end{equation}
+                        ]]>
+                    </code-block>
+                </td>
+                <td>
+                    <code-block lang="tex">
+                        <![CDATA[
+                        \begin{equation}
+                          f(n) = O(g(n)) \quad \textrm{and} \quad g(n) = O(f(n))
+                        \end{equation}
+                    ]]>
+                    </code-block>
+                </td>
+            </tr>
+            <tr>
+                <td>Big Omega</td>
+                <td>
+                    <code-block lang="tex">
+                        \begin{equation}
+                        f(n) = \Omega(g(n))
+                        \end{equation}
+                    </code-block>
+                </td>
+                <td>
+                    <code-block lang="tex">
+                        <![CDATA[
+                        \begin{equation}
+                          \exists k > 0 \, \exists n_{0} \, \forall n > n_{0} : |f(n)| \geq k \cdot g(n)
+                        \end{equation}
+                        ]]>
+                    </code-block>
+                </td>
+                <td>
+                    <code-block lang="tex">
+                        <![CDATA[
+                        \begin{equation}
+                          \limsup_{n \to \infty} \frac{f(n)}{g(n)} > 0
+                        \end{equation}
+                    ]]>
+                    </code-block>
+                </td>
+            </tr>
+        </table>
+
+        <img src="$WRS_MODULE$/images/dev/dsalgo/dsalgo-5.png" alt="Compexity graph"/>
+
+
+        <chapter title="Time Complexity">
+            <list>
+                <li>n &lt;= 100,000,000 : the expected time complexity is O(n) or O(nlog(n))</li>
+                <li>n &lt;= 10,000 : the expected time complexity is O(n^2)</li>
+                <li>n &lt;= 500 : the expected time complexity is O(n^3)</li>
+            </list>
+            <code-block lang="python" collapsible="true" collapsed-title="Example codes">
+                <![CDATA[
+# O(1), Lookup table
+def print_first(my_list):
+    print(my_list[0])
+
+# O(log n), Binary Search
+def print_powers_of_two(n):
+    i = 1
+    while i < n:
+        print(i)
+        i = i * 2
+
+# O(n), loop
+def print_three_times(my_list):
+    for i in range(len(my_list)):
+        print(my_list[i])
+
+    for i in range(len(my_list)):
+        print(my_list[i])
+
+    for i in range(len(my_list)):
+        print(my_list[i])
+
+# O(n*log n), Merge sort
+def print_powers_of_two_repeatedly(n):
+    for i in range(n): # 반복횟수: n에 비례
+        j = 1
+        while j < n: # 반복횟수: lg n에 비례
+            print(i, j)
+            j = j * 2
+
+# O(n^2), two nested loop
+def print_pairs(my_list):
+    for i in range(len(my_list)):
+        for j in range(len(my_list)):
+            print(my_list[i], my_list[j])
+
+# O(2^N), Fibonacci
+def powerset(n=''):
+    array = list(n)
+    base = ['']
+    results = base.copy()
+
+    for element in array:
+        previous_plus_element = [el + element for el in results]
+        results.extend(previous_plus_element)
+
+    return results
+
+// powerset('abc')
+// [''].                                         - start
+// ['', 'a']                                     - first reduce(a)
+// ['', 'a', 'b', 'ab']                          - second reduce(b)
+// ['', 'a', 'b', 'ab', 'c', 'ac', 'bc', 'abc']  - third reduce(c)
+
+# O(N!), Permutations
+def permutations(s):
+    if len(s) <= 1:
+        return [s]
+    else:
+        perms = []
+        for i, c in enumerate(s):
+            for perm in permutations(s[:i] + s[i+1:]):
+                perms.append(c + perm)
+        return perms
+
+# Example usage:
+                ]]>
+            </code-block>
+        </chapter>
+
+        <chapter title="Space Complexity">
+            어떤 알고리즘을 시행할 때 필요한 메모리 크기로 생각하면 됨
+            <code-block lang="python">
+                <![CDATA[
+# O(1), 입력값 개수에 상관없이 result 값은 1개
+def product(a, b, c):
+    result = a * b * c
+    return result
+
+# O(n)
+def get_every_other(my_list):
+    every_other = my_list[::2]
+    return every_other
+
+# O(n^2), products는 리스트 모든 내부 값들의 조합 곱
+def largest_product(my_list):
+    products = []
+    for a in my_list:
+        for b in my_list:
+            products.append(a * b)
+
+    return max(products)
+]]>
+            </code-block>
+        </chapter>
+
+
+        <img src="$WRS_MODULE$/images/dev/dsalgo/dsalgo-6.png" alt="Compexity reference"/>
+        <list>
+            <li><b>Access</b>: get A[i] element value</li>
+            <li><b>Search</b>: find whether some value exists in array (and get it's index)</li>
+        </list>
+    </chapter>
+</topic>
