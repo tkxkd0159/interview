@@ -15,7 +15,8 @@
         <spotlight>
             <a href="DS-Algo-Intro.topic" type="documents"
                summary="Data structure is a data organization, management, and storage format that is usually chosen for efficient access to data.
-               Algorithm is a finite sequence of rigorous instructions, typically used to solve a class of specific problems or to perform a computation.">Algorithms</a>
+               Algorithm is a finite sequence of rigorous instructions, typically used to solve a class of specific problems or to perform a computation.">Data
+                Structures & Algorithms</a>
             <a href="Operating-system.topic" type="documents"
                summary="Operating system is system software that manages computer hardware and software resources, and provides common services for computer programs.">Operating
                 System</a>
@@ -32,7 +33,12 @@
                summary="Computer network is a set of computers sharing resources located on or provided by network nodes. Computers use common communication protocols over digital interconnections to communicate with each other. ">Network</a>
             <a href="Compiler.topic"
                summary="Compiler is a computer program that translates computer code written in one programming language into another language.">Compiler</a>
-            <a href="Software-engineering.topic" summary="With a custom card summary">Software Engineering</a>
+            <a href="Software-engineering.topic"
+               summary="Software engineering is an engineering approach to software development. A practitioner, a software engineer, applies the engineering design process to develop software.">Software
+                Engineering</a>
+            <a href="Distributed-computing.topic"
+               summary="Distributed computing is a field of computer science that studies distributed systems, defined as computer systems whose inter-communicating components are located on different networked computers.">Distributed
+                Computing</a>
 
         </primary>
 
