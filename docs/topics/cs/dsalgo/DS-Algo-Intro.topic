@@ -69,7 +69,6 @@
                 <td>Name</td>
                 <td>Notation</td>
                 <td>Formal definition</td>
-                <td>Limit</td>
             </tr>
             <tr>
                 <td>Big O</td>
@@ -83,19 +82,11 @@
                 <td>
                     <code-block lang="tex">
                         <![CDATA[
-                        \begin{equation}
-                          \exists k > 0 \, \exists n_{0} \, \forall n > n_{0} : |f(n)| \leq k \cdot g(n)
-                        \end{equation}
+                        \begin{align}
+                        &\exists k > 0 \, \exists n_{0} \, \forall n > n_{0} : |f(n)| \leq k \cdot g(n) \nonumber \\
+                        &\limsup_{n \to \infty} \frac{f(n)}{g(n)} < \infty
+                        \end{align}
                         ]]>
-                    </code-block>
-                </td>
-                <td>
-                    <code-block lang="tex">
-                        <![CDATA[
-                        \begin{equation}
-                          \limsup_{n \to \infty} \frac{f(n)}{g(n)} < \infty
-                        \end{equation}
-                    ]]>
                     </code-block>
                 </td>
             </tr>
@@ -111,19 +102,11 @@
                 <td>
                     <code-block lang="tex">
                         <![CDATA[
-                        \begin{equation}
-                        \exists k_{1} > 0 \, \exists k_{2} > 0 \, \exists n_{0} \, \forall n > n_{0} : k_{1} \cdot g(n) \leq f(n) \leq k_{2} \cdot g(n)
-                        \end{equation}
+                        \begin{align}
+                        &\exists k_{1} > 0 \, \exists k_{2} > 0 \, \exists n_{0} \, \forall n > n_{0} : k_{1} \cdot g(n) \leq f(n) \leq k_{2} \cdot g(n) \\
+                        &f(n) = O(g(n)) \quad \textrm{and} \quad g(n) = O(f(n))
+                        \end{align}
                         ]]>
-                    </code-block>
-                </td>
-                <td>
-                    <code-block lang="tex">
-                        <![CDATA[
-                        \begin{equation}
-                          f(n) = O(g(n)) \quad \textrm{and} \quad g(n) = O(f(n))
-                        \end{equation}
-                    ]]>
                     </code-block>
                 </td>
             </tr>
@@ -139,19 +122,11 @@
                 <td>
                     <code-block lang="tex">
                         <![CDATA[
-                        \begin{equation}
-                          \exists k > 0 \, \exists n_{0} \, \forall n > n_{0} : |f(n)| \geq k \cdot g(n)
-                        \end{equation}
+                        \begin{align}
+                          &\exists k > 0 \, \exists n_{0} \, \forall n > n_{0} : |f(n)| \geq k \cdot g(n) \\
+                          &\limsup_{n \to \infty} \frac{f(n)}{g(n)} > 0
+                        \end{align}
                         ]]>
-                    </code-block>
-                </td>
-                <td>
-                    <code-block lang="tex">
-                        <![CDATA[
-                        \begin{equation}
-                          \limsup_{n \to \infty} \frac{f(n)}{g(n)} > 0
-                        \end{equation}
-                    ]]>
                     </code-block>
                 </td>
             </tr>
