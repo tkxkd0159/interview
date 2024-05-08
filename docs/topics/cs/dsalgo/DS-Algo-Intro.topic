@@ -83,7 +83,7 @@
                     <code-block lang="tex">
                         <![CDATA[
                         \begin{align}
-                        &\exists k > 0 \, \exists n_{0} \, \forall n > n_{0} : |f(n)| \leq k \cdot g(n) \nonumber \\
+                        &\exists k > 0 \, \exists n_{0} \, \forall n > n_{0} : |f(n)| \leq k \cdot g(n) \\
                         &\limsup_{n \to \infty} \frac{f(n)}{g(n)} < \infty
                         \end{align}
                         ]]>
@@ -102,10 +102,10 @@
                 <td>
                     <code-block lang="tex">
                         <![CDATA[
-                        \begin{align}
-                        &\exists k_{1} > 0 \, \exists k_{2} > 0 \, \exists n_{0} \, \forall n > n_{0} : k_{1} \cdot g(n) \leq f(n) \leq k_{2} \cdot g(n) \\
-                        &f(n) = O(g(n)) \quad \textrm{and} \quad g(n) = O(f(n))
-                        \end{align}
+                        \begin{cases}
+                        \exists k_{1} > 0 \, \exists k_{2} > 0 \, \exists n_{0} \, \forall n > n_{0} : k_{1} \cdot g(n) \leq f(n) \leq k_{2} \cdot g(n) \\
+                        f(n) = O(g(n)) \quad \textrm{and} \quad g(n) = O(f(n))
+                        \end{cases}
                         ]]>
                     </code-block>
                 </td>
