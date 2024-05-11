@@ -25,11 +25,11 @@
             <toc-element topic="Compiler-LLVM.topic"/>
         </toc-element>
         <toc-element topic="Software-engineering.topic"/>
+        <toc-element topic="Cryptography.topic"/>
     </toc-element>
 
     <toc-element toc-title="Dev">
         <toc-element topic="Dev-methodologies.topic">
-            <toc-element topic="Secure-coding.topic"/>
         </toc-element>
         <toc-element topic="Design-pattern.topic">
             <toc-element topic="Behavioral-Patterns.topic"/>
@@ -38,7 +38,9 @@
             <toc-element topic="web-dp.topic"/>
         </toc-element>
         <toc-element topic="System-design.topic"/>
-        <toc-element topic="Security.topic"/>
+        <toc-element topic="Security.topic">
+            <toc-element topic="Secure-coding.topic"/>
+        </toc-element>
     </toc-element>
 
     <toc-element toc-title="DevOps">

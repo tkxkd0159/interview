@@ -39,15 +39,23 @@
             <a href="Distributed-computing.topic"
                summary="Distributed computing is a field of computer science that studies distributed systems, defined as computer systems whose inter-communicating components are located on different networked computers.">Distributed
                 Computing</a>
+            <a href="Cryptography.topic"
+               summary="Cryptography is about constructing and analyzing protocols that prevent third parties or the public from reading private messages.">Cryptography</a>
 
         </primary>
 
         <!--    Add several topics that are less important or are relevant only for advanced/experienced users.    -->
         <secondary>
             <title>Dev</title>
-            <a href="Design-pattern.topic" summary="With a custom card summary">Design Patterns</a>
-            <a href="System-design.topic" summary="With a custom card summary">System Design</a>
-            <a href="Security.topic" summary="Cryptography, Web">Security</a>
+            <a href="Design-pattern.topic"
+               summary="Design pattern describes a relatively small, well-defined aspect of a computer program in terms of how to write the code.">Design
+                Patterns</a>
+            <a href="System-design.topic"
+               summary="Systems design is the application of systems theory to product development. There is some overlap with the disciplines of systems analysis, systems architecture and systems engineering.">System
+                Design</a>
+            <a href="Security.topic"
+               summary="The protection of computer systems and networks from attacks by malicious actors that may result in unauthorized information disclosure, theft of, or damage to hardware, software, or data, as well as from the disruption or misdirection of the services they provide">Computer
+                Security</a>
         </secondary>
 
         <!--    Optionally add additional cards and links to topics that are not in this section but may be relevant.    -->
