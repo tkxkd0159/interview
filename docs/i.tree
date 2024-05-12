@@ -17,7 +17,9 @@
             <toc-element topic="os-concurrency.topic"/>
             <toc-element topic="os-virtualization.topic"/>
         </toc-element>
-        <toc-element topic="Network.topic"/>
+        <toc-element topic="Network.topic">
+            <toc-element topic="OSI-7.topic"/>
+        </toc-element>
         <toc-element topic="Database.topic"/>
         <toc-element topic="Distributed-computing.topic"/>
         <toc-element topic="Compiler.topic">
