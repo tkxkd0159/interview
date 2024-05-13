@@ -225,6 +225,91 @@
         more networks, while maintaining the quality of service (QoS) functions and ensuring the complete delivery of the data. The
         integrity of the data can be guaranteed via error correction and similar functions. It can also provide an explicit flow control
         function. Transfer Control Protocol (TCP) and User Datagram Protocols (UDP) are essential protocols in layer 4.
+
+        <chapter title="TCP" id="tcp">
+            <p> Transmission Control Protocol lets two hosts connect and exchange data streams. TCP guarantees the delivery of data and
+                packets
+                in the same order as they were sent. TCP's role is to ensure the packets are reliably delivered, and error-free. TCP
+                implements
+                congestion control, which means the initial requests start small, increasing in size to the levels of bandwidth the
+                computers,
+                servers, and network can support. However, TCP is a time-consuming process, since it involves many steps. And also, the
+                connection cannot be closed without getting the FIN flags along with the ACK flags as a confirmation from both sides, which
+                takes time.
+            </p>
+
+            <p>
+                TCP uses the 3-way handshake process to establish a connection between two devices before transmitting the data. After the
+                establishment of the connection, the data transfer takes place between the devices.
+            </p>
+            <img src="$WRS_MODULE$/images/dev/net/net-7.png" alt=""/>
+
+            <procedure title="3-Way Handshaking for establishing connection" id="tcp-3way">
+                <img src="$WRS_MODULE$/images/dev/net/net-5.png" alt=""/>
+
+                <step><b>The client sends the SYN to the server.</b> It sets the 'SYN' flag as 1 and sends the message to the server. The
+                    message
+                    has also some additional information like the sequence number(ISN), the ACK is set here to 0, the
+                    window size, and the maximum segment size.
+                </step>
+                <step><b>The server replies with the SYN and the ACK to the client.</b> After receiving the client's synchronization
+                    request, the
+                    server sends an acknowledgment to the client by setting the ACK flag to '1'. The acknowledgment number of the ACK is
+                    one
+                    more than the received sequence number. For Example, if the client has sent the SYN with sequence number = 10000, then
+                    the server will send the ACK with acknowledgment number = 10001. Also, if the server also wants to establish the
+                    connection, the server sets the 'SYN' flag as 1 and send some additional information like the client.
+                </step>
+                <step><b>The client sends the ACK to the server.</b> After receiving the SYN from the server, the client sets the ACK flag
+                    to '1'
+                    and sends it with an acknowledgement number 1 greater than the server's SYN sequence number(ISN) to the client. Here,
+                    the SYN
+                    flag is kept '0'. After completion of this step, the connection is now established from the server to the client-side
+                    also. After the connection is being established, the minimum of the sender's and receiver's maximum segment size is
+                    taken under consideration for data transmission.
+                </step>
+            </procedure>
+            <procedure title="4-Way Handshaking for terminating connection" id="tcp-3way2">
+                <img src="$WRS_MODULE$/images/dev/net/net-6.png" alt=""/>
+                <step>From one side of the connection, either from the client or the server the FIN flag will be sent as the request for the
+                    termination of the connection.
+                </step>
+                <step>Whoever receives the FIN flag will then be sending an ACK flag as the acknowledgment for the closing request to the
+                    other side.
+                </step>
+                <step>The server will also send a FIN flag as the closing signal to the other side.</step>
+                <step>In the final step, who received the final FIN flag, will be sending an ACK flag as the final Acknowledgement
+                    for the suggested connection closing.
+                </step>
+            </procedure>
+        </chapter>
+
+        <chapter title="UDP" id="udp">
+            <p> User Datagram Protocol is a communication protocol used across the Internet for especially time-sensitive transmissions
+                such as
+                video playback or DNS lookups. . UDP is faster but less reliable than TCP. UDP communications do not go through this
+                process.
+                Instead,
+                one computer can simply begin sending data to the other. In addition, TCP communications indicate the order in which data
+                packets should be received and confirm that packets arrive as intended. If a packet does not arrive — e.g. due to congestion
+                in
+                intermediary networks — TCP requires that it be re-sent. UDP communications do not include any of this functionality.
+                However,
+                if a UDP datagram is lost in transit, it will not be re-sent. As a result, applications that use
+                UDP must be able to tolerate errors, loss, and duplication.</p>
+            <p>
+                UDP is commonly used in time-sensitive communications where occasionally dropping packets is better than waiting. Voice and
+                video traffic are often sent using this protocol because they are both time-sensitive and designed to handle some level of
+                loss. For example, VoIP (voice over IP), which is used by many Internet-based telephone services, typically operates over
+                UDP. This is because a static-y phone conversation is preferable to one that is crystal clear but heavily delayed. This also
+                makes UDP the ideal protocol for online gaming. Similarly, because DNS servers both need to be fast and efficient,
+                they operate through UDP as well.
+            </p>
+            <img src="$WRS_MODULE$/images/dev/net/net-8.png" alt=""/>
+            <p><i>Length</i> field specifies the length in bytes of the UDP header and UDP data. The minimum length is 8 bytes, the length
+                of the header.</p>
+
+        </chapter>
     </chapter>
 
     <chapter title="Session Layer" id="session_layer">
