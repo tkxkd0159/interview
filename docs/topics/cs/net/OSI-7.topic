@@ -314,7 +314,8 @@
 
     <chapter title="Session Layer" id="session_layer">
         The session layer controls the dialogues (connections) between computers. It establishes, manages, maintains and ultimately
-        terminates the connections between the local and remote application. Layer 5 software also handles authentication and authorization
+        terminates the connections between the local and remote application. In other words, it manages sessions. Layer 5 software also
+        handles authentication and authorization
         functions. It verifies the data is delivered as well. The session layer is commonly implemented explicitly in application
         environments that use remote procedure calls.
     </chapter>
