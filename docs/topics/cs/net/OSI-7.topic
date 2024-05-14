@@ -206,6 +206,17 @@
             address example is 192.1.56.10 -> 0:0:0:0:0:ffff:192.1.56.10 and ::ffff:192.1.56.10/96 (shortened format).
         </chapter>
 
+        <chapter title="NAT(Network Address Translation)" id="nat_network_address_translation_">
+            <img src="$WRS_MODULE$/images/dev/net/net-9.png" alt="" width="700"/>
+            To access the Internet, one public IP address is needed, but we can use a private IP address in our private network. The idea of
+            NAT is to allow multiple devices to access the Internet through a single public address. To achieve this, the translation of a
+            private IP address to a public IP address is required. Network Address Translation (NAT) is a process in which one or more local
+            IP address is translated into one or more Global IP address and vice versa in order to provide Internet access to the local
+            hosts. Also, it does the translation of port numbers i.e. masks the port number of the host with another port number, in the
+            packet that will be routed to the destination. It then makes the corresponding entries of IP address and port number in the NAT
+            table.
+        </chapter>
+
         <chapter title="Multiprotocol label switching (MPLS)">
             Multiprotocol label switching (MPLS) is a technique for speeding up network connections that was first developed in the 1990s.
             The public Internet functions by forwarding packets from one router to the next until the packets reach their destination. MLPS,
@@ -339,9 +350,18 @@
         protocol (POP), simple mail transfer protocol (SMTP), Simple Network Management Protocol (SNMP), and Telnet (a terminal emulation).
 
         <chapter title="DHCP" id="dhcp">
-            [Only for IPv4] Dynamic Host Configuration Protocol(DHCP) is an application-layer protocol that allows a client machine on the
-            network, to get
-            an IP address and other configuration parameters from the server.
+            [Only for IPv4] The Dynamic Host Configuration Protocol (DHCP) gives the network administrator a method to remove the end user
+            from this configuration problem and maintain the network configuration in a centralized location.
+
+            DHCP is an application-layer protocol that allows a client machine on the network, to get an IP address and other configuration
+            parameters from the server. It gets information by exchanging packets between a daemon on the client and another on the server.
+            Most operating systems now provide a DHCP client in their base package.
+
+            To obtain an address, the DHCP client daemon (dhcpcd) broadcasts a DHCP discover message, which is received by the server and
+            processed. (Multiple servers can be configured on the network for redundancy.) If a free address is available for that client, a
+            DHCP offer message is created, This message contains an IP address and other options that are appropriate for that client. The
+            client receives the server DHCP offer and stores it while waiting for other offers. When the client chooses the best offer, it
+            broadcasts a DHCP request that specifies which server offer it wants.
         </chapter>
     </chapter>
 </topic>
