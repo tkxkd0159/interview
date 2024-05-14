@@ -112,11 +112,11 @@
         </chapter>
     </chapter>
     <seealso>
-        <category ref="refs">
-            <a href="https://aosabook.org/en/v1/llvm.html">LLVM Architecture</a>
-        </category>
-        <category ref="diy">
+        <category ref="related">
             <a href="https://github.com/tkxkd0159/interview/tree/main/examples/optimization/xlang">Cross-Language LTO Lab</a>
+        </category>
+        <category ref="external">
+            <a href="https://aosabook.org/en/v1/llvm.html">LLVM Architecture</a>
         </category>
     </seealso>
 </topic>
