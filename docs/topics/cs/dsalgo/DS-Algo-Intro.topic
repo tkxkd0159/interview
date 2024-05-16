@@ -29,13 +29,15 @@
 
         <chapter title="Verification">
             위와 같은 구조를 통해 algorithm을 설계하면 이에 대한 correctness를 검증(verification) 해야함. (e.g. time complexity, memory usage, # of disk operations)
-            <list style="decimal">
+            <list type="decimal">
                 <li>Induction(귀납법): 입력 1 ~ n에 대해 성립함을 보이고 입력 n+1에 대해 성립함을 증명하면 이것은 모든 n에 대하여 성립</li>
                 <li>Counter example(반례)</li>
                 <li>Proof of Contradiction(귀류법): 증명하고 싶은 어떤 사실의 반대가 옳다고 가정. 이것이 성립하지 않음을 보임으로써 참을 증명</li>
-                <li>Recursion: 정의 단계에서 자신을 재참조하는 함수. <i>stack overflow</i>가 발생하지 않게 해당 함수가 종료되는 base case를 설정해줘야 함. 두개 이상의 함수가 cycle 내에서 서로를
-                    호출하는 경우는
-                    <i>mutual recursion</i>이라고 한다.
+                <li>
+                    <p> Recursion: 정의 단계에서 자신을 재참조하는 함수. <i>stack overflow</i> 가 발생하지 않게 해당 함수가 종료되는 base case를 설정해줘야 함.
+                        두개 이상의 함수가 cycle 내에서 서로를
+                        호출하는 경우는
+                        <i>mutual recursion</i> 이라고 한다.</p>
                     <code-block lang="python">
                         <![CDATA[
                     def is_even(n):
@@ -51,7 +53,7 @@
                         return is_even(n - 1)
                     ]]>
                     </code-block>
-                    recusrion을 사용하는 경우 아래와 같은 function call overhead가 발생한다.
+                    <p> recusrion을 사용하는 경우 아래와 같은 function call overhead가 발생한다.</p>
                     <list>
                         <li>Save caller's state (return address)</li>
                         <li>Allocate stack space for arguments and local variables</li>
@@ -78,6 +80,7 @@
                         f(n) = O(g(n))
                         \end{equation}
                     </code-block>
+                    For large enough n, the running time is at most k*g(n) for some constant k.
                 </td>
                 <td>
                     <code-block lang="tex">
@@ -98,6 +101,7 @@
                         f(n) = \Theta(g(n))
                         \end{equation}
                     </code-block>
+                    For large enough n, the running time is at least k1*g(n) and at most k2*g(n) for some constants k1 and k2.
                 </td>
                 <td>
                     <code-block lang="tex">
@@ -118,6 +122,7 @@
                         f(n) = \Omega(g(n))
                         \end{equation}
                     </code-block>
+                    For large enough n, the running time is at least k*g(n) for some constant k.
                 </td>
                 <td>
                     <code-block lang="tex">
