@@ -97,7 +97,7 @@ jobs:
 
     env:
       ALGOLIA_KEY: ${{ secrets.ALGOLIA_KEY }}
-      ALGOLIA_APP_NAME: WHIXSMPJX1
+      ALGOLIA_APP_NAME: FK258AU572
       ALGOLIA_INDEX_NAME: writerside_interview
       CONFIG_JSON_PRODUCT: I
       CONFIG_JSON_VERSION: 1
