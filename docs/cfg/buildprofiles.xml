@@ -10,6 +10,11 @@
         <download-page>https://github.com/tkxkd0159/interview</download-page>
         <showDownloadButton>false</showDownloadButton>
         <noindex-content>false</noindex-content>
+
+        <algolia-id>FK258AU572</algolia-id>
+        <algolia-index>writerside_interview</algolia-index>
+        <algolia-api-key>6773415323db138e992fccc45cd9c21d</algolia-api-key>
+        <web-root>https://tkxkd0159.github.io/interview</web-root>
     </variables>
 
     <footer>
