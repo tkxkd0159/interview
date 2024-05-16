@@ -8,6 +8,7 @@
         <product-web-url>https://tkxkd0159.github.io/interview</product-web-url>
 
         <noindex-content>false</noindex-content>
+        <web-root>https://tkxkd0159.github.io/interview</web-root>
         <search-endpoint>http://127.0.0.1:8080</search-endpoint>
     </variables>
 
