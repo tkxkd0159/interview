@@ -17,6 +17,8 @@
     * [AlgoMonster](https://algo.monster/?sscid=11k8_6n0eu&) : Canada
     * [InterviewBit](https://www.interviewbit.com/) : India
     * [NeetCode](https://neetcode.io/) : subset of LeetCode
+    * [Grokking the Coding Interview: Patterns for Coding Questions](https://www.designgurus.io/course/grokking-the-coding-interview?aff=kJSIoU)
+      
 
 # Computer Architecture
 
