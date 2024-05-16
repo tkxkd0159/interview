@@ -9,7 +9,7 @@
 
         <noindex-content>false</noindex-content>
         <search-endpoint>http://127.0.0.1:8080</search-endpoint>
-        <web-root>https://tkxkd0159.github.io/interview</web-root>
+        <web-root>https://tkxkd0159.github.io</web-root>
     </variables>
 
     <footer>
