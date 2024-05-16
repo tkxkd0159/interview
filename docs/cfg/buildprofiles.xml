@@ -6,15 +6,12 @@
         <custom-favicons>favicon.png</custom-favicons>
         <header-logo>$WRS_MODULE$/images/books.png</header-logo>
         <product-web-url>https://tkxkd0159.github.io/interview</product-web-url>
-        <download-title>Contribute to this docs</download-title>
-        <download-page>https://github.com/tkxkd0159/interview</download-page>
-        <showDownloadButton>false</showDownloadButton>
 
         <noindex-content>false</noindex-content>
         <search-endpoint>http://127.0.0.1:8080</search-endpoint>
     </variables>
 
     <footer>
-        <copyright>Jaeseung Lee</copyright>
+        <copyright>Jeseung Lee</copyright>
     </footer>
 </buildprofiles>
