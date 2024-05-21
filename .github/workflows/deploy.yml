@@ -19,6 +19,7 @@ env:
   # Replace XX with the ID of the instance in capital letters
   ARTIFACT: webHelpI2-all.zip
   ALGOLIA_ARTIFACT: algolia-indexes-I.zip
+  # Track the version of Writerside at https://www.jetbrains.com/help/writerside/15989.html
   DOCKER_VERSION: '241.15989'
 
 jobs:
