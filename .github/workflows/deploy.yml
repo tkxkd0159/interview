@@ -19,6 +19,7 @@ env:
   # Replace XX with the ID of the instance in capital letters
   ARTIFACT: webHelpI2-all.zip
   ALGOLIA_ARTIFACT: algolia-indexes-I.zip
+  DOCKER_VERSION: '241.15989'
 
 jobs:
   build:
@@ -33,6 +34,7 @@ jobs:
         with:
           instance: ${{ env.INSTANCE }}
           artifact: ${{ env.ARTIFACT }}
+          docker-version: ${{ env.DOCKER_VERSION }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
