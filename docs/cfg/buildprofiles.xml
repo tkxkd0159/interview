@@ -12,7 +12,7 @@
     <build-profile instance="i">
         <variables>
             <noindex-content>false</noindex-content>
-            <!--            <search-endpoint>http://127.0.0.1:8080</search-endpoint>-->
+            <search-endpoint>http://127.0.0.1:8080</search-endpoint>
         </variables>
     </build-profile>
 
