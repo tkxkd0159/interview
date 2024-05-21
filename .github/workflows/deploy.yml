@@ -28,10 +28,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          path: 'interview'
-      - name: Print current directory
-        run: pwd
 
       - name: Build Writerside docs using Docker
         uses: JetBrains/writerside-github-action@v4
