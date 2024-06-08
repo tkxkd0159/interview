@@ -5,6 +5,8 @@
        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
        title="Data Structures &amp; Algorithms" id="DS-Algo-Intro">
 
+    <show-structure for="chapter" depth="2"/>
+
     <p>
         <i>Data structures</i> are used for efficient management of data. Efficient data structure can be different depending on the
         goal. <i>Algorithms</i> are finite list of well-defined instructions for accomplishing some task. Efficient sequence of action (from
@@ -65,7 +67,7 @@
         </chapter>
     </chapter>
 
-    <chapter title="Complexity">
+    <chapter title="Asymptotic Notation">
         <table style="header-row">
             <tr>
                 <td>Name</td>
