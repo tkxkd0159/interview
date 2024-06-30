@@ -7,26 +7,23 @@
 
 
     <chapter title="1D DP" id="1_d_dp">
-        
+        <chapter title="Palindrome" id="palindrome">
+
+        </chapter>
     </chapter>
 
     <chapter title="2D DP" id="2_d_dp">
-        
-    </chapter>
+        <chapter title="0 / 1 Knapsack" id="0_1_knapsack">
 
-    <chapter title="0 / 1 Knapsack" id="0_1_knapsack">
-        
-    </chapter>
+        </chapter>
 
-    <chapter title="Unbounded Knapsack" id="unbounded_knapsack">
+        <chapter title="Unbounded Knapsack" id="unbounded_knapsack">
 
-    </chapter>
+        </chapter>
 
-    <chapter title="Longest Common Sequence" id="longest_common_sequence">
-        
-    </chapter>
+        <chapter title="Longest Common Sequence" id="longest_common_sequence">
 
-    <chapter title="Palindrome" id="palindrome">
-        
+        </chapter>
+
     </chapter>
 </topic>

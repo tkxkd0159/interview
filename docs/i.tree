@@ -16,6 +16,7 @@
             <toc-element topic="Graph.topic"/>
             <toc-element topic="Backtracking.topic"/>
             <toc-element topic="Dynamic-Programming.topic"/>
+            <toc-element topic="Greedy.topic"/>
             <toc-element topic="Sorting.topic"/>
             <toc-element topic="Others.topic"/>
             <toc-element topic="dsalgo-rwp.topic"/>
