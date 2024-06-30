@@ -10,6 +10,14 @@
     <toc-element toc-title="Computer science">
         <toc-element topic="Computer-architecture.topic"/>
         <toc-element topic="DS-Algo-Intro.topic">
+            <toc-element topic="Array.topic"/>
+            <toc-element topic="Linked-List.topic"/>
+            <toc-element topic="Tree.topic"/>
+            <toc-element topic="Graph.topic"/>
+            <toc-element topic="Backtracking.topic"/>
+            <toc-element topic="Dynamic-Programming.topic"/>
+            <toc-element topic="Sorting.topic"/>
+            <toc-element topic="Others.topic"/>
             <toc-element topic="dsalgo-rwp.topic"/>
         </toc-element>
         <toc-element topic="Operating-system.topic">

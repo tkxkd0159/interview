@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Array" id="Array">
+
+    <chapter title="Static Array" id="static_array">
+        
+    </chapter>
+
+    <chapter title="Dynamic Array" id="dynamic_array">
+        
+    </chapter>
+
+    <chapter title="Stack" id="stack">
+        
+    </chapter>
+
+    <chapter title="Binary Search" id="binary_search">
+        Find a target value within a sorted array
+    </chapter>
+
+    <chapter title="Kadane's Algorithm" id="kadane_s_algorithm">
+
+    </chapter>
+
+    <chapter title="Sliding Window" id="sliding_window">
+        <p>
+            Fixed size window
+        </p>
+        <p>
+            Variable size window
+        </p>
+    </chapter>
+
+    <chapter title="Two Pointers" id="two_pointers">
+        
+    </chapter>
+
+    <chapter title="Prefix Sum" id="prefix_sum">
+        
+    </chapter>
+</topic>

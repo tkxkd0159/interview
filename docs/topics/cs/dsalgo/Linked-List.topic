@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Linked List" id="Linked-List">
+
+    <chapter title="Singly Linked List" id="singly_linked_list">
+        
+    </chapter>
+
+    <chapter title="Doubly Linked List" id="doubly_linked_list">
+        
+    </chapter>
+
+    <chapter title="Queue" id="queue">
+
+    </chapter>
+
+    <chapter title="Fast and Slow Pointer" id="fast_and_slow_pointer">
+        
+    </chapter>
+</topic>

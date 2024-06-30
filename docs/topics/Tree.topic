@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Tree" id="Tree">
+
+    <show-structure depth="2"/>
+
+    <chapter title="Binary Tree" id="binary_tree">
+        
+    </chapter>
+
+    <chapter title="Binary Search Tree" id="binary_search_tree">
+        <p>
+            Ordered/Sorted Binary Tree.
+        </p>
+
+        <chapter title="Search Range" id="search_range">
+            
+        </chapter>
+
+        <chapter title="BST-based Set" id="bst_based_set">
+            
+        </chapter>
+
+        <chapter title="BST-based Map" id="bst_based_map">
+            
+        </chapter>
+    </chapter>
+
+    <chapter title="Heap" id="heap">
+        <p>
+            Priority Queue. Heap properties
+        </p>
+
+        <p>
+            Push and Pop
+        </p>
+
+        <p>
+            <code>Heapify</code> is the process of creating a heap data structure from a binary tree.
+        </p>
+
+        <chapter title="Two Heaps" id="two_heaps">
+            
+        </chapter>
+    </chapter>
+
+    <chapter title="Trie" id="trie">
+        <p>
+            Prefix Tree / Digital Tree. Used for searching strings.
+        </p>
+
+    </chapter>
+
+    <chapter title="Union-Find" id="union_find">
+        <p>
+            Disjoint Set. Used for finding connected components in a graph.
+        </p>
+    </chapter>
+
+    <chapter title="Segment Tree" id="segment_tree">
+        
+    </chapter>
+
+    <chapter title="Depth-First Search" id="depth_first_search">
+        <p>
+            DFS is an algorithm for traversing or searching tree or graph data structures.
+        </p>
+
+        <p>
+            <b>Iterative DFS</b>
+        </p>
+    </chapter>
+
+    <chapter title="Breadth-First Search" id="breadth_first_search">
+        <p>
+            BFS is an algorithm for traversing or searching tree or graph data structures.
+        </p>
+    </chapter>
+</topic>
