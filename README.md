@@ -13,6 +13,12 @@
 * Platforms
     * [Algo Expert](https://www.algoexpert.io/product) : USA
     * [LeetCode](https://leetcode.com/) : USA
+      * [Leetcode 75](https://leetcode.com/studyplan/leetcode-75/) 
+      * [Blind 75](https://leetcode.com/problem-list/oizxjoit/)
+      * [Grind 75](https://leetcode.com/problem-list/rab78cw1/), [Grind 169](https://leetcode.com/problem-list/rabvlt31/)
+        * [Ref](https://www.techinterviewhandbook.org/grind75?weeks=26&hours=40) 
+      * [Neetcode 150](https://neetcode.io/)
+      * [SQL 45](https://leetcode.com/problem-list/o2qifkts/)
     * [Interview Cake](https://www.interviewcake.com/) : USA
     * [AlgoMonster](https://algo.monster/?sscid=11k8_6n0eu&) : Canada
     * [InterviewBit](https://www.interviewbit.com/) : India
