@@ -7,7 +7,7 @@
                   start-page="Overview.topic">
 
     <toc-element topic="Overview.topic"/>
-    <toc-element toc-title="Computer science">
+    <toc-element toc-title="Computer Science">
         <toc-element topic="Computer-architecture.topic"/>
         <toc-element topic="DS-Algo-Intro.topic">
             <toc-element topic="Array.topic"/>
@@ -59,6 +59,11 @@
         <toc-element topic="Docker.topic"/>
         <toc-element topic="IaC.topic"/>
         <toc-element topic="MLOps.topic"/>
+    </toc-element>
+
+
+    <toc-element topic="AI.topic">
+        <toc-element topic="GenAI.topic"/>
     </toc-element>
 
     <toc-element topic="Interview.topic"/>

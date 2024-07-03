@@ -41,12 +41,14 @@
                 Computing</a>
             <a href="Cryptography.topic"
                summary="Cryptography is about constructing and analyzing protocols that prevent third parties or the public from reading private messages.">Cryptography</a>
-
         </primary>
 
         <!--    Add several topics that are less important or are relevant only for advanced/experienced users.    -->
         <secondary>
             <title>Dev</title>
+            <a href="Dev-methodologies.topic"
+               summary="Software development methodology is a framework(paradigm) that is used to structure, plan, and control the process of developing an information system.">Dev
+                Methodologies</a>
             <a href="Design-pattern.topic"
                summary="Design pattern describes a relatively small, well-defined aspect of a computer program in terms of how to write the code.">Design
                 Patterns</a>
