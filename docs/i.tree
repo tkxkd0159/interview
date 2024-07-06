@@ -29,7 +29,9 @@
         <toc-element topic="Network.topic">
             <toc-element topic="OSI-7.topic"/>
         </toc-element>
-        <toc-element topic="Database.topic"/>
+        <toc-element topic="Database.topic">
+            <toc-element topic="Structured-Query-Language.topic"/>
+        </toc-element>
         <toc-element topic="Distributed-computing.topic"/>
         <toc-element topic="Compiler.topic">
             <toc-element topic="Compiler-Opti.topic"/>
@@ -55,6 +57,7 @@
     </toc-element>
 
     <toc-element toc-title="DevOps">
+        <toc-element topic="Observability-Engineering.topic"/>
         <toc-element topic="Kubernetes.topic"/>
         <toc-element topic="Docker.topic"/>
         <toc-element topic="IaC.topic"/>
