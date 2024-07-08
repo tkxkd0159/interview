@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="PS Note" id="PS-Note">
+
+    <show-structure for="chapter" depth="2"/>
+
+    <chapter title="Graph" id="graph">
+
+        <chapter title="DFS or BFS" id="dfs_or_bfs">
+            <list>
+                <li>M * N (Row &amp; Column)</li>
+            </list>
+
+            <code-block lang="go">
+                <![CDATA[
+                func pacificAtlantic(heights [][]int) [][]int {
+                    if len(heights) == 0 {
+                        return nil
+                    }
+
+                    rows, cols := len(heights), len(heights[0])
+                    pacific := make([][]bool, rows)
+                    atlantic := make([][]bool, rows)
+                    for i := range pacific {
+                        pacific[i] = make([]bool, cols)
+                        atlantic[i] = make([]bool, cols)
+                    }
+
+                    var dfs func(int, int, [][]bool)
+                    dfs = func(r, c int, reachable [][]bool) {
+                        reachable[r][c] = true
+                        directions := [][]int{{1, 0}, {-1, 0}, {0, 1}, {0, -1}}
+                        for _, d := range directions {
+                            nr, nc := r+d[0], c+d[1]
+                            if nr >= 0 && nr < rows && nc >= 0 && nc < cols &&
+                                !reachable[nr][nc] && heights[nr][nc] >= heights[r][c] {
+                                dfs(nr, nc, reachable)
+                            }
+                        }
+                    }
+
+                    for r := 0; r < rows; r++ {
+                        dfs(r, 0, pacific)
+                        dfs(r, cols-1, atlantic)
+                    }
+                    for c := 0; c < cols; c++ {
+                        dfs(0, c, pacific)
+                        dfs(rows-1, c, atlantic)
+                    }
+
+                    var result [][]int
+                    for r := 0; r < rows; r++ {
+                        for c := 0; c < cols; c++ {
+                            if pacific[r][c] && atlantic[r][c] {
+                                result = append(result, []int{r, c})
+                            }
+                        }
+                    }
+
+                    return result
+                }
+                ]]>
+            </code-block>
+        </chapter>
+
+        <chapter title="Topological Sorting" id="topological_sorting">
+            <list>
+                <li>Kahn's Algorithm(indegree, outdegree)</li>
+                <li>Prerequisite task, </li>
+            </list>
+
+            <code-block lang="go">
+                func canFinish(numCourses int, prerequisites [][]int) bool {
+                    indegree := make([]int, numCourses)
+                    adj := make([][]int, numCourses)
+                    for _, p := range prerequisites {
+                        adj[p[1]] = append(adj[p[1]], p[0])
+                        indegree[p[0]]++
+                    }
+
+                    q := make([]int, 0)
+                    for i := range numCourses {
+                        if indegree[i] == 0 {
+                            q = append(q, i)
+                        }
+                    }
+
+                    visited := 0
+                    for len(q) > 0 {
+                        node := q[0]
+                        q = q[1:]
+                        visited++
+
+                        for _, neighbor := range adj[node] {
+                            indegree[neighbor]--
+                            if indegree[neighbor] == 0 {
+                                q = append(q, neighbor)
+                            }
+                        }
+                    }
+
+                    return visited == numCourses
+                }
+            </code-block>
+        </chapter>
+
+    </chapter>
+</topic>

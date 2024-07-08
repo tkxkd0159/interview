@@ -69,6 +69,8 @@
         <toc-element topic="GenAI.topic"/>
     </toc-element>
 
-    <toc-element topic="Interview.topic"/>
+    <toc-element topic="Interview.topic">
+        <toc-element topic="PS-Note.topic"/>
+    </toc-element>
 
 </instance-profile>
