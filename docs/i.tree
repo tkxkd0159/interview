@@ -30,6 +30,7 @@
             <toc-element topic="OSI-7.topic"/>
         </toc-element>
         <toc-element topic="Database.topic">
+            <toc-element topic="Distributed-Storage.topic"/>
             <toc-element topic="Structured-Query-Language.topic"/>
         </toc-element>
         <toc-element topic="Distributed-computing.topic"/>
