@@ -20,13 +20,13 @@
         </list>
 
         <deflist collapsible="true">
-            <def title="Synchronous Network">
+            <def title="Synchronous Network" id="syncnet">
                 노드가 메시지를 보내는 시간과 수신 노드가 메시지를 수신하는 시간 사이에 상한선이 존재하고, 그 시간 안에 반드시 메시지가 수신 노드에게 도착한다는 것을 보증하는 네트워크. 따라서 네트워크 사이에 데이터 통신이 ‘반드시’ 이루어져야 하는 경우에 사용. 단순하게 이해하자면, 어떤 메시지를 보내면, 정해진 시간 안에 반드시 응답이 도착하는 네트워크. 비행기나 우주선의 통신과 같이, 정해진 시간 안에 노드 간 통신이 반드시 필요한 네트워크에서 주로 사용.
             </def>
-            <def title="Asynchronous Network">
+            <def title="Asynchronous Network" id="asyncnet">
                 노드가 메시지를 보내는 시간과 수신 노드가 메시지를 수신하는 시간 사이에 상한선이 없다. 즉 메시지가 수신 노드에게 제대로 도착했는지 여부를, 수신 노드가 응답하는 데 얼마나 시간이 걸리는지를 알 수 없다. 따라서 특정 노드가 임의로 메시지를 전송하지 않거나 거짓 데이터를 전송하는 배신행위가 가능한 네트워크. 인터넷이나 블록체인 네트워크가 여기에 해당.
             </def>
-            <def title="Partial Synchronous Network">
+            <def title="Partial Synchronous Network" id="syncasyncnet">
                 노드가 메시지를 보내는 시간과 수신 노드가 메시지를 수신하는 시간 사이에 상한선이 존재하지만, 그 상한선이 얼마인지는 알 수 없는 네트워크. 단순히 표현하자면 ‘노드와 노드 사이에 메시지가 도달하는 것은 보증하지만, 언제 도달할지는 알 수 없다. 네트워크에서 메시지가 도달하는 시간의 상한선이 유한(finite)한 것이 부분 동기 네트워크이고, 무한(infinite)한 것이 비동기 네트워크. 로직의 경우 Global Stabilazation Time까지는 async, 이후는 sync처럼 동작하게 됨.
             </def>
         </deflist>
@@ -44,7 +44,7 @@
         <list>
             <li>아래 3가지 속성을 동시에 만족할 수 없음 (최대 2개 충족). CA는 주로 RDB에 사용되고 CP, AP는 NoSQL
                 <list>
-                    <li><b>CA</b>: MySQL(Single-node or Master-Slave replication), PostgreSQL(Single-node or Master-Slave replication), Oracle DB(Single-node or Real Application Cluster), Microsoft SQL Server(Single-node or Synchronous replication)</li>
+                    <li><b>CA</b>: Traditional RDB [MySQL(Single-node or Master-Slave replication), PostgreSQL(Single-node or Master-Slave replication), Oracle DB(Single-node or Real Application Cluster), Microsoft SQL Server(Single-node or Synchronous replication)]</li>
                     <li><b>CP</b>: CockroachDB, Redis, HBase, MongoDB(Configured for strong consistency), Cassandra (Configured for strong consistency)</li>
                     <li><b>AP</b>: MongoDB(Default), Cassandra(Default), Riak, Amazon DynamoDB, Couchbase
                     </li>
@@ -157,7 +157,7 @@
         <chapter title="ACID compared with BASE" id="acid_compared_with_base">
             <table>
                 <tr>
-                    <td></td>
+                    <td>_</td>
                     <td>ACID</td>
                     <td>BASE</td>
                 </tr>
