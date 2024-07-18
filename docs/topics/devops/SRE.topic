@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Site Reliability Engineering" id="SRE" help-id="Site-Reliability-Engineering">
+
+    <show-structure for="chapter" depth="2"/>
+
+    <p>
+        Reliability Engineering is a multidisciplinary field that applies engineering principles and data analysis to:
+    </p>
+    <list>
+        <li><b>Predict</b>: Anticipate the likelihood and modes of failure in products, systems, or processes.</li>
+        <li><b>Prevent</b>: Design and implement strategies to minimize the occurrence of failures.</li>
+        <li><b>Manage</b>: Develop procedures for identifying, diagnosing, and rectifying failures when they occur.</li>
+    </list>
+
+    <chapter title="Product-Focused Reliability" id="product_focused_reliability">
+        <p>In tranditional <i>Service support model</i>, the core responsibilities of SREs are to be "responsible for
+            the availability,
+            latency, performance, efficiency, change management, monitoring, emergency response, and capacity planning
+            of their [SRE] service(s)"
+            Therefore, Site Reliability Engineers (SRE) traditionally support products indirectly via their services,
+            being accountable to service level objectives (SLO), and improving the reliability of these services.
+            However, this approach has the following limitations that can impact products and the end user experience:
+        </p>
+        <list>
+            <li>Services are partial solutions for user needs and business goals. Measuring the reliability of a service
+                is only an approximation of the user need or business goal.
+            </li>
+            <li>User interfaces (UI) are increasingly complex. There are a number of layers between UIs and the services
+                that SREs measure, resulting in a significant gap in the coverage of the product.
+            </li>
+            <li>Service growth can easily outpace the engineering growth of an organization, leading to inevitable
+                neglect of services or team overload.
+            </li>
+            <li>Service support optimizes a small part of the product's overall reliability and performance, while
+                significant risks exist beyond the scope of these services.
+            </li>
+            <li>Services are synchronous by nature. Asynchronous flows are often overlooked or difficult to prioritize
+                because their success cannot be measured by a single service.
+            </li>
+        </list>
+
+        <p>
+            To address these limitations, Google uses Product support model. The core of this model focuses on SREs
+            being accountable for the reliability of a product's critical functionality.
+            Without the fixed boundaries of traditional service ownership, SRE teams are empowered to align their
+            priorities to business and user outcomes and tackle wider ranging and more impactful efforts at every layer
+            of the service stack.
+        </p>
+        Product-focused Reliability Engagement has following key steps:
+        <list type="decimal">
+            <li>Engage your stakeholders</li>
+            <li>Model the product</li>
+            <li>Measure performance</li>
+            <li>Manage reliability</li>
+        </list>
+
+        <chapter title="Model the Product" id="model_the_product">
+
+            <p>
+                People use a product to achieve a real-world objective. To help product teams build products and
+                services that facilitate user goals, you need to understand what the product's users are trying to
+                accomplish.
+                User objectives are broken down into a list of steps that the user takes to accomplish the overall
+                objective. Each step is an isolated unit of work, independent of the other steps. These steps provide
+                the following information:
+            </p>
+            <list>
+                <li>An explanation of what a user is doing with a product, or the user goal.</li>
+                <li>A definition of a start condition and a number of success or failure conditions for each step.</li>
+                <li>A tangible list of actions that you can relate to the product's interface or infrastructure, for
+                    example, the RPCs called when a user is sending an email.
+                </li>
+            </list>
+
+            Following table is the example user objectives and steps for a mail service:
+            <table>
+                <tr>
+                    <td>Objective</td>
+                    <td>Step</td>
+                    <td>Description</td>
+                </tr>
+                <tr>
+                    <td rowspan="5">Compose mail</td>
+                    <td>Login</td>
+                    <td>The user authenticates themselves on the login page</td>
+                </tr>
+                <tr>
+                    <td>Open compose dialog</td>
+                    <td>The user clicks the Compose button, and the Compose dialog is presented.</td>
+                </tr>
+                <tr>
+                    <td>Lookup addresses</td>
+                    <td>The user starts to type a recipient's email address. A number of matching addresses are
+                        presented for selection.
+                    </td>
+                </tr>
+                <tr>
+                    <td>Check spelling</td>
+                    <td>As the user types their message, spelling mistakes are highlighted.</td>
+                </tr>
+                <tr>
+                    <td>Send mail</td>
+                    <td>The user clicks the Send button. The message is queued for delivery in the mail service.</td>
+                </tr>
+                <tr>
+                    <td rowspan="5">Read mail</td>
+                    <td>Login</td>
+                    <td>The user authenticates themselves on the login page</td>
+                </tr>
+                <tr>
+                    <td>Open inbox</td>
+                    <td>The user opens their inbox page, which lists all their email messages..</td>
+                </tr>
+                <tr>
+                    <td>Open message</td>
+                    <td>The user selects an email message, and its contents are presented.</td>
+                </tr>
+                <tr>
+                    <td>Receive mail (async)</td>
+                    <td>When the mail service receives new messages, they are automatically displayed in the user's
+                        inbox.
+                    </td>
+                </tr>
+            </table>
+
+            <p>
+                <b>Severity</b> refers to the impact of a defect, issue, or incident on the functionality or performance
+                of a system or application. It considers the technical impact.
+                <b>Criticality</b> refers to the urgency or priority with which an issue needs to be addressed. It
+                considers the business impact.
+                A critical issue may not always be severe, and a severe issue may not always be critical.
+            </p>
+
+            Product Severity example as follows:
+            <table>
+                <tr>
+                    <td>Severity</td>
+                    <td>Description</td>
+                </tr>
+                <tr>
+                    <td>Major</td>
+                    <td>Any impact to receiving or sending mail. <b>> 20%</b> impact to core features</td>
+                </tr>
+                <tr>
+                    <td>Medium</td>
+                    <td><b>> 5%</b> impact to core features. <b>> 20%</b> impact to auxiliary features</td>
+                </tr>
+                <tr>
+                    <td>Minor</td>
+                    <td><b>> 0%</b> impact to any feature</td>
+                </tr>
+            </table>
+
+            Product Criticality example as follows:
+            <table>
+                <tr>
+                    <td>Criticality</td>
+                    <td>Description</td>
+                    <td>User Objectives > Steps</td>
+                </tr>
+                <tr>
+                    <td>Critical</td>
+                    <td>Services that are responsible for mail transport and delivery, and are critical (not optional)
+                        dependencies of core features.
+                    </td>
+                    <td>
+                        <list>
+                            <li>Compose mail</li>
+                            <li>Read mail</li>
+                        </list>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Important</td>
+                    <td>Services that are non-critical dependencies (graceful failover) of core features or are
+                        dependencies of auxiliary features.
+                    </td>
+                    <td>
+                        <list>
+                            <li>Compose mail > Check spelling</li>
+                            <li>Read mail > Filter spam</li>
+                        </list>
+                    </td>
+                </tr>
+                <tr>
+                    <td>None</td>
+                    <td>All other services, typically internal or unlaunched features.</td>
+                    <td>All other product features not identified as product priorities.</td>
+                </tr>
+            </table>
+        </chapter>
+
+        <chapter title="Measure Performance" id="measure_performance">
+
+            <table>
+                <tr>
+                    <td>Feature</td>
+                    <td>SLI (Service Level Indicator) - metrics</td>
+                    <td>SLO (Service Level Objective)</td>
+                </tr>
+                <tr>
+                    <td>Definition</td>
+                    <td>A quantitative measure of a specific aspect of service performance.</td>
+                    <td>A target value or range for an SLI, defining the desired level of service.</td>
+                </tr>
+                <tr>
+                    <td>Purpose</td>
+                    <td>To assess whether a service is meeting its performance goals.</td>
+                    <td>To establish an agreement on the expected service performance.</td>
+                </tr>
+                <tr>
+                    <td>Focus</td>
+                    <td>Actual measurement or observation of a service aspect.</td>
+                    <td>Target or goal to be achieved for the measured aspect.</td>
+                </tr>
+                <tr>
+                    <td>Examples</td>
+                    <td>
+                        <list>
+                            <li>Availability (percentage of uptime)</li>
+                            <li>Latency (time to respond to a request)</li>
+                            <li>Error rate (percentage of failed requests)</li>
+                            <li>Throughput (requests per second)</li>
+                        </list>
+                    </td>
+                    <td>
+                        <list>
+                            <li>99.9% availability</li>
+                            <li>95th percentile latency of 200ms</li>
+                            <li>Error rate less than 1%</li>
+                            <li>Throughput of at least 1000 requests per second</li>
+                        </list>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Relationship</td>
+                    <td>Building block for defining SLOs.</td>
+                    <td>Defined in terms of one or more SLIs.</td>
+                </tr>
+            </table>
+
+
+            <p>
+                Service-based SLOs generally don't provide adequate product coverage. There are classes of issues that
+                cannot be measured from a single server, for example, issues that occur within a web or mobile
+                application, or through an asynchronous action.
+                So SRE team try to expand their SLOs in a number of ways. There are three main categories of SLOs that
+                provide broader coverage for the product: service SLOs, client-side SLOs, and end-to-end SLOs.
+            </p>
+            <table>
+                <tr>
+                    <td>SLI Type</td>
+                    <td>Definition</td>
+                    <td>Example</td>
+                    <td>Pros</td>
+                    <td>Cons</td>
+                </tr>
+                <tr>
+                    <td>Service SLI</td>
+                    <td>Measures the health and performance of a specific service component from the service provider's
+                        perspective.
+                    </td>
+                    <td>
+                        <list>
+                            <li>Server CPU utilization</li>
+                            <li>Database query response time</li>
+                            <li>Error rates in service logs</li>
+                        </list>
+                    </td>
+                    <td>
+                        <list>
+                            <li>Easier to collect and monitor</li>
+                            <li>Provides insights into individual component health</li>
+                        </list>
+                    </td>
+                    <td>
+                        <list>
+                            <li>Doesn't reflect end-user experience</li>
+                            <li>May not capture issues outside the service's control</li>
+                        </list>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Client SLI</td>
+                    <td>Measures the service's performance as experienced by the client or end-user.</td>
+                    <td>
+                        <list>
+                            <li>Page load time in a web browser</li>
+                            <li>API request latency from a mobile app</li>
+                            <li>Client-side error rates reported by JavaScript</li>
+                        </list>
+                    </td>
+                    <td>
+                        <list>
+                            <li>Reflects the actual user experience</li>
+                            <li>Captures issues that may not be visible to the server</li>
+                        </list>
+                    </td>
+                    <td>
+                        <list>
+                            <li>Can be harder to collect, requiring client-side instrumentation</li>
+                            <li>Can be influenced by factors outside the service's control (e.g., network conditions)
+                            </li>
+                        </list>
+                    </td>
+                </tr>
+                <tr>
+                    <td>End-to-End SLI</td>
+                    <td>Measures the performance of the entire system, from the client's initial request to the final
+                        response, including all intermediate components and dependencies.
+                    </td>
+                    <td>
+                        <list>
+                            <li>Time to complete a purchase on an e-commerce site</li>
+                            <li>Time to render a complex report in a business intelligence tool</li>
+                            <li>Success rate of completing a multi-step workflow</li>
+                        </list>
+                    </td>
+                    <td>
+                        <list>
+                            <li>Provides the most comprehensive view of system health</li>
+                            <li>Captures issues that may arise due to interactions between components</li>
+                        </list>
+                    </td>
+                    <td>
+                        <list>
+                            <li>Can be the most complex to measure and analyze</li>
+                            <li>Requires coordination and instrumentation across multiple components</li>
+                        </list>
+                    </td>
+                </tr>
+            </table>
+
+            <p><b>Telemetry</b>: Before you can implement the SLOs discussed in Product SLOs, metrics (also known as
+                SLIs) must be available to help you track the relevant product functionality.
+                Whereas a team's understanding of SLO performance was once limited to "database writes availability is
+                98%," for example, product-focused SLOs can show that those 2% of errors are causing 100% of "save email
+                draft" steps to fail.
+                The key requirement to turn aggregate availability metrics into accurate and actionable indicators of
+                product performance is the ability to know what product functionality is supported by each request.
+                Beyond simple observability needs, this request-level information can also be used in traffic routing
+                and load shedding policies to ensure that lower priority functionality doesn't harm more
+                mission-critical features.
+                There are two main methods to consider: client-side annotation and server-side annotation.
+            </p>
+            <table>
+                <tr>
+                    <td>Annotation</td>
+                    <td>Description</td>
+                    <td>Use case</td>
+                </tr>
+                <tr>
+                    <td>Client-side annotation</td>
+                    <td>Update the user interface (web pages and mobile applications) to attach the user objective step
+                        metadata to the RPC requests sent to your backend services. This is technically challenging and
+                        requires your UI teams to help design and eventually own and maintain these annotations.
+                    </td>
+                    <td>Using client-side annotation offers the most accurate method of mapping what a user is trying to
+                        achieve with the interface they're using. The annotation is done on individual RPC requests and
+                        therefore has the highest fidelity.
+                    </td>
+                </tr>
+                <tr>
+                    <td>Server-side annotation</td>
+                    <td>Analyze the RPC requests that a backend server receives and infers what the user's objective
+                        step is.
+                    </td>
+                    <td>This method is necessary when it's too costly to modify the client, or when you don't own the
+                        client (like REST services). Server-side annotation is not as accurate as client-side annotation
+                        since a number of assumptions are needed for a server to infer which step a RPC request is
+                        serving.
+                    </td>
+                </tr>
+            </table>
+            <p>
+                You likely won't be able to annotate all of your traffic. You might annotate only the most critical user objectives.
+            </p>
+        </chapter>
+    </chapter>
+</topic>

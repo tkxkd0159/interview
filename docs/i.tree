@@ -58,8 +58,10 @@
     </toc-element>
 
     <toc-element toc-title="DevOps">
-        <toc-element topic="Observability-Engineering.topic"/>
-        <toc-element topic="Kubernetes.topic"/>
+        <toc-element topic="SRE.topic"/>
+        <toc-element topic="Kubernetes.topic">
+            <toc-element topic="Extending-Kubernetes.topic"/>
+        </toc-element>
         <toc-element topic="Docker.topic"/>
         <toc-element topic="IaC.topic"/>
         <toc-element topic="MLOps.topic"/>

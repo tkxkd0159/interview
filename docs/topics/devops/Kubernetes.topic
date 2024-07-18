@@ -5,5 +5,36 @@
        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
        title="Kubernetes" id="Kubernetes">
 
-    <p>Start typing here...</p>
+    <chapter title="Control/Data Plane" id="control_data_plane">
+        <p>
+            The control plane is the "brains" of Kubernetes. It makes decisions about the cluster's state, such as which pods should run on which nodes, how to scale applications, and how to recover from failures. It also exposes the Kubernetes API, which allows users and external systems to interact with the cluster.
+        </p>
+
+        <list>
+            <li>kube-apiserver: The API server is the front end for the Kubernetes control plane. It handles requests from users and other components, validates them, and forwards them to the appropriate controller.</li>
+            <li>etcd: A consistent and highly-available key-value store used as Kubernetes' backing store for all cluster data.</li>
+            <li>kube-scheduler: This component watches for newly created pods with no assigned node and selects a node for them to run on.</li>
+            <li>kube-controller-manager: This component runs controller processes that regulate the state of the cluster.</li>
+        </list>
+
+        <p>
+            The data plane is the "body" of Kubernetes. It consists of the nodes where containerized applications run. The data plane is responsible for executing the decisions made by the control plane, such as starting and stopping pods, monitoring their health, and providing networking and storage resources.
+        </p>
+
+        <list>
+            <li>kubelet: An agent that runs on each node in the cluster. It communicates with the control plane and is responsible for managing the pods running on its node.</li>
+            <li>kube-proxy: A network proxy that runs on each node in the cluster. It maintains network rules on nodes, allowing network communication to your Pods from network sessions inside or outside of your cluster.</li>
+            <li>Container runtime: The software that is responsible for running containers. Kubernetes supports several container runtimes, including Docker, containerd, and CRI-O.</li>
+        </list>
+
+        <p>The control plane and data plane work together in a loop:</p>
+        <list>
+            <li>The control plane makes decisions about the desired state of the cluster.</li>
+            <li>The control plane sends instructions to the data plane to implement those decisions.</li>
+            <li>The data plane executes the instructions and reports back to the control plane.</li>
+            <li>The control plane monitors the state of the cluster and makes further decisions as needed.</li>
+        </list>
+        <p>This continuous loop ensures that the cluster remains in the desired state, even in the face of failures or
+            changes in workload.</p>
+    </chapter>
 </topic>
