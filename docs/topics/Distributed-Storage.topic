@@ -45,7 +45,6 @@
             <li>아래 3가지 속성을 동시에 만족할 수 없음 (최대 2개 충족). CA는 주로 RDB에 사용되고 CP, AP는 NoSQL
                 <list>
                     <li><b>CA</b>: MySQL(Single-node or Master-Slave replication), PostgreSQL(Single-node or Master-Slave replication), Oracle DB(Single-node or Real Application Cluster), Microsoft SQL Server(Single-node or Synchronous replication)</li>
-                    <li><b>CA</b>: MySQL(Single-node or Master-Slave replication), PostgreSQL(Single-node or Master-Slave replication), Oracle DB(Single-node or Real Application Cluster), Microsoft SQL Server(Single-node or Synchronous replication)</li>
                     <li><b>CP</b>: CockroachDB, Redis, HBase, MongoDB(Configured for strong consistency), Cassandra (Configured for strong consistency)</li>
                     <li><b>AP</b>: MongoDB(Default), Cassandra(Default), Riak, Amazon DynamoDB, Couchbase
                     </li>
@@ -153,5 +152,61 @@
             <li><b>Atomicity &amp; Consistency</b>: 트랜잭션은 순차적으로 수행되며 이전 트랜잭션의 처리가 완료되기 전까지 다음 트랜잭션은 수행될 수 없다.</li>
             <li><b>Durability</b>: 트랜잭션은 블록에 담겨 모든 다음 블록들의 상태에 영구적으로 반영.</li>
         </list>
+
+
+        <chapter title="ACID compared with BASE" id="acid_compared_with_base">
+            <table>
+                <tr>
+                    <td></td>
+                    <td>ACID</td>
+                    <td>BASE</td>
+                </tr>
+                <tr>
+                    <td>Scale</td>
+                    <td>Scales vertically</td>
+                    <td>Scales horizontally</td>
+                </tr>
+                <tr>
+                    <td>Flexibility</td>
+                    <td>Less flexible. Blocks specific records from other applications when processing.</td>
+                    <td>More flexible. Allows multiple applications to update the same record simultaneously.</td>
+                </tr>
+                <tr>
+                    <td>Performance</td>
+                    <td>Performance decreases when processing large volumes of data.</td>
+                    <td>Capable of handling large, unstructured data with high throughput.</td>
+                </tr>
+                <tr>
+                    <td>Synchronization</td>
+                    <td>Yes. Adds delay when synchronizing.</td>
+                    <td>No synchronization at the database level.</td>
+                </tr>
+            </table>
+
+            <p>
+                It’s harder to scale an ACID database transaction model because it focuses on consistency. Only one transaction is allowed for any record at any moment, which makes horizontal scaling more challenging.
+                Alternately, you can scale the BASE database model horizontally because it doesn’t need to maintain strict consistency. Adding multiple nodes across the database cluster allows the BASE model to improve its data availability.
+            </p>
+
+            <p>
+                ACID databases are less flexible when handling data. It must guarantee immediate consistency,
+                an ACID database may restrict access to some applications if it experiences network or power outages. Similarly, applications must wait for their turn to update data if other software modules are processing a particular record. Conversely, BASE databases are more flexible. Rather than imposing strict restrictions, BASE allows applications to modify records when they are available.
+            </p>
+
+            <p>
+                An ACID database needs a synchronization mechanism to commit changes from a transaction and reflect them in all associated records.
+                At the same time, it must lock the particular record from other parties until the transaction completes or is discarded.
+                Meanwhile, a BASE database runs without locking the records, synchronizing them eventually without time guarantees.
+                When working with BASE databases, developers know there might be inconsistencies when processing certain records and take the necessary precautions in the application.
+            </p>
+
+            <p>
+                ACID is the ideal option for enterprise applications that require data consistency, reliability, and predictability.
+                For example, banks use an ACID database to store customer transactions because data integrity is the top priority.
+                Meanwhile, BASE databases are a better option for online analytical processing of less structured, high-volume data.
+                For example, ecommerce websites use BASE databases to update product prices, which change frequently.
+                In this case, pricing accuracy is less vital than allowing all customers real-time access to the product price.
+            </p>
+        </chapter>
     </chapter>
 </topic>
