@@ -381,4 +381,30 @@
             </p>
         </chapter>
     </chapter>
+
+    <chapter title="Observability" id="observability">
+        <chapter title="Logs" id="logs">
+            In general, logs should be recorded by the application. Developer should mask sensitive information such as PW, Session ID and do not log any debug information such as stack trace.
+
+            Below are examples of situations that would be good to log:
+            <list>
+                <li>All input validation failures</li>
+                <li>All authentication attempts, especially failures</li>
+                <li>All access control failures</li>
+                <li>All apparent tampering events, including unexpected changes to state data</li>
+                <li>All attempts to connect with invalid or expired session tokens</li>
+                <li>All system exceptions</li>
+                <li>All administrative functions, including changes to security configuration settings</li>
+                <li>All backend TLS connection failures and cryptographic module failures</li>
+            </list>
+        </chapter>
+
+        <chapter title="Metrics" id="metrics">
+            
+        </chapter>
+
+        <chapter title="Traces" id="traces">
+            
+        </chapter>
+    </chapter>
 </topic>
