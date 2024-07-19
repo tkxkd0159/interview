@@ -6,29 +6,43 @@
        title="Kubernetes" id="Kubernetes">
 
     <chapter title="K8s API structure" id="k_8_s_api_structure">
-        <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md">API Conventions</a>
+        <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md">API
+            Conventions</a>
 
     </chapter>
     <chapter title="Control/Data Plane" id="control_data_plane">
         <p>
-            The control plane is the "brains" of Kubernetes. It makes decisions about the cluster's state, such as which pods should run on which nodes, how to scale applications, and how to recover from failures. It also exposes the Kubernetes API, which allows users and external systems to interact with the cluster.
+            The control plane is the "brains" of Kubernetes. It makes decisions about the cluster's state, such as which pods should run on
+            which nodes, how to scale applications, and how to recover from failures. It also exposes the Kubernetes API, which allows users
+            and external systems to interact with the cluster.
         </p>
 
         <list>
-            <li>kube-apiserver: The API server is the front end for the Kubernetes control plane. It handles requests from users and other components, validates them, and forwards them to the appropriate controller.</li>
+            <li>kube-apiserver: The API server is the front end for the Kubernetes control plane. It handles requests from users and other
+                components, validates them, and forwards them to the appropriate controller.
+            </li>
             <li>etcd: A consistent and highly-available key-value store used as Kubernetes' backing store for all cluster data.</li>
-            <li>kube-scheduler: This component watches for newly created pods with no assigned node and selects a node for them to run on.</li>
+            <li>kube-scheduler: This component watches for newly created pods with no assigned node and selects a node for them to run on.
+            </li>
             <li>kube-controller-manager: This component runs controller processes that regulate the state of the cluster.</li>
         </list>
 
         <p>
-            The data plane is the "body" of Kubernetes. It consists of the nodes where containerized applications run. The data plane is responsible for executing the decisions made by the control plane, such as starting and stopping pods, monitoring their health, and providing networking and storage resources.
+            The data plane is the "body" of Kubernetes. It consists of the nodes where containerized applications run. The data plane is
+            responsible for executing the decisions made by the control plane, such as starting and stopping pods, monitoring their health,
+            and providing networking and storage resources.
         </p>
 
         <list>
-            <li>kubelet: An agent that runs on each node in the cluster. It communicates with the control plane and is responsible for managing the pods running on its node.</li>
-            <li>kube-proxy: A network proxy that runs on each node in the cluster. It maintains network rules on nodes, allowing network communication to your Pods from network sessions inside or outside of your cluster.</li>
-            <li>Container runtime: The software that is responsible for running containers. Kubernetes supports several container runtimes, including Docker, containerd, and CRI-O.</li>
+            <li>kubelet: An agent that runs on each node in the cluster. It communicates with the control plane and is responsible for
+                managing the pods running on its node.
+            </li>
+            <li>kube-proxy: A network proxy that runs on each node in the cluster. It maintains network rules on nodes, allowing network
+                communication to your Pods from network sessions inside or outside of your cluster.
+            </li>
+            <li>Container runtime: The software that is responsible for running containers. Kubernetes supports several container runtimes,
+                including Docker, containerd, and CRI-O.
+            </li>
         </list>
 
         <p>The control plane and data plane work together in a loop:</p>
@@ -40,5 +54,51 @@
         </list>
         <p>This continuous loop ensures that the cluster remains in the desired state, even in the face of failures or
             changes in workload.</p>
+    </chapter>
+
+    <chapter title="Controller" id="controller">
+        <note>While all Operators are controllers, not all controllers are Operators</note>
+
+        <p>
+            A controller is a control loop that watches the shared state of the cluster through the apiserver and makes changes attempting
+            to move the current state towards the desired state. In other words, The desired state is expressed by
+            creating/deleting/updating objects in the apiserver, and it's the job of the controllers to ensure that the observed state
+            matches the desired state.
+        </p>
+        Examples of controllers that ship with Kubernetes include:
+        <list>
+            <li>Replication controller: Ensures that the number of replicas defined for a pod matches the number currently deployed in the
+                cluster.
+            </li>
+            <li>Namespace controller: Creates the initial resources in a namespace when it is created.</li>
+            <li>ServiceAccounts controller: Creates default ServiceAccounts in new namespaces.</li>
+            <li>Node controller: Responsible for noticing and responding when nodes go down.</li>
+            <li>Job controller: Watches for Job objects that represent one-off tasks, then creates Pods to run those tasks to completion.
+            </li>
+        </list>
+
+        <p>
+            You can also write your own <b>custom controllers (or operators)</b> to automate tasks specific to your applications. For
+            example, you might have a custom controller that scales a stateful application based on custom metrics not directly available to
+            the built-in Kubernetes Horizontal Pod Autoscaler. In general, a controller uses apiserver to figure out what state the cluster
+            is currently in (a.k.a. observed state) and then makes changes to move the cluster towards the desired state. This
+            process is often referred to as <a href="https://pkg.go.dev/sigs.k8s.io/controller-runtime/pkg/reconcile#Reconciler">reconciliation</a>,
+            and one run of this loop is a <b>"reconciliation loop" or "reconciliation
+            run"</b>.
+        </p>
+
+        <p>
+            An <i>Operator</i> is a pattern for extending the Kubernetes API that was developed by CoreOS in 2016. It includes one or more
+            custom resources and a controller which manages those resources. The Operator pattern aims to capture the key aim of a human
+            operator
+            who is managing a service or set of services. In essence, an Operator is a way of building a custom controller and packaging it
+            with the <i>CRDs (Custom Resource Definitions)</i> that the controller watches. It's a higher level concept that uses
+            controllers as building blocks.
+        </p>
+        <p>
+            For example, a Prometheus Operator creates, configures, and manages Prometheus monitoring instances. It includes a custom
+            resource (the Prometheus server) and a custom controller. The controller watches for changes to Prometheus custom resources,
+            then creates, updates, or deletes Prometheus instances as needed.
+        </p>
     </chapter>
 </topic>
