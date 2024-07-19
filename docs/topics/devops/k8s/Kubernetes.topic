@@ -5,6 +5,10 @@
        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
        title="Kubernetes" id="Kubernetes">
 
+    <chapter title="K8s API structure" id="k_8_s_api_structure">
+        <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md">API Conventions</a>
+
+    </chapter>
     <chapter title="Control/Data Plane" id="control_data_plane">
         <p>
             The control plane is the "brains" of Kubernetes. It makes decisions about the cluster's state, such as which pods should run on which nodes, how to scale applications, and how to recover from failures. It also exposes the Kubernetes API, which allows users and external systems to interact with the cluster.
