@@ -60,7 +60,6 @@
     <toc-element toc-title="DevOps">
         <toc-element topic="SRE.topic"/>
         <toc-element topic="Kubernetes.topic">
-            <toc-element topic="k8s-cookbook.topic"/>
             <toc-element topic="Extending-Kubernetes.topic"/>
         </toc-element>
         <toc-element topic="Docker.topic"/>
