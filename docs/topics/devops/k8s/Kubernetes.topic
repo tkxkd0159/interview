@@ -11,8 +11,45 @@
 
     </chapter>
     <chapter title="Control/Data Plane" id="control_data_plane">
+        <code-block lang="text">
+            +----------------------+
+            |      Master Node     |
+            |----------------------|
+            |  API Server          |
+            |  etcd                |
+            |  Controller Manager  |
+            |  Scheduler           |
+            +----------------------+
+                        |
+                        |
+            +----------------------+    +----------------------+
+            |     Worker Node 1    |    |     Worker Node 2    |
+            |----------------------|    |----------------------|
+            |  Kubelet             |    |  Kubelet             |
+            |  Kube-proxy          |    |  Kube-proxy          |
+            |  Container Runtime   |    |  Container Runtime   |
+            |  Pods                |    |  Pods                |
+            +----------------------+    +----------------------+
+        </code-block>
+
+        <code-block lang="text">
+            +-----------------------+        +-----------------------+
+            |     Cluster 1         |        |     Cluster 2         |
+            |-----------------------|        |-----------------------|
+            |  Master Node          |        |  Master Node          |
+            |  Worker Nodes         |        |  Worker Nodes         |
+            |  Services/Pods        |        |  Services/Pods        |
+            +-----------------------+        +-----------------------+
+                    |                              |
+                    +------------------------------+
+                    |
+                    +----------------+----------------+
+                    |  Multi-Cluster Management Tool  |
+                    |  (e.g., KubeFed, Istio, etc.)   |
+                    +---------------------------------+
+        </code-block>
         <p>
-            The control plane is the "brains" of Kubernetes. It makes decisions about the cluster's state, such as which pods should run on
+            <b>The control plane</b> is the "brains" of Kubernetes(a.k.a. master node). It makes decisions about the cluster's state, such as which pods should run on
             which nodes, how to scale applications, and how to recover from failures. It also exposes the Kubernetes API, which allows users
             and external systems to interact with the cluster.
         </p>
@@ -28,7 +65,7 @@
         </list>
 
         <p>
-            The data plane is the "body" of Kubernetes. It consists of the nodes where containerized applications run. The data plane is
+            <b>The data plane</b> is the "body" of Kubernetes(a.k.a. worker node). It consists of the nodes where containerized applications run. The data plane is
             responsible for executing the decisions made by the control plane, such as starting and stopping pods, monitoring their health,
             and providing networking and storage resources.
         </p>
