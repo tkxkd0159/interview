@@ -5,9 +5,13 @@
        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
        title="Kubernetes" id="Kubernetes">
 
-    <chapter title="K8s API structure" id="k_8_s_api_structure">
-        <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md">API
-            Conventions</a>
+    <chapter title="k8s API structure" id="k_8_s_api_structure">
+        <p>
+            <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md">API
+                Conventions</a></p>
+        <p>
+            <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/">API Reference</a>
+        </p>
 
     </chapter>
     <chapter title="Control/Data Plane" id="control_data_plane">
@@ -55,13 +59,24 @@
         </p>
 
         <list>
-            <li>kube-apiserver: The API server is the front end for the Kubernetes control plane. It handles requests from users and other
+            <li><b>kube-apiserver</b>: The API server is the front end for the Kubernetes control plane. It handles requests
+                from users and other
                 components, validates them, and forwards them to the appropriate controller.
             </li>
-            <li>etcd: A consistent and highly-available key-value store used as Kubernetes' backing store for all cluster data.</li>
-            <li>kube-scheduler: This component watches for newly created pods with no assigned node and selects a node for them to run on.
+            <li><b>etcd</b>: A consistent and highly-available key-value store used as Kubernetes' backing store for all
+                cluster data.
             </li>
-            <li>kube-controller-manager: This component runs controller processes that regulate the state of the cluster.</li>
+            <li><b>kube-scheduler</b>: This component watches for newly created pods with no assigned node and selects a node
+                for them to run on.
+            </li>
+            <li><b>kube-controller-manager</b>: This component runs controller processes that regulate the state of the
+                cluster.
+            </li>
+            <li><b>cloud-controller-manager</b>: A Kubernetes control plane component that embeds cloud-specific control logic.
+                The cloud controller manager lets you link your cluster into your cloud provider's API, and separates
+                out the components that interact with that cloud platform from components that only interact with your
+                cluster.
+            </li>
         </list>
 
         <p>
@@ -71,13 +86,13 @@
         </p>
 
         <list>
-            <li>kubelet: An agent that runs on each node in the cluster. It communicates with the control plane and is responsible for
+            <li><b>kubelet</b>: An agent that runs on each node in the cluster. It communicates with the control plane and is responsible for
                 managing the pods running on its node.
             </li>
-            <li>kube-proxy: A network proxy that runs on each node in the cluster. It maintains network rules on nodes, allowing network
+            <li><b>kube-proxy</b>: A network proxy that runs on each node in the cluster. It maintains network rules on nodes, allowing network
                 communication to your Pods from network sessions inside or outside of your cluster.
             </li>
-            <li>Container runtime: The software that is responsible for running containers. Kubernetes supports several container runtimes,
+            <li><b>Container runtime</b>: The software that is responsible for running containers. Kubernetes supports several container runtimes,
                 including Docker, containerd, and CRI-O.
             </li>
         </list>
