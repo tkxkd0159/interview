@@ -8,6 +8,7 @@
     <show-structure for="chapter" depth="2"/>
 
     <chapter title="Continuous Integration" id="continuous_integration">
+        <img src="$WRS_MODULE$/images/devops/ci1.png" alt="ci1"/>
         CI is the practice of frequently merging code changes from multiple developers into a shared, central code
         repository (like Git). Each merge typically triggers an automated build process, which includes:
         <list>
@@ -56,6 +57,12 @@
                     </li>
                 </list>
             </chapter>
+        </chapter>
+
+        <chapter title="Reference" id="reference">
+            <img src="$WRS_MODULE$/images/devops/ci2.png" alt="ci2"/>
+            <img src="$WRS_MODULE$/images/devops/ci3.png" alt="ci3"/>
+            <img src="$WRS_MODULE$/images/devops/ci4.png" alt="ci4"/>
         </chapter>
     </chapter>
 
