@@ -5,15 +5,8 @@
        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
        title="Kubernetes" id="Kubernetes">
 
-    <chapter title="k8s API structure" id="k_8_s_api_structure">
-        <p>
-            <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md">API
-                Conventions</a></p>
-        <p>
-            <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/">API Reference</a>
-        </p>
+    <show-structure for="chapter" depth="2"/>
 
-    </chapter>
     <chapter title="Control/Data Plane" id="control_data_plane">
         <code-block lang="text">
             +----------------------+
@@ -153,4 +146,91 @@
             then creates, updates, or deletes Prometheus instances as needed.
         </p>
     </chapter>
+
+    <chapter title="Pods" id="pods">
+
+        <chapter title="Containers" id="containers">
+
+        </chapter>
+    </chapter>
+
+    <chapter title="Workload Management" id="workload_management">
+        <p>
+            A <b>workload</b> is an application running on Kubernetes. Whether your workload is a single component or several that work
+            together, on Kubernetes you run it inside a set of pods. In Kubernetes, a Pod represents a set of running containers on your
+            cluster.
+            Kubernetes pods have a defined lifecycle. For example, once a pod is running in your cluster then a critical fault on the node
+            where that pod is running means that all the pods on that node fail. Kubernetes treats that level of failure as final: you would
+            need to create a new Pod to recover, even if the node later becomes healthy.
+            However, to make life considerably easier, <b>you don't need to manage each Pod directly.</b> Instead, you can use workload
+            resources that manage a set of pods on your behalf. These resources configure <b>controllers</b> that make sure the right number
+            of the right kind of pod are running, to match the state you specified.
+        </p>
+        <chapter title="Deployments" id="deployments">
+            <note>Do not manage ReplicaSets owned by a Deployment.</note>
+            <p>
+                A Deployment provides declarative updates for Pods and ReplicaSets.
+                Deployment is a good fit for managing a stateless application workload on your cluster, where any Pod in the Deployment is
+                interchangeable and can be replaced if needed.
+                You describe a desired state in a Deployment, and the Deployment Controller changes the actual state to the desired state at
+                a controlled rate. You can define Deployments to create new <b>ReplicaSets</b>, or to remove existing Deployments and adopt
+                all their resources with new Deployments.
+            </p>
+
+            <chapter title="ReplicaSet" id="replica_set">
+                <p>
+                    A ReplicaSet's purpose is to maintain a stable set of replica Pods running at any given time. As such, it is often used
+                    to guarantee the availability of a specified number of identical Pods.
+                    A ReplicaSet is defined with fields, including a selector that specifies how to identify Pods it can acquire, a number
+                    of replicas indicating how many Pods it should be maintaining, and a pod template specifying the data of new Pods it
+                    should create to meet the number of replicas criteria. A ReplicaSet then fulfills its purpose by creating and deleting
+                    Pods as needed to reach the desired number. When a ReplicaSet needs to create new Pods, it uses its Pod template.
+                </p>
+                <p>
+                    A ReplicaSet is linked to its Pods via the Pods' <a
+                        href="https://kubernetes.io/docs/concepts/architecture/garbage-collection/#owners-dependents">metadata.ownerReferences</a>
+                    field, which specifies what resource the current object is owned by. All Pods acquired by a ReplicaSet have their owning
+                    ReplicaSet's identifying information within their ownerReferences field. It's through this link that the ReplicaSet
+                    knows of the state of the Pods it is maintaining and plans accordingly.
+                    A ReplicaSet identifies new Pods to acquire by using its selector. <b>If there is a Pod that has no OwnerReference or the
+                    OwnerReference is not a Controller and it matches a ReplicaSet's selector, it will be immediately acquired by said
+                    ReplicaSet.</b>
+                </p>
+            </chapter>
+        </chapter>
+
+        <chapter title="StatefulSet" id="stateful_set">
+            
+        </chapter>
+
+        <chapter title="DaemonSet" id="daemon_set">
+            
+        </chapter>
+
+        <chapter title="Job" id="job">
+            
+        </chapter>
+        <chapter title="CronJob" id="cron_job">
+            
+        </chapter>
+    </chapter>
+
+    <chapter title="Networking" id="networking">
+        
+    </chapter>
+    <chapter title="Storage" id="storage">
+        
+    </chapter>
+
+    <chapter title="Configuration" id="configuration">
+        
+    </chapter>
+
+    <seealso>
+        <category ref="external">
+            <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md">k8s API Conventions</a>
+            <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/">k8s API Reference</a>
+            <a href="https://kubernetes.io/docs/concepts/">k8s Concepts</a>
+        </category>
+    </seealso>
 </topic>
