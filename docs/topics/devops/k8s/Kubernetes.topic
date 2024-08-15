@@ -73,7 +73,7 @@
         </list>
 
         <p>
-            <b>The data plane</b> is the "body" of Kubernetes(a.k.a. worker node). It consists of the nodes where containerized applications run. The data plane is
+            <b>The data plane(Node Components)</b> is the "body" of Kubernetes(a.k.a. worker node). It consists of the nodes where containerized applications run. The data plane is
             responsible for executing the decisions made by the control plane, such as starting and stopping pods, monitoring their health,
             and providing networking and storage resources.
         </p>
