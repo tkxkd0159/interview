@@ -141,7 +141,7 @@
                     managing the pods running on its node.
                 </li>
                 <li><b>kube-proxy</b>: A network proxy that runs on each node in the cluster. It maintains network rules on nodes, allowing network
-                    communication to your Pods from network sessions inside or outside of your cluster.
+                    communication to your Pods from network sessions inside or outside your cluster.
                 </li>
                 <li><b>Container runtime</b>: The software that is responsible for running containers. Kubernetes supports several container runtimes,
                     including Docker, containerd, and CRI-O.
@@ -271,10 +271,10 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-	  app: nginx
+      app: nginx
     matchExpressions:
-	  - { key: tier, operator: In, values: [cache] }
-	  - { key: environment, operator: NotIn, values: [dev] }
+      - { key: tier, operator: In, values: [cache] }
+      - { key: environment, operator: NotIn, values: [dev] }
   template:
     metadata:
       labels:
@@ -355,7 +355,7 @@ guestbook-redis-replica-qgazl
             A <b>workload</b> is an application running on Kubernetes. Whether your workload is a single component or several that work
             together, on Kubernetes you run it inside a set of pods. In Kubernetes, a Pod represents a set of running containers on your
             cluster.
-            Kubernetes pods have a defined lifecycle. For example, once a pod is running in your cluster then a critical fault on the node
+            Kubernetes' pods have a defined lifecycle. For example, once a pod is running in your cluster then a critical fault on the node
             where that pod is running means that all the pods on that node fail. Kubernetes treats that level of failure as final: you would
             need to create a new Pod to recover, even if the node later becomes healthy.
             However, to make life considerably easier, <b>you don't need to manage each Pod directly.</b> Instead, you can use workload
@@ -389,7 +389,7 @@ guestbook-redis-replica-qgazl
                     ReplicaSet's identifying information within their ownerReferences field. It's through this link that the ReplicaSet
                     knows of the state of the Pods it is maintaining and plans accordingly.
                     A ReplicaSet identifies new Pods to acquire by using its selector. <b>If there is a Pod that has no OwnerReference or the
-                    OwnerReference is not a Controller and it matches a ReplicaSet's selector, it will be immediately acquired by said
+                    OwnerReference is not a Controller, and it matches a ReplicaSet's selector, it will be immediately acquired by said
                     ReplicaSet.</b>
                 </p>
             </chapter>
