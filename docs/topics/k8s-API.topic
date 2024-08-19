@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="k8s API" id="k8s-API">
+
+    <p>Start typing here...</p>
+
+
+    <seealso>
+        <category ref="external">
+            <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md">k8s API Conventions</a>
+            <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/">k8s API Reference</a>
+        </category>
+    </seealso>
+</topic>

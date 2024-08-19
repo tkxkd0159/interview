@@ -60,6 +60,7 @@
     <toc-element topic="devops-overview.topic">
         <toc-element topic="SRE.topic"/>
         <toc-element topic="Kubernetes.topic">
+            <toc-element topic="k8s-API.topic"/>
             <toc-element topic="k8s-cluster.topic"/>
             <toc-element topic="k8s-security.topic"/>
             <toc-element topic="k8s-scheduling.topic"/>
