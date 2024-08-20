@@ -5,12 +5,228 @@
        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
        title="Secure Coding" id="Secure-coding">
 
+    <show-structure depth="2"/>
+
     <p>Secure coding is the practice of developing software that is resistant to security vulnerabilities by applying
         security best practices, techniques, and tools early in development.</p>
+
+    <chapter title="Common Vulnerabilities" id="common_vulnerabilities">
+        <chapter title="Buffer Overflow" id="buffer_overflow">
+            <p>
+                Buffer overflows can crash your application or allow attackers to write data into other buffers.
+            </p>
+            <p>
+                If the input string is longer than 10 characters, it will overwrite adjacent memory, leading to
+                undefined behavior.
+            </p>
+            <code-block lang="c">
+<![CDATA[
+#include <stdio.h>
+#include <string.h>
+
+void vulnerable_function(char *input) {
+    char buffer[10];
+    strcpy(buffer, input);  // This does not check the length of input
+    printf("Buffer content: %s\n", buffer);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <input>\n", argv[0]);
+        return 1;
+    }
+
+    vulnerable_function(argv[1]);
+    return 0;
+}
+]]>
+            </code-block>
+        </chapter>
+
+        <chapter title="After/Double Free" id="after_double_free">
+            <p>
+                An "after free" vulnerability occurs when a program continues to use a pointer after it has been freed.
+                This can lead to undefined behavior, including crashes or potential security vulnerabilities.
+            </p>
+            <code-block lang="c">
+<![CDATA[
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int *ptr = (int *)malloc(sizeof(int) * 10);  // Allocate memory
+    if (ptr == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        return 1;
+    }
+
+    // Use the allocated memory
+    for (int i = 0; i < 10; i++) {
+        ptr[i] = i * 10;
+    }
+
+    // Free the memory
+    free(ptr);
+
+    // Using the pointer after it has been freed
+    printf("After free: %d\n", ptr[0]);  // Undefined behavior
+
+    return 0;
+}
+]]>
+            </code-block>
+
+            <p>
+                A "double free" vulnerability occurs when a program attempts to free the same memory location more than once.
+                This can lead to crashes or security vulnerabilities.
+            </p>
+            <code-block lang="c">
+<![CDATA[
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int *ptr = (int *)malloc(sizeof(int) * 10);  // Allocate memory
+    if (ptr == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        return 1;
+    }
+
+    // Use the allocated memory
+    for (int i = 0; i < 10; i++) {
+        ptr[i] = i * 10;
+    }
+
+    // Free the memory
+    free(ptr);
+
+    // Free the memory again
+    free(ptr);  // Undefined behavior
+
+    return 0;
+}
+]]>
+            </code-block>
+        </chapter>
+
+        <chapter title="Insecure Deserialization" id="insecure-deserial">
+            Insecure deserialization involves directly transforming an external data structure (e.g., JSON, XML,
+            etc.) to an internal one (e.g., objects, arrays, etc.) without sufficient checks.
+            Insecure deserialization is a common vulnerability in all kinds of applications.
+            It might be good to accept unsanitized data during development,
+            but users can sneak in malicious data without notice if it is done in production.
+        </chapter>
+
+        <chapter title="Memory Leak" id="memory_leak">
+            Memory leaks let your application consume memory without bounds. If you exhaust the available memory and
+            request more, your application will crash.
+            Every complex enough application is susceptible to this vulnerability. Even garbage-collected languages
+            aren’t safe from memory leaks. Garbage-collected languages still allow you to build data structures a
+            garbage collector can’t manage.
+        </chapter>
+
+        <chapter title="Cross-Site Scripting (XSS)" id="cross_site_scripting_xss_">
+            Cross-Site Scripting (XSS) attacks are a type of injection,
+            in which malicious scripts are injected into otherwise benign and trusted websites.
+            There are three main types of XSS: Stored, Reflected, and DOM-based.
+
+            <p>
+                An attacker can exploit following vulnerability
+                by crafting a malicious URL that includes a script in the <code>query</code> parameter.
+                For example: <code>http://example.com/?query=&lt;script&gt;alert('XSS');&lt;/script&gt;</code>
+            </p>
+            <code-block lang="html">
+                <!DOCTYPE html>
+<![CDATA[
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XSS Example</title>
+</head>
+<body>
+    <h1>Search</h1>
+    <form method="GET" action="">
+        <input type="text" name="query" placeholder="Enter search term">
+        <input type="submit" value="Search">
+    </form>
+
+    <div id="results">
+        <!-- The search results will be displayed here -->
+        <p>Your search term: <span id="search-term"></span></p>
+    </div>
+
+    <script>
+        // Get the query parameter from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('query');
+            if (query) {
+                // Display the search term without proper sanitization
+                document.getElementById('search-term').innerHTML = query;
+            }
+    </script>
+</body>
+</html>
+]]>
+
+            </code-block>
+        </chapter>
+
+        <chapter title="XML External Entity (XXE) Processing" id="xml_external_entity_xxe_processing">
+            An XML External Entity attack is a type of attack against an application that parses XML input. This attack
+            occurs when XML input containing a reference to an external entity is processed by a weakly configured XML
+            parser. This attack may lead to the disclosure of confidential data, denial of service, server side request
+            forgery, port scanning from the perspective of the machine where the parser is located, and other system
+            impacts.
+
+            <p>
+                When the XML parser processes this file, it will include the contents of /etc/passwd in place of the <code>&amp;xxe;</code> entity.
+            </p>
+            <code-block lang="xml">
+<![CDATA[
+<?xml version="1.0"?>
+<!DOCTYPE root [
+        <!ELEMENT root ANY >
+        <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+<root>&xxe;</root>
+]]>
+            </code-block>
+        </chapter>
+
+        <chapter title="Insecure Direct Object Reference (IDOR)" id="insecure_direct_object_reference_idor_">
+            Insecure Direct Object Reference (IDOR) is a vulnerability that arises when attackers can access or modify objects by manipulating identifiers used in a web application's URLs or parameters. It occurs due to missing access control checks, which fail to verify whether a user should be allowed to access specific data.
+
+            <code-block lang="plain text">
+                http://example.com/user/123
+            </code-block>
+            <p>
+                The 123 in the URL is a direct reference to the user's record in the database, often represented by the
+                primary key. If an attacker changes this number to 124 and gains access to another user's information,
+                the application is vulnerable to Insecure Direct Object Reference. This happens because the app didn't
+                properly check if the user had permission to view data for user 124 before displaying it.
+            </p>
+        </chapter>
+
+        <chapter title="Path Traversal" id="path_traversal">
+            A path traversal attack (also known as directory traversal) aims to access files and directories that are
+            stored outside the web root folder.
+            By manipulating variables that reference files with “dot-dot-slash (../)” sequences and its variations or by
+            using absolute file paths, it may be possible to access arbitrary files and directories stored on file
+            system including application source code or configuration and critical system files.
+
+            <code-block lang="plain text">
+                http://some_site.com.br/get-files?file=../../../../some dir/some file
+                http://some_site.com.br/get-files?file=/etc/passwd
+            </code-block>
+        </chapter>
+    </chapter>
 
     <seealso>
         <category ref="external">
             <a href="https://owasp.org/www-project-developer-guide/release/">OWASP Developer Guide</a>
+            <a href="https://cheatsheetseries.owasp.org/index.html">OWASP Cheat Sheet</a>
+            <a href="https://wiki.sei.cmu.edu/confluence/display/seccode/SEI+CERT+Coding+Standards">SEI CERT Coding Standards</a>
+            <a href="https://csrc.nist.gov/projects/ssdf">NIST Secure Software Development Framework</a>
         </category>
     </seealso>
 </topic>
