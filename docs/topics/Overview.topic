@@ -16,7 +16,7 @@
             <a href="DS-Algo-Intro.topic" type="documents"
                summary="Data structure is a data organization, management, and storage format that is usually chosen for efficient access to data.
                Algorithm is a finite sequence of rigorous instructions, typically used to solve a class of specific problems or to perform a computation.">Data
-                Structures & Algorithms</a>
+                Structures and Algorithms</a>
             <a href="Operating-system.topic" type="documents"
                summary="Operating system is system software that manages computer hardware and software resources, and provides common services for computer programs.">Operating
                 System</a>
@@ -62,7 +62,10 @@
 
         <!--    Optionally add additional cards and links to topics that are not in this section but may be relevant.    -->
         <misc>
-            <cards><title>DevOps</title>
+            <cards>
+                <title>DevOps</title>
+                <a href="devops-overview.topic"
+                   summary="DevOps is a set of practices that combines software development (Dev) and IT operations (Ops). It aims to shorten the systems development life cycle and provide continuous delivery with high software quality.">Overview</a>
                 <a href="Docker.topic"
                    summary="Docker is a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers.">Docker</a>
                 <a href="Kubernetes.topic"
@@ -70,6 +73,8 @@
                 <a href="IaC.topic" summary="Infrastructure as Code">IaC</a>
                 <a href="MLOps.topic"
                    summary="MLOps is a paradigm that aims to deploy and maintain machine learning models in production reliably and efficiently.">MLOps</a>
+                <a href="SRE.topic"
+                   summary="Site reliability engineering is a set of principles and practices that applies aspects of software engineering to IT infrastructure and operations. SRE claims to create highly reliable and scalable IT systems.">Site Reliability Engineering</a>
             </cards>
             <cards>
                 <title>Others</title>
