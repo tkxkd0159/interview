@@ -46,39 +46,8 @@
 
     </chapter>
 
-    <chapter title="Controller" id="controller">
+    <chapter title="Operator Pattern" id="operator_pattern">
         <note>While all Operators are controllers, not all controllers are Operators</note>
-
-        <p>
-            A controller is a control loop that watches the shared state of the cluster through the apiserver and makes
-            changes attempting
-            to move the current state towards the desired state. In other words, The desired state is expressed by
-            creating/deleting/updating objects in the apiserver, and it's the job of the controllers to ensure that the
-            observed state
-            matches the desired state.
-        </p>
-        Examples of controllers that ship with Kubernetes include:
-        <list>
-            <li>Replication controller: Ensures that the number of replicas defined for a pod matches the number
-                currently deployed in the
-                cluster.
-            </li>
-            <li>Namespace controller: Creates the initial resources in a namespace when it is created.</li>
-            <li>ServiceAccounts controller: Creates default ServiceAccounts in new namespaces.</li>
-            <li>Node controller: Responsible for noticing and responding when nodes go down.</li>
-            <li>Job controller: Watches for Job objects that represent one-off tasks, then creates Pods to run those
-                tasks to completion.
-            </li>
-        </list>
-
-        <p>
-            You can also write your own <b>custom controllers (or operators)</b> to automate tasks specific to your
-            applications. For example, you might have a custom controller that scales a stateful application based on custom metrics not
-            directly available to the built-in Kubernetes Horizontal Pod Autoscaler. In general, a controller uses apiserver to figure out
-            what state the cluster is currently in (a.k.a. observed state) and then makes changes to move the cluster towards the desired
-            state. This process is often referred to as <a href="https://pkg.go.dev/sigs.k8s.io/controller-runtime/pkg/reconcile#Reconciler">reconciliation</a>,
-            and one run of this loop is a <b>reconciliation loop</b> or <b>reconciliation run</b>.
-        </p>
 
         <p>
             An <i>Operator</i> is a pattern for extending the Kubernetes API that was developed by CoreOS in 2016. It
