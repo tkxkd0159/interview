@@ -11,7 +11,7 @@
         <img src="$WRS_MODULE$/images/devops/k8s-intro.svg" alt="app-env" width="700"/>
         <p>
             Kubernetes is a portable, extensible platform for managing containerized workloads and
-            services, that facilitates both declarative configuration and automation.
+            services that facilitate both declarative configuration and automation.
 
             Containers are similar to VMs, but they have relaxed isolation properties to share the OS among the
             applications. Therefore, containers are considered lightweight. Similar to a VM, a container has
@@ -59,8 +59,8 @@
             (for example, MySQL), caches, nor cluster storage systems (for example, Ceph) as built-in services. Such
             components can run on Kubernetes, and/or can be accessed by applications running on Kubernetes through
             portable mechanisms, such as the <a href="https://www.openservicebrokerapi.org/">Open Service Broker</a>.
-            Does not dictate logging, monitoring, or alerting solutions. It provides some integrations as proof of
-            concept, and mechanisms to collect and export metrics.
+            It does not dictate logging, monitoring, or alerting solutions. It provides some integrations as proof of
+            concept and mechanisms to collect and export metrics.
         </p>
 
         <chapter title="Control/Data Plane" id="control_data_plane">
@@ -165,12 +165,12 @@
 
         <chapter title="Label(+Selector)" id="label_selector_">
             <p>
-                Label are key/value pairs that are attached to objects, such as pods. Labels are primarily used for
-                identifying and grouping related objects. They are intended to be used
-                for selection and filtering. It's commonly used by Kubernetes components and controllers to select and
-                manage resources. They use label
-                selector to specify sets of other resources, such as pods. Newer resources, such as Job, Deployment,
-                ReplicaSet, and DaemonSet, support set-based requirements as well.
+                Label is key/value pairs that are attached to objects, such as pods.
+                Labels are primarily used for identifying and grouping related objects.
+                They are intended to be used for selection and filtering.
+                It's commonly used by Kubernetes components and controllers to select and manage resources.
+                They use label selector to specify sets of other resources, such as pods.
+                Newer resources, such as Job, Deployment, ReplicaSet, and DaemonSet, support set-based requirements as well.
             </p>
             <b>Characteristics:</b>
             <list>
@@ -270,7 +270,7 @@ guestbook-redis-replica-qgazl
         <chapter title="Annotation" id="annotation">
             ObjectMeta.annotations (<code>map[string]string</code>)
             <p>
-                Annotations are used to store arbitrary metadata that is not intended to be used for selection or
+                Annotations are used to store arbitrary metadata not intended to be used for selection or
                 filtering. They are often used to attach non-identifying information to objects, such as build
                 information, audit trails, or configuration details.
             </p>
@@ -309,7 +309,7 @@ guestbook-redis-replica-qgazl
             A <b>workload</b> is an application running on Kubernetes. Whether your workload is a single component or several that work
             together, on Kubernetes you run it inside a set of pods. In Kubernetes, a Pod represents a set of running containers on your
             cluster.
-            Kubernetes' pods have a defined lifecycle. For example, once a pod is running in your cluster then a critical fault on the node
+            Kubernetes' pods have a defined lifecycle. For example, once a pod is running in your cluster, then a critical fault on the node
             where that pod is running means that all the pods on that node fail. Kubernetes treats that level of failure as final: you would
             need to create a new Pod to recover, even if the node later becomes healthy.
             However, to make life considerably easier, <b>you don't need to manage each Pod directly.</b> Instead, you can use workload
@@ -339,9 +339,9 @@ guestbook-redis-replica-qgazl
                 <p>
                     A ReplicaSet is linked to its Pods via the Pods' <a
                         href="https://kubernetes.io/docs/concepts/architecture/garbage-collection/#owners-dependents">metadata.ownerReferences</a>
-                    field, which specifies what resource the current object is owned by. All Pods acquired by a ReplicaSet have their owning
-                    ReplicaSet's identifying information within their ownerReferences field. It's through this link that the ReplicaSet
-                    knows of the state of the Pods it is maintaining and plans accordingly.
+                    field, which specifies what resource the current object is owned by.
+                    All Pods acquired by a ReplicaSet have their own identifying information within their ownerReferences field.
+                    It's through this link that the ReplicaSet knows of the state of the Pods it is maintaining and plans accordingly.
                     A ReplicaSet identifies new Pods to acquire by using its selector. <b>If there is a Pod that has no OwnerReference or the
                     OwnerReference is not a Controller, and it matches a ReplicaSet's selector, it will be immediately acquired by said
                     ReplicaSet.</b>
