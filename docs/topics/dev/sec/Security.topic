@@ -5,7 +5,38 @@
        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
        title="Security" id="Security">
 
-    <chapter title="Common Vulnerabilities and Exposures (CVE)">
+    <chapter title="Common Vulnerabilities and Exposures (CVE)" id="cve">
         tbu
+    </chapter>
+
+    <chapter title="DevSecOps" id="dev_sec_ops">
+        <p>
+            <b>DevSecOps</b> extends the principles of DevOps by integrating security practices into the development and
+            operations processes.
+            The goal is to make security a shared responsibility throughout the entire lifecycle of
+            applications and infrastructure.
+            The core principles of DevSecOps include:
+        </p>
+        <list>
+            <li><b>Shift-Left Security:</b> Incorporate security practices early in the development process, rather than
+                waiting until the end.
+            </li>
+            <li><b>Compliance as Code:</b> Define and enforce security policies and compliance requirements using code.
+            </li>
+            <li><b>Security Automation:</b> Automate security testing and compliance checks within the CI/CD pipeline.
+                Automated build tools compile the code, run unit tests, and perform <b>static code analysis</b> for security
+                vulnerabilities.
+                Automated testing frameworks run integration, end-to-end, and <b>security tests</b> (e.g.,
+                vulnerability scanning, penetration testing).
+                Deployment scripts or tools deploy the application to staging
+                or production environments, with <b>security checks in place</b>.
+            </li>
+            <li><b>Continuous Monitoring:</b> Continuously monitor for security vulnerabilities and threats in both
+                applications and infrastructure.
+            </li>
+            <li><b>Collaboration:</b> Foster collaboration between development, operations, and security teams to ensure
+                security is a shared responsibility.
+            </li>
+        </list>
     </chapter>
 </topic>

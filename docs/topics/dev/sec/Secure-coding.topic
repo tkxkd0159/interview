@@ -5,5 +5,12 @@
        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
        title="Secure Coding" id="Secure-coding">
 
-    <p>Start typing here...</p>
+    <p>Secure coding is the practice of developing software that is resistant to security vulnerabilities by applying
+        security best practices, techniques, and tools early in development.</p>
+
+    <seealso>
+        <category ref="external">
+            <a href="https://owasp.org/www-project-developer-guide/release/">OWASP Developer Guide</a>
+        </category>
+    </seealso>
 </topic>
