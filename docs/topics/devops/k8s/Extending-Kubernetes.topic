@@ -77,7 +77,7 @@
             directly available to the built-in Kubernetes Horizontal Pod Autoscaler. In general, a controller uses apiserver to figure out
             what state the cluster is currently in (a.k.a. observed state) and then makes changes to move the cluster towards the desired
             state. This process is often referred to as <a href="https://pkg.go.dev/sigs.k8s.io/controller-runtime/pkg/reconcile#Reconciler">reconciliation</a>,
-            and one run of this loop is a <b>"reconciliation loop" or "reconciliation run"</b>.
+            and one run of this loop is a <b>reconciliation loop</b> or <b>reconciliation run</b>.
         </p>
 
         <p>
