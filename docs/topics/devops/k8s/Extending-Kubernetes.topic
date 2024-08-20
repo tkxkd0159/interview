@@ -8,33 +8,89 @@
     <chapter title="Custom Resource" id="custom_resource">
 
         <p>
-            In Kubernetes, a Custom Resource (CR) is an extension of the Kubernetes API that stores and retrieves structured data. When you
-            create a Custom Resource, you are adding a new endpoint in your Kubernetes API that allows you to manage custom objects.
+            In Kubernetes, a Custom Resource (CR) is an extension of the Kubernetes API that stores and retrieves
+            structured data.
+            When you create a Custom Resource, you are adding a new endpoint in your Kubernetes API that allows you to manage
+            custom objects.
 
             To understand Custom Resources, it's helpful to compare them with the standard Kubernetes resources.
         </p>
         <p>
-            <b>Standard Kubernetes Resources</b> are the built-in resource types that come with Kubernetes out of the box, like Pod,
+            <b>Standard Kubernetes Resources</b> are the built-in resource types that come with Kubernetes out of the
+            box, like Pod,
             Service, Volume, Namespace, Deployment, and so on(<code>kubectl api-resources -o wide</code>).
-            They have predefined behavior in the Kubernetes API, and the Kubernetes control plane is aware of how to interact with them.
-            For example, when you create a <i>Deployment</i>, the Kubernetes API knows that it should create a <i>ReplicaSet</i>, and the
+            They have predefined behavior in the Kubernetes API, and the Kubernetes control plane is aware of how to
+            interact with them.
+            For example, when you create a <i>Deployment</i>, the Kubernetes API knows that it should create a <i>ReplicaSet</i>,
+            and the
             <i>ReplicaSet</i>
             controller knows that it should create <i>Pods</i>.
         </p>
         <p>
-            <b>Custom Resources</b> are user-defined extensions to the Kubernetes API. They let you store and manipulate additional kinds of
+            <b>Custom Resources</b> are user-defined extensions to the Kubernetes API. They let you store and manipulate
+            additional kinds of
             objects. Custom Resources give you all the power of the Kubernetes API to handle your custom objects.
-            For example, you might create a <b>Database</b> custom resource if you are deploying databases via Kubernetes and want to
-            represent them in your cluster. When you create, update, or delete Custom Resources, you can have a custom controller watching
-            these events and taking action. This combination of a Custom Resource and a custom controller is often used to implement
+            For example, you might create a <b>Database</b> custom resource if you are deploying databases via
+            Kubernetes and want to
+            represent them in your cluster. When you create, update, or delete Custom Resources, you can have a custom
+            controller watching
+            these events and taking action. This combination of a Custom Resource and a custom controller is often used
+            to implement
             Operators in Kubernetes.
         </p>
         <p>
-            In summary, while standard resources are predefined resource types with specific behaviors understood by Kubernetes, Custom
-            Resources are extensions of the Kubernetes API that you define to represent custom objects, often used in conjunction with
-            custom controllers to automate complex application management tasks.
+            In summary, while standard resources are predefined resource types with specific behaviors understood by
+            Kubernetes, Custom Resources are extensions of the Kubernetes API that you define to represent custom objects, often used in
+            conjunction with custom controllers to automate complex application management tasks.
         </p>
 
+    </chapter>
 
+    <chapter title="Controller" id="controller">
+        <note>While all Operators are controllers, not all controllers are Operators</note>
+
+        <p>
+            A controller is a control loop that watches the shared state of the cluster through the apiserver and makes
+            changes attempting
+            to move the current state towards the desired state. In other words, The desired state is expressed by
+            creating/deleting/updating objects in the apiserver, and it's the job of the controllers to ensure that the
+            observed state
+            matches the desired state.
+        </p>
+        Examples of controllers that ship with Kubernetes include:
+        <list>
+            <li>Replication controller: Ensures that the number of replicas defined for a pod matches the number
+                currently deployed in the
+                cluster.
+            </li>
+            <li>Namespace controller: Creates the initial resources in a namespace when it is created.</li>
+            <li>ServiceAccounts controller: Creates default ServiceAccounts in new namespaces.</li>
+            <li>Node controller: Responsible for noticing and responding when nodes go down.</li>
+            <li>Job controller: Watches for Job objects that represent one-off tasks, then creates Pods to run those
+                tasks to completion.
+            </li>
+        </list>
+
+        <p>
+            You can also write your own <b>custom controllers (or operators)</b> to automate tasks specific to your
+            applications. For example, you might have a custom controller that scales a stateful application based on custom metrics not
+            directly available to the built-in Kubernetes Horizontal Pod Autoscaler. In general, a controller uses apiserver to figure out
+            what state the cluster is currently in (a.k.a. observed state) and then makes changes to move the cluster towards the desired
+            state. This process is often referred to as <a href="https://pkg.go.dev/sigs.k8s.io/controller-runtime/pkg/reconcile#Reconciler">reconciliation</a>,
+            and one run of this loop is a <b>"reconciliation loop" or "reconciliation run"</b>.
+        </p>
+
+        <p>
+            An <i>Operator</i> is a pattern for extending the Kubernetes API that was developed by CoreOS in 2016. It
+            includes one or more custom resources and a controller which manages those resources. The Operator pattern aims to capture the
+            key aim of a human operator who is managing a service or set of services. In essence, an Operator is a way of building a custom
+            controller and packaging it with the <i>CRDs (Custom Resource Definitions)</i> that the controller watches. It's a higher level concept
+            that uses controllers as building blocks.
+        </p>
+        <p>
+            For example, a Prometheus Operator creates, configures, and manages Prometheus monitoring instances. It
+            includes a custom resource (the Prometheus server) and a custom controller. The controller watches for changes to Prometheus
+            custom resources, then creates, updates, or deletes Prometheus instances as needed.
+        </p>
     </chapter>
 </topic>
