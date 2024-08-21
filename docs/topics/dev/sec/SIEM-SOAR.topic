@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="SIEM &amp; SOAR" id="SIEM-SOAR">
+
+    <chapter title="Security Information and Event Management" id="security_information_and_event_management">
+        SIEM is a set of tools and services offering a holistic view of an organization's information security. It provides:
+        <list>
+            <li><b>Real-time monitoring and analysis</b> of security alerts</li>
+            <li><b>Log collection and management</b> from various sources</li>
+            <li><b>Incident detection and response</b> capabilities</li>
+            <li><b>Compliance reporting</b></li>
+        </list>
+    </chapter>
+
+    <chapter title="Security Orchestration, Automation, and Response" id="soar">
+        Security Orchestration, Automation, and Response (SOAR) is a category of security solutions designed to help organizations manage and respond to security threats more efficiently and effectively.
+
+        <procedure title="Components of a SOAR Platform" id="components_of_a_soar_platform" type="choices">
+            <step><b>Dashboard and Reporting:</b> Provides a centralized view of security operations, including metrics and KPIs, helping teams monitor performance and identify areas for improvement.
+            </step>
+            <step><b>Case Management:</b> Tools for tracking and managing security incidents, including documentation, evidence collection, and communication.
+                SOAR provides tools for managing the entire lifecycle of a security incident, from detection and analysis to containment, eradication, and recovery.
+            </step>
+            <step><b>Threat Intelligence Integration:</b> Allows for the incorporation of external threat intelligence into the incident response process, enhancing the quality and context of alerts.
+                And SOAR platforms integrate with various security tools, such as SIEM, firewalls, endpoint protection, and threat intelligence feeds. This allows for a unified approach to security management.
+            </step>
+            <step><b>Automation Engine:</b> The core component that enables the creation and execution of automated workflows and playbooks.
+                These are predefined, automated response procedures that can be executed in response to specific types of threats.
+            </step>
+        </procedure>
+    </chapter>
+</topic>
