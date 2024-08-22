@@ -3,13 +3,90 @@
         SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
 <topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="k8s API" id="k8s-API">
+       title="Kubernetes API" id="k8s-API">
 
-    <p>Start typing here...</p>
+    <show-structure depth="2" for="chapter"/>
+
+    <p>The Kubernetes API is a resource-based (RESTful) programmatic interface provided via HTTP.
+        It supports retrieving, creating, updating, and deleting primary resources via the standard HTTP verbs (POST, PUT, PATCH, DELETE, GET).
+        For some resources, the API includes additional subresources that allow fine-grained authorization (such as separate views for Pod details and log retrievals),
+        and can accept and serve those resources in different representations for convenience or efficiency.</p>
+    <p>
+        Kubernetes supports efficient change notifications on resources via <i>watches</i>.
+        Kubernetes also provides consistent list operations so that API clients can effectively cache, track, and synchronize the state of resources.
+    </p>
+    <procedure title="API Resource Categories" id="api_resource_categories">
+        <step><b>Workloads</b> are objects you use to manage and run your containers on the cluster.</step>
+        <step><b>Discovery &amp; LB</b> resources are objects you use to "stitch" your workloads together into an externally accessible, load-balanced Service.</step>
+        <step><b>Config &amp; Storage</b> resources are objects you use to inject initialization data into your applications, and to persist data that is external to your container.</step>
+        <step><b>Cluster</b> resources objects define how the cluster itself is configured; these are typically used only by cluster operators.</step>
+        <step><b>Metadata</b> resources are objects you use to configure the behavior of other resources within the cluster, such as <code>HorizontalPodAutoscaler</code> for scaling workloads.</step>
+    </procedure>
+
+    <note>core resources use <code>/api</code> instead of <code>/apis</code> and omit the <b>GROUP</b> path segment.</note>
+    <tabs>
+        <tab title="Cluster-scoped Resources" id="csr">
+            <list>
+                <li><code>GET /apis/GROUP/VERSION/RESOURCETYPE</code> - return the collection of resources of the resource type</li>
+                <li><code>GET /apis/GROUP/VERSION/RESOURCETYPE/NAME</code> - return the resource with NAME under the resource type</li>
+                <li><code>GET /apis/GROUP/VERSION/RESOURCETYPE/NAME/SUBRESOURCE</code></li>
+            </list>
+        </tab>
+        <tab title="Namespace-scoped Resources" id="nsr">
+            <list>
+                <li><code>GET /apis/GROUP/VERSION/RESOURCETYPE</code> - return the collection of all instances of the resource type across all namespaces</li>
+                <li><code>GET /apis/GROUP/VERSION/namespaces/NAMESPACE/RESOURCETYPE</code> - return collection of all instances of the resource type in NAMESPACE</li>
+                <li><code>GET /apis/GROUP/VERSION/namespaces/NAMESPACE/RESOURCETYPE/NAME</code> - return the instance of the resource type with NAME in NAMESPACE</li>
+                <li><code>GET /apis/GROUP/VERSION/namespaces/NAMESPACE/RESOURCETYPE/NAME/SUBRESOURCE</code></li>
+            </list>
+        </tab>
+    </tabs>
+
+    <chapter title="Detection of Changes" id="detection_of_changes">
+        <p>
+            The Kubernetes API allows clients to make an initial request for an object or a collection, 
+            and then to track changes since that initial request: <code>watch</code>.
+        </p>
+        <p>
+            To make this change tracking possible, every Kubernetes object has a <code>resourceVersion</code> field representing the version of that resource as stored in the underlying persistence layer.
+            The client can use that <code>resourceVersion</code> to initiate a watch against the API server.
+        </p>
+        <chapter title="Resource Version" id="resource_version">
+
+        </chapter>
+
+        <chapter title="Watch Bookmarks" id="watch_bookmarks">
+
+        </chapter>
+    </chapter>
+
+    <chapter title="Extend the Kubernetes API" id="extend_the_kubernetes_api">
+        <chapter title="API Server Aggregation" id="api_service">
+            Refer to the <a href="https://github.com/kubernetes/sample-apiserver/blob/master/README.md">sample-apiserver</a>
+            Unless you absolutely need apiserver-aggregation, recommend using CRD(e.g., Kubebuilder, operator-sdk) instead of apiserver-builder for building Kubernetes APIs.
+            This approach addresses limitations and feedback from apiserver-builder.
+            Aggregated apiserver empowers you to customize your apiserver to do the following things cannot be achieved by CRD:
+            <list>
+                <li>Makes your apiserver adopt different storage APIs rather than etcdV3</li>
+                <li>Extends long-running subresources/endpoints like websocket for your own resources</li>
+                <li>Integrate your apiserver with whatever other external systems</li>
+            </list>
+
+            This is my <a href="https://github.com/tkxkd0159/k8s-api-agg">API Aggregation example</a>
+
+        </chapter>
+
+        <chapter title="CRD" id="crd">
+            You can call your custom resources via the Kubernetes API without any additional configuration.
+            The API endpoint for your custom resource is <b>/apis/GROUP/VERSION/PLURALNAME</b>, which is based on <code>CustomResourceDefinition</code> spec.
+            (e.g., <code>kubectl get --raw /apis/ljs.com/v1alpha1/virtualmachines</code>)
+        </chapter>
+    </chapter>
 
 
     <seealso>
         <category ref="external">
+            <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#api-groups">k8s API Group</a>
             <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md">k8s API Conventions</a>
             <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/">k8s API Reference</a>
         </category>
