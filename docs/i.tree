@@ -27,6 +27,7 @@
             <toc-element topic="os-virtualization.topic"/>
         </toc-element>
         <toc-element topic="Network.topic">
+            <toc-element topic="Network-Security.topic"/>
             <toc-element topic="OSI-7.topic"/>
         </toc-element>
         <toc-element topic="Database.topic">
