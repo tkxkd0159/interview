@@ -53,6 +53,9 @@
         </p>
         <chapter title="Resource Version" id="resource_version">
 
+            <p>
+                <code>generation</code>
+            </p>
         </chapter>
 
         <chapter title="Watch Bookmarks" id="watch_bookmarks">
