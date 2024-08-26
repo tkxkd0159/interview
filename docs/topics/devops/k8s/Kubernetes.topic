@@ -412,6 +412,13 @@ guestbook-redis-replica-qgazl
                     OwnerReference is not a Controller, and it matches a ReplicaSet's selector, it will be immediately acquired by said
                     ReplicaSet.</b>
                 </p>
+                <p>
+                    <code>Deployment</code> is an object which can own <code>ReplicaSets</code> and update them and their Pods via declarative,
+                    server-side rolling updates. While ReplicaSets can be used independently,
+                    today they're mainly used by <code>Deployments</code> as a mechanism to orchestrate Pod creation, deletion and updates.
+                    Therefore, using <code>Deployments</code> instead of directly using <code>ReplicaSets</code>,
+                    unless you require custom update orchestration or don't require updates at all.
+                </p>
             </chapter>
         </chapter>
 
