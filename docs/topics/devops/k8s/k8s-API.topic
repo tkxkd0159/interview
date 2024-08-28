@@ -104,7 +104,7 @@
 
         <chapter title="Custom Resource" id="crd">
             <p>
-                In Kubernetes, a Custom Resource (CR) is an extension of the Kubernetes API that stores and retrieves
+                In Kubernetes, a <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#should-i-use-a-configmap-or-a-custom-resource">Custom Resource (CR)</a> is an extension of the Kubernetes API that stores and retrieves
                 structured data.
                 When you create a Custom Resource, you are adding a new endpoint in your Kubernetes API that allows you to manage
                 custom objects.
