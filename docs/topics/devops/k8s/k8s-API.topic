@@ -64,6 +64,29 @@
     </chapter>
 
     <chapter title="Extend the Kubernetes API" id="extend_the_kubernetes_api">
+        <list>
+            <li><a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#should-i-add-a-custom-resource-to-my-kubernetes-cluster">API Aggregation VS Stand-alone API</a></li>
+            <li><a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#choosing-a-method-for-adding-custom-resources">API Aggregation VS CRD</a></li>
+            <li><a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#should-i-use-a-configmap-or-a-custom-resource">CRD VS ConfigMap</a></li>
+        </list>
+
+        <chapter title="Operator Pattern" id="operator_pattern">
+            <note>While all Operators are controllers, not all controllers are Operators</note>
+
+            <p>
+                An <i>Operator</i> is a pattern for extending the Kubernetes API that was developed by CoreOS in 2016. It
+                includes one or more custom resources and a controller which manages those resources. The Operator pattern aims to capture the
+                key aim of a human operator who is managing a service or set of services. In essence, an Operator is a way of building a custom
+                controller and packaging it with the <i>CRDs (Custom Resource Definitions)</i> that the controller watches. It's a higher level concept
+                that uses controllers as building blocks.
+            </p>
+            <p>
+                For example, a Prometheus Operator creates, configures, and manages Prometheus monitoring instances. It
+                includes a custom resource (the Prometheus server) and a custom controller. The controller watches for changes to Prometheus
+                custom resources, then creates, updates, or deletes Prometheus instances as needed.
+            </p>
+        </chapter>
+        
         <chapter title="API Server Aggregation" id="api_service">
             Refer to the <a href="https://github.com/kubernetes/sample-apiserver/blob/master/README.md">sample-apiserver</a>
             Unless you absolutely need apiserver-aggregation, recommend using CRD(e.g., Kubebuilder, operator-sdk) instead of apiserver-builder for building Kubernetes APIs.
@@ -79,10 +102,46 @@
 
         </chapter>
 
-        <chapter title="CRD" id="crd">
-            You can call your custom resources via the Kubernetes API without any additional configuration.
+        <chapter title="Custom Resource" id="crd">
+            <p>
+                In Kubernetes, a Custom Resource (CR) is an extension of the Kubernetes API that stores and retrieves
+                structured data.
+                When you create a Custom Resource, you are adding a new endpoint in your Kubernetes API that allows you to manage
+                custom objects.
+            </p>
+            <p>
+                <b>Standard Kubernetes Resources</b> are the built-in resource types that come with Kubernetes out of the
+                box, like Pod,
+                Service, Volume, Namespace, Deployment, and so on(<code>kubectl api-resources -o wide</code>).
+                They have predefined behavior in the Kubernetes API, and the Kubernetes control plane is aware of how to
+                interact with them.
+                For example, when you create a <i>Deployment</i>, the Kubernetes API knows that it should create a <i>ReplicaSet</i>,
+                and the
+                <i>ReplicaSet</i>
+                controller knows that it should create <i>Pods</i>.
+            </p>
+            <p>
+                <b>Custom Resources</b> are user-defined extensions to the Kubernetes API. They let you store and manipulate
+                additional kinds of
+                objects. Custom Resources give you all the power of the Kubernetes API to handle your custom objects.
+                For example, you might create a <b>Database</b> custom resource if you are deploying databases via
+                Kubernetes and want to
+                represent them in your cluster. When you create, update, or delete Custom Resources, you can have a custom
+                controller watching
+                these events and taking action. This combination of a Custom Resource and a custom controller is often used
+                to implement
+                Operators in Kubernetes.
+            </p>
+            <p>
+                In summary, while standard resources are predefined resource types with specific behaviors understood by
+                Kubernetes, Custom Resources are extensions of the Kubernetes API that you define to represent custom objects, often used in
+                conjunction with custom controllers to automate complex application management tasks.
+            </p>
+            <p>
+                You can call your custom resources via the Kubernetes API without any additional configuration.
             The API endpoint for your custom resource is <b>/apis/GROUP/VERSION/PLURALNAME</b>, which is based on <code>CustomResourceDefinition</code> spec.
             (e.g., <code>kubectl get --raw /apis/ljs.com/v1alpha1/virtualmachines</code>)
+            </p>
         </chapter>
     </chapter>
 
