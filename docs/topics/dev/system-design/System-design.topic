@@ -6,4 +6,10 @@
        title="System Design" id="System-design">
 
     <p>Start typing here...</p>
+
+    <seealso>
+        <category ref="external">
+            <a href="https://microservices.io/">Microservices Patterns</a>
+        </category>
+    </seealso>
 </topic>
