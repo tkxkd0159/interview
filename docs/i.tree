@@ -54,8 +54,10 @@
         </toc-element>
         <toc-element topic="System-design.topic"/>
         <toc-element topic="Security.topic">
-            <toc-element topic="SIEM-SOAR.topic"/>
+            <toc-element topic="Vulnerability-Database.topic"/>
             <toc-element topic="Secure-coding.topic"/>
+            <toc-element topic="DevSecOps.topic"/>
+            <toc-element topic="SIEM-SOAR.topic"/>
         </toc-element>
     </toc-element>
 
