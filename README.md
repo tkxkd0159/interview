@@ -83,4 +83,4 @@
 
 ## Programming Languages
 
-[Refs](https://gitlab.com/ljspg/lang)
+[Refs](https://github.com/tkxkd0159/lang)
