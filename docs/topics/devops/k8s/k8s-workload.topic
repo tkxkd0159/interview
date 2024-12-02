@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Workloads" id="k8s-workload">
+
+
+    <show-structure for="chapter" depth="3"/>
+
+    <chapter title="Pods" id="pods">
+        <note>
+            You need to install a container runtime into each node in the cluster so that Pods can run there.
+        </note>
+        <p>
+            <b>Pod</b> is smallest deployable units of computing that you can create and manage in Kubernetes. 쿠버네티스는
+            컨테이너를 개별적으로 하나씩 배포하는 것이 아니라 Pod 라는 단위로 배포하는데, Pod는 하나 이상의 컨테이너를 포함한다.
+            Pod 내의 컨테이너는 IP와 Port를 공유한다. 컨테이너 A가 8080, 컨테이너 B가 7001로 배포가 되었을 때, B에서 A를 호출할 때 localhost:8080 으로 호출하면 된다.
+            또한, Pod 내에 배포된 컨테이너간에는 디스크 볼륨을 공유할 수 있다. 단, 컨테이너는 로컬디스크로 형성되므로 영구적 저장을 위해서는 따로 외부 volume을 설정해야 함. 아니면 pod 삭제
+            시 날라감.
+        </p>
+
+        <img src="$WRS_MODULE$/images/devops/k8s-pod-1.png" alt="pod diagram1" width="350" style="inline"/>
+        <img src="$WRS_MODULE$/images/devops/k8s-pod-2.png" alt="pod diagram2" width="350" style="inline"/>
+
+        <list>
+            <li><a href="https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/">Pod Lifecycle</a></li>
+            <li><a href="https://kubernetes.io/docs/concepts/workloads/pods/downward-api/">Expose Pod and container
+                fields to a running container</a></li>
+        </list>
+
+        <chapter title="Pod QoS" id="pod_qo_s">
+            <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/">Ref</a>
+
+            <chapter title="Guaranteed" id="guaranteed">
+                <list>
+                    <li>Every Container in the Pod must have a memory/CPU limit and a memory/CPU request.</li>
+                    <li>For every Container in the Pod, the memory/CPU limit must equal the memory/CPU request.</li>
+                </list>
+
+                <code-block lang="yaml">
+                    <![CDATA[
+apiVersion: v1
+kind: Pod
+metadata:
+    name: guaranteed-pod
+spec:
+    containers:
+        - name: my-container
+          image: my-image
+          resources:
+              requests:
+                  memory: "500Mi"
+                  cpu: "1"
+              limits:
+                  memory: "500Mi"
+                  cpu: "1"
+]]>
+                </code-block>
+            </chapter>
+
+            <chapter title="Burstable" id="burstable">
+                <note>
+                    At least one Container in the Pod has a memory or CPU request or limit.
+                </note>
+                <p>
+                    Pods that are <code>Burstable</code> have some lower-bound resource guarantees based on the request, but do not
+                    require a specific limit. If a limit is not specified, it defaults to a limit equivalent to the
+                    capacity of the Node, which allows the Pods to flexibly increase their resources if resources are
+                    available. In the event of Pod eviction due to Node resource pressure, these Pods are evicted only
+                    after all <code>BestEffort</code> Pods are evicted. Because a <code>Burstable</code> Pod can include a Container that has no
+                    resource limits or requests, a Pod that is <code>Burstable</code> can try to use any amount of node resources.
+                </p>
+                <code-block lang="yaml">
+                    <![CDATA[
+apiVersion: v1
+kind: Pod
+metadata:
+    name: burstable-pod
+spec:
+    containers:
+        - name: my-container
+          image: my-image
+          resources:
+              requests:
+                  memory: "200Mi"
+                  cpu: "0.5"
+              limits:
+                  memory: "400Mi"
+                  cpu: "1"
+]]>
+                </code-block>
+            </chapter>
+
+            <chapter title="BestEffort" id="best_effort">
+                <p>
+                    Pods in the BestEffort QoS class can use node resources that aren't specifically assigned to Pods in
+                    other QoS classes. For example, if you have a node with 16 CPU cores available to the kubelet, and
+                    you assign 4 CPU cores to a <code>Guaranteed</code> Pod, then a Pod in the <code>BestEffort</code>
+                    QoS class can try to use any amount of the remaining 12 CPU cores.
+                    The kubelet prefers to evict <code>BestEffort</code> Pods if the node comes under resource pressure.
+                </p>
+            </chapter>
+        </chapter>
+
+        <chapter title="Pod Pattern" id="pod_pattern">
+            <chapter title="Sidecar" id="sidecar">
+                <p>
+                    The `sidecar pattern` consists of a **main application** plus a **helper container** with a
+                    responsibility that is essential to your application, but is not necessarily part of the application
+                    itself.
+                    The most common sidecar containers are logging utilities, sync services, watchers, and monitoring
+                    agents. It wouldn't make sense for a logging container to run while the application itself isn't
+                    running.
+                </p>
+                <img src="$WRS_MODULE$/images/devops/k8s-pod-3.png" alt="pod-sidecar" width="300"/>
+                <code-block lang="yaml" collapsible="true" collapsed-title="As normal container"
+                            default-state="collapsed">
+                    <![CDATA[
+# Example YAML configuration for the sidecar pattern.
+
+# It defines a main application container which writes
+# the current date to a log file every five seconds.
+
+# The sidecar container is nginx serving that log file.
+# (In practice, your sidecar is likely to be a log collection
+# container that uploads to external storage.)
+
+# To run:
+#   kubectl apply -f pod.yaml
+
+# Once the pod is running:
+#
+#   (Connect to the sidecar pod)
+#   kubectl exec pod-with-sidecar -c sidecar-container -it bash
+#
+#   (Install curl on the sidecar)
+#   apt-get update && apt-get install curl
+#
+#   (Access the log file via the sidecar)
+#   curl 'http://localhost:80/app.txt'
+
+apiVersion: v1
+kind: Pod
+metadata:
+    name: pod-with-sidecar
+spec:
+    # Create a volume called 'shared-logs' that the
+    # app and sidecar share.
+    volumes:
+        - name: shared-logs
+          emptyDir: { }
+
+    # In the sidecar pattern, there is a main application
+    # container and a sidecar container.
+    containers:
+
+        # Main application container
+        - name: app-container
+                  # Simple application: write the current date
+            # to the log file every five seconds
+          image: alpine # alpine is a simple Linux OS image
+          command: [ "/bin/sh" ]
+          args: [ "-c", "while true; do date >> /var/log/app.txt; sleep 5;done" ]
+
+                  # Mount the pod's shared log file into the app container.
+            # The app writes logs here.
+          volumeMounts:
+              - name: shared-logs
+                mountPath: /var/log
+
+        # Sidecar container
+        - name: sidecar-container
+                  # Simple sidecar: display log files using nginx.
+                  # In reality, this sidecar would be a custom image
+            # that uploads logs to a third-party or storage service.
+          image: nginx:1.7.9
+          ports:
+              - containerPort: 80
+
+              # Mount the pod's shared log file into the sidecar
+              # container. In this case, nginx will serve the files
+              # in this directory.
+          volumeMounts:
+              - name: shared-logs
+                mountPath: /usr/share/nginx/html # nginx-specific mount path
+]]>
+                </code-block>
+            </chapter>
+
+            <chapter title="Ambassador" id="ambassador">
+                <p>
+                    The `ambassador pattern` is a useful way to connect containers with the outside world. An ambassador
+                    container is essentially a proxy that allows other containers to connect to a port on localhost
+                    while the ambassador container can proxy these connections to different environments depending on
+                    the cluster’s needs.
+
+                    One of the best use-cases for the ambassador pattern is for providing access to a database. When
+                    developing locally, you probably want to use your local database, while your test and production
+                    deployments want different databases again.
+
+                    The solution is for <b>the application to always connect to localhost, and let the responsibility of
+                    mapping this connecting to the right database fall to an ambassador container.</b> Alternatively,
+                    the
+                    ambassador could be sending requests to different shards of the database—the application itself
+                    doesn't need to worry.
+                </p>
+                <img src="$WRS_MODULE$/images/devops/k8s-pod-4.png" alt="k8s-pod-ambassador" width="300"/>
+            </chapter>
+        </chapter>
+
+        <chapter title="Containers" id="containers">
+            <chapter title="Init container" id="init_container">
+                <a href="https://kubernetes.io/docs/concepts/workloads/pods/init-containers/">Ref</a>
+                <list>
+                    <li>Init container is specialized containers that run before app containers in a Pod. Init
+                        containers can contain utilities or setup scripts not present in an app image.
+                    </li>
+                    <li>Kubernetes implements sidecar containers as a special case of init containers. It starts before
+                        the main application container and continues to run.
+                    </li>
+                </list>
+                <p>
+                    If a Pod's init container fails, the kubelet repeatedly restarts that init container until it
+                    succeeds. However, if the Pod has a <code>restartPolicy</code> of Never, and an init container fails
+                    during startup of that Pod, Kubernetes treats the overall Pod as failed.
+                </p>
+            </chapter>
+            <chapter title="Ephemeral container" id="ephemeral_container">
+                <p>
+                    However, sometimes it's necessary to inspect the state of an existing Pod, for example, to
+                    troubleshoot a hard-to-reproduce bug. In these cases, you can run an ephemeral container in an
+                    existing Pod to inspect its state and run arbitrary commands.
+                </p>
+                <p>
+                    Ephemeral containers are useful for interactive troubleshooting when kubectl exec is insufficient
+                    because a container has crashed or a container image doesn't include debugging utilities.
+                    In particular, distroless images enable you to deploy minimal container images that reduce attack
+                    surface and exposure to bugs and vulnerabilities. Since distroless images do not include a shell or
+                    any debugging utilities, it's difficult to troubleshoot distroless images using <code>kubectl
+                    exec</code> alone.
+                </p>
+                <p>
+                    Ephemeral containers are created using a special ephemeralcontainers handler in the API rather than
+                    by adding them directly to <b>pod.spec</b>, so it's not possible to add an ephemeral container using
+                    kubectl edit.
+                </p>
+
+                <p>
+                    At the example below, <code>ehphemeral-demo</code> pod doesn't have a shell or debugging utilities,
+                    so we can't use <code>kubectl exec</code> to troubleshoot it.
+                    Instead, we can run an ephemeral container with a shell to inspect the state of the pod via <code>kubectl
+                    debug</code>.
+
+                </p>
+                <code-block lang="sh">
+                    # registry.k8s.io/pause:3.1 is a minimal image that doesn't include a shell or debugging utilities
+                    kubectl run ephemeral-demo --image=registry.k8s.io/pause:3.1 --restart=Never
+                    kubectl debug -it ephemeral-demo --image=busybox:1.28 --target=ephemeral-demo
+                </code-block>
+            </chapter>
+        </chapter>
+    </chapter>
+
+    <chapter title="Workload Management" id="workload_management">
+        <p>
+            A <b>workload</b> is an application running on Kubernetes. Whether your workload is a single component or
+            several that work
+            together, on Kubernetes you run it inside a set of pods. In Kubernetes, a Pod represents a set of running
+            containers on your
+            cluster.
+            Kubernetes' pods have a defined lifecycle. For example, once a pod is running in your cluster, then a
+            critical fault on the node
+            where that pod is running means that all the pods on that node fail. Kubernetes treats that level of failure
+            as final: you would
+            need to create a new Pod to recover, even if the node later becomes healthy.
+            However, to make life considerably easier, <b>you don't need to manage each Pod directly.</b> Instead, you
+            can use workload
+            resources that manage a set of pods on your behalf. These resources configure <b>controllers</b> that make
+            sure the right number
+            of the right kind of pod are running, to match the state you specified.
+        </p>
+        <chapter title="Deployments" id="deployments">
+            <note>Do not manage ReplicaSets owned by a Deployment.</note>
+            <p>
+                A Deployment provides declarative updates for Pods and ReplicaSets.
+                Deployment is a good fit for managing a stateless application workload on your cluster, where any Pod in
+                the Deployment is
+                interchangeable and can be replaced if needed.
+                You describe a desired state in a Deployment, and the Deployment Controller changes the actual state to
+                the desired state at
+                a controlled rate. You can define Deployments to create new <b>ReplicaSets</b>, or to remove existing
+                Deployments and adopt
+                all their resources with new Deployments.
+            </p>
+
+            <chapter title="ReplicaSet" id="replica_set">
+                <p>
+                    A ReplicaSet's purpose is to maintain a stable set of replica Pods running at any given time. As
+                    such, it is often used
+                    to guarantee the availability of a specified number of identical Pods.
+                    A ReplicaSet is defined with fields, including a selector that specifies how to identify Pods it can
+                    acquire, a number
+                    of replicas indicating how many Pods it should be maintaining, and a pod template specifying the
+                    data of new Pods it
+                    should create to meet the number of replicas criteria. A ReplicaSet then fulfills its purpose by
+                    creating and deleting
+                    Pods as needed to reach the desired number. When a ReplicaSet needs to create new Pods, it uses its
+                    Pod template.
+                </p>
+                <p>
+                    A ReplicaSet is linked to its Pods via the Pods' <a
+                        href="https://kubernetes.io/docs/concepts/architecture/garbage-collection/#owners-dependents">metadata.ownerReferences</a>
+                    field, which specifies what resource the current object is owned by.
+                    All Pods acquired by a ReplicaSet have their own identifying information within their
+                    ownerReferences field.
+                    It's through this link that the ReplicaSet knows of the state of the Pods it is maintaining and
+                    plans accordingly.
+                    A ReplicaSet identifies new Pods to acquire by using its selector. <b>If there is a Pod that has no
+                    OwnerReference or the
+                    OwnerReference is not a Controller, and it matches a ReplicaSet's selector, it will be immediately
+                    acquired by said
+                    ReplicaSet.</b>
+                </p>
+                <p>
+                    <code>Deployment</code> is an object which can own <code>ReplicaSets</code> and update them and
+                    their Pods via declarative,
+                    server-side rolling updates. While ReplicaSets can be used independently,
+                    today they're mainly used by <code>Deployments</code> as a mechanism to orchestrate Pod creation,
+                    deletion and updates.
+                    Therefore, using <code>Deployments</code> instead of directly using <code>ReplicaSets</code>,
+                    unless you require custom update orchestration or don't require updates at all.
+                </p>
+            </chapter>
+        </chapter>
+
+        <chapter title="StatefulSet" id="stateful_set">
+
+        </chapter>
+
+        <chapter title="DaemonSet" id="daemon_set">
+
+        </chapter>
+
+        <chapter title="Job" id="job">
+
+        </chapter>
+        <chapter title="CronJob" id="cron_job">
+
+        </chapter>
+    </chapter>
+
+    <chapter title="Autoscaling Workloads" id="autoscaling">
+
+    </chapter>
+
+    <seealso>
+        <category ref="external">
+            <a href="https://www.notion.so/ljswiki/Kubernetes-2961367d9cd7482bbe141ffc8073eef5#150eacd3298d806da113f3603c5381d5">Managing
+                Workloads</a>
+        </category>
+    </seealso>
+</topic>
