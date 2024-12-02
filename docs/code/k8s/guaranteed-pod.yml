@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: guaranteed-pod
+spec:
+  containers:
+    - name: my-container
+      image: my-image
+      resources:
+        requests:
+          memory: "500Mi"
+          cpu: "1"
+        limits:
+          memory: "500Mi"
+          cpu: "1"
