@@ -64,12 +64,15 @@ spec:
                     At least one Container in the Pod has a memory or CPU request or limit.
                 </note>
                 <p>
-                    Pods that are <code>Burstable</code> have some lower-bound resource guarantees based on the request, but do not
+                    Pods that are <code>Burstable</code> have some lower-bound resource guarantees based on the request,
+                    but do not
                     require a specific limit. If a limit is not specified, it defaults to a limit equivalent to the
                     capacity of the Node, which allows the Pods to flexibly increase their resources if resources are
                     available. In the event of Pod eviction due to Node resource pressure, these Pods are evicted only
-                    after all <code>BestEffort</code> Pods are evicted. Because a <code>Burstable</code> Pod can include a Container that has no
-                    resource limits or requests, a Pod that is <code>Burstable</code> can try to use any amount of node resources.
+                    after all <code>BestEffort</code> Pods are evicted. Because a <code>Burstable</code> Pod can include
+                    a Container that has no
+                    resource limits or requests, a Pod that is <code>Burstable</code> can try to use any amount of node
+                    resources.
                 </p>
                 <code-block lang="yaml">
                     <![CDATA[
@@ -253,10 +256,12 @@ spec:
                     debug</code>.
 
                 </p>
-                <code-block lang="sh">
+                <code-block lang="shell">
+                    <![CDATA[
                     # registry.k8s.io/pause:3.1 is a minimal image that doesn't include a shell or debugging utilities
                     kubectl run ephemeral-demo --image=registry.k8s.io/pause:3.1 --restart=Never
                     kubectl debug -it ephemeral-demo --image=busybox:1.28 --target=ephemeral-demo
+                    ]]>
                 </code-block>
             </chapter>
         </chapter>
