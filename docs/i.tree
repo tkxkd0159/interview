@@ -52,7 +52,11 @@
             <toc-element topic="Creational-Patterns.topic"/>
             <toc-element topic="web-dp.topic"/>
         </toc-element>
-        <toc-element topic="System-design.topic"/>
+        <toc-element topic="System-design.topic">
+            <toc-element topic="MSA.topic">
+              <toc-element topic="msa-data-persistence.topic"/>
+            </toc-element>
+        </toc-element>
         <toc-element topic="Security.topic">
             <toc-element topic="Vulnerability-Database.topic"/>
             <toc-element topic="Secure-coding.topic"/>
@@ -64,8 +68,8 @@
     <toc-element topic="devops-overview.topic">
         <toc-element topic="SRE.topic"/>
         <toc-element topic="Kubernetes.topic">
-            <toc-element topic="k8s-workload.topic"/>
             <toc-element topic="k8s-cluster.topic"/>
+            <toc-element topic="k8s-workload.topic"/>
             <toc-element topic="k8s-API.topic">
             </toc-element>
             <toc-element topic="k8s-security.topic"/>

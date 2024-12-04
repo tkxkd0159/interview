@@ -3,7 +3,7 @@
         SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
 <topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="Design Patterns" id="Design-pattern">
+       title="Software Design Patterns" id="Design-pattern">
 
     <p>Design patterns differ by their complexity, level of detail and scale of applicability to the entire system being
         designed. I like the analogy to road construction: you can make an intersection safer by either installing some
