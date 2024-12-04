@@ -8,24 +8,29 @@
     <show-structure depth="2"/>
 
     <chapter title="Binary Tree" id="binary_tree">
-        
+      <list>
+        <li>Full Binary Tree: Every node has either 0 or 2 children</li>
+        <li>Complete Binary Tree: All levels fully filled except possibly the last, which is filled from left to right</li>
+        <li>Perfect Binary Tree: All internal nodes have 2 children, and all leaf nodes are at the same level</li>
+      </list>
     </chapter>
 
     <chapter title="Binary Search Tree" id="binary_search_tree">
         <p>
-            Ordered/Sorted Binary Tree.
+            Ordered/Sorted Binary Tree. Left subtree are smaller than right subtree.
         </p>
+      <code-block collapsed-title="Example" collapsible="true" src="$WRS_MODULE$/code/dsalgo/bst-range.go" lang="go"></code-block>
 
         <chapter title="Search Range" id="search_range">
-            
+
         </chapter>
 
         <chapter title="BST-based Set" id="bst_based_set">
-            
+
         </chapter>
 
         <chapter title="BST-based Map" id="bst_based_map">
-            
+
         </chapter>
     </chapter>
 
@@ -43,7 +48,7 @@
         </p>
 
         <chapter title="Two Heaps" id="two_heaps">
-            
+
         </chapter>
     </chapter>
 
@@ -61,7 +66,7 @@
     </chapter>
 
     <chapter title="Segment Tree" id="segment_tree">
-        
+
     </chapter>
 
     <chapter title="Depth-First Search" id="depth_first_search">
