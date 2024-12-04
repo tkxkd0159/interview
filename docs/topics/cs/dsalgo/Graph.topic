@@ -10,16 +10,4 @@
     <li>Adjacency Matrix: represent a graph as n*n matrix. only use when the number of vertex is not too big. Time complexity: O(V^2)</li>
     <li>Adjacency List: retrieve faster than adjacency matrix. Time complexity: O(V+E)</li>
   </list>
-
-  <chapter id="dijkstra_s" title="Dijkstra's Algorithm">
-
-  </chapter>
-
-  <chapter id="prim_s_algorithm" title="Prim's Algorithm">
-
-  </chapter>
-
-  <chapter id="kruskal_s_algorithm" title="Kruskal's Algorithm">
-
-  </chapter>
 </topic>

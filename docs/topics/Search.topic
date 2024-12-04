@@ -46,4 +46,18 @@
 
     </chapter>
   </chapter>
+
+  <chapter title="Shortest Path" id="shortest_path">
+    <chapter id="dijkstra_s" title="Dijkstra's Algorithm">
+
+    </chapter>
+
+    <chapter id="prim_s_algorithm" title="Prim's Algorithm">
+
+    </chapter>
+
+    <chapter id="kruskal_s_algorithm" title="Kruskal's Algorithm">
+
+    </chapter>
+  </chapter>
 </topic>
