@@ -14,4 +14,8 @@
     <description>Created after removal of "Backtracking" from interview</description>
     <accepts>Backtracking.html</accepts>
   </rule>
+  <rule id="3b8339b2">
+    <description>Created after removal of "Linked List" from interview</description>
+    <accepts>Linked-List.html</accepts>
+  </rule>
 </rules>

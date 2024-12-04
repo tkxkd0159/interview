@@ -2,43 +2,95 @@
 <!DOCTYPE topic
   SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
 <topic id="Array"
-       title="Array"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
+       title="Array &amp; List"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-  <chapter id="static_array" title="Static Array">
+  <show-structure depth="2"/>
 
-  </chapter>
+  <note>High-evel language like Rust provide features of both array and linked list(<code>VecDeque</code>).</note>
 
-  <chapter id="dynamic_array" title="Dynamic Array">
-
-  </chapter>
-
-  <chapter id="stack" title="Stack">
-
-  </chapter>
-
-  <chapter id="binary_search" title="Binary Search">
-    Find a target value within a sorted array
-  </chapter>
-
-  <chapter id="kadane_s_algorithm" title="Kadane's Algorithm">
-
-  </chapter>
-
-  <chapter id="sliding_window" title="Sliding Window">
+  <chapter title="Array" id="array">
     <p>
-      Fixed size window
+      An array is a collection of elements, typically of the same type, stored in contiguous memory locations.
     </p>
+    <list>
+      <li>Fixed Size: Array has a fixed size defined at the time of their creation. Dynamic array can resize, but this involves creating a
+        new array and copying elements
+      </li>
+      <li>Memory Management: The size and type of elements are known at compile time, which lead to efficient memory usage</li>
+      <li>Access Time: Accessing elements by index, O(1)</li>
+    </list>
+  </chapter>
+
+  <chapter title="List" id="list">
     <p>
-      Variable size window
+      A list, in a low-level sense, often refers to a linked list, which is a collection of elements where each element points to the
+      next(and possibly the previous) element.
     </p>
+    <list>
+      <li>Dynamic Size: List can easily grow or shrink in size by adding or removing elements, as they are not stored in contiguous memory
+        locations
+      </li>
+      <li>Node-based Structure: Each element contains data and a reference(or pointer) to the next node, and possibly to the previous node
+        in the case of doubly linked list.
+      </li>
+      <li>Access Time: Accessing elements by position requires traversal from the head of the list, which can be O(n) in the worst case</li>
+    </list>
+
+    <chapter id="singly_linked_list" title="Singly Linked List">
+
+    </chapter>
+
+    <chapter id="doubly_linked_list" title="Doubly Linked List">
+
+    </chapter>
   </chapter>
 
-  <chapter id="two_pointers" title="Two Pointers">
 
-  </chapter>
+  <chapter title="Usages" id="usages">
+    <chapter id="stack" title="Stack">
 
-  <chapter id="prefix_sum" title="Prefix Sum">
+    </chapter>
 
+    <chapter id="queue" title="Queue">
+
+    </chapter>
+
+    <chapter id="binary_search" title="Binary Search">
+      Find a target value within a sorted array
+    </chapter>
+
+    <chapter id="kadane_s_algorithm" title="Kadane's Algorithm">
+
+    </chapter>
+
+    <chapter id="sliding_window" title="Sliding Window">
+      <chapter title="Fixed-size Window" id="fixed_size_window">
+
+      </chapter>
+
+      <chapter title="Dynamic size Window" id="dynamic_size_window">
+
+      </chapter>
+    </chapter>
+
+    <chapter id="two_pointers" title="Two Pointers">
+
+    </chapter>
+
+    <chapter id="prefix_sum" title="Prefix Sum">
+
+    </chapter>
+
+    <chapter id="fast_and_slow_pointer" title="Fast and Slow Pointer">
+      <chapter title="Linked list-based" id="linked_list_based">
+
+      </chapter>
+    </chapter>
+
+    <chapter id="sweep_line" title="Sweep Line">
+        <code-block lang="python" src="$WRS_MODULE$/code/dsalgo/sweep-line-1.py" collapsible="true" collapsed-title="Example"/>
+    </chapter>
   </chapter>
 </topic>
