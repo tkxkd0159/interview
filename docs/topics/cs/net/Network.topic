@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
-<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="Network" id="Network">
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic id="Network"
+       title="Network"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-    <img src="$WRS_MODULE$/images/dev/net/net-0-2.png" alt="" width="700"/>
+  <img alt="" src="$WRS_MODULE$/images/dev/net/net-0-2.png" width="700"/>
 
-    <deflist>
-        <def title="Network throughput">
+  <deflist>
+    <def title="Network throughput">
             <code-block lang="tex">
                 \begin{equation}
                 Throughput \leq \frac{\text{TCP Receive Window}}{\text{Round-Trip Time}}
                 \end{equation}
             </code-block>
-            <br/>
-            <code-block lang="tex">
+      <br/>
+      <code-block lang="tex">
                 \begin{equation}
                 \text{Message latency } T(N) = \frac{M+N}{A}
                 \end{equation}
             </code-block>
-            <i> where N is message length, A is the asymptotic bandwidth and M is the half-peak length.</i>
-            <br/>
-            <i>Maximum theoretical throughput</i> is closely related to the channel capacity of the system, and is the maximum possible
-            quantity of data that can be transmitted under ideal circumstances. In some cases this number is reported as equal to the
-            channel capacity, though this can be deceptive, as only non-packetized systems (asynchronous) technologies can achieve this
-            without data compression.
-            <br/>
-            <i>Asymptotic throughput</i> for a packet-mode communication network is the value of the maximum throughput function, when the
-            incoming network load approaches infinity, either due to a message size, or the number of data sources. As other bit rates and
-            data bandwidths, the asymptotic throughput is measured in bits per second (bit/s).
-        </def>
-    </deflist>
+      <i> where N is message length, A is the asymptotic bandwidth and M is the half-peak length.</i>
+      <br/>
+      <i>Maximum theoretical throughput</i> is closely related to the channel capacity of the system, and is the maximum possible
+      quantity of data that can be transmitted under ideal circumstances. In some cases this number is reported as equal to the
+      channel capacity, though this can be deceptive, as only non-packetized systems (asynchronous) technologies can achieve this
+      without data compression.
+      <br/>
+      <i>Asymptotic throughput</i> for a packet-mode communication network is the value of the maximum throughput function, when the
+      incoming network load approaches infinity, either due to a message size, or the number of data sources. As other bit rates and
+      data bandwidths, the asymptotic throughput is measured in bits per second (bit/s).
+    </def>
+  </deflist>
 </topic>

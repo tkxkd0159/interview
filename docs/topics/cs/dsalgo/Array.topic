@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
-<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="Array" id="Array">
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic id="Array"
+       title="Array"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-    <chapter title="Static Array" id="static_array">
-        
-    </chapter>
+  <chapter id="static_array" title="Static Array">
 
-    <chapter title="Dynamic Array" id="dynamic_array">
-        
-    </chapter>
+  </chapter>
 
-    <chapter title="Stack" id="stack">
-        
-    </chapter>
+  <chapter id="dynamic_array" title="Dynamic Array">
 
-    <chapter title="Binary Search" id="binary_search">
-        Find a target value within a sorted array
-    </chapter>
+  </chapter>
 
-    <chapter title="Kadane's Algorithm" id="kadane_s_algorithm">
+  <chapter id="stack" title="Stack">
 
-    </chapter>
+  </chapter>
 
-    <chapter title="Sliding Window" id="sliding_window">
-        <p>
-            Fixed size window
-        </p>
-        <p>
-            Variable size window
-        </p>
-    </chapter>
+  <chapter id="binary_search" title="Binary Search">
+    Find a target value within a sorted array
+  </chapter>
 
-    <chapter title="Two Pointers" id="two_pointers">
-        
-    </chapter>
+  <chapter id="kadane_s_algorithm" title="Kadane's Algorithm">
 
-    <chapter title="Prefix Sum" id="prefix_sum">
-        
-    </chapter>
+  </chapter>
+
+  <chapter id="sliding_window" title="Sliding Window">
+    <p>
+      Fixed size window
+    </p>
+    <p>
+      Variable size window
+    </p>
+  </chapter>
+
+  <chapter id="two_pointers" title="Two Pointers">
+
+  </chapter>
+
+  <chapter id="prefix_sum" title="Prefix Sum">
+
+  </chapter>
 </topic>

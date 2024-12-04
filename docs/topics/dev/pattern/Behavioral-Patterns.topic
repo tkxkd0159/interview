@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
-<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="Behavioral Patterns" id="Behavioral-Patterns">
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic id="Behavioral-Patterns"
+       title="Behavioral Patterns"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-    <p>These patterns are concerned with algorithms and the assignment of responsibilities between objects.
-    </p>
+  <p>These patterns are concerned with algorithms and the assignment of responsibilities between objects.
+  </p>
 
-    <chapter title="Chain of Responsibility" id="bp-1"></chapter>
-    <chapter title="Command" id="bp-2"></chapter>
-    <chapter title="Iterator" id="bp-3"></chapter>
-    <chapter title="Mediator" id="bp-4"></chapter>
-    <chapter title="Memento" id="bp-5"></chapter>
-    <chapter title="Observer" id="bp-6"></chapter>
-    <chapter title="State" id="bp-7"></chapter>
-    <chapter title="Strategy" id="bp-8"></chapter>
-    <chapter title="Template Method" id="bp-9"></chapter>
-    <chapter title="Visitor" id="bp-10"></chapter>
+  <chapter id="bp-1" title="Chain of Responsibility"></chapter>
+  <chapter id="bp-2" title="Command"></chapter>
+  <chapter id="bp-3" title="Iterator"></chapter>
+  <chapter id="bp-4" title="Mediator"></chapter>
+  <chapter id="bp-5" title="Memento"></chapter>
+  <chapter id="bp-6" title="Observer"></chapter>
+  <chapter id="bp-7" title="State"></chapter>
+  <chapter id="bp-8" title="Strategy"></chapter>
+  <chapter id="bp-9" title="Template Method"></chapter>
+  <chapter id="bp-10" title="Visitor"></chapter>
 
 </topic>

@@ -1,367 +1,367 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
-<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="OSI 7 layers" id="OSI-7">
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic id="OSI-7"
+       title="OSI 7 layers"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-    <show-structure for="chapter" depth="2"/>
+  <show-structure depth="2" for="chapter"/>
 
-    <p>The OSI(Open Systems Interconnection) model is an abstract, conceptual model of how networks should work. In practice, it isn’t as
-        popular as another network model called the TCP/IP model. But, the OSI model breaks up and fleshes out the details of networks into
-        seven segments called layers that help explain how networks work. </p>
+  <p>The OSI(Open Systems Interconnection) model is an abstract, conceptual model of how networks should work. In practice, it isn’t as
+    popular as another network model called the TCP/IP model. But, the OSI model breaks up and fleshes out the details of networks into
+    seven segments called layers that help explain how networks work. </p>
 
-    <img src="$WRS_MODULE$/images/dev/net/net-0.png" alt=""/>
-    <img src="$WRS_MODULE$/images/dev/net/net-0-1.png" alt=""/>
-    <img src="$WRS_MODULE$/images/dev/net/net-1.png" alt=""/>
+  <img alt="" src="$WRS_MODULE$/images/dev/net/net-0.png"/>
+  <img alt="" src="$WRS_MODULE$/images/dev/net/net-0-1.png"/>
+  <img alt="" src="$WRS_MODULE$/images/dev/net/net-1.png"/>
 
 
-    <chapter title="Physical Layer" id="physical_layer">
-        It consists of physical wires and cable connections that sends a bitstream of 0 and 1’s converted from frames to the physical layer
-        of the receiving device. However, this also consists of data sent over the electromagnetic spectrum such as WiFi or satellite links.
-        All this is done with some sort of hardware component such as a radio for sending data using the electromagnetic spectrum so you
-        will find repeaters, network hubs, and more that help extend cable and signal capabilities in this layer.
-    </chapter>
+  <chapter id="physical_layer" title="Physical Layer">
+    It consists of physical wires and cable connections that sends a bitstream of 0 and 1’s converted from frames to the physical layer
+    of the receiving device. However, this also consists of data sent over the electromagnetic spectrum such as WiFi or satellite links.
+    All this is done with some sort of hardware component such as a radio for sending data using the electromagnetic spectrum so you
+    will find repeaters, network hubs, and more that help extend cable and signal capabilities in this layer.
+  </chapter>
 
-    <chapter title="Data Link Layer" id="data_link_layer">
-        The data link layer takes a look at the node-to-node connectivity or link between two directly connected nodes. It handles packaging
-        and unpacking the data in frames. <u>Its major role is to ensure error-free transmission of information.</u>
-        Unlike the other layers, the Data Link layer is composed of two sub-layers: <b>Logical Link Control (LLC)</b> and <b>Medium Access
-        Control (MAC)</b>. The LLC communicates with the upper layers to receive network protocol data and forwards it to the MAC layer
-        after frame multiplexing, which is the combination of multiple frames into one. This allows several network protocols to coexist and
-        be
-        transported over to MAC, which then allows network access technologies to communicate with each other, ensuring that the physical
-        layer isn’t limited to just a specific medium like copper.
-        Both the MAC and LLC are also responsible for flow and error control. However, it is important to note that the Data Link layer
-        doesn’t handle anything beyond a local area network; its primary focus is on local delivery.
+  <chapter id="data_link_layer" title="Data Link Layer">
+    The data link layer takes a look at the node-to-node connectivity or link between two directly connected nodes. It handles packaging
+    and unpacking the data in frames. <u>Its major role is to ensure error-free transmission of information.</u>
+    Unlike the other layers, the Data Link layer is composed of two sub-layers: <b>Logical Link Control (LLC)</b> and <b>Medium Access
+    Control (MAC)</b>. The LLC communicates with the upper layers to receive network protocol data and forwards it to the MAC layer
+    after frame multiplexing, which is the combination of multiple frames into one. This allows several network protocols to coexist and
+    be
+    transported over to MAC, which then allows network access technologies to communicate with each other, ensuring that the physical
+    layer isn’t limited to just a specific medium like copper.
+    Both the MAC and LLC are also responsible for flow and error control. However, it is important to note that the Data Link layer
+    doesn’t handle anything beyond a local area network; its primary focus is on local delivery.
 
-        <br/>
-        The services provided by the data link layer are:
+    <br/>
+    The services provided by the data link layer are:
+    <list>
+      <li>Encapsulation of network layer data packets into frames</li>
+      <li>Frame synchronization</li>
+      <li>
+        <p>In the logical link control (LLC) sublayer:</p>
         <list>
-            <li>Encapsulation of network layer data packets into frames</li>
-            <li>Frame synchronization</li>
-            <li>
-                <p>In the logical link control (LLC) sublayer:</p>
-                <list>
-                    <li>Error control (automatic repeat request, ARQ), in addition to ARQ provided by some transport-layer protocols, to
-                        forward error correction (FEC) techniques provided on the physical layer, and to error-detection and packet
-                        canceling provided at all layers, including the network layer. Data-link-layer error control (i.e. retransmission of
-                        erroneous packets) is provided in
-                        wireless networks
-                        and V.42 telephone network modems, but not in LAN protocols
-                        such
-                        as
-                        Ethernet
-                        , since bit errors are so uncommon in short wires. In that case, only error detection and
-                        canceling of erroneous packets are provided.
-                    </li>
-                    <li>Flow control, in addition to the one provided on the transport layer. Data-link-layer flow control is not used in
-                        LAN protocols such as
-                        Ethernet, but in
-                        <tooltip term="netmodem">modems</tooltip>
-                        and wireless networks.
-                    </li>
-                </list>
-            </li>
-            <li>
-                <p>In the medium access control (MAC) sublayer:</p>
-                <list>
-                    <li>Multiple access methods for channel-access control, for example CSMA/CD protocols for collision detection and
-                        re-transmission in Ethernet bus networks and hub networks, or the CSMA/CA protocol for collision avoidance in
-                        wireless networks.
-                    </li>
-                    <li>Physical addressing (MAC addressing)
-                    </li>
-                    <li>
-                        LAN switching (packet switching), including MAC filtering, Spanning Tree Protocol (STP), Shortest Path Bridging
-                        (SPB) and TRILL (TRansparent Interconnection of Lots of Links)
-                    </li>
-                    <li>Data packet queuing or scheduling</li>
-                    <li>Store-and-forward switching or cut-through switching</li>
-                    <li>Quality of service (QoS) control</li>
-                    <li>Virtual LANs (VLAN)</li>
-                </list>
-            </li>
+          <li>Error control (automatic repeat request, ARQ), in addition to ARQ provided by some transport-layer protocols, to
+            forward error correction (FEC) techniques provided on the physical layer, and to error-detection and packet
+            canceling provided at all layers, including the network layer. Data-link-layer error control (i.e. retransmission of
+            erroneous packets) is provided in
+            wireless networks
+            and V.42 telephone network modems, but not in LAN protocols
+            such
+            as
+            Ethernet
+            , since bit errors are so uncommon in short wires. In that case, only error detection and
+            canceling of erroneous packets are provided.
+          </li>
+          <li>Flow control, in addition to the one provided on the transport layer. Data-link-layer flow control is not used in
+            LAN protocols such as
+            Ethernet, but in
+            <tooltip term="netmodem">modems</tooltip>
+            and wireless networks.
+          </li>
         </list>
+      </li>
+      <li>
+        <p>In the medium access control (MAC) sublayer:</p>
+        <list>
+          <li>Multiple access methods for channel-access control, for example CSMA/CD protocols for collision detection and
+            re-transmission in Ethernet bus networks and hub networks, or the CSMA/CA protocol for collision avoidance in
+            wireless networks.
+          </li>
+          <li>Physical addressing (MAC addressing)
+          </li>
+          <li>
+            LAN switching (packet switching), including MAC filtering, Spanning Tree Protocol (STP), Shortest Path Bridging
+            (SPB) and TRILL (TRansparent Interconnection of Lots of Links)
+          </li>
+          <li>Data packet queuing or scheduling</li>
+          <li>Store-and-forward switching or cut-through switching</li>
+          <li>Quality of service (QoS) control</li>
+          <li>Virtual LANs (VLAN)</li>
+        </list>
+      </li>
+    </list>
 
-        <chapter title="Ethernet (IEEE 802.3)" id="ethernet">
-            Ethernet is a family of wired computer networking technologies commonly used in Local Area Network (LAN).
-            <img src="$WRS_MODULE$/images/dev/net/net-2.png" alt=""/>
-            The organization of the Ethernet
-            frame is central to the operation of the system. The Ethernet standard determines both the
-            structure of a frame and when a station is allowed to send a frame.
-            As networks grew in complexity and features, the IEEE received requests for more tags to achieve new goals. To accommodate these
-            requests, the 802.3 standards engineers defined an envelope frame, which adds an extra 482 bytes to the maximum frame size.
-            Q-tag as one of the tags that can be carried in an envelope prefix. The Q-tag is so called because it carries an 802.1Q tag,
-            also known as a VLAN or priority tag. The 802.1Q standard defines a
-            virtual LAN (VLAN) as one or more switch ports that function as a separate and independent Ethernet system on a switch. Ethernet
-            traffic within a given VLAN (e.g., VLAN 100) will be sent and received only on those ports of the switch that are defined to be
-            members of that particular VLAN.
-        </chapter>
-        <chapter title="IEEE 802.11" id="ieee_802_11">
-            IEEE 802.11 is part of the IEEE 802 set of local area network (LAN) technical standards, and specifies the set of medium access
-            control (MAC) and physical layer (PHY) protocols for implementing wireless local area network (WLAN) computer communication.
-            Current
-            802.11 standards specify frame types for use in the transmission of data as well as management and control of wireless
-            links. Wi-Fi is a family of wireless entwork protocols based on the IEEE 802.11
-        </chapter>
-        <chapter title="Address Resolution Protocol (ARP)">
-            The Address Resolution Protocol is a layer 2 protocol used to map MAC addresses to IP addresses. All hosts on a network are
-            located by their IP address, but NICs do not have IP addresses, they have MAC addresses. ARP is the protocol used to associate
-            the IP address to a MAC address.
+    <chapter id="ethernet" title="Ethernet (IEEE 802.3)">
+      Ethernet is a family of wired computer networking technologies commonly used in Local Area Network (LAN).
+      <img alt="" src="$WRS_MODULE$/images/dev/net/net-2.png"/>
+      The organization of the Ethernet
+      frame is central to the operation of the system. The Ethernet standard determines both the
+      structure of a frame and when a station is allowed to send a frame.
+      As networks grew in complexity and features, the IEEE received requests for more tags to achieve new goals. To accommodate these
+      requests, the 802.3 standards engineers defined an envelope frame, which adds an extra 482 bytes to the maximum frame size.
+      Q-tag as one of the tags that can be carried in an envelope prefix. The Q-tag is so called because it carries an 802.1Q tag,
+      also known as a VLAN or priority tag. The 802.1Q standard defines a
+      virtual LAN (VLAN) as one or more switch ports that function as a separate and independent Ethernet system on a switch. Ethernet
+      traffic within a given VLAN (e.g., VLAN 100) will be sent and received only on those ports of the switch that are defined to be
+      members of that particular VLAN.
+    </chapter>
+    <chapter id="ieee_802_11" title="IEEE 802.11">
+      IEEE 802.11 is part of the IEEE 802 set of local area network (LAN) technical standards, and specifies the set of medium access
+      control (MAC) and physical layer (PHY) protocols for implementing wireless local area network (WLAN) computer communication.
+      Current
+      802.11 standards specify frame types for use in the transmission of data as well as management and control of wireless
+      links. Wi-Fi is a family of wireless entwork protocols based on the IEEE 802.11
+    </chapter>
+    <chapter title="Address Resolution Protocol (ARP)">
+      The Address Resolution Protocol is a layer 2 protocol used to map MAC addresses to IP addresses. All hosts on a network are
+      located by their IP address, but NICs do not have IP addresses, they have MAC addresses. ARP is the protocol used to associate
+      the IP address to a MAC address.
 
-            When a host wants to send a packet to another host, say IP address 10.5.5.1, on its local area network (LAN), it first sends out
-            (broadcasts) an ARP packet. The ARP packet contains a simple question: What is the MAC address corresponding to IP address
-            10.5.5.1? The host that has been configured to use the IP address responds with an ARP packet containing its MAC address.
-        </chapter>
+      When a host wants to send a packet to another host, say IP address 10.5.5.1, on its local area network (LAN), it first sends out
+      (broadcasts) an ARP packet. The ARP packet contains a simple question: What is the MAC address corresponding to IP address
+      10.5.5.1? The host that has been configured to use the IP address responds with an ARP packet containing its MAC address.
+    </chapter>
+  </chapter>
+
+  <chapter title="Network Layer">
+    The network layer handles packet routing via logical addressing and switching functions. A network is a medium to which many nodes
+    can be connected. Every node has an address. When a node needs to transfer a message to other nodes, it can merely provide the
+    content of the message and the address of the destination node, then the network will find the way to deliver the message to the
+    destination node, possibly routing through other nodes. If the message is too long, the network may split it into several segments
+    at one node, sending them separately and reassembling the fragments at another node. The IP, ICMP, and OSPF protocols all
+    operate on Layer 3 of the OSI Model
+
+    <chapter id="i_pv_4" title="IPv4">
+      <img alt="" src="$WRS_MODULE$/images/dev/net/net-3.png"/>
+      Internet Protocol version 4 (IPv4) is the first version of the Internet Protocol (IP) as a standalone specification. It is one
+      of the core protocols of standards-based internetworking methods in the Internet and other packet-switched networks.
+      <list>
+        <li>
+          IHL(Internet Header Length): The IPv4 header is variable in size due to the optional 14th field (options). The IHL field
+          contains the size of the IPv4 header
+        </li>
+        <li>
+          DSCP(Differentiated Services Code Point): Originally defined as the type of service (ToS), this field specifies
+          differentiated services (DiffServ). Real-time data streaming makes use of the DSCP field. An example is Voice over
+          IP (VoIP), which is used for interactive voice services.
+        </li>
+        <li>
+          Explicit Congestion Notification(ECN): This field allows end-to-end notification of network congestion without dropping
+          packets. ECN is an optional feature available when both endpoints support it and effective when also supported by
+          the underlying network.
+
+        </li>
+        <li>
+          Total Length: This 16-bit field defines the entire packet size in bytes, including header and data. The minimum size is
+          20 bytes (header without data) and the maximum is 65,535 bytes. All hosts are required to be able to reassemble
+          datagrams of size up to 576 bytes, but most modern hosts handle much larger packets. Links may impose further
+          restrictions on the packet size, in which case datagrams must be fragmented. Fragmentation in IPv4 is performed in
+          either the sending host or in routers. Reassembly is performed at the receiving host.
+        </li>
+        <li>Identification: This field is an identification field and is primarily used for uniquely identifying the group of
+          fragments of a single IP datagram.
+        </li>
+        <li>
+          Fragment offset: This field specifies the offset of a particular fragment relative to the beginning of the original
+          unfragmented IP datagram. The fragmentation offset value for the first fragment is always 0. The field is 13 bits wide,
+          so that the offset can be from 0 to 8191.
+        </li>
+        <li>
+          Time to live (TTL): An eight-bit time to live field limits a datagram's lifetime to prevent network failure in the event
+          of a routing loop. It is specified in seconds, but time intervals less than 1 second are rounded up to 1. In practice,
+          the field is used as a hop count—when the datagram arrives at a router, the router decrements the TTL field by one. When
+          the TTL field hits zero, the router discards the packet and typically sends an ICMP time exceeded message to the sender.
+        </li>
+        <li>
+          Protocol: This field defines the protocol used in the data portion of the IP datagram.
+        </li>
+        <li>
+          Header checksum: The 16-bit IPv4 header checksum field is used for error checking of the header. When a packet arrives
+          at a router or its destination, the network device calculates the checksum of the header including the checksum field. A
+          value of 0xFFFF is expected. If a different result is obtained, the device discards the packet.
+        </li>
+      </list>
     </chapter>
 
-    <chapter title="Network Layer">
-        The network layer handles packet routing via logical addressing and switching functions. A network is a medium to which many nodes
-        can be connected. Every node has an address. When a node needs to transfer a message to other nodes, it can merely provide the
-        content of the message and the address of the destination node, then the network will find the way to deliver the message to the
-        destination node, possibly routing through other nodes. If the message is too long, the network may split it into several segments
-        at one node, sending them separately and reassembling the fragments at another node. The IP, ICMP, and OSPF protocols all
-        operate on Layer 3 of the OSI Model
+    <chapter id="i_pv_6" title="IPv6">
+      Broadcast was used with IPv4 but is not used with IPv6 anymore, because the amount of addresses in a single IPv4 network was
+      limited or at least much less, so reaching everybody on the network could be handled.
+      <img alt="" src="$WRS_MODULE$/images/dev/net/net-4.png"/>
+      The fixed header starts an IPv6 packet and has a size of 40 octets (320 bits). The bytes of the multi-byte fields are in the
+      network byte order (Big Endian).
+      <list>
+        <li>Traffic class(6+2): The bits of this field hold two values. The six most-significant bits hold the differentiated
+          services
+          field (DS field), which is used to classify packets. The remaining two bits are used for Explicit Congestion
+          Notification (ECN); priority values subdivide into ranges: traffic where the source provides congestion control and
+          non-congestion control traffic.
+        </li>
+        <li>Flow label: A high-entropy identifier of a flow of packets between a source and destination. A flow is a group of
+          packets, e.g., a TCP session or a media stream. The special flow label 0 means the packet does not belong to any flow.
+        </li>
+        <li>Payload Length: The size of the payload in octets, including any extension headers.</li>
+        <li>Next Header: Specifies the type of the next header. This field usually specifies the transport layer
+          protocol used by a packet's
+          payload. When extension headers are present in the packet, this field indicates which extension header follows. The
+          values are shared with those used for the IPv4 <i>protocol</i> field, as both fields have the same function.
+        </li>
+        <li>Hop Limit: Replaces the time to live field in IPv4.</li>
+      </list>
 
-        <chapter title="IPv4" id="i_pv_4">
-            <img src="$WRS_MODULE$/images/dev/net/net-3.png" alt=""/>
-            Internet Protocol version 4 (IPv4) is the first version of the Internet Protocol (IP) as a standalone specification. It is one
-            of the core protocols of standards-based internetworking methods in the Internet and other packet-switched networks.
-            <list>
-                <li>
-                    IHL(Internet Header Length): The IPv4 header is variable in size due to the optional 14th field (options). The IHL field
-                    contains the size of the IPv4 header
-                </li>
-                <li>
-                    DSCP(Differentiated Services Code Point): Originally defined as the type of service (ToS), this field specifies
-                    differentiated services (DiffServ). Real-time data streaming makes use of the DSCP field. An example is Voice over
-                    IP (VoIP), which is used for interactive voice services.
-                </li>
-                <li>
-                    Explicit Congestion Notification(ECN): This field allows end-to-end notification of network congestion without dropping
-                    packets. ECN is an optional feature available when both endpoints support it and effective when also supported by
-                    the underlying network.
-
-                </li>
-                <li>
-                    Total Length: This 16-bit field defines the entire packet size in bytes, including header and data. The minimum size is
-                    20 bytes (header without data) and the maximum is 65,535 bytes. All hosts are required to be able to reassemble
-                    datagrams of size up to 576 bytes, but most modern hosts handle much larger packets. Links may impose further
-                    restrictions on the packet size, in which case datagrams must be fragmented. Fragmentation in IPv4 is performed in
-                    either the sending host or in routers. Reassembly is performed at the receiving host.
-                </li>
-                <li>Identification: This field is an identification field and is primarily used for uniquely identifying the group of
-                    fragments of a single IP datagram.
-                </li>
-                <li>
-                    Fragment offset: This field specifies the offset of a particular fragment relative to the beginning of the original
-                    unfragmented IP datagram. The fragmentation offset value for the first fragment is always 0. The field is 13 bits wide,
-                    so that the offset can be from 0 to 8191.
-                </li>
-                <li>
-                    Time to live (TTL): An eight-bit time to live field limits a datagram's lifetime to prevent network failure in the event
-                    of a routing loop. It is specified in seconds, but time intervals less than 1 second are rounded up to 1. In practice,
-                    the field is used as a hop count—when the datagram arrives at a router, the router decrements the TTL field by one. When
-                    the TTL field hits zero, the router discards the packet and typically sends an ICMP time exceeded message to the sender.
-                </li>
-                <li>
-                    Protocol: This field defines the protocol used in the data portion of the IP datagram.
-                </li>
-                <li>
-                    Header checksum: The 16-bit IPv4 header checksum field is used for error checking of the header. When a packet arrives
-                    at a router or its destination, the network device calculates the checksum of the header including the checksum field. A
-                    value of 0xFFFF is expected. If a different result is obtained, the device discards the packet.
-                </li>
-            </list>
-        </chapter>
-
-        <chapter title="IPv6" id="i_pv_6">
-            Broadcast was used with IPv4 but is not used with IPv6 anymore, because the amount of addresses in a single IPv4 network was
-            limited or at least much less, so reaching everybody on the network could be handled.
-            <img src="$WRS_MODULE$/images/dev/net/net-4.png" alt=""/>
-            The fixed header starts an IPv6 packet and has a size of 40 octets (320 bits). The bytes of the multi-byte fields are in the
-            network byte order (Big Endian).
-            <list>
-                <li>Traffic class(6+2): The bits of this field hold two values. The six most-significant bits hold the differentiated
-                    services
-                    field (DS field), which is used to classify packets. The remaining two bits are used for Explicit Congestion
-                    Notification (ECN); priority values subdivide into ranges: traffic where the source provides congestion control and
-                    non-congestion control traffic.
-                </li>
-                <li>Flow label: A high-entropy identifier of a flow of packets between a source and destination. A flow is a group of
-                    packets, e.g., a TCP session or a media stream. The special flow label 0 means the packet does not belong to any flow.
-                </li>
-                <li>Payload Length: The size of the payload in octets, including any extension headers.</li>
-                <li>Next Header: Specifies the type of the next header. This field usually specifies the transport layer
-                    protocol used by a packet's
-                    payload. When extension headers are present in the packet, this field indicates which extension header follows. The
-                    values are shared with those used for the IPv4 <i>protocol</i> field, as both fields have the same function.
-                </li>
-                <li>Hop Limit: Replaces the time to live field in IPv4.</li>
-            </list>
-
-            IPv6 addresses range from 0000:0000:0000:0000:0000:0000:0000:0000 to ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff. And IPv4-mapped
-            IPv6
-            address example is 192.1.56.10 -> 0:0:0:0:0:ffff:192.1.56.10 and ::ffff:192.1.56.10/96 (shortened format).
-        </chapter>
-
-        <chapter title="NAT(Network Address Translation)" id="nat_network_address_translation_">
-            <img src="$WRS_MODULE$/images/dev/net/net-9.png" alt="" width="700"/>
-            To access the Internet, one public IP address is needed, but we can use a private IP address in our private network. The idea of
-            NAT is to allow multiple devices to access the Internet through a single public address. To achieve this, the translation of a
-            private IP address to a public IP address is required. Network Address Translation (NAT) is a process in which one or more local
-            IP address is translated into one or more Global IP address and vice versa in order to provide Internet access to the local
-            hosts. Also, it does the translation of port numbers i.e. masks the port number of the host with another port number, in the
-            packet that will be routed to the destination. It then makes the corresponding entries of IP address and port number in the NAT
-            table.
-        </chapter>
-
-        <chapter title="Multiprotocol label switching (MPLS)">
-            Multiprotocol label switching (MPLS) is a technique for speeding up network connections that was first developed in the 1990s.
-            The public Internet functions by forwarding packets from one router to the next until the packets reach their destination. MLPS,
-            on the other hand, sends packets along predetermined network paths. Ideally, the result is that routers spend less time deciding
-            where to forward each packet, and packets take the same path every time.
-
-            Consider the process of planning a long drive. Instead of identifying which towns and cities one must drive through in order to
-            reach the destination, it is usually more efficient to identify the roads that go in the correct direction. Similarly, MPLS
-            identifies paths — network "roads" — rather than a series of intermediary destinations.
-
-            MPLS is considered to operate at OSI layer "2.5", below the network layer (layer 3) and above the data link layer (layer 2).
-        </chapter>
+      IPv6 addresses range from 0000:0000:0000:0000:0000:0000:0000:0000 to ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff. And IPv4-mapped
+      IPv6
+      address example is 192.1.56.10 -> 0:0:0:0:0:ffff:192.1.56.10 and ::ffff:192.1.56.10/96 (shortened format).
     </chapter>
 
-    <chapter title="Transport Layer" id="transport_layer">
-        The transport layer provides the functions and means of transferring data sequences from a source to a destination host via one or
-        more networks, while maintaining the quality of service (QoS) functions and ensuring the complete delivery of the data. The
-        integrity of the data can be guaranteed via error correction and similar functions. It can also provide an explicit flow control
-        function. Transfer Control Protocol (TCP) and User Datagram Protocols (UDP) are essential protocols in layer 4.
-
-        <chapter title="TCP" id="tcp">
-            <p> Transmission Control Protocol lets two hosts connect and exchange data streams. TCP guarantees the delivery of data and
-                packets
-                in the same order as they were sent. TCP's role is to ensure the packets are reliably delivered, and error-free. TCP
-                implements
-                congestion control, which means the initial requests start small, increasing in size to the levels of bandwidth the
-                computers,
-                servers, and network can support. However, TCP is a time-consuming process, since it involves many steps. And also, the
-                connection cannot be closed without getting the FIN flags along with the ACK flags as a confirmation from both sides, which
-                takes time.
-            </p>
-
-            <p>
-                TCP uses the 3-way handshake process to establish a connection between two devices before transmitting the data. After the
-                establishment of the connection, the data transfer takes place between the devices.
-            </p>
-            <img src="$WRS_MODULE$/images/dev/net/net-7.png" alt=""/>
-
-            <procedure title="3-Way Handshaking for establishing connection" id="tcp-3way">
-                <img src="$WRS_MODULE$/images/dev/net/net-5.png" alt=""/>
-
-                <step><b>The client sends the SYN to the server.</b> It sets the 'SYN' flag as 1 and sends the message to the server. The
-                    message
-                    has also some additional information like the sequence number(ISN), the ACK is set here to 0, the
-                    window size, and the maximum segment size.
-                </step>
-                <step><b>The server replies with the SYN and the ACK to the client.</b> After receiving the client's synchronization
-                    request, the
-                    server sends an acknowledgment to the client by setting the ACK flag to '1'. The acknowledgment number of the ACK is
-                    one
-                    more than the received sequence number. For Example, if the client has sent the SYN with sequence number = 10000, then
-                    the server will send the ACK with acknowledgment number = 10001. Also, if the server also wants to establish the
-                    connection, the server sets the 'SYN' flag as 1 and send some additional information like the client.
-                </step>
-                <step><b>The client sends the ACK to the server.</b> After receiving the SYN from the server, the client sets the ACK flag
-                    to '1'
-                    and sends it with an acknowledgement number 1 greater than the server's SYN sequence number(ISN) to the client. Here,
-                    the SYN
-                    flag is kept '0'. After completion of this step, the connection is now established from the server to the client-side
-                    also. After the connection is being established, the minimum of the sender's and receiver's maximum segment size is
-                    taken under consideration for data transmission.
-                </step>
-            </procedure>
-            <procedure title="4-Way Handshaking for terminating connection" id="tcp-3way2">
-                <img src="$WRS_MODULE$/images/dev/net/net-6.png" alt=""/>
-                <step>From one side of the connection, either from the client or the server the FIN flag will be sent as the request for the
-                    termination of the connection.
-                </step>
-                <step>Whoever receives the FIN flag will then be sending an ACK flag as the acknowledgment for the closing request to the
-                    other side.
-                </step>
-                <step>The server will also send a FIN flag as the closing signal to the other side.</step>
-                <step>In the final step, who received the final FIN flag, will be sending an ACK flag as the final Acknowledgement
-                    for the suggested connection closing.
-                </step>
-            </procedure>
-        </chapter>
-
-        <chapter title="UDP" id="udp">
-            <p> User Datagram Protocol is a communication protocol used across the Internet for especially time-sensitive transmissions
-                such as
-                video playback or DNS lookups. . UDP is faster but less reliable than TCP. UDP communications do not go through this
-                process.
-                Instead,
-                one computer can simply begin sending data to the other. In addition, TCP communications indicate the order in which data
-                packets should be received and confirm that packets arrive as intended. If a packet does not arrive — e.g. due to congestion
-                in
-                intermediary networks — TCP requires that it be re-sent. UDP communications do not include any of this functionality.
-                However,
-                if a UDP datagram is lost in transit, it will not be re-sent. As a result, applications that use
-                UDP must be able to tolerate errors, loss, and duplication.</p>
-            <p>
-                UDP is commonly used in time-sensitive communications where occasionally dropping packets is better than waiting. Voice and
-                video traffic are often sent using this protocol because they are both time-sensitive and designed to handle some level of
-                loss. For example, VoIP (voice over IP), which is used by many Internet-based telephone services, typically operates over
-                UDP. This is because a static-y phone conversation is preferable to one that is crystal clear but heavily delayed. This also
-                makes UDP the ideal protocol for online gaming. Similarly, because DNS servers both need to be fast and efficient,
-                they operate through UDP as well.
-            </p>
-            <img src="$WRS_MODULE$/images/dev/net/net-8.png" alt=""/>
-            <p><i>Length</i> field specifies the length in bytes of the UDP header and UDP data. The minimum length is 8 bytes, the length
-                of the header.</p>
-
-        </chapter>
+    <chapter id="nat_network_address_translation_" title="NAT(Network Address Translation)">
+      <img alt="" src="$WRS_MODULE$/images/dev/net/net-9.png" width="700"/>
+      To access the Internet, one public IP address is needed, but we can use a private IP address in our private network. The idea of
+      NAT is to allow multiple devices to access the Internet through a single public address. To achieve this, the translation of a
+      private IP address to a public IP address is required. Network Address Translation (NAT) is a process in which one or more local
+      IP address is translated into one or more Global IP address and vice versa in order to provide Internet access to the local
+      hosts. Also, it does the translation of port numbers i.e. masks the port number of the host with another port number, in the
+      packet that will be routed to the destination. It then makes the corresponding entries of IP address and port number in the NAT
+      table.
     </chapter>
 
-    <chapter title="Session Layer" id="session_layer">
-        The session layer controls the dialogues (connections) between computers. It establishes, manages, maintains and ultimately
-        terminates the connections between the local and remote application. In other words, it manages sessions. Layer 5 software also
-        handles authentication and authorization
-        functions. It verifies the data is delivered as well. The session layer is commonly implemented explicitly in application
-        environments that use remote procedure calls.
+    <chapter title="Multiprotocol label switching (MPLS)">
+      Multiprotocol label switching (MPLS) is a technique for speeding up network connections that was first developed in the 1990s.
+      The public Internet functions by forwarding packets from one router to the next until the packets reach their destination. MLPS,
+      on the other hand, sends packets along predetermined network paths. Ideally, the result is that routers spend less time deciding
+      where to forward each packet, and packets take the same path every time.
+
+      Consider the process of planning a long drive. Instead of identifying which towns and cities one must drive through in order to
+      reach the destination, it is usually more efficient to identify the roads that go in the correct direction. Similarly, MPLS
+      identifies paths — network "roads" — rather than a series of intermediary destinations.
+
+      MPLS is considered to operate at OSI layer "2.5", below the network layer (layer 3) and above the data link layer (layer 2).
+    </chapter>
+  </chapter>
+
+  <chapter id="transport_layer" title="Transport Layer">
+    The transport layer provides the functions and means of transferring data sequences from a source to a destination host via one or
+    more networks, while maintaining the quality of service (QoS) functions and ensuring the complete delivery of the data. The
+    integrity of the data can be guaranteed via error correction and similar functions. It can also provide an explicit flow control
+    function. Transfer Control Protocol (TCP) and User Datagram Protocols (UDP) are essential protocols in layer 4.
+
+    <chapter id="tcp" title="TCP">
+      <p> Transmission Control Protocol lets two hosts connect and exchange data streams. TCP guarantees the delivery of data and
+        packets
+        in the same order as they were sent. TCP's role is to ensure the packets are reliably delivered, and error-free. TCP
+        implements
+        congestion control, which means the initial requests start small, increasing in size to the levels of bandwidth the
+        computers,
+        servers, and network can support. However, TCP is a time-consuming process, since it involves many steps. And also, the
+        connection cannot be closed without getting the FIN flags along with the ACK flags as a confirmation from both sides, which
+        takes time.
+      </p>
+
+      <p>
+        TCP uses the 3-way handshake process to establish a connection between two devices before transmitting the data. After the
+        establishment of the connection, the data transfer takes place between the devices.
+      </p>
+      <img alt="" src="$WRS_MODULE$/images/dev/net/net-7.png"/>
+
+      <procedure id="tcp-3way" title="3-Way Handshaking for establishing connection">
+        <img alt="" src="$WRS_MODULE$/images/dev/net/net-5.png"/>
+
+        <step><b>The client sends the SYN to the server.</b> It sets the 'SYN' flag as 1 and sends the message to the server. The
+          message
+          has also some additional information like the sequence number(ISN), the ACK is set here to 0, the
+          window size, and the maximum segment size.
+        </step>
+        <step><b>The server replies with the SYN and the ACK to the client.</b> After receiving the client's synchronization
+          request, the
+          server sends an acknowledgment to the client by setting the ACK flag to '1'. The acknowledgment number of the ACK is
+          one
+          more than the received sequence number. For Example, if the client has sent the SYN with sequence number = 10000, then
+          the server will send the ACK with acknowledgment number = 10001. Also, if the server also wants to establish the
+          connection, the server sets the 'SYN' flag as 1 and send some additional information like the client.
+        </step>
+        <step><b>The client sends the ACK to the server.</b> After receiving the SYN from the server, the client sets the ACK flag
+          to '1'
+          and sends it with an acknowledgement number 1 greater than the server's SYN sequence number(ISN) to the client. Here,
+          the SYN
+          flag is kept '0'. After completion of this step, the connection is now established from the server to the client-side
+          also. After the connection is being established, the minimum of the sender's and receiver's maximum segment size is
+          taken under consideration for data transmission.
+        </step>
+      </procedure>
+      <procedure id="tcp-3way2" title="4-Way Handshaking for terminating connection">
+        <img alt="" src="$WRS_MODULE$/images/dev/net/net-6.png"/>
+        <step>From one side of the connection, either from the client or the server the FIN flag will be sent as the request for the
+          termination of the connection.
+        </step>
+        <step>Whoever receives the FIN flag will then be sending an ACK flag as the acknowledgment for the closing request to the
+          other side.
+        </step>
+        <step>The server will also send a FIN flag as the closing signal to the other side.</step>
+        <step>In the final step, who received the final FIN flag, will be sending an ACK flag as the final Acknowledgement
+          for the suggested connection closing.
+        </step>
+      </procedure>
     </chapter>
 
-    <chapter title="Presentation Layer" id="presentation_layer">
-        The presentation layer checks the data to ensure it is compatible with the communications resources. It translates the data into the
-        form that the application level and lower levels accept. Any needed data formatting or code conversion is also handled by the sixth
-        layer, such as the American Standard Code for Information Interchange (ASCII) code for text files. It functions for data compression
-        and encryption as well. For example, video calls will be compressed during the transmission so that it can be transmitted faster,
-        and the data will be recovered at the receiving side. While it doesn't directly encrypt data, it can be involved in data encryption
-        and decryption processes, especially when data encryption is part of the presentation format. Specifically, SSL/TLS operates between
-        the application layer and the transport layer, providing secure communication over a network by encrypting the data exchanged
-        between two systems.
+    <chapter id="udp" title="UDP">
+      <p> User Datagram Protocol is a communication protocol used across the Internet for especially time-sensitive transmissions
+        such as
+        video playback or DNS lookups. . UDP is faster but less reliable than TCP. UDP communications do not go through this
+        process.
+        Instead,
+        one computer can simply begin sending data to the other. In addition, TCP communications indicate the order in which data
+        packets should be received and confirm that packets arrive as intended. If a packet does not arrive — e.g. due to congestion
+        in
+        intermediary networks — TCP requires that it be re-sent. UDP communications do not include any of this functionality.
+        However,
+        if a UDP datagram is lost in transit, it will not be re-sent. As a result, applications that use
+        UDP must be able to tolerate errors, loss, and duplication.</p>
+      <p>
+        UDP is commonly used in time-sensitive communications where occasionally dropping packets is better than waiting. Voice and
+        video traffic are often sent using this protocol because they are both time-sensitive and designed to handle some level of
+        loss. For example, VoIP (voice over IP), which is used by many Internet-based telephone services, typically operates over
+        UDP. This is because a static-y phone conversation is preferable to one that is crystal clear but heavily delayed. This also
+        makes UDP the ideal protocol for online gaming. Similarly, because DNS servers both need to be fast and efficient,
+        they operate through UDP as well.
+      </p>
+      <img alt="" src="$WRS_MODULE$/images/dev/net/net-8.png"/>
+      <p><i>Length</i> field specifies the length in bytes of the UDP header and UDP data. The minimum length is 8 bytes, the length
+        of the header.</p>
+
     </chapter>
+  </chapter>
 
-    <chapter title="Application Layer" id="application_layer">
-        The application layer of the OSI model interacts directly with software applications to provide communication functions as required,
-        and it is the closest to end users. Functions of the application layer typically include verifying the availability of communication
-        partners and resources to support any data transfer. This layer also defines protocols for end applications, such as domain name
-        system (DNS), file transfer protocol (FTP), hypertext transfer protocol (HTTP), Internet message access protocol (IMAP), post office
-        protocol (POP), simple mail transfer protocol (SMTP), Simple Network Management Protocol (SNMP), and Telnet (a terminal emulation).
+  <chapter id="session_layer" title="Session Layer">
+    The session layer controls the dialogues (connections) between computers. It establishes, manages, maintains and ultimately
+    terminates the connections between the local and remote application. In other words, it manages sessions. Layer 5 software also
+    handles authentication and authorization
+    functions. It verifies the data is delivered as well. The session layer is commonly implemented explicitly in application
+    environments that use remote procedure calls.
+  </chapter>
 
-        <chapter title="DHCP" id="dhcp">
-            [Only for IPv4] The Dynamic Host Configuration Protocol (DHCP) gives the network administrator a method to remove the end user
-            from this configuration problem and maintain the network configuration in a centralized location.
+  <chapter id="presentation_layer" title="Presentation Layer">
+    The presentation layer checks the data to ensure it is compatible with the communications resources. It translates the data into the
+    form that the application level and lower levels accept. Any needed data formatting or code conversion is also handled by the sixth
+    layer, such as the American Standard Code for Information Interchange (ASCII) code for text files. It functions for data compression
+    and encryption as well. For example, video calls will be compressed during the transmission so that it can be transmitted faster,
+    and the data will be recovered at the receiving side. While it doesn't directly encrypt data, it can be involved in data encryption
+    and decryption processes, especially when data encryption is part of the presentation format. Specifically, SSL/TLS operates between
+    the application layer and the transport layer, providing secure communication over a network by encrypting the data exchanged
+    between two systems.
+  </chapter>
 
-            DHCP is an application-layer protocol that allows a client machine on the network, to get an IP address and other configuration
-            parameters from the server. It gets information by exchanging packets between a daemon on the client and another on the server.
-            Most operating systems now provide a DHCP client in their base package.
+  <chapter id="application_layer" title="Application Layer">
+    The application layer of the OSI model interacts directly with software applications to provide communication functions as required,
+    and it is the closest to end users. Functions of the application layer typically include verifying the availability of communication
+    partners and resources to support any data transfer. This layer also defines protocols for end applications, such as domain name
+    system (DNS), file transfer protocol (FTP), hypertext transfer protocol (HTTP), Internet message access protocol (IMAP), post office
+    protocol (POP), simple mail transfer protocol (SMTP), Simple Network Management Protocol (SNMP), and Telnet (a terminal emulation).
 
-            To obtain an address, the DHCP client daemon (dhcpcd) broadcasts a DHCP discover message, which is received by the server and
-            processed. (Multiple servers can be configured on the network for redundancy.) If a free address is available for that client, a
-            DHCP offer message is created, This message contains an IP address and other options that are appropriate for that client. The
-            client receives the server DHCP offer and stores it while waiting for other offers. When the client chooses the best offer, it
-            broadcasts a DHCP request that specifies which server offer it wants.
-        </chapter>
+    <chapter id="dhcp" title="DHCP">
+      [Only for IPv4] The Dynamic Host Configuration Protocol (DHCP) gives the network administrator a method to remove the end user
+      from this configuration problem and maintain the network configuration in a centralized location.
+
+      DHCP is an application-layer protocol that allows a client machine on the network, to get an IP address and other configuration
+      parameters from the server. It gets information by exchanging packets between a daemon on the client and another on the server.
+      Most operating systems now provide a DHCP client in their base package.
+
+      To obtain an address, the DHCP client daemon (dhcpcd) broadcasts a DHCP discover message, which is received by the server and
+      processed. (Multiple servers can be configured on the network for redundancy.) If a free address is available for that client, a
+      DHCP offer message is created, This message contains an IP address and other options that are appropriate for that client. The
+      client receives the server DHCP offer and stores it while waiting for other offers. When the client chooses the best offer, it
+      broadcasts a DHCP request that specifies which server offer it wants.
     </chapter>
+  </chapter>
 </topic>

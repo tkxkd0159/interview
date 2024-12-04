@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE terms SYSTEM "https://resources.jetbrains.com/writerside/1.0/glossary.dtd">
 <terms>
-    <term name="web-storage">The Web Storage API provides a mechanism for storing and retrieving smaller, data items
-        consisting of a name and a corresponding value. This is useful when you just need to store some simple data,
-        like the user's name.
-    </term>
-    <term name="indexdb">The IndexedDB API provides the browser with a complete database system for storing complex
-        data. This can be used for things from complete sets of customer records to even complex data types like audio
-        or video files.
-    </term>
-    <term name="instrumentation">
-        In the context of computer programming, instrumentation refers to the measure of a product's performance, in
-        order to diagnose errors and to write trace information.Instrumentation can be of two types: source
-        instrumentation and binary instrumentation.
-    </term>
-    <term name="netmodem">
-        Modems also operate at the Data Link layer (Layer 2) of the OSI model. Modems also use MAC addresses to control access to the
-        network medium. Modems are used to connect a local network (LAN) to a wide area network (WAN) such as the Internet. Modems often
-        implement flow control mechanisms to regulate the flow of data between the local network and the wide area network.
-    </term>
+  <term name="web-storage">The Web Storage API provides a mechanism for storing and retrieving smaller, data items
+    consisting of a name and a corresponding value. This is useful when you just need to store some simple data,
+    like the user's name.
+  </term>
+  <term name="indexdb">The IndexedDB API provides the browser with a complete database system for storing complex
+    data. This can be used for things from complete sets of customer records to even complex data types like audio
+    or video files.
+  </term>
+  <term name="instrumentation">
+    In the context of computer programming, instrumentation refers to the measure of a product's performance, in
+    order to diagnose errors and to write trace information.Instrumentation can be of two types: source
+    instrumentation and binary instrumentation.
+  </term>
+  <term name="netmodem">
+    Modems also operate at the Data Link layer (Layer 2) of the OSI model. Modems also use MAC addresses to control access to the
+    network medium. Modems are used to connect a local network (LAN) to a wide area network (WAN) such as the Internet. Modems often
+    implement flow control mechanisms to regulate the flow of data between the local network and the wide area network.
+  </term>
 </terms>

@@ -1,87 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
-<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="Tree" id="Tree">
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic id="Tree"
+       title="Tree"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-    <show-structure depth="2"/>
+  <show-structure depth="2"/>
 
-    <chapter title="Binary Tree" id="binary_tree">
-      <list>
-        <li>Full Binary Tree: Every node has either 0 or 2 children</li>
-        <li>Complete Binary Tree: All levels fully filled except possibly the last, which is filled from left to right</li>
-        <li>Perfect Binary Tree: All internal nodes have 2 children, and all leaf nodes are at the same level</li>
-      </list>
-    </chapter>
+  <chapter id="binary_tree" title="Binary Tree">
+    <list>
+      <li>Full Binary Tree: Every node has either 0 or 2 children</li>
+      <li>Complete Binary Tree: All levels fully filled except possibly the last, which is filled from left to right</li>
+      <li>Perfect Binary Tree: All internal nodes have 2 children, and all leaf nodes are at the same level</li>
+    </list>
+  </chapter>
 
-    <chapter title="Binary Search Tree" id="binary_search_tree">
-        <p>
-            Ordered/Sorted Binary Tree. Left subtree are smaller than right subtree.
-        </p>
-      <code-block collapsed-title="Example" collapsible="true" src="$WRS_MODULE$/code/dsalgo/bst-range.go" lang="go"></code-block>
+  <chapter id="binary_search_tree" title="Binary Search Tree">
+    <p>
+      Ordered/Sorted Binary Tree. Left subtree are smaller than right subtree.
+    </p>
+    <code-block collapsed-title="Example" collapsible="true" lang="go" src="$WRS_MODULE$/code/dsalgo/bst-range.go"></code-block>
 
-        <chapter title="Search Range" id="search_range">
-
-        </chapter>
-
-        <chapter title="BST-based Set" id="bst_based_set">
-
-        </chapter>
-
-        <chapter title="BST-based Map" id="bst_based_map">
-
-        </chapter>
-    </chapter>
-
-    <chapter title="Heap" id="heap">
-        <p>
-            Priority Queue. Heap properties
-        </p>
-
-        <p>
-            Push and Pop
-        </p>
-
-        <p>
-            <code>Heapify</code> is the process of creating a heap data structure from a binary tree.
-        </p>
-
-        <chapter title="Two Heaps" id="two_heaps">
-
-        </chapter>
-    </chapter>
-
-    <chapter title="Trie" id="trie">
-        <p>
-            Prefix Tree / Digital Tree. Used for searching strings.
-        </p>
+    <chapter id="search_range" title="Search Range">
 
     </chapter>
 
-    <chapter title="Union-Find" id="union_find">
-        <p>
-            Disjoint Set. Used for finding connected components in a graph.
-        </p>
-    </chapter>
-
-    <chapter title="Segment Tree" id="segment_tree">
+    <chapter id="bst_based_set" title="BST-based Set">
 
     </chapter>
 
-    <chapter title="Depth-First Search" id="depth_first_search">
-        <p>
-            DFS is an algorithm for traversing or searching tree or graph data structures.
-        </p>
+    <chapter id="bst_based_map" title="BST-based Map">
 
-        <p>
-            <b>Iterative DFS</b>
-        </p>
     </chapter>
+  </chapter>
 
-    <chapter title="Breadth-First Search" id="breadth_first_search">
-        <p>
-            BFS is an algorithm for traversing or searching tree or graph data structures.
-        </p>
+  <chapter id="heap" title="Heap">
+    <p>
+      Priority Queue. Heap properties
+    </p>
+
+    <p>
+      Push and Pop
+    </p>
+
+    <p>
+      <code>Heapify</code> is the process of creating a heap data structure from a binary tree.
+    </p>
+
+    <chapter id="two_heaps" title="Two Heaps">
+
     </chapter>
+  </chapter>
+
+  <chapter id="trie" title="Trie">
+    <p>
+      Prefix Tree / Digital Tree. Used for searching strings.
+    </p>
+
+  </chapter>
+
+  <chapter id="union_find" title="Union-Find">
+    <p>
+      Disjoint Set. Used for finding connected components in a graph.
+    </p>
+  </chapter>
+
+  <chapter id="segment_tree" title="Segment Tree">
+
+  </chapter>
+
+  <chapter id="depth_first_search" title="Depth-First Search">
+    <p>
+      DFS is an algorithm for traversing or searching tree or graph data structures.
+    </p>
+
+    <p>
+      <b>Iterative DFS</b>
+    </p>
+  </chapter>
+
+  <chapter id="breadth_first_search" title="Breadth-First Search">
+    <p>
+      BFS is an algorithm for traversing or searching tree or graph data structures.
+    </p>
+  </chapter>
 </topic>

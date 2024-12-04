@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
-<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="PS Note" id="PS-Note">
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic id="PS-Note"
+       title="PS Note"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-    <show-structure for="chapter" depth="2"/>
+  <show-structure depth="2" for="chapter"/>
 
-    <chapter title="Graph" id="graph">
+  <chapter id="graph" title="Graph">
 
-        <chapter title="DFS or BFS" id="dfs_or_bfs">
-            <list>
-                <li>M * N (Row &amp; Column)</li>
-            </list>
+    <chapter id="dfs_or_bfs" title="DFS or BFS">
+      <list>
+        <li>M * N (Row &amp; Column)</li>
+      </list>
 
-            <code-block lang="go" src="$WRS_MODULE$/code/dsalgo/dfs-sample.go"/>
-        </chapter>
-
-        <chapter title="Topological Sorting" id="topological_sorting">
-            <list>
-                <li>Kahn's Algorithm(indegree, outdegree)</li>
-                <li>Prerequisite task, </li>
-            </list>
-
-          <code-block lang="go" src="$WRS_MODULE$/code/dsalgo/topological-sorting.go"/>
-        </chapter>
-
+      <code-block lang="go" src="$WRS_MODULE$/code/dsalgo/dfs-sample.go"/>
     </chapter>
+
+    <chapter id="topological_sorting" title="Topological Sorting">
+      <list>
+        <li>Kahn's Algorithm(indegree, outdegree)</li>
+        <li>Prerequisite task,</li>
+      </list>
+
+      <code-block lang="go" src="$WRS_MODULE$/code/dsalgo/topological-sorting.go"/>
+    </chapter>
+
+  </chapter>
 </topic>

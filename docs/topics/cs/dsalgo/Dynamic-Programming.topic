@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
-<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="Dynamic Programming" id="Dynamic-Programming">
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic id="Dynamic-Programming"
+       title="Dynamic Programming"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
 
-    <chapter title="1D DP" id="1_d_dp">
-        <chapter title="Palindrome" id="palindrome">
-
-        </chapter>
-    </chapter>
-
-    <chapter title="2D DP" id="2_d_dp">
-        <chapter title="0 / 1 Knapsack" id="0_1_knapsack">
-
-        </chapter>
-
-        <chapter title="Unbounded Knapsack" id="unbounded_knapsack">
-
-        </chapter>
-
-        <chapter title="Longest Common Sequence" id="longest_common_sequence">
-
-        </chapter>
+  <chapter id="1_d_dp" title="1D DP">
+    <chapter id="palindrome" title="Palindrome">
 
     </chapter>
+  </chapter>
+
+  <chapter id="2_d_dp" title="2D DP">
+    <chapter id="0_1_knapsack" title="0 / 1 Knapsack">
+
+    </chapter>
+
+    <chapter id="unbounded_knapsack" title="Unbounded Knapsack">
+
+    </chapter>
+
+    <chapter id="longest_common_sequence" title="Longest Common Sequence">
+
+    </chapter>
+
+  </chapter>
 </topic>

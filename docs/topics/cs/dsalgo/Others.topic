@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
-<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="Others" id="Others">
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic id="Others"
+       title="Others"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-    <chapter title="Recursion" id="recursion">
-        <p>
-            Factorial.
-        </p>
-        <code-block lang="go">
+  <chapter id="recursion" title="Recursion">
+    <p>
+      Factorial.
+    </p>
+    <code-block lang="go">
             func factorial(n int) int {
                 if n == 0 {
                     return 1
@@ -20,20 +20,20 @@
         </code-block>
 
 
-        <chapter title="Fibonacci" id="fibonacci">
-
-        </chapter>
-    </chapter>
-
-    <chapter title="Hashing" id="hashing">
+    <chapter id="fibonacci" title="Fibonacci">
 
     </chapter>
+  </chapter>
 
-    <chapter title="Bit Manipulation" id="bit_manipulation">
+  <chapter id="hashing" title="Hashing">
 
-    </chapter>
+  </chapter>
 
-    <chapter title="Sweep Line" id="sweep_line">
+  <chapter id="bit_manipulation" title="Bit Manipulation">
+
+  </chapter>
+
+  <chapter id="sweep_line" title="Sweep Line">
 
         <code-block lang="python">
             def maximum_overlapping_intervals(intervals):
@@ -63,5 +63,5 @@
             result = maximum_overlapping_intervals(intervals)
             print("Maximum number of overlapping intervals:", result) # 3
         </code-block>
-    </chapter>
+  </chapter>
 </topic>

@@ -1,22 +1,22 @@
 <buildprofiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/build-profiles.xsd">
 
+  <variables>
+    <primary-color>iris</primary-color>
+    <custom-favicons>favicon.png</custom-favicons>
+    <header-logo>$WRS_MODULE$/images/books.png</header-logo>
+    <product-web-url>https://tkxkd0159.github.io/interview</product-web-url>
+    <web-root>https://tkxkd0159.github.io</web-root>
+  </variables>
+
+  <build-profile instance="i">
     <variables>
-        <primary-color>iris</primary-color>
-        <custom-favicons>favicon.png</custom-favicons>
-        <header-logo>$WRS_MODULE$/images/books.png</header-logo>
-        <product-web-url>https://tkxkd0159.github.io/interview</product-web-url>
-        <web-root>https://tkxkd0159.github.io</web-root>
+      <noindex-content>false</noindex-content>
+      <search-endpoint>http://127.0.0.1:8080</search-endpoint>
     </variables>
+  </build-profile>
 
-    <build-profile instance="i">
-        <variables>
-            <noindex-content>false</noindex-content>
-            <search-endpoint>http://127.0.0.1:8080</search-endpoint>
-        </variables>
-    </build-profile>
-
-    <footer>
-        <copyright>Jaeseung Lee</copyright>
-    </footer>
+  <footer>
+    <copyright>Jaeseung Lee</copyright>
+  </footer>
 </buildprofiles>

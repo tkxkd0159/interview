@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
-<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="Optimization" id="Compiler-Opti">
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic id="Compiler-Opti"
+       title="Optimization"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-    <chapter title="Compiler Optimization">
-        <p>파일이 나눠지는 경우에는 inline 되지 않고 그대로 호출됨. 이 경우 LTO 필요.</p>
+  <chapter title="Compiler Optimization">
+    <p>파일이 나눠지는 경우에는 inline 되지 않고 그대로 호출됨. 이 경우 LTO 필요.</p>
 
-        <chapter title="No optimization (-O0)">
+    <chapter title="No optimization (-O0)">
             <code-block lang="shell">
                 clang main.c -o main
                 objdump -d main
             </code-block>
 
-            <code>calculation</code> 호출 후 반환값 저장(<code>mov %eax,-0x8(%rbp)</code>)
-            <code-block lang="text" ignore-vars="true">
+      <code>calculation</code> 호출 후 반환값 저장(<code>mov %eax,-0x8(%rbp)</code>)
+      <code-block ignore-vars="true" lang="text">
                 <![CDATA[
                 0000000000001140 <doubleNum>:
                 1140:       55                      push   %rbp
@@ -74,15 +74,15 @@
                 11ca:       c3                      ret
                 ]]>
             </code-block>
-        </chapter>
+    </chapter>
 
-        <chapter title="All optimization wihtout violating strict compliance (-O3)">
+    <chapter title="All optimization wihtout violating strict compliance (-O3)">
             <code-block lang="shell">
                 clang -O3 main.c -o main3
                 objdump -d main3
             </code-block>
-            최적화로 인해 <code>calculation</code>을 호출하지 않고 바로 90으로 inline 됨. (<code>mov $0x5a,%esi</code>)
-            <code-block lang="text" ignore-vars="true">
+      최적화로 인해 <code>calculation</code>을 호출하지 않고 바로 90으로 inline 됨. (<code>mov $0x5a,%esi</code>)
+      <code-block ignore-vars="true" lang="text">
                 <![CDATA[
                 0000000000001140 <doubleNum>:
                 1140:       8d 04 3f                lea    (%rdi,%rdi,1),%eax
@@ -116,16 +116,16 @@
                 118a:       c3                      ret
                 ]]>
             </code-block>
-        </chapter>
+    </chapter>
 
-        <chapter
-                title="All optimization wihtout violating strict compliance (-O3) - Separating code into several files">
-            아래처럼 파일을 분리해놓은 경우 inline 최적화가 안되었는데 컴파일러가 참조없이 각각의 source file에 대해 object file을 만들기 때문.
-            <code-block lang="shell">
+    <chapter
+      title="All optimization wihtout violating strict compliance (-O3) - Separating code into several files">
+      아래처럼 파일을 분리해놓은 경우 inline 최적화가 안되었는데 컴파일러가 참조없이 각각의 source file에 대해 object file을 만들기 때문.
+      <code-block lang="shell">
                 clang -O3 main1.c calc.c ops.c -o main3_2
                 objdump -d main3_2
             </code-block>
-            <code-block lang="text" ignore-vars="true">
+      <code-block ignore-vars="true" lang="text">
                 <![CDATA[
                 0000000000001140 <main>:
                     1140:       53                      push   %rbx
@@ -172,21 +172,21 @@
                     11a5:       c3                      ret
                 ]]>
             </code-block>
-        </chapter>
     </chapter>
+  </chapter>
 
-    <chapter title="Link-Time Optimization (LTO)">
-        <note>
-            Details differ depending on which operating system you're on, but the important bit is that the linker
-            detects that it has LLVM bitcode in the <code>.o</code> files instead of native object files. When it sees
-            this, it reads
-            all the bitcode files into memory, links them together, then runs the LLVM optimizer over the aggregate.
-        </note>
-        Compiler Optimization의 3번째 케이스같은 상황에서 최적화를 위해 LTO 필요. 아래 보면 다시 <code>mov $0x5a,%esi</code>로 inline된 걸 볼 수 있음.
-        <code-block lang="shell">
+  <chapter title="Link-Time Optimization (LTO)">
+    <note>
+      Details differ depending on which operating system you're on, but the important bit is that the linker
+      detects that it has LLVM bitcode in the <code>.o</code> files instead of native object files. When it sees
+      this, it reads
+      all the bitcode files into memory, links them together, then runs the LLVM optimizer over the aggregate.
+    </note>
+    Compiler Optimization의 3번째 케이스같은 상황에서 최적화를 위해 LTO 필요. 아래 보면 다시 <code>mov $0x5a,%esi</code>로 inline된 걸 볼 수 있음.
+    <code-block lang="shell">
             clang -O3 -flto main1.c calc.c ops.c -o main3_3
         </code-block>
-        <code-block lang="text" ignore-vars="true">
+    <code-block ignore-vars="true" lang="text">
             <![CDATA[
 0000000000001140 <main>:
     1140:       50                      push   %rax
@@ -199,115 +199,115 @@
     115a:       c3                      ret
 ]]>
         </code-block>
-    </chapter>
+  </chapter>
 
-    <chapter title="Profile-Guided Optimization (PGO)">
-        <tldr>PGO에서 주로 하는 optimization은 Full/Partial Inlining, Function Layout, Speed &amp; Size decision, Basic Block
-            Layout, Code Separation, Virtual Call Expansion, Switch Expansion, Data Separation, Loop Unrolling
-        </tldr>
-        <p>
-            Profile-guided optimization (PGO), also known as profile-directed feedback (PDF), and feedback-directed
-            optimization (FDO) is a compiler optimization technique in computer programming that uses profiling to
-            improve program runtime performance. Optimization techniques based on static program analysis of the source
-            code consider code performance improvements without actually executing the program. No dynamic program
-            analysis is performed. Sampling이나
-            <tooltip term="instrumentation">Instrumentation</tooltip>
-            을 통해 profile data 추출 가능.
-        </p>
-        <list>
-            <li>Pros: it can improve important scenarios.</li>
-            <li>Cons: other scenarios may degrade.</li>
-        </list>
-        <img src="$WRS_MODULE$/images/dev/compiler/pgo-1.png" alt="PGO implementation steps"/>
-        <p>
-            <code>Intrinsic은</code> Compiler에 의해 주입되는 built-in function으로 memory call, floating point operation,
-            etc(refer to <code>include/llvm/IR/Intrinsics.td</code>)의 최적화를 위해 사용됨.
-            Compiler가 <code>Intrinsic</code> 을 만나면 이를 미리 최적화해놓은 코드로 대체한다.
-        </p>
-        <table style="header-row">
-            <tr>
-                <td>Type</td>
-                <td>Description</td>
-            </tr>
-            <tr>
-                <td>Inlining</td>
-                <td>
-                    <img src="$WRS_MODULE$/images/dev/compiler/pgo-2.png"
-                         alt="Sequence of calls to function ‘bar’ from ‘goo’, ‘foo’ and ‘bat’" style="inline"
-                         width="300"/>
-                    <img src="$WRS_MODULE$/images/dev/compiler/pgo-3.png"
-                         alt="Impact of PGO inlining, ‘bar’ is inlined into ‘bat’ and ‘baz’ is inlined into ‘bar’."
-                         style="inline" width="300"/>
-                    <p>
-                        호출이 많아 코드 크기를 늘리더라도 함수 호출 오버헤드를 줄이기 위한 최적화. 일반적으로 다른 최적화들에 앞서 우선적으로 진행됨.
-                        위 예시에서는 빈도에 따라 bat-bar 경로와 goo-bar-baz의 bar-baz, foo-bar-baz의 bar-baz가 최적화 되었다.
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td>Basic Block Layout</td>
-                <td>
-                    <img src="$WRS_MODULE$/images/dev/compiler/pgo-4.png"
-                         alt="Optimized layout for a group of basic blocks is performed such that most frequent paths fall through"/>
-                    <p>
-                        자주 접근하는 경로로 더 먼저 접근하도록 블록을 재정렬한다.
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td>Live and Dead Code Separation</td>
-                <td>
-                    <img src="$WRS_MODULE$/images/dev/compiler/pgo-5.png" alt="Block 'C' is a scenario dead function"/>
-                    <p>
-                        code hit(counter)가 안되는 부문은 Dead section으로 보내고 profile data에 포함시키지 않는다.
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td>Function Layout</td>
-                <td>
-                    <img src="$WRS_MODULE$/images/dev/compiler/pgo-6.png" alt="Function Layout"/>
-                    <p>
-                        앞에서 진행된 inlining, code separation 결과를 바탕으로 Function Layout 데이터를 생성.
-                        기본적인 전략은 높은 빈도로 부르는 강하게 결합된 애들은 page locality를 달성하기 위해 같이 모아놓는다.
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td>Switch Expansion</td>
-                <td>
-                    <img src="$WRS_MODULE$/images/dev/compiler/pgo-7.png" alt="Switch Expansion"/>
-                    <p>
-                        training data기반의 optimization. 위 예시를 보면 대부분이 입력이 10으로 들어온다는 것을 training data를 통해 인지하고 10인 경우
-                        switch-case 거치지 않고 바로 jump하도록 optimization.
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td>Virtual Call Expansion</td>
-                <td>Switch Expansion과 마찬가지로 function pointer 등으로 간접적으로 호출하는 어떤 함수가 특정 함수로 자주 불릴 때 direct call로 대체하거나 빈도가
-                    매우 높은 경우 Inlining까지 가능.
-                </td>
-            </tr>
-        </table>
-    </chapter>
+  <chapter title="Profile-Guided Optimization (PGO)">
+    <tldr>PGO에서 주로 하는 optimization은 Full/Partial Inlining, Function Layout, Speed &amp; Size decision, Basic Block
+      Layout, Code Separation, Virtual Call Expansion, Switch Expansion, Data Separation, Loop Unrolling
+    </tldr>
+    <p>
+      Profile-guided optimization (PGO), also known as profile-directed feedback (PDF), and feedback-directed
+      optimization (FDO) is a compiler optimization technique in computer programming that uses profiling to
+      improve program runtime performance. Optimization techniques based on static program analysis of the source
+      code consider code performance improvements without actually executing the program. No dynamic program
+      analysis is performed. Sampling이나
+      <tooltip term="instrumentation">Instrumentation</tooltip>
+      을 통해 profile data 추출 가능.
+    </p>
+    <list>
+      <li>Pros: it can improve important scenarios.</li>
+      <li>Cons: other scenarios may degrade.</li>
+    </list>
+    <img alt="PGO implementation steps" src="$WRS_MODULE$/images/dev/compiler/pgo-1.png"/>
+    <p>
+      <code>Intrinsic은</code> Compiler에 의해 주입되는 built-in function으로 memory call, floating point operation,
+      etc(refer to <code>include/llvm/IR/Intrinsics.td</code>)의 최적화를 위해 사용됨.
+      Compiler가 <code>Intrinsic</code> 을 만나면 이를 미리 최적화해놓은 코드로 대체한다.
+    </p>
+    <table style="header-row">
+      <tr>
+        <td>Type</td>
+        <td>Description</td>
+      </tr>
+      <tr>
+        <td>Inlining</td>
+        <td>
+          <img alt="Sequence of calls to function ‘bar’ from ‘goo’, ‘foo’ and ‘bat’"
+               src="$WRS_MODULE$/images/dev/compiler/pgo-2.png" style="inline"
+               width="300"/>
+          <img alt="Impact of PGO inlining, ‘bar’ is inlined into ‘bat’ and ‘baz’ is inlined into ‘bar’."
+               src="$WRS_MODULE$/images/dev/compiler/pgo-3.png"
+               style="inline" width="300"/>
+          <p>
+            호출이 많아 코드 크기를 늘리더라도 함수 호출 오버헤드를 줄이기 위한 최적화. 일반적으로 다른 최적화들에 앞서 우선적으로 진행됨.
+            위 예시에서는 빈도에 따라 bat-bar 경로와 goo-bar-baz의 bar-baz, foo-bar-baz의 bar-baz가 최적화 되었다.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>Basic Block Layout</td>
+        <td>
+          <img alt="Optimized layout for a group of basic blocks is performed such that most frequent paths fall through"
+               src="$WRS_MODULE$/images/dev/compiler/pgo-4.png"/>
+          <p>
+            자주 접근하는 경로로 더 먼저 접근하도록 블록을 재정렬한다.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>Live and Dead Code Separation</td>
+        <td>
+          <img alt="Block 'C' is a scenario dead function" src="$WRS_MODULE$/images/dev/compiler/pgo-5.png"/>
+          <p>
+            code hit(counter)가 안되는 부문은 Dead section으로 보내고 profile data에 포함시키지 않는다.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>Function Layout</td>
+        <td>
+          <img alt="Function Layout" src="$WRS_MODULE$/images/dev/compiler/pgo-6.png"/>
+          <p>
+            앞에서 진행된 inlining, code separation 결과를 바탕으로 Function Layout 데이터를 생성.
+            기본적인 전략은 높은 빈도로 부르는 강하게 결합된 애들은 page locality를 달성하기 위해 같이 모아놓는다.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>Switch Expansion</td>
+        <td>
+          <img alt="Switch Expansion" src="$WRS_MODULE$/images/dev/compiler/pgo-7.png"/>
+          <p>
+            training data기반의 optimization. 위 예시를 보면 대부분이 입력이 10으로 들어온다는 것을 training data를 통해 인지하고 10인 경우
+            switch-case 거치지 않고 바로 jump하도록 optimization.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>Virtual Call Expansion</td>
+        <td>Switch Expansion과 마찬가지로 function pointer 등으로 간접적으로 호출하는 어떤 함수가 특정 함수로 자주 불릴 때 direct call로 대체하거나 빈도가
+          매우 높은 경우 Inlining까지 가능.
+        </td>
+      </tr>
+    </table>
+  </chapter>
 
-    <chapter title="Binary Optimization and Layout Tool(BOLT)">
-        <img src="$WRS_MODULE$/images/dev/compiler/bolt-1.png" alt="BOLT's binary rewriting pipeline"/>
+  <chapter title="Binary Optimization and Layout Tool(BOLT)">
+    <img alt="BOLT's binary rewriting pipeline" src="$WRS_MODULE$/images/dev/compiler/bolt-1.png"/>
 
-        <p>
-            PGO처럼 profile data를 통해 optimization을 함. 단, post-link optimizing, 즉, binary에서 optimization을 진행.
-            Profile data의 수집은 binary 실행을 통해 이뤄지기 때문에 PGO처럼 IR 단계에서 사용할 때보다 높은 정확도의 optimization이 가능. 즉, compile 초기 단계에서
-            optimization을 시도할수록 최적화 양 자체는 많더라도 그것의 실제 적중률은 낮을 수 있음. Trade-off가 있으므로 상황에 맞게 적용이 필요.
-            BOLT는 Insturction Translation Lookaside Buffer(ITLB)나 Instruction Cache의 적중률이 낮을 떄 사용하면 효과가 좋음.
-        </p>
-        <img src="$WRS_MODULE$/images/dev/compiler/bolt-2.png" alt="Comparison BOLT and LTO+PGO"/>
-    </chapter>
+    <p>
+      PGO처럼 profile data를 통해 optimization을 함. 단, post-link optimizing, 즉, binary에서 optimization을 진행.
+      Profile data의 수집은 binary 실행을 통해 이뤄지기 때문에 PGO처럼 IR 단계에서 사용할 때보다 높은 정확도의 optimization이 가능. 즉, compile 초기 단계에서
+      optimization을 시도할수록 최적화 양 자체는 많더라도 그것의 실제 적중률은 낮을 수 있음. Trade-off가 있으므로 상황에 맞게 적용이 필요.
+      BOLT는 Insturction Translation Lookaside Buffer(ITLB)나 Instruction Cache의 적중률이 낮을 떄 사용하면 효과가 좋음.
+    </p>
+    <img alt="Comparison BOLT and LTO+PGO" src="$WRS_MODULE$/images/dev/compiler/bolt-2.png"/>
+  </chapter>
 
-    <seealso>
-        <category ref="external">
-            <a href="https://llvm.org/devmtg/2020-09/slides/PGO_Instrumentation.pdf">PGO Instrumentation</a>
-            <a href="https://arxiv.org/pdf/1807.06735.pdf">BOLT: A Practical Binary Optimizer for Data Centers and Beyond</a>
-        </category>
-    </seealso>
+  <seealso>
+    <category ref="external">
+      <a href="https://llvm.org/devmtg/2020-09/slides/PGO_Instrumentation.pdf">PGO Instrumentation</a>
+      <a href="https://arxiv.org/pdf/1807.06735.pdf">BOLT: A Practical Binary Optimizer for Data Centers and Beyond</a>
+    </category>
+  </seealso>
 </topic>

@@ -1,215 +1,215 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
-<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="Interview" id="Interview">
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic id="Interview"
+       title="Interview"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-    <show-structure depth="2"/>
+  <show-structure depth="2"/>
 
-    <tip>
-        <p>
-            Answer based on STAR if it's possible. If not, you should make a conclusion explicitly at least
-        </p>
+  <tip>
+    <p>
+      Answer based on STAR if it's possible. If not, you should make a conclusion explicitly at least
+    </p>
+    <list>
+      <li><b>Situation</b>: explain what situation was it and what purpose did you have at that moment</li>
+      <li><b>Task</b>: explain what problem(crisis) occurred in detail</li>
+      <li><b>Action</b>: explain what I did to resolve the problem</li>
+      <li><b>Result</b>: the result of my action and the lessons I have learned</li>
+    </list>
+  </tip>
+
+  <note>
+    <b>Bar raiser</b>: Hire someone who is significantly ahead of the existing staff in at least one aspect. Hire
+    someone who raise our average.
+  </note>
+
+  <chapter id="screening-interview" title="Screening interview">
+    <list>
+      <li><b>Tell me about yourself / Walk me through your resume (1 min)</b>
         <list>
-            <li><b>Situation</b>: explain what situation was it and what purpose did you have at that moment</li>
-            <li><b>Task</b>: explain what problem(crisis) occurred in detail</li>
-            <li><b>Action</b>: explain what I did to resolve the problem</li>
-            <li><b>Result</b>: the result of my action and the lessons I have learned</li>
+          <li>Explain what you have done at previous companies with specific data</li>
+          <li>Explain what skills you have and what you can (tech stack)</li>
+          <li>Past - Present - Future: what you have done and what you want to do in the future</li>
         </list>
-    </tip>
-
-    <note>
-        <b>Bar raiser</b>: Hire someone who is significantly ahead of the existing staff in at least one aspect. Hire
-        someone who raise our average.
-    </note>
-
-    <chapter title="Screening interview" id="screening-interview">
+      </li>
+      <li><b>Why are you leaving your current job?</b>
         <list>
-            <li><b>Tell me about yourself / Walk me through your resume (1 min)</b>
-                <list>
-                    <li>Explain what you have done at previous companies with specific data</li>
-                    <li>Explain what skills you have and what you can (tech stack)</li>
-                    <li>Past - Present - Future: what you have done and what you want to do in the future</li>
-                </list>
-            </li>
-            <li><b>Why are you leaving your current job?</b>
-                <list>
-                    <li>Answer in a positive tone and as briefly as possible without lying.</li>
-                </list>
-            </li>
-            <li><b>Why our company? / Why are you applying? / Why do you want to work for us?</b>
-                <list>
-                    <li>Research about the company's missions, products, trends</li>
-                    <li>Claim - Evidence - Example: I would like to work for ``. The first reason is...</li>
-                </list>
-            </li>
-            <li><b>What do you know about this role?</b>
-                <list>
-                    <li>To determine how well the interviewee is prepared</li>
-                    <li>Try to match your experiences with JD</li>
-                </list>
-            </li>
-            <li><b>What is your favorite product from the company, and how would you improve it?</b></li>
-            <li><b>What is your strength and weakness?</b>
-                <list>
-                    <li>They want to know about how well you analyzed yourself</li>
-                    <li>Explain how to overcome the weakness</li>
-                    <li>Let them know your strength(secret weapon)</li>
-                </list>
-            </li>
-            <li><b>Tell me about your accomplishment in your current position, and what was your role? (STAR)</b></li>
-            <li><b>Describe the most challenging work problem you faced in your last job</b></li>
-            <li><b>Where do you see yourself in 5 years? / What are your career goals?</b></li>
-            <li><b>Ask the recruiter for advice on how succeed on the interview</b>
-                <list>
-                    <li>If you don’t mind, can I ask you a question? At this company, what stage of the hiring process
-                        are most applicants struggling with?
-                    </li>
-                </list>
-            </li>
+          <li>Answer in a positive tone and as briefly as possible without lying.</li>
         </list>
+      </li>
+      <li><b>Why our company? / Why are you applying? / Why do you want to work for us?</b>
+        <list>
+          <li>Research about the company's missions, products, trends</li>
+          <li>Claim - Evidence - Example: I would like to work for ``. The first reason is...</li>
+        </list>
+      </li>
+      <li><b>What do you know about this role?</b>
+        <list>
+          <li>To determine how well the interviewee is prepared</li>
+          <li>Try to match your experiences with JD</li>
+        </list>
+      </li>
+      <li><b>What is your favorite product from the company, and how would you improve it?</b></li>
+      <li><b>What is your strength and weakness?</b>
+        <list>
+          <li>They want to know about how well you analyzed yourself</li>
+          <li>Explain how to overcome the weakness</li>
+          <li>Let them know your strength(secret weapon)</li>
+        </list>
+      </li>
+      <li><b>Tell me about your accomplishment in your current position, and what was your role? (STAR)</b></li>
+      <li><b>Describe the most challenging work problem you faced in your last job</b></li>
+      <li><b>Where do you see yourself in 5 years? / What are your career goals?</b></li>
+      <li><b>Ask the recruiter for advice on how succeed on the interview</b>
+        <list>
+          <li>If you don’t mind, can I ask you a question? At this company, what stage of the hiring process
+            are most applicants struggling with?
+          </li>
+        </list>
+      </li>
+    </list>
+  </chapter>
+
+  <chapter id="tech-interview" title="Technical interview">
+    <chapter id="coding-interview" title="Coding interview">
+      <a href="PS-Note.topic">PS Cheatsheet</a>
+      <list type="alpha-lower">
+        <li><p><b>
+          Evaluation items
+        </b></p>
+          <list>
+            <li>Foundation about Computer science - algorithms &amp; data structures</li>
+            <li>Coding quality</li>
+            <li>General problem solving ability</li>
+          </list>
+        </li>
+        <li><p><b>
+          Tips
+        </b></p>
+          <list>
+            <li>Use descriptive variable name</li>
+            <li>Make a function to minimize redundant code</li>
+            <li>Use comments if you need</li>
+            <li>Write a descriptive code</li>
+            <li>Idiomatic coding based on programming language which I use</li>
+            <li>Explain how you would test your code(normal/edge case)</li>
+          </list>
+        </li>
+      </list>
+
+      <procedure title="Procedure" type="steps">
+        <step><b>
+          Introductions:
+        </b> Have a rehearsed 30-60 second introduction regarding your education, work experience, and interests
+          prepared. Pay attention when the interviewer talks about themselves and incorporate their work into
+          your questions later.
+        </step>
+        <step><b>Problem statement:</b>
+          Paraphrase the problem back to the interviewer after they have read it to you.
+          Ask clarifying questions about the input such as the expected input size, edge cases, and invalid
+          inputs.
+          Quickly walk through an example test case to confirm you understand the problem.
+        </step>
+        <step><b>Brainstorming DS &amp; Algo:</b>
+          Always be thinking out loud.
+          Break the problem down: figure out what you need to do, and think about what data structure or
+          algorithm can accomplish it with a good time complexity.
+          Be receptive to any comments or feedback from the interviewer, they are probably trying to hint you
+          towards the correct solution.
+          Once you have an idea, before coding, explain your idea to the interviewer and make sure they
+          understand and agree that it is a reasonable approach.
+        </step>
+        <step><b>Implementation:</b>
+          Explain your decision-making as you implement. When you declare things like sets, explain what the
+          purpose is.
+          Write clean code that conforms to your programming language's conventions.
+          Avoid writing duplicate code - use a helper function or for loop if you are writing similar code
+          multiple times.
+          If you are stuck, don't panic - communicate your concerns with your interviewer.
+          Don't be scared to start with a brute force solution (while acknowledging that it is brute force),
+          then improve it by optimizing the "slow" parts.
+          Keep thinking out loud and talk with your interviewer. It makes it easier for them to give you
+          hints.
+        </step>
+        <step><b>Testing &amp; Debugging:</b>
+          When walking through test cases, keep track of the variables by writing at the bottom of the file,
+          and continuously update them. Condense trivial parts like creating a prefix sum to save time.
+          If there are errors and the environment supports running code, put print statements in your
+          algorithm and walk through a small test case, comparing the expected value of variables and the
+          actual values.
+          Be vocal and keep talking with your interviewer if you run into any problems.
+        </step>
+        <step><b>Explanation &amp; follow-ups:</b>
+          1) Time and space complexity, average and worst case.
+          2) Why did you choose this data structure, algorithm, or logic?
+          3) Do you think the algorithm could be improved in terms of complexity? If they ask you this, then
+          the answer is <b>usually</b> yes, especially if your algorithm is slower than <u>O(n)</u>.
+        </step>
+        <step><b>Outro:</b>
+          Have questions regarding the company prepared.
+          Be interested, smile, and ask follow-up questions to your interviewer's responses.
+        </step>
+      </procedure>
     </chapter>
+  </chapter>
 
-    <chapter title="Technical interview" id="tech-interview">
-        <chapter title="Coding interview" id="coding-interview">
-            <a href="PS-Note.topic">PS Cheatsheet</a>
-            <list type="alpha-lower">
-                <li><p><b>
-                    Evaluation items
-                </b></p>
-                    <list>
-                        <li>Foundation about Computer science - algorithms &amp; data structures</li>
-                        <li>Coding quality</li>
-                        <li>General problem solving ability</li>
-                    </list>
-                </li>
-                <li><p><b>
-                    Tips
-                </b></p>
-                    <list>
-                        <li>Use descriptive variable name</li>
-                        <li>Make a function to minimize redundant code</li>
-                        <li>Use comments if you need</li>
-                        <li>Write a descriptive code</li>
-                        <li>Idiomatic coding based on programming language which I use</li>
-                        <li>Explain how you would test your code(normal/edge case)</li>
-                    </list>
-                </li>
-            </list>
+  <chapter id="behave-interview" title="Behavioral interview">
+    <tip>Prepare a few stories based on the job description</tip>
 
-            <procedure title="Procedure" type="steps">
-                <step><b>
-                    Introductions:
-                </b> Have a rehearsed 30-60 second introduction regarding your education, work experience, and interests
-                    prepared. Pay attention when the interviewer talks about themselves and incorporate their work into
-                    your questions later.
-                </step>
-                <step><b>Problem statement:</b>
-                    Paraphrase the problem back to the interviewer after they have read it to you.
-                    Ask clarifying questions about the input such as the expected input size, edge cases, and invalid
-                    inputs.
-                    Quickly walk through an example test case to confirm you understand the problem.
-                </step>
-                <step><b>Brainstorming DS &amp; Algo:</b>
-                    Always be thinking out loud.
-                    Break the problem down: figure out what you need to do, and think about what data structure or
-                    algorithm can accomplish it with a good time complexity.
-                    Be receptive to any comments or feedback from the interviewer, they are probably trying to hint you
-                    towards the correct solution.
-                    Once you have an idea, before coding, explain your idea to the interviewer and make sure they
-                    understand and agree that it is a reasonable approach.
-                </step>
-                <step><b>Implementation:</b>
-                    Explain your decision-making as you implement. When you declare things like sets, explain what the
-                    purpose is.
-                    Write clean code that conforms to your programming language's conventions.
-                    Avoid writing duplicate code - use a helper function or for loop if you are writing similar code
-                    multiple times.
-                    If you are stuck, don't panic - communicate your concerns with your interviewer.
-                    Don't be scared to start with a brute force solution (while acknowledging that it is brute force),
-                    then improve it by optimizing the "slow" parts.
-                    Keep thinking out loud and talk with your interviewer. It makes it easier for them to give you
-                    hints.
-                </step>
-                <step><b>Testing &amp; Debugging:</b>
-                    When walking through test cases, keep track of the variables by writing at the bottom of the file,
-                    and continuously update them. Condense trivial parts like creating a prefix sum to save time.
-                    If there are errors and the environment supports running code, put print statements in your
-                    algorithm and walk through a small test case, comparing the expected value of variables and the
-                    actual values.
-                    Be vocal and keep talking with your interviewer if you run into any problems.
-                </step>
-                <step><b>Explanation &amp; follow-ups:</b>
-                    1) Time and space complexity, average and worst case.
-                    2) Why did you choose this data structure, algorithm, or logic?
-                    3) Do you think the algorithm could be improved in terms of complexity? If they ask you this, then
-                    the answer is <b>usually</b> yes, especially if your algorithm is slower than <u>O(n)</u>.
-                </step>
-                <step><b>Outro:</b>
-                    Have questions regarding the company prepared.
-                    Be interested, smile, and ask follow-up questions to your interviewer's responses.
-                </step>
-            </procedure>
-        </chapter>
-    </chapter>
-
-    <chapter title="Behavioral interview" id="behave-interview">
-        <tip>Prepare a few stories based on the job description</tip>
-
-        <tabs>
-            <tab title="Teamwork">
-                <list>
-                    <li>Give me an example of a time you had a conflict with a team member. How did you handle it?</li>
-                    <li>Describe a time when you used your leadership skills to motivate your team or colleagues</li>
-                </list>
-            </tab>
-            <tab title="Motivation">
-                <list>
-                    <li>Tell me about a time when you worked under either extremely close supervision or extremely loose
-                        supervision. How did you handle that?
-                    </li>
-                    <li>Tell me about a time <b>took the initiative</b> in your career. What was your motivation for
-                        doing so?
-                    </li>
-                    <li>Share an example of a career goal you had. What steps did you take to achieve it?</li>
-                </list>
-            </tab>
-            <tab title="Adaptability">
-                <list>
-                    <li>Tell me about a time you <b>made a mistake at work</b>. How did you resolve the problem, and
-                        what did you learn from your mistake?
-                    </li>
-                    <li>Describe an occasion when you <b>failed at a task</b>.</li>
-                    <li>Describe a time when you were responsible for a task you didn't receive training on and were
-                        unsure how to complete. How did you handle it?
-                    </li>
-                    <li>Describe <b>your process for solving problems</b>. What steps do you take to resolve important
-                        issues at work?
-                    </li>
-                    <li>Give an example of a time when you ahd to <b>make a difficult decision</b>. How did you handle
-                        it?
-                    </li>
-                </list>
-            </tab>
-            <tab title="Time management">
-                <list>
-                    <li>Describe an occasion when you had to manage your time to complete a task. How did you do it?
-                    </li>
-                    <li>Tell me about a time an unexpected problem derailed your planning. How did you recover?</li>
-                </list>
-            </tab>
-            <tab title="Customer service">
-                <list>
-                    <li>Give me an example of a time when you didn't meet a client's expectation. What happened, and how
-                        did you attempt to rectify the situation?
-                    </li>
-                    <li>Describe a time when you had to interact with a difficult client or customer. What was the
-                        situation, and how did you handle it?
-                    </li>
-                    <li>When you're working with a large number of</li>
-                </list>
-            </tab>
-        </tabs>
-    </chapter>
+    <tabs>
+      <tab title="Teamwork">
+        <list>
+          <li>Give me an example of a time you had a conflict with a team member. How did you handle it?</li>
+          <li>Describe a time when you used your leadership skills to motivate your team or colleagues</li>
+        </list>
+      </tab>
+      <tab title="Motivation">
+        <list>
+          <li>Tell me about a time when you worked under either extremely close supervision or extremely loose
+            supervision. How did you handle that?
+          </li>
+          <li>Tell me about a time <b>took the initiative</b> in your career. What was your motivation for
+            doing so?
+          </li>
+          <li>Share an example of a career goal you had. What steps did you take to achieve it?</li>
+        </list>
+      </tab>
+      <tab title="Adaptability">
+        <list>
+          <li>Tell me about a time you <b>made a mistake at work</b>. How did you resolve the problem, and
+            what did you learn from your mistake?
+          </li>
+          <li>Describe an occasion when you <b>failed at a task</b>.</li>
+          <li>Describe a time when you were responsible for a task you didn't receive training on and were
+            unsure how to complete. How did you handle it?
+          </li>
+          <li>Describe <b>your process for solving problems</b>. What steps do you take to resolve important
+            issues at work?
+          </li>
+          <li>Give an example of a time when you ahd to <b>make a difficult decision</b>. How did you handle
+            it?
+          </li>
+        </list>
+      </tab>
+      <tab title="Time management">
+        <list>
+          <li>Describe an occasion when you had to manage your time to complete a task. How did you do it?
+          </li>
+          <li>Tell me about a time an unexpected problem derailed your planning. How did you recover?</li>
+        </list>
+      </tab>
+      <tab title="Customer service">
+        <list>
+          <li>Give me an example of a time when you didn't meet a client's expectation. What happened, and how
+            did you attempt to rectify the situation?
+          </li>
+          <li>Describe a time when you had to interact with a difficult client or customer. What was the
+            situation, and how did you handle it?
+          </li>
+          <li>When you're working with a large number of</li>
+        </list>
+      </tab>
+    </tabs>
+  </chapter>
 </topic>

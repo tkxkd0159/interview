@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
-<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="Creational Patterns" id="Creational-Patterns">
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic id="Creational-Patterns"
+       title="Creational Patterns"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-    <p>These patterns provide various object creation mechanisms, which increase flexibility and reuse of existing code.</p>
+  <p>These patterns provide various object creation mechanisms, which increase flexibility and reuse of existing code.</p>
 
-<chapter title="Factory Method" id="cp-1"></chapter>
-<chapter title="Abstract Factory" id="cp-2"></chapter>
-<chapter title="Builder" id="cp-3"></chapter>
-<chapter title="Prototype" id="cp-4"></chapter>
-<chapter title="Singleton" id="cp-5"></chapter>
+  <chapter id="cp-1" title="Factory Method"></chapter>
+  <chapter id="cp-2" title="Abstract Factory"></chapter>
+  <chapter id="cp-3" title="Builder"></chapter>
+  <chapter id="cp-4" title="Prototype"></chapter>
+  <chapter id="cp-5" title="Singleton"></chapter>
 </topic>

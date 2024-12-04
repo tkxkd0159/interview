@@ -1,94 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
-<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="DevOps" id="devops-overview">
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic id="devops-overview"
+       title="DevOps"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-    <show-structure for="chapter" depth="2"/>
+  <show-structure depth="2" for="chapter"/>
 
-    <chapter title="Continuous Integration" id="continuous_integration">
-        <img src="$WRS_MODULE$/images/devops/ci1.png" alt="ci1"/>
-        CI is the practice of frequently merging code changes from multiple developers into a shared, central code
-        repository (like Git). Each merge typically triggers an automated build process, which includes:
+  <chapter id="continuous_integration" title="Continuous Integration">
+    <img alt="ci1" src="$WRS_MODULE$/images/devops/ci1.png"/>
+    CI is the practice of frequently merging code changes from multiple developers into a shared, central code
+    repository (like Git). Each merge typically triggers an automated build process, which includes:
+    <list>
+      <li>Compilation: Transforming source code into executable code.</li>
+      <li>Unit Testing: Verifying the functionality of individual components or modules.</li>
+      <li>Integration Testing: Ensuring that different parts of the software work together correctly.</li>
+      <li>Other Checks: Potentially additional steps like code quality analysis, security scans, or performance
+        tests.
+      </li>
+    </list>
+
+    <b>Benefits:</b>
+    <list>
+      <li> Early Bug Detection: CI helps identify integration issues and bugs early in the development cycle when
+        they are easier and cheaper to fix.
+      </li>
+      <li> Improved Collaboration: Encourages developers to integrate their work frequently, reducing the risk of
+        long-lived feature branches and painful merge conflicts.
+      </li>
+      <li> Faster Feedback Loop: Automated builds and tests provide rapid feedback to developers, enabling them to
+        iterate more quickly and confidently.
+      </li>
+      <li> Increased Confidence: Frequent, successful builds create a higher degree of confidence in the stability
+        of the codebase. So it also enables refactoring for sustained productivity.
+      </li>
+      <li>
+        Streamlined Releases: CI lays the groundwork for Continuous Delivery (CD), where the software is always
+        in a deployable state.
+      </li>
+    </list>
+
+    <chapter id="rules" title="Rules">
+      <chapter id="build" title="Build">
         <list>
-            <li>Compilation: Transforming source code into executable code.</li>
-            <li>Unit Testing: Verifying the functionality of individual components or modules.</li>
-            <li>Integration Testing: Ensuring that different parts of the software work together correctly.</li>
-            <li>Other Checks: Potentially additional steps like code quality analysis, security scans, or performance
-                tests.
-            </li>
+          <li>Automate the Build</li>
+          <li>Every Push to Mainline Should Trigger a Build</li>
+          <li>Fix Broken Builds Immediately</li>
+          <li>Keep the Build Fast</li>
         </list>
+      </chapter>
 
-        <b>Benefits:</b>
+      <chapter id="test" title="Test Suite">
         <list>
-            <li> Early Bug Detection: CI helps identify integration issues and bugs early in the development cycle when
-                they are easier and cheaper to fix.
-            </li>
-            <li> Improved Collaboration: Encourages developers to integrate their work frequently, reducing the risk of
-                long-lived feature branches and painful merge conflicts.
-            </li>
-            <li> Faster Feedback Loop: Automated builds and tests provide rapid feedback to developers, enabling them to
-                iterate more quickly and confidently.
-            </li>
-            <li> Increased Confidence: Frequent, successful builds create a higher degree of confidence in the stability
-                of the codebase. So it also enables refactoring for sustained productivity.
-            </li>
-            <li>
-                Streamlined Releases: CI lays the groundwork for Continuous Delivery (CD), where the software is always
-                in a deployable state.
-            </li>
+          <li>Self-Testing that are more localized unit tests with slow services replaced by Test Doubles</li>
+          <li>Test in a Clone of the Production Environments which are built by scripts from scratch (E2E)
+          </li>
         </list>
-
-        <chapter title="Rules" id="rules">
-            <chapter title="Build" id="build">
-                <list>
-                    <li>Automate the Build</li>
-                    <li>Every Push to Mainline Should Trigger a Build</li>
-                    <li>Fix Broken Builds Immediately</li>
-                    <li>Keep the Build Fast</li>
-                </list>
-            </chapter>
-
-            <chapter title="Test Suite" id="test">
-                <list>
-                    <li>Self-Testing that are more localized unit tests with slow services replaced by Test Doubles</li>
-                    <li>Test in a Clone of the Production Environments which are built by scripts from scratch (E2E)
-                    </li>
-                </list>
-            </chapter>
-        </chapter>
-
-        <chapter title="Reference" id="reference">
-            <img src="$WRS_MODULE$/images/devops/ci2.png" alt="ci2"/>
-            <img src="$WRS_MODULE$/images/devops/ci3.png" alt="ci3"/>
-            <img src="$WRS_MODULE$/images/devops/ci4.png" alt="ci4"/>
-        </chapter>
+      </chapter>
     </chapter>
 
-    <chapter title="Continuous Deployment" id="continuous_deployment">
-        Automate Deployment, Automate Rollback
-        <chapter title="Strategy" id="strategy">
-            <chapter title="Rolling" id="rolling">
-                구버전에서 신버전으로 점진적 전환. 전환 중 한쪽 버전 인스턴스 감소에 따른 트래픽 분산 필요.
-                <img src="$WRS_MODULE$/images/devops/devops-1.png" alt="rolling" width="768"/>
-            </chapter>
-
-            <chapter title="Blue-Green" id="blue_green">
-                <p>
-                    신버전을 미리 배포해두고 구버전을 신버전으로 한번에 옮기는 전략. 롤백이 쉽고 운영환경 영향없이 한번에 새로운 버전으로 전환이 가능한 장점이 있음. 단, 서버 리소스가 2배로 듬
-                </p>
-                <img src="$WRS_MODULE$/images/devops/devops-2.png" alt="bg1" width="350" style="inline"/>
-                <img src="$WRS_MODULE$/images/devops/devops-3.png" alt="bg2" width="350" style="inline"/>
-            </chapter>
-
-            <chapter title="Canary" id="canary">
-                <p>
-                    특정 유저(혹은 특정 서버)만 업데이트해서 트래픽 모니터링 후 정상이면 아예 전부 바꾸는 전략. 로드밸런서에서 랜덤으로 라우팅을 신버전 서버로 하는 방법도 있다. A/B 테스트
-                    느낌으로 원래 버전과 동시다발적으로 서비스하다가 큰 이상 없으면 바꾸는 방법
-                </p>
-                <img src="$WRS_MODULE$/images/devops/devops-4.png" alt="canary" width="768"/>
-            </chapter>
-        </chapter>
+    <chapter id="reference" title="Reference">
+      <img alt="ci2" src="$WRS_MODULE$/images/devops/ci2.png"/>
+      <img alt="ci3" src="$WRS_MODULE$/images/devops/ci3.png"/>
+      <img alt="ci4" src="$WRS_MODULE$/images/devops/ci4.png"/>
     </chapter>
+  </chapter>
+
+  <chapter id="continuous_deployment" title="Continuous Deployment">
+    Automate Deployment, Automate Rollback
+    <chapter id="strategy" title="Strategy">
+      <chapter id="rolling" title="Rolling">
+        구버전에서 신버전으로 점진적 전환. 전환 중 한쪽 버전 인스턴스 감소에 따른 트래픽 분산 필요.
+        <img alt="rolling" src="$WRS_MODULE$/images/devops/devops-1.png" width="768"/>
+      </chapter>
+
+      <chapter id="blue_green" title="Blue-Green">
+        <p>
+          신버전을 미리 배포해두고 구버전을 신버전으로 한번에 옮기는 전략. 롤백이 쉽고 운영환경 영향없이 한번에 새로운 버전으로 전환이 가능한 장점이 있음. 단, 서버 리소스가 2배로 듬
+        </p>
+        <img alt="bg1" src="$WRS_MODULE$/images/devops/devops-2.png" style="inline" width="350"/>
+        <img alt="bg2" src="$WRS_MODULE$/images/devops/devops-3.png" style="inline" width="350"/>
+      </chapter>
+
+      <chapter id="canary" title="Canary">
+        <p>
+          특정 유저(혹은 특정 서버)만 업데이트해서 트래픽 모니터링 후 정상이면 아예 전부 바꾸는 전략. 로드밸런서에서 랜덤으로 라우팅을 신버전 서버로 하는 방법도 있다. A/B 테스트
+          느낌으로 원래 버전과 동시다발적으로 서비스하다가 큰 이상 없으면 바꾸는 방법
+        </p>
+        <img alt="canary" src="$WRS_MODULE$/images/devops/devops-4.png" width="768"/>
+      </chapter>
+    </chapter>
+  </chapter>
 </topic>

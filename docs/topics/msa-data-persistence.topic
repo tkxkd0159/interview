@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
   SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
-<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="Patterns for Data Persistence" id="msa-data-persistence">
+<topic id="msa-data-persistence"
+       title="Patterns for Data Persistence"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-  <chapter title="Database-per-service" id="database_per_service">
+  <chapter id="database_per_service" title="Database-per-service">
     <p>
       In the shared-database-per-service pattern, the same database is shared by several microservices. Make sure that you avoid hot
       tables (single tables that are shared among multiple microservices). This pattern does not reduce dependencies between development
@@ -13,23 +13,23 @@
       transactions can lock the "Customer" table and this blocks the "Customer" transactions. And, every service has a potential entry point
       to all parts of the database, increasing the risk of accidental or malicious data access beyond the service's domain.
     </p>
-    <chapter title="Shared-database-per-service" id="shared_database_per_service">
+    <chapter id="shared_database_per_service" title="Shared-database-per-service">
 
     </chapter>
   </chapter>
 
-  <chapter title="API Composition" id="api_composition">
+  <chapter id="api_composition" title="API Composition">
 
   </chapter>
 
-  <chapter title="CQRS" id="cqrs">
+  <chapter id="cqrs" title="CQRS">
     <tldr>
       <p>Command Query Responsibility Segregation</p>
       <p>The event sourcing pattern is typically used with the CQRS to decouple read from write workloads</p>
     </tldr>
   </chapter>
 
-  <chapter title="Saga pattern" id="saga_pattern">
+  <chapter id="saga_pattern" title="Saga pattern">
 
   </chapter>
 

@@ -1,72 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
-<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="Kubernetes" id="Kubernetes">
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic id="Kubernetes"
+       title="Kubernetes"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-    <show-structure for="chapter" depth="2"/>
+  <show-structure depth="2" for="chapter"/>
 
-    <chapter title="Architecture" id="architecture">
-        <img src="$WRS_MODULE$/images/devops/k8s-intro.svg" alt="app-env" width="700"/>
-        <p>
-            Kubernetes is a portable, extensible platform for managing containerized workloads and
-            services that facilitate both declarative configuration and automation.
+  <chapter id="architecture" title="Architecture">
+    <img alt="app-env" src="$WRS_MODULE$/images/devops/k8s-intro.svg" width="700"/>
+    <p>
+      Kubernetes is a portable, extensible platform for managing containerized workloads and
+      services that facilitate both declarative configuration and automation.
 
-            Containers are similar to VMs, but they have relaxed isolation properties to share the OS among the
-            applications. Therefore, containers are considered lightweight. Similar to a VM, a container has
-            its own filesystem, share of CPU, memory, process space, and more. As they are decoupled from the underlying
-            infrastructure, they are portable across clouds and OS distributions.
-        </p>
+      Containers are similar to VMs, but they have relaxed isolation properties to share the OS among the
+      applications. Therefore, containers are considered lightweight. Similar to a VM, a container has
+      its own filesystem, share of CPU, memory, process space, and more. As they are decoupled from the underlying
+      infrastructure, they are portable across clouds and OS distributions.
+    </p>
 
-        Kubernetes provides you with:
-        <list>
-            <li><b>Service discovery and load balancing:</b> Kubernetes can expose a container using the DNS name or
-                using their own IP address. If traffic to a container is high, Kubernetes is able to load balance and
-                distribute the network traffic so that the deployment is stable.
-            </li>
-            <li><b>Storage orchestration:</b> Kubernetes allows you to automatically mount a storage system of your
-                choice, such as local storages, public cloud providers, and more.
-            </li>
-            <li><b>Automated rollouts and rollbacks:</b> You can describe the desired state for your deployed containers
-                using Kubernetes, and it can change the actual state to the desired state at a controlled rate.
-            </li>
-            <li><b>Automatic bin packing:</b> You provide Kubernetes with a cluster of nodes that it can use to run
-                containerized tasks. You tell Kubernetes how much CPU and memory (RAM) each container needs. Kubernetes
-                can fit containers onto your nodes to make the best use of your resources.
-            </li>
-            <li><b>Self-healing:</b> Kubernetes restarts containers that fail, replaces containers, kills containers
-                that don't respond to your user-defined health check, and doesn't advertise them to clients until they
-                are ready to serve.
-            </li>
-            <li><b>Secret and configuration management:</b> Kubernetes lets you store and manage sensitive information,
-                such as passwords, OAuth tokens, and SSH keys. You can deploy and update secrets and application
-                configuration without rebuilding your container images, and without exposing secrets in your stack
-                configuration.
-            </li>
-            <li><b>Horizontal scaling:</b> Scale your application up and down with a simple command, with a UI, or
-                automatically based on CPU usage.
-            </li>
-            <li><b>IPv4/IPv6 dual-stack:</b> Allocation of IPv4 and IPv6 addresses to Pods and Services.</li>
-        </list>
+    Kubernetes provides you with:
+    <list>
+      <li><b>Service discovery and load balancing:</b> Kubernetes can expose a container using the DNS name or
+        using their own IP address. If traffic to a container is high, Kubernetes is able to load balance and
+        distribute the network traffic so that the deployment is stable.
+      </li>
+      <li><b>Storage orchestration:</b> Kubernetes allows you to automatically mount a storage system of your
+        choice, such as local storages, public cloud providers, and more.
+      </li>
+      <li><b>Automated rollouts and rollbacks:</b> You can describe the desired state for your deployed containers
+        using Kubernetes, and it can change the actual state to the desired state at a controlled rate.
+      </li>
+      <li><b>Automatic bin packing:</b> You provide Kubernetes with a cluster of nodes that it can use to run
+        containerized tasks. You tell Kubernetes how much CPU and memory (RAM) each container needs. Kubernetes
+        can fit containers onto your nodes to make the best use of your resources.
+      </li>
+      <li><b>Self-healing:</b> Kubernetes restarts containers that fail, replaces containers, kills containers
+        that don't respond to your user-defined health check, and doesn't advertise them to clients until they
+        are ready to serve.
+      </li>
+      <li><b>Secret and configuration management:</b> Kubernetes lets you store and manage sensitive information,
+        such as passwords, OAuth tokens, and SSH keys. You can deploy and update secrets and application
+        configuration without rebuilding your container images, and without exposing secrets in your stack
+        configuration.
+      </li>
+      <li><b>Horizontal scaling:</b> Scale your application up and down with a simple command, with a UI, or
+        automatically based on CPU usage.
+      </li>
+      <li><b>IPv4/IPv6 dual-stack:</b> Allocation of IPv4 and IPv6 addresses to Pods and Services.</li>
+    </list>
 
-        <p>
-            Kubernetes operates at the container level rather than at the hardware level, it provides some generally
-            applicable features common to PaaS offerings, such as deployment, scaling, load balancing, and lets users
-            integrate their logging, monitoring, and alerting solutions. However, Kubernetes is not monolithic, and
-            these default solutions are optional and pluggable. Kubernetes does not provide application-level services,
-            such as middleware (for example, message buses), data-processing frameworks (for example, Spark), databases
-            (for example, MySQL), caches, nor cluster storage systems (for example, Ceph) as built-in services. Such
-            components can run on Kubernetes, and/or can be accessed by applications running on Kubernetes through
-            portable mechanisms, such as the <a href="https://www.openservicebrokerapi.org/">Open Service Broker</a>.
-            It does not dictate logging, monitoring, or alerting solutions. It provides some integrations as proof of
-            concept and mechanisms to collect and export metrics.
-        </p>
+    <p>
+      Kubernetes operates at the container level rather than at the hardware level, it provides some generally
+      applicable features common to PaaS offerings, such as deployment, scaling, load balancing, and lets users
+      integrate their logging, monitoring, and alerting solutions. However, Kubernetes is not monolithic, and
+      these default solutions are optional and pluggable. Kubernetes does not provide application-level services,
+      such as middleware (for example, message buses), data-processing frameworks (for example, Spark), databases
+      (for example, MySQL), caches, nor cluster storage systems (for example, Ceph) as built-in services. Such
+      components can run on Kubernetes, and/or can be accessed by applications running on Kubernetes through
+      portable mechanisms, such as the <a href="https://www.openservicebrokerapi.org/">Open Service Broker</a>.
+      It does not dictate logging, monitoring, or alerting solutions. It provides some integrations as proof of
+      concept and mechanisms to collect and export metrics.
+    </p>
 
-        <chapter title="Control/Data Plane" id="control_data_plane">
-            <a href="https://kubernetes.io/docs/concepts/overview/components/">Kubernetes Components</a>
+    <chapter id="control_data_plane" title="Control/Data Plane">
+      <a href="https://kubernetes.io/docs/concepts/overview/components/">Kubernetes Components</a>
 
-            <code-block lang="text">
+      <code-block lang="text">
                 +----------------------+
                 |      Master Node     |
                 |----------------------|
@@ -87,7 +87,7 @@
                 +----------------------+    +----------------------+
             </code-block>
 
-            <code-block lang="text">
+      <code-block lang="text">
                 +-----------------------+        +-----------------------+
                 |     Cluster 1         |        |     Cluster 2         |
                 |-----------------------|        |-----------------------|
@@ -103,135 +103,141 @@
                 |  (e.g., KubeFed, Istio, etc.)   |
                 +---------------------------------+
             </code-block>
-            <p>
-                <b>The control plane</b> is the "brains" of Kubernetes(a.k.a. master node). It makes decisions about the cluster's state, such as which pods should run on
-                which nodes, how to scale applications, and how to recover from failures. It also exposes the Kubernetes API, which allows users
-                and external systems to interact with the cluster.
-            </p>
+      <p>
+        <b>The control plane</b> is the "brains" of Kubernetes(a.k.a. master node). It makes decisions about the cluster's state, such as
+        which pods should run on
+        which nodes, how to scale applications, and how to recover from failures. It also exposes the Kubernetes API, which allows users
+        and external systems to interact with the cluster.
+      </p>
 
-            <list>
-                <li><b>kube-apiserver</b>: The API server is the front end for the Kubernetes control plane. It handles requests
-                    from users and other
-                    components, validates them, and forwards them to the appropriate controller.
-                </li>
-                <li><b>etcd</b>: A consistent and highly-available key-value store used as Kubernetes' backing store for all
-                    cluster data.
-                </li>
-                <li><b>kube-scheduler</b>: This component watches for newly created pods with no assigned node and selects a node
-                    for them to run on.
-                </li>
-                <li><b>kube-controller-manager</b>: This component runs controller processes that regulate the state of the
-                    cluster.
-                </li>
-                <li><b>cloud-controller-manager</b>: A Kubernetes control plane component that embeds cloud-specific control logic.
-                    The cloud controller manager lets you link your cluster into your cloud provider's API, and separates
-                    out the components that interact with that cloud platform from components that only interact with your
-                    cluster.
-                </li>
-            </list>
+      <list>
+        <li><b>kube-apiserver</b>: The API server is the front end for the Kubernetes control plane. It handles requests
+          from users and other
+          components, validates them, and forwards them to the appropriate controller.
+        </li>
+        <li><b>etcd</b>: A consistent and highly-available key-value store used as Kubernetes' backing store for all
+          cluster data.
+        </li>
+        <li><b>kube-scheduler</b>: This component watches for newly created pods with no assigned node and selects a node
+          for them to run on.
+        </li>
+        <li><b>kube-controller-manager</b>: This component runs controller processes that regulate the state of the
+          cluster.
+        </li>
+        <li><b>cloud-controller-manager</b>: A Kubernetes control plane component that embeds cloud-specific control logic.
+          The cloud controller manager lets you link your cluster into your cloud provider's API, and separates
+          out the components that interact with that cloud platform from components that only interact with your
+          cluster.
+        </li>
+      </list>
 
-            <p>
-                <b>The data plane(Node Components)</b> is the "body" of Kubernetes(a.k.a. worker node). It consists of the nodes where containerized applications run. The data plane is
-                responsible for executing the decisions made by the control plane, such as starting and stopping pods, monitoring their health,
-                and providing networking and storage resources.
-            </p>
+      <p>
+        <b>The data plane(Node Components)</b> is the "body" of Kubernetes(a.k.a. worker node). It consists of the nodes where containerized
+        applications run. The data plane is
+        responsible for executing the decisions made by the control plane, such as starting and stopping pods, monitoring their health,
+        and providing networking and storage resources.
+      </p>
 
-            <list>
-                <li><b>kubelet</b>: An agent that runs on each node in the cluster. It communicates with the control plane and is responsible for
-                    managing the pods running on its node.
-                </li>
-                <li><b>kube-proxy</b>: A network proxy that runs on each node in the cluster. It maintains network rules on nodes, allowing network
-                    communication to your Pods from network sessions inside or outside your cluster.
-                </li>
-                <li><b>Container runtime</b>: The software that is responsible for running containers. Kubernetes supports several container runtimes,
-                    including Docker, containerd, and CRI-O.
-                </li>
-            </list>
+      <list>
+        <li><b>kubelet</b>: An agent that runs on each node in the cluster. It communicates with the control plane and is responsible for
+          managing the pods running on its node.
+        </li>
+        <li><b>kube-proxy</b>: A network proxy that runs on each node in the cluster. It maintains network rules on nodes, allowing network
+          communication to your Pods from network sessions inside or outside your cluster.
+        </li>
+        <li><b>Container runtime</b>: The software that is responsible for running containers. Kubernetes supports several container
+          runtimes,
+          including Docker, containerd, and CRI-O.
+        </li>
+      </list>
 
-            <p>The control plane and data plane work together in a loop:</p>
-            <list>
-                <li>The control plane makes decisions about the desired state of the cluster.</li>
-                <li>The control plane sends instructions to the data plane to implement those decisions.</li>
-                <li>The data plane executes the instructions and reports back to the control plane.</li>
-                <li>The control plane monitors the state of the cluster and makes further decisions as needed.</li>
-            </list>
-            <p>This continuous loop ensures that the cluster remains in the desired state, even in the face of failures or
-                changes in workload.</p>
-        </chapter>
-
-        <chapter title="Controller" id="controller">
-            <p>
-                In Kubernetes, controllers are control loops that watch the state of your cluster through the kube-apiserver,
-                then make or request changes where needed.
-                Each controller tries to move the current cluster state closer to the desired state.
-                In other words, The desired state is expressed by creating/deleting/updating objects in the apiserver,
-                and it's the job of the controllers to ensure that the observed state matches the desired state.
-                A controller tracks at least one Kubernetes resource type. These objects have a spec field that represents the desired state.
-            </p>
-            <p>
-                In contrast with <b>Job</b> controller, some controllers need to make changes to things outside your cluster.
-                Controllers that interact with external state find their desired state from the API server, then communicate directly with an external system to bring the current state closer in line.
-                The important point here is that the controller makes some changes to bring about your desired state, and then reports the current state back to your cluster's API server. Other control loops can observe that reported data and take their own actions.
-            </p>
-            <p>
-                Kubernetes comes with a set of built-in controllers that run inside the <a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/">kube-controller-manager</a>.
-                These built-in controllers provide important core behaviors.
-                Examples of controllers that ship with Kubernetes include:
-            </p>
-            <list>
-                <li>Replication controller: Ensures that the number of replicas defined for a pod matches the number
-                    currently deployed in the
-                    cluster.
-                </li>
-                <li>Namespace controller: Creates the initial resources in a namespace when it is created.</li>
-                <li>ServiceAccounts controller: Creates default ServiceAccounts in new namespaces.</li>
-                <li>Node controller: Responsible for noticing and responding when nodes go down.</li>
-                <li>Job controller: Watches for Job objects that represent one-off tasks, then creates Pods to run those
-                    tasks to completion.
-                </li>
-            </list>
-
-            <p>
-                You can also write your own <b>custom controllers (or operators)</b> to automate tasks specific to your
-                applications. For example, you might have a custom controller that scales a stateful application based
-                on custom metrics not
-                directly available to the built-in Kubernetes Horizontal Pod Autoscaler. In general, a controller uses
-                apiserver to figure out
-                what state the cluster is currently in (a.k.a. observed state) and then makes changes to move the
-                cluster towards the desired
-                state. This process is often referred to as <a
-                    href="https://pkg.go.dev/sigs.k8s.io/controller-runtime/pkg/reconcile#Reconciler">reconciliation</a>,
-                and one run of this loop is a <b>reconciliation loop</b> or <b>reconciliation run</b>.
-            </p>
-        </chapter>
+      <p>The control plane and data plane work together in a loop:</p>
+      <list>
+        <li>The control plane makes decisions about the desired state of the cluster.</li>
+        <li>The control plane sends instructions to the data plane to implement those decisions.</li>
+        <li>The data plane executes the instructions and reports back to the control plane.</li>
+        <li>The control plane monitors the state of the cluster and makes further decisions as needed.</li>
+      </list>
+      <p>This continuous loop ensures that the cluster remains in the desired state, even in the face of failures or
+        changes in workload.</p>
     </chapter>
 
-    <chapter title="Objects" id="objects">
-        <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/">Objects In Kubernetes</a>
+    <chapter id="controller" title="Controller">
+      <p>
+        In Kubernetes, controllers are control loops that watch the state of your cluster through the kube-apiserver,
+        then make or request changes where needed.
+        Each controller tries to move the current cluster state closer to the desired state.
+        In other words, The desired state is expressed by creating/deleting/updating objects in the apiserver,
+        and it's the job of the controllers to ensure that the observed state matches the desired state.
+        A controller tracks at least one Kubernetes resource type. These objects have a spec field that represents the desired state.
+      </p>
+      <p>
+        In contrast with <b>Job</b> controller, some controllers need to make changes to things outside your cluster.
+        Controllers that interact with external state find their desired state from the API server, then communicate directly with an
+        external system to bring the current state closer in line.
+        The important point here is that the controller makes some changes to bring about your desired state, and then reports the current
+        state back to your cluster's API server. Other control loops can observe that reported data and take their own actions.
+      </p>
+      <p>
+        Kubernetes comes with a set of built-in controllers that run inside the <a
+        href="https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/">kube-controller-manager</a>.
+        These built-in controllers provide important core behaviors.
+        Examples of controllers that ship with Kubernetes include:
+      </p>
+      <list>
+        <li>Replication controller: Ensures that the number of replicas defined for a pod matches the number
+          currently deployed in the
+          cluster.
+        </li>
+        <li>Namespace controller: Creates the initial resources in a namespace when it is created.</li>
+        <li>ServiceAccounts controller: Creates default ServiceAccounts in new namespaces.</li>
+        <li>Node controller: Responsible for noticing and responding when nodes go down.</li>
+        <li>Job controller: Watches for Job objects that represent one-off tasks, then creates Pods to run those
+          tasks to completion.
+        </li>
+      </list>
 
-        <chapter title="Label(+Selector)" id="label_selector_">
-            <p>
-                <i>Labels</i> are key/value pairs that are attached to objects, such as pods.
-                Labels are primarily used for identifying and grouping related objects.
-                They are intended to be used for selection and filtering.
-                It's commonly used by Kubernetes components and controllers to select and manage resources.
-                They use label selector to specify sets of other resources, such as pods.
-                Newer resources, such as Job, Deployment, ReplicaSet, and DaemonSet, support set-based requirements as well.
-            </p>
-            <b>Characteristics:</b>
-            <list>
-                <li><b>Selectors:</b> Labels can be queried using label selectors, which makes them suitable for
-                    grouping resources (e.g., for deployments, services, and controllers).
-                </li>
-                <li><b>Indexing:</b> Labels are indexed by the Kubernetes API server, making label-based queries
-                    efficient.
-                </li>
-                <li><b>Immutability:</b> While labels can be changed, they are generally intended to be stable
-                    identifiers for the lifecycle of the object.
-                </li>
-            </list>
+      <p>
+        You can also write your own <b>custom controllers (or operators)</b> to automate tasks specific to your
+        applications. For example, you might have a custom controller that scales a stateful application based
+        on custom metrics not
+        directly available to the built-in Kubernetes Horizontal Pod Autoscaler. In general, a controller uses
+        apiserver to figure out
+        what state the cluster is currently in (a.k.a. observed state) and then makes changes to move the
+        cluster towards the desired
+        state. This process is often referred to as <a
+        href="https://pkg.go.dev/sigs.k8s.io/controller-runtime/pkg/reconcile#Reconciler">reconciliation</a>,
+        and one run of this loop is a <b>reconciliation loop</b> or <b>reconciliation run</b>.
+      </p>
+    </chapter>
+  </chapter>
 
-            <code-block lang="yaml" collapsible="true" collapsed-title="Example YAML">
+  <chapter id="objects" title="Objects">
+    <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/">Objects In Kubernetes</a>
+
+    <chapter id="label_selector_" title="Label(+Selector)">
+      <p>
+        <i>Labels</i> are key/value pairs that are attached to objects, such as pods.
+        Labels are primarily used for identifying and grouping related objects.
+        They are intended to be used for selection and filtering.
+        It's commonly used by Kubernetes components and controllers to select and manage resources.
+        They use label selector to specify sets of other resources, such as pods.
+        Newer resources, such as Job, Deployment, ReplicaSet, and DaemonSet, support set-based requirements as well.
+      </p>
+      <b>Characteristics:</b>
+      <list>
+        <li><b>Selectors:</b> Labels can be queried using label selectors, which makes them suitable for
+          grouping resources (e.g., for deployments, services, and controllers).
+        </li>
+        <li><b>Indexing:</b> Labels are indexed by the Kubernetes API server, making label-based queries
+          efficient.
+        </li>
+        <li><b>Immutability:</b> While labels can be changed, they are generally intended to be stable
+          identifiers for the lifecycle of the object.
+        </li>
+      </list>
+
+      <code-block collapsed-title="Example YAML" collapsible="true" lang="yaml">
 <![CDATA[
 apiVersion: v1
 kind: Pod
@@ -241,11 +247,11 @@ metadata:
     app.kubernetes.io/name: proxy
 spec:
   containers:
-  - name: nginx
-    image: nginx:11.14.2
-    ports:
-      - containerPort: 80
-        name: http-web-svc
+    - name: nginx
+      image: nginx:11.14.2
+      ports:
+        - containerPort: 80
+          name: http-web-svc
 ---
 apiVersion: v1
 kind: Service
@@ -255,12 +261,12 @@ spec:
   selector:
     app.kubernetes.io/name: proxy
   ports:
-  - name: name-of-service-port
-    protocol: TCP
-    port: 80
-    targetPort: http-web-svc
+    - name: name-of-service-port
+      protocol: TCP
+      port: 80
+      targetPort: http-web-svc
 ---
-# The result of matchLabels and matchExpressions are ANDed. 
+# The result of matchLabels and matchExpressions are ANDed.
 # An empty label selector matches all objects.
 apiVersion: apps/v1
 kind: Deployment
@@ -273,8 +279,8 @@ spec:
     matchLabels:
       app: nginx
     matchExpressions:
-      - { key: tier, operator: In, values: [cache] }
-      - { key: environment, operator: NotIn, values: [dev] }
+      - { key: tier, operator: In, values: [ cache ] }
+      - { key: environment, operator: NotIn, values: [ dev ] }
   template:
     metadata:
       labels:
@@ -283,13 +289,13 @@ spec:
         app: nginx
     spec:
       containers:
-      - name: nginx
-        image: nginx:1.14
+        - name: nginx
+          image: nginx:1.14
 ]]>
             </code-block>
 
-            <p>The result of <code>kubectl get pods -Lapp -Ltier -Lrole</code></p>
-            <code-block lang="text">
+      <p>The result of <code>kubectl get pods -Lapp -Ltier -Lrole</code></p>
+      <code-block lang="text">
 <![CDATA[
 NAME                           APP         TIER       ROLE
 guestbook-fe-4nlpb             guestbook   frontend   <none>
@@ -303,73 +309,76 @@ my-nginx-o0ef1                 nginx       <none>     <none>
 ]]>
             </code-block>
 
-            <p>The result of <code>kubectl get pods -lapp=guestbook,role=replica</code></p>
-            <code-block lang="text">
+      <p>The result of <code>kubectl get pods -lapp=guestbook,role=replica</code></p>
+      <code-block lang="text">
 <![CDATA[
 NAME
 guestbook-redis-replica-2q2yf
 guestbook-redis-replica-qgazl
 ]]>
             </code-block>
-        </chapter>
-
-        <chapter title="Annotation" id="annotation">
-            <code>ObjectMeta.annotations</code> (<code>map[string]string</code>)
-            <p>
-                <i>Annotations</i> are used to store arbitrary metadata not intended to be used for selection or
-                filtering. They are often used to attach non-identifying information to objects, such as build
-                information, audit trails, or configuration details.
-            </p>
-            <b>Characteristics:</b>
-            <list>
-                <li><b>Selectors:</b> Annotations cannot be used in label selectors. They are not intended for grouping
-                    or selecting objects.
-                </li>
-                <li><b>Indexing:</b> Annotations are not indexed by the Kubernetes API server, making annotation-based
-                    queries less efficient.
-                </li>
-                <li><b>Flexibility:</b> Annotations can store larger amounts of data compared to labels and can be
-                    changed more freely.
-                </li>
-            </list>
-        </chapter>
-
-        <chapter title="Namespace" id="namespace">
-            <img src="$WRS_MODULE$/images/devops/k8s-namespace.png" alt="k8s-namespace" width="480"/>
-            <p>
-                <i>Namespaces</i> provide a mechanism for isolating groups of resources within a single cluster.
-                Names of resources need to be unique within a namespace, but not across namespaces.
-                Namespace-based scoping is applicable only for namespaced objects
-                (e.g., Deployments, Services, etc.) and not for cluster-wide objects
-                (e.g., StorageClass, Nodes, PersistentVolumes, etc.).
-            </p>
-            <p>
-                Namespaces are intended for use in environments with many users spread across multiple teams, or projects.
-                For clusters with a few to tens of users, you should not need to create or think about namespaces at all.
-                Namespaces are a way to divide cluster resources between multiple users (via <a href="https://kubernetes.io/docs/concepts/policy/resource-quotas/">resource quota</a>).
-                Kubernetes starts with four <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/#initial-namespaces">initial namespaces</a>.
-            </p>
-        </chapter>
-
     </chapter>
 
-
-    <chapter title="Networking" id="networking">
-        
+    <chapter id="annotation" title="Annotation">
+      <code>ObjectMeta.annotations</code> (<code>map[string]string</code>)
+      <p>
+        <i>Annotations</i> are used to store arbitrary metadata not intended to be used for selection or
+        filtering. They are often used to attach non-identifying information to objects, such as build
+        information, audit trails, or configuration details.
+      </p>
+      <b>Characteristics:</b>
+      <list>
+        <li><b>Selectors:</b> Annotations cannot be used in label selectors. They are not intended for grouping
+          or selecting objects.
+        </li>
+        <li><b>Indexing:</b> Annotations are not indexed by the Kubernetes API server, making annotation-based
+          queries less efficient.
+        </li>
+        <li><b>Flexibility:</b> Annotations can store larger amounts of data compared to labels and can be
+          changed more freely.
+        </li>
+      </list>
     </chapter>
-    <chapter title="Storage" id="storage">
-        
+
+    <chapter id="namespace" title="Namespace">
+      <img alt="k8s-namespace" src="$WRS_MODULE$/images/devops/k8s-namespace.png" width="480"/>
+      <p>
+        <i>Namespaces</i> provide a mechanism for isolating groups of resources within a single cluster.
+        Names of resources need to be unique within a namespace, but not across namespaces.
+        Namespace-based scoping is applicable only for namespaced objects
+        (e.g., Deployments, Services, etc.) and not for cluster-wide objects
+        (e.g., StorageClass, Nodes, PersistentVolumes, etc.).
+      </p>
+      <p>
+        Namespaces are intended for use in environments with many users spread across multiple teams, or projects.
+        For clusters with a few to tens of users, you should not need to create or think about namespaces at all.
+        Namespaces are a way to divide cluster resources between multiple users (via <a
+        href="https://kubernetes.io/docs/concepts/policy/resource-quotas/">resource quota</a>).
+        Kubernetes starts with four <a
+        href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/#initial-namespaces">initial namespaces</a>.
+      </p>
     </chapter>
 
-    <chapter title="Configuration" id="configuration">
-        
-    </chapter>
+  </chapter>
 
-    <seealso>
-        <category ref="external">
-            <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md">k8s API Conventions</a>
-            <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/">k8s API Reference</a>
-            <a href="https://kubernetes.io/docs/concepts/">k8s Concepts</a>
-        </category>
-    </seealso>
+
+  <chapter id="networking" title="Networking">
+
+  </chapter>
+  <chapter id="storage" title="Storage">
+
+  </chapter>
+
+  <chapter id="configuration" title="Configuration">
+
+  </chapter>
+
+  <seealso>
+    <category ref="external">
+      <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md">k8s API
+        Conventions</a>
+      <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/">k8s API Reference</a>
+      <a href="https://kubernetes.io/docs/concepts/">k8s Concepts</a>
+    </category>
+  </seealso>
 </topic>

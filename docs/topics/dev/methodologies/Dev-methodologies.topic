@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
-<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="Dev Methodologies" id="Dev-methodologies">
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic id="Dev-methodologies"
+       title="Dev Methodologies"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-    <show-structure depth="3"/>
+  <show-structure depth="3"/>
 
 
-    <chapter title="Object-oriented Programming(OOP)">
-        <chapter title="Features">
-            <deflist>
-                <def title="Abstraction">Separate interface and implementation. In other words, it hides complicate internal logic and client implement their logic based on interface.
-                </def>
-                <def title="Encapsulation">Do not allow to access properties directly. Combining the properties of an object with the behavior of using them(private property, setter, getter)
-                    <code-block lang="java" collapsible="true">
+  <chapter title="Object-oriented Programming(OOP)">
+    <chapter title="Features">
+      <deflist>
+        <def title="Abstraction">Separate interface and implementation. In other words, it hides complicate internal logic and client
+          implement their logic based on interface.
+        </def>
+        <def title="Encapsulation">Do not allow to access properties directly. Combining the properties of an object with the behavior of
+          using them(private property, setter, getter)
+          <code-block collapsible="true" lang="java">
                         class Citizen:
                         drinking_age = 19
 
@@ -36,13 +38,13 @@
                         print(young.__str__())
                         print(young.__authenticate("87654321")) Error
                     </code-block>
-                </def>
-                <def title="Inheritance">
-                    <list>
-                        <li><b>Method overloading:</b> the method name are same but parameters are different.</li>
-                        <li><b>Method overriding:</b> Same method name, parameters but different logic</li>
-                    </list>
-                    <code-block lang="java" collapsible="true">
+        </def>
+        <def title="Inheritance">
+          <list>
+            <li><b>Method overloading:</b> the method name are same but parameters are different.</li>
+            <li><b>Method overriding:</b> Same method name, parameters but different logic</li>
+          </list>
+          <code-block collapsible="true" lang="java">
                         class Parent {
 
                             void display() { System.out.println("Parent class: display()"); }
@@ -62,10 +64,14 @@
                             }
                         }
                     </code-block>
-                </def>
-                <def title="Polymorphism">The property of allowing each element of a programming language (constants, variables, objects, methods, etc.) to belong to various data types. In general, in OOP, polymorphism refers to the fact that one object can have multiple data types.
-                    Below is an example of the method. The internal logic of the <code>StringValue()</code> varies depending on the data type to which it is connected. In other words, it belongs to various data types. The monomorphism approach requires implementing a separately named function for each transformation.
-                    <code-block>
+        </def>
+        <def title="Polymorphism">The property of allowing each element of a programming language (constants, variables, objects, methods,
+          etc.) to belong to various data types. In general, in OOP, polymorphism refers to the fact that one object can have multiple data
+          types.
+          Below is an example of the method. The internal logic of the <code>StringValue()</code> varies depending on the data type to which
+          it is connected. In other words, it belongs to various data types. The monomorphism approach requires implementing a separately
+          named function for each transformation.
+          <code-block>
                         // monomorphism
                         string = StringFromNumber(number);
                         string = StringFromDate(date);
@@ -74,14 +80,15 @@
                         string = number.StringValue();
                         string = date.StringValue();
                     </code-block>
-                </def>
-            </deflist>
-        </chapter>
+        </def>
+      </deflist>
+    </chapter>
 
-        <chapter title="SOLID design">
-            <deflist>
-                <def title="Single Responsibility Principle">단일 책임 원칙은 같이 수정해야될 것들은 묶고, 따로 수정해야될 것들은 분리하는 것. 즉, 모든 클래스는 단 한가지 책임만을 가지고 클래스 안에 정의되어 있는 모든 기능은 이 하나의 책임을 수행하는 데 집중해야 함.
-                <code-block lang="python" collapsible="true">
+    <chapter title="SOLID design">
+      <deflist>
+        <def title="Single Responsibility Principle">단일 책임 원칙은 같이 수정해야될 것들은 묶고, 따로 수정해야될 것들은 분리하는 것. 즉, 모든 클래스는 단 한가지 책임만을 가지고 클래스 안에 정의되어
+          있는 모든 기능은 이 하나의 책임을 수행하는 데 집중해야 함.
+          <code-block collapsible="true" lang="python">
                     class Ship:
                         def __init__(self, fuel, fuel_per_hour, num_crew):
                             self.fuel_tank = FuelTank(fuel)
@@ -128,10 +135,11 @@
                         def report_crew(self):
                             print("There are currently {} crew members".format(self.num_crew))
                 </code-block>
-                </def>
-                <def title="Open-Closed Principle">
-                    클래스는 확장에는 열려있어야 되고 수정에는 닫혀있어야 함. 즉, 새로운 코드를 작성해서 기존 기능을 확장할 수는 있지만 기존 한번 작성한 코드는 바꿀 필요는 없는 상황을 만들어야 함. 아래 예시를 보면 <code>Triangle</code> 을 새롭게 구현할 때 기존의 <code>Shape</code>, <code>Circle</code>, <code>Rectangle</code> 의 코드를 변경할 필요 없음.
-                    <code-block lang="java" collapsible="true">
+        </def>
+        <def title="Open-Closed Principle">
+          클래스는 확장에는 열려있어야 되고 수정에는 닫혀있어야 함. 즉, 새로운 코드를 작성해서 기존 기능을 확장할 수는 있지만 기존 한번 작성한 코드는 바꿀 필요는 없는 상황을 만들어야 함. 아래 예시를 보면
+          <code>Triangle</code> 을 새롭게 구현할 때 기존의 <code>Shape</code>, <code>Circle</code>, <code>Rectangle</code> 의 코드를 변경할 필요 없음.
+          <code-block collapsible="true" lang="java">
                         // Base class
                         abstract class Shape {
                             abstract double calculateArea();
@@ -185,15 +193,16 @@
 
 
                     </code-block>
-                </def>
-                <def title="Liskov Substitution Principle"><p>
-                    부모 클래스의 인스턴스를 사용하는 위치에 자식 클래스의 인스턴스를 대신 사용했을 때 코드가 원래 의도대로 작동해야 한다. 새로 정의하는 메소드가 아닌 상속된 메소드는 왠만하면 그대로 쓸 수 있게 설계돼야 함 (새로운 정의가 아닌 확장의 개념으로 상속).
-                    아래는 리스코프 치환 원칙을 위반한 2가지 예시
-                </p>
-                    <list>
-                        <li>
-                            자식 클래스가 부모 클래스의 변수의 타입을 바꾸거나 메소드의 파라미터 또는 타입/갯수를 바꾸는 경우
-                            <code-block lang="python" collapsible="true">
+        </def>
+        <def title="Liskov Substitution Principle"><p>
+          부모 클래스의 인스턴스를 사용하는 위치에 자식 클래스의 인스턴스를 대신 사용했을 때 코드가 원래 의도대로 작동해야 한다. 새로 정의하는 메소드가 아닌 상속된 메소드는 왠만하면 그대로 쓸 수 있게 설계돼야 함 (새로운 정의가 아닌
+          확장의 개념으로 상속).
+          아래는 리스코프 치환 원칙을 위반한 2가지 예시
+        </p>
+          <list>
+            <li>
+              자식 클래스가 부모 클래스의 변수의 타입을 바꾸거나 메소드의 파라미터 또는 타입/갯수를 바꾸는 경우
+              <code-block collapsible="true" lang="python">
                                 class Employee:
                                     company_name = "Macdonalds"
                                     raise_percentage = 1.03
@@ -228,10 +237,10 @@
                                     def wage(self):
                                         return "시급 정보를 알려줄 수 없습니다"
                             </code-block>
-                        </li>
-                        <li>
-                            자식 클래스가 부모 클래스의 의도와 다르게 메소드를 오버라이딩 하는 경우
-                            <code-block lang="python" collapsible="true">
+            </li>
+            <li>
+              자식 클래스가 부모 클래스의 의도와 다르게 메소드를 오버라이딩 하는 경우
+              <code-block collapsible="true" lang="python">
                                 class Rectangle:
 
                                     def __init__(self, width, height):
@@ -279,17 +288,18 @@
                                         self._width = value if value > 0 else 1
                                         self._height = value if value > 0 else 1
                             </code-block>
-                        </li>
-                    </list>
-                </def>
-                <def title="Interface Segregation Principle"><p>
-                    인터페이스는 추상클래스와 비슷하지만 다름. 추상 클래스 안에는 일반 메소드도 선언할 수 있고 이건 자식클래스에서 무조건 구현하지 않고 그대로 상속받아도 되지만 인터페이스는 꼭 지켜야하는 규약이라 무조건 해당 규칙대로 구현해야 함.
-                    인터페이스 분리 원칙은 클래스가 사용하지 않을 메소드에 의존할 것을 강요하면 안 되는것. 따라서 인터페이스는 기능이나 역할별로 쪼갤 수 있으면 쪼개는 게 좋음
-                </p>
-                    <list>
-                        <li>
-                            아래에서 메모는 <code>send</code> 기능이 필요없는데도 불구하고 추상메소드(인터페이스)에 의해 구현을 강요당함. 따라서 이런 상황이 발생하지 않게 인터페이스를 더 잘게 쪼개야 함.
-                            /<code-block lang="python" collapsible="true">
+            </li>
+          </list>
+        </def>
+        <def title="Interface Segregation Principle"><p>
+          인터페이스는 추상클래스와 비슷하지만 다름. 추상 클래스 안에는 일반 메소드도 선언할 수 있고 이건 자식클래스에서 무조건 구현하지 않고 그대로 상속받아도 되지만 인터페이스는 꼭 지켜야하는 규약이라 무조건 해당 규칙대로 구현해야 함.
+          인터페이스 분리 원칙은 클래스가 사용하지 않을 메소드에 의존할 것을 강요하면 안 되는것. 따라서 인터페이스는 기능이나 역할별로 쪼갤 수 있으면 쪼개는 게 좋음
+        </p>
+          <list>
+            <li>
+              아래에서 메모는 <code>send</code> 기능이 필요없는데도 불구하고 추상메소드(인터페이스)에 의해 구현을 강요당함. 따라서 이런 상황이 발생하지 않게 인터페이스를 더 잘게 쪼개야 함.
+              /
+              <code-block collapsible="true" lang="python">
                             from abc import ABC, abstractmethod
 
 
@@ -351,10 +361,10 @@
                                     for text in self.texts:
                                     print(text.content)
                             </code-block>
-                        </li>
-                        <li>
-                            아래는 기능에 따라 인터페이스를 분리한 예시
-                            <code-block lang="python" collapsible="true">
+            </li>
+            <li>
+              아래는 기능에 따라 인터페이스를 분리한 예시
+              <code-block collapsible="true" lang="python">
                                 from abc import ABC, abstractmethod
 
                                 class IPrinter(ABC):
@@ -410,20 +420,21 @@
                                 print(SamsungPrinter.mro())
                                 print(LGPrinter.mro())
                             </code-block>
-                        </li>
-                    </list>
-                </def>
-                <def title="Dependency Inversion Principle">
-                    <p> 의존 관계 역전 원칙은 상위 모듈이 하위 모듈을 사용할 때 직접 인스턴스를 가져다가 쓰지 말라는 뜻이다. 왜냐하면 인스턴스를 바로 가져다가 쓴다는 말은
-                        하위 모듈의 구체적인 내용에 상위 모듈이 의존하게 되어 하위 모듈에 변화가 있을 때마다 상위 모듈의 코드를 바꿔줘야 하기 때문이다.
-                        이에 대한 해결책은 추상 클래스(or 인터페이스)로 상위 모듈과 하위 모듈 사이에 추상화 레이어를 만드는 것. 이렇게 할 경우 상위 모듈에는 추상 클래스의 자식 클래스의
-                        인스턴스를 사용한다는 가정 하에 코드를 작성해두면 되고 하위 모듈은 추상 클래스의 추상 메소드(또는 인터페이스)들을 구현만 하면 된다.
-                        의존 관계 역전 원칙은 개방-폐쇄 원칙을 지키기 위한 하나의 방법으로도 볼 수 있다. 이 원칙은 <code>Dependency injection</code> 이랑 묶여서 잘 사용됨(유지보수와 테스트 쉬워짐)</p>
+            </li>
+          </list>
+        </def>
+        <def title="Dependency Inversion Principle">
+          <p> 의존 관계 역전 원칙은 상위 모듈이 하위 모듈을 사용할 때 직접 인스턴스를 가져다가 쓰지 말라는 뜻이다. 왜냐하면 인스턴스를 바로 가져다가 쓴다는 말은
+            하위 모듈의 구체적인 내용에 상위 모듈이 의존하게 되어 하위 모듈에 변화가 있을 때마다 상위 모듈의 코드를 바꿔줘야 하기 때문이다.
+            이에 대한 해결책은 추상 클래스(or 인터페이스)로 상위 모듈과 하위 모듈 사이에 추상화 레이어를 만드는 것. 이렇게 할 경우 상위 모듈에는 추상 클래스의 자식 클래스의
+            인스턴스를 사용한다는 가정 하에 코드를 작성해두면 되고 하위 모듈은 추상 클래스의 추상 메소드(또는 인터페이스)들을 구현만 하면 된다.
+            의존 관계 역전 원칙은 개방-폐쇄 원칙을 지키기 위한 하나의 방법으로도 볼 수 있다. 이 원칙은 <code>Dependency injection</code> 이랑 묶여서 잘 사용됨(유지보수와 테스트 쉬워짐)</p>
 
-                    <p>
-                        아래는 구현 예시. <code>SwitchController</code> 가 직접 <code>LampSwitch</code> 를 파라미터로 사용하는 것이 아니라 <code>Switchable</code> 이라는 인터페이스를 매개 삼아서 사용함. 따라서 이후 인터페이스대로 구현된 <code>BulbSwitch</code> 도 상위 모듈 변경없이 바로 사용 가능.
-                    </p>
-                    <code-block lang="java" collapsible="true">
+          <p>
+            아래는 구현 예시. <code>SwitchController</code> 가 직접 <code>LampSwitch</code> 를 파라미터로 사용하는 것이 아니라 <code>Switchable</code> 이라는 인터페이스를 매개
+            삼아서 사용함. 따라서 이후 인터페이스대로 구현된 <code>BulbSwitch</code> 도 상위 모듈 변경없이 바로 사용 가능.
+          </p>
+          <code-block collapsible="true" lang="java">
                         // Low-level module
                         class LampSwitch {
                             void turnOn() {
@@ -473,11 +484,11 @@
                             }
                         }
                     </code-block>
-                </def>
-            </deflist>
-        </chapter>
+        </def>
+      </deflist>
     </chapter>
-    <chapter title="Aspect Oriented Programming(AOP)">
+  </chapter>
+  <chapter title="Aspect Oriented Programming(AOP)">
 
-    </chapter>
+  </chapter>
 </topic>

@@ -1,156 +1,184 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
-<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="Kubernetes API" id="k8s-API">
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic id="k8s-API"
+       title="Kubernetes API"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-    <show-structure depth="2" for="chapter"/>
+  <show-structure depth="2" for="chapter"/>
 
-    <p>The Kubernetes API is a resource-based (RESTful) programmatic interface provided via HTTP.
-        It supports retrieving, creating, updating, and deleting primary resources via the standard HTTP verbs (POST, PUT, PATCH, DELETE, GET).
-        For some resources, the API includes additional subresources that allow fine-grained authorization (such as separate views for Pod details and log retrievals),
-        and can accept and serve those resources in different representations for convenience or efficiency.</p>
+  <p>The Kubernetes API is a resource-based (RESTful) programmatic interface provided via HTTP.
+    It supports retrieving, creating, updating, and deleting primary resources via the standard HTTP verbs (POST, PUT, PATCH, DELETE, GET).
+    For some resources, the API includes additional subresources that allow fine-grained authorization (such as separate views for Pod
+    details and log retrievals),
+    and can accept and serve those resources in different representations for convenience or efficiency.</p>
+  <p>
+    Kubernetes supports efficient change notifications on resources via <i>watches</i>.
+    Kubernetes also provides consistent list operations so that API clients can effectively cache, track, and synchronize the state of
+    resources.
+  </p>
+  <procedure id="api_resource_categories" title="API Resource Categories">
+    <step><b>Workloads</b> are objects you use to manage and run your containers on the cluster.</step>
+    <step><b>Discovery &amp; LB</b> resources are objects you use to "stitch" your workloads together into an externally accessible,
+      load-balanced Service.
+    </step>
+    <step><b>Config &amp; Storage</b> resources are objects you use to inject initialization data into your applications, and to persist
+      data that is external to your container.
+    </step>
+    <step><b>Cluster</b> resources objects define how the cluster itself is configured; these are typically used only by cluster operators.
+    </step>
+    <step><b>Metadata</b> resources are objects you use to configure the behavior of other resources within the cluster, such as <code>HorizontalPodAutoscaler</code>
+      for scaling workloads.
+    </step>
+  </procedure>
+
+  <note>core resources use <code>/api</code> instead of <code>/apis</code> and omit the <b>GROUP</b> path segment.</note>
+  <tabs>
+    <tab id="csr" title="Cluster-scoped Resources">
+      <list>
+        <li><code>GET /apis/GROUP/VERSION/RESOURCETYPE</code> - return the collection of resources of the resource type</li>
+        <li><code>GET /apis/GROUP/VERSION/RESOURCETYPE/NAME</code> - return the resource with NAME under the resource type</li>
+        <li><code>GET /apis/GROUP/VERSION/RESOURCETYPE/NAME/SUBRESOURCE</code></li>
+      </list>
+    </tab>
+    <tab id="nsr" title="Namespace-scoped Resources">
+      <list>
+        <li><code>GET /apis/GROUP/VERSION/RESOURCETYPE</code> - return the collection of all instances of the resource type across all
+          namespaces
+        </li>
+        <li><code>GET /apis/GROUP/VERSION/namespaces/NAMESPACE/RESOURCETYPE</code> - return collection of all instances of the resource type
+          in NAMESPACE
+        </li>
+        <li><code>GET /apis/GROUP/VERSION/namespaces/NAMESPACE/RESOURCETYPE/NAME</code> - return the instance of the resource type with NAME
+          in NAMESPACE
+        </li>
+        <li><code>GET /apis/GROUP/VERSION/namespaces/NAMESPACE/RESOURCETYPE/NAME/SUBRESOURCE</code></li>
+      </list>
+    </tab>
+  </tabs>
+
+  <chapter id="detection_of_changes" title="Detection of Changes">
     <p>
-        Kubernetes supports efficient change notifications on resources via <i>watches</i>.
-        Kubernetes also provides consistent list operations so that API clients can effectively cache, track, and synchronize the state of resources.
+      The Kubernetes API allows clients to make an initial request for an object or a collection,
+      and then to track changes since that initial request: <code>watch</code>.
     </p>
-    <procedure title="API Resource Categories" id="api_resource_categories">
-        <step><b>Workloads</b> are objects you use to manage and run your containers on the cluster.</step>
-        <step><b>Discovery &amp; LB</b> resources are objects you use to "stitch" your workloads together into an externally accessible, load-balanced Service.</step>
-        <step><b>Config &amp; Storage</b> resources are objects you use to inject initialization data into your applications, and to persist data that is external to your container.</step>
-        <step><b>Cluster</b> resources objects define how the cluster itself is configured; these are typically used only by cluster operators.</step>
-        <step><b>Metadata</b> resources are objects you use to configure the behavior of other resources within the cluster, such as <code>HorizontalPodAutoscaler</code> for scaling workloads.</step>
-    </procedure>
+    <p>
+      To make this change tracking possible, every Kubernetes object has a <code>resourceVersion</code> field representing the version of
+      that resource as stored in the underlying persistence layer.
+      The client can use that <code>resourceVersion</code> to initiate a watch against the API server.
+    </p>
+    <chapter id="resource_version" title="Resource Version">
 
-    <note>core resources use <code>/api</code> instead of <code>/apis</code> and omit the <b>GROUP</b> path segment.</note>
-    <tabs>
-        <tab title="Cluster-scoped Resources" id="csr">
-            <list>
-                <li><code>GET /apis/GROUP/VERSION/RESOURCETYPE</code> - return the collection of resources of the resource type</li>
-                <li><code>GET /apis/GROUP/VERSION/RESOURCETYPE/NAME</code> - return the resource with NAME under the resource type</li>
-                <li><code>GET /apis/GROUP/VERSION/RESOURCETYPE/NAME/SUBRESOURCE</code></li>
-            </list>
-        </tab>
-        <tab title="Namespace-scoped Resources" id="nsr">
-            <list>
-                <li><code>GET /apis/GROUP/VERSION/RESOURCETYPE</code> - return the collection of all instances of the resource type across all namespaces</li>
-                <li><code>GET /apis/GROUP/VERSION/namespaces/NAMESPACE/RESOURCETYPE</code> - return collection of all instances of the resource type in NAMESPACE</li>
-                <li><code>GET /apis/GROUP/VERSION/namespaces/NAMESPACE/RESOURCETYPE/NAME</code> - return the instance of the resource type with NAME in NAMESPACE</li>
-                <li><code>GET /apis/GROUP/VERSION/namespaces/NAMESPACE/RESOURCETYPE/NAME/SUBRESOURCE</code></li>
-            </list>
-        </tab>
-    </tabs>
-
-    <chapter title="Detection of Changes" id="detection_of_changes">
-        <p>
-            The Kubernetes API allows clients to make an initial request for an object or a collection, 
-            and then to track changes since that initial request: <code>watch</code>.
-        </p>
-        <p>
-            To make this change tracking possible, every Kubernetes object has a <code>resourceVersion</code> field representing the version of that resource as stored in the underlying persistence layer.
-            The client can use that <code>resourceVersion</code> to initiate a watch against the API server.
-        </p>
-        <chapter title="Resource Version" id="resource_version">
-
-            <p>
-                <code>generation</code>
-            </p>
-        </chapter>
-
-        <chapter title="Watch Bookmarks" id="watch_bookmarks">
-
-        </chapter>
+      <p>
+        <code>generation</code>
+      </p>
     </chapter>
 
-    <chapter title="Extend the Kubernetes API" id="extend_the_kubernetes_api">
-        <list>
-            <li><a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#should-i-add-a-custom-resource-to-my-kubernetes-cluster">API Aggregation VS Stand-alone API</a></li>
-            <li><a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#choosing-a-method-for-adding-custom-resources">API Aggregation VS CRD</a></li>
-            <li><a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#should-i-use-a-configmap-or-a-custom-resource">CRD VS ConfigMap</a></li>
-        </list>
+    <chapter id="watch_bookmarks" title="Watch Bookmarks">
 
-        <chapter title="Operator Pattern" id="operator_pattern">
-            <note>While all Operators are controllers, not all controllers are Operators</note>
+    </chapter>
+  </chapter>
 
-            <p>
-                An <i>Operator</i> is a pattern for extending the Kubernetes API that was developed by CoreOS in 2016. It
-                includes one or more custom resources and a controller which manages those resources. The Operator pattern aims to capture the
-                key aim of a human operator who is managing a service or set of services. In essence, an Operator is a way of building a custom
-                controller and packaging it with the <i>CRDs (Custom Resource Definitions)</i> that the controller watches. It's a higher level concept
-                that uses controllers as building blocks.
-            </p>
-            <p>
-                For example, a Prometheus Operator creates, configures, and manages Prometheus monitoring instances. It
-                includes a custom resource (the Prometheus server) and a custom controller. The controller watches for changes to Prometheus
-                custom resources, then creates, updates, or deletes Prometheus instances as needed.
-            </p>
-        </chapter>
-        
-        <chapter title="API Server Aggregation" id="api_service">
-            Refer to the <a href="https://github.com/kubernetes/sample-apiserver/blob/master/README.md">sample-apiserver</a>
-            Unless you absolutely need apiserver-aggregation, recommend using CRD(e.g., Kubebuilder, operator-sdk) instead of apiserver-builder for building Kubernetes APIs.
-            This approach addresses limitations and feedback from apiserver-builder.
-            Aggregated apiserver empowers you to customize your apiserver to do the following things cannot be achieved by CRD:
-            <list>
-                <li>Makes your apiserver adopt different storage APIs rather than etcdV3</li>
-                <li>Extends long-running subresources/endpoints like websocket for your own resources</li>
-                <li>Integrate your apiserver with whatever other external systems</li>
-            </list>
+  <chapter id="extend_the_kubernetes_api" title="Extend the Kubernetes API">
+    <list>
+      <li><a
+        href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#should-i-add-a-custom-resource-to-my-kubernetes-cluster">API
+        Aggregation VS Stand-alone API</a></li>
+      <li><a
+        href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#choosing-a-method-for-adding-custom-resources">API
+        Aggregation VS CRD</a></li>
+      <li><a
+        href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#should-i-use-a-configmap-or-a-custom-resource">CRD
+        VS ConfigMap</a></li>
+    </list>
 
-            This is my <a href="https://github.com/tkxkd0159/k8s-api-agg">API Aggregation example</a>
+    <chapter id="operator_pattern" title="Operator Pattern">
+      <note>While all Operators are controllers, not all controllers are Operators</note>
 
-        </chapter>
-
-        <chapter title="Custom Resource" id="crd">
-            <p>
-                In Kubernetes, a <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#should-i-use-a-configmap-or-a-custom-resource">Custom Resource (CR)</a> is an extension of the Kubernetes API that stores and retrieves
-                structured data.
-                When you create a Custom Resource, you are adding a new endpoint in your Kubernetes API that allows you to manage
-                custom objects.
-            </p>
-            <p>
-                <b>Standard Kubernetes Resources</b> are the built-in resource types that come with Kubernetes out of the
-                box, like Pod,
-                Service, Volume, Namespace, Deployment, and so on(<code>kubectl api-resources -o wide</code>).
-                They have predefined behavior in the Kubernetes API, and the Kubernetes control plane is aware of how to
-                interact with them.
-                For example, when you create a <i>Deployment</i>, the Kubernetes API knows that it should create a <i>ReplicaSet</i>,
-                and the
-                <i>ReplicaSet</i>
-                controller knows that it should create <i>Pods</i>.
-            </p>
-            <p>
-                <b>Custom Resources</b> are user-defined extensions to the Kubernetes API. They let you store and manipulate
-                additional kinds of
-                objects. Custom Resources give you all the power of the Kubernetes API to handle your custom objects.
-                For example, you might create a <b>Database</b> custom resource if you are deploying databases via
-                Kubernetes and want to
-                represent them in your cluster. When you create, update, or delete Custom Resources, you can have a custom
-                controller watching
-                these events and taking action. This combination of a Custom Resource and a custom controller is often used
-                to implement
-                Operators in Kubernetes.
-            </p>
-            <p>
-                In summary, while standard resources are predefined resource types with specific behaviors understood by
-                Kubernetes, Custom Resources are extensions of the Kubernetes API that you define to represent custom objects, often used in
-                conjunction with custom controllers to automate complex application management tasks.
-            </p>
-            <p>
-                You can call your custom resources via the Kubernetes API without any additional configuration.
-            The API endpoint for your custom resource is <b>/apis/GROUP/VERSION/PLURALNAME</b>, which is based on <code>CustomResourceDefinition</code> spec.
-            (e.g., <code>kubectl get --raw /apis/ljs.com/v1alpha1/virtualmachines</code>)
-            </p>
-        </chapter>
+      <p>
+        An <i>Operator</i> is a pattern for extending the Kubernetes API that was developed by CoreOS in 2016. It
+        includes one or more custom resources and a controller which manages those resources. The Operator pattern aims to capture the
+        key aim of a human operator who is managing a service or set of services. In essence, an Operator is a way of building a custom
+        controller and packaging it with the <i>CRDs (Custom Resource Definitions)</i> that the controller watches. It's a higher level
+        concept
+        that uses controllers as building blocks.
+      </p>
+      <p>
+        For example, a Prometheus Operator creates, configures, and manages Prometheus monitoring instances. It
+        includes a custom resource (the Prometheus server) and a custom controller. The controller watches for changes to Prometheus
+        custom resources, then creates, updates, or deletes Prometheus instances as needed.
+      </p>
     </chapter>
 
+    <chapter id="api_service" title="API Server Aggregation">
+      Refer to the <a href="https://github.com/kubernetes/sample-apiserver/blob/master/README.md">sample-apiserver</a>
+      Unless you absolutely need apiserver-aggregation, recommend using CRD(e.g., Kubebuilder, operator-sdk) instead of apiserver-builder
+      for building Kubernetes APIs.
+      This approach addresses limitations and feedback from apiserver-builder.
+      Aggregated apiserver empowers you to customize your apiserver to do the following things cannot be achieved by CRD:
+      <list>
+        <li>Makes your apiserver adopt different storage APIs rather than etcdV3</li>
+        <li>Extends long-running subresources/endpoints like websocket for your own resources</li>
+        <li>Integrate your apiserver with whatever other external systems</li>
+      </list>
 
-    <seealso>
-        <category ref="external">
-            <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#api-groups">k8s API Group</a>
-            <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md">k8s API Conventions</a>
-            <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/">k8s API Reference</a>
-        </category>
-    </seealso>
+      This is my <a href="https://github.com/tkxkd0159/k8s-api-agg">API Aggregation example</a>
+
+    </chapter>
+
+    <chapter id="crd" title="Custom Resource">
+      <p>
+        In Kubernetes, a <a
+        href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#should-i-use-a-configmap-or-a-custom-resource">Custom
+        Resource (CR)</a> is an extension of the Kubernetes API that stores and retrieves
+        structured data.
+        When you create a Custom Resource, you are adding a new endpoint in your Kubernetes API that allows you to manage
+        custom objects.
+      </p>
+      <p>
+        <b>Standard Kubernetes Resources</b> are the built-in resource types that come with Kubernetes out of the
+        box, like Pod,
+        Service, Volume, Namespace, Deployment, and so on(<code>kubectl api-resources -o wide</code>).
+        They have predefined behavior in the Kubernetes API, and the Kubernetes control plane is aware of how to
+        interact with them.
+        For example, when you create a <i>Deployment</i>, the Kubernetes API knows that it should create a <i>ReplicaSet</i>,
+        and the
+        <i>ReplicaSet</i>
+        controller knows that it should create <i>Pods</i>.
+      </p>
+      <p>
+        <b>Custom Resources</b> are user-defined extensions to the Kubernetes API. They let you store and manipulate
+        additional kinds of
+        objects. Custom Resources give you all the power of the Kubernetes API to handle your custom objects.
+        For example, you might create a <b>Database</b> custom resource if you are deploying databases via
+        Kubernetes and want to
+        represent them in your cluster. When you create, update, or delete Custom Resources, you can have a custom
+        controller watching
+        these events and taking action. This combination of a Custom Resource and a custom controller is often used
+        to implement
+        Operators in Kubernetes.
+      </p>
+      <p>
+        In summary, while standard resources are predefined resource types with specific behaviors understood by
+        Kubernetes, Custom Resources are extensions of the Kubernetes API that you define to represent custom objects, often used in
+        conjunction with custom controllers to automate complex application management tasks.
+      </p>
+      <p>
+        You can call your custom resources via the Kubernetes API without any additional configuration.
+        The API endpoint for your custom resource is <b>/apis/GROUP/VERSION/PLURALNAME</b>, which is based on
+        <code>CustomResourceDefinition</code> spec.
+        (e.g., <code>kubectl get --raw /apis/ljs.com/v1alpha1/virtualmachines</code>)
+      </p>
+    </chapter>
+  </chapter>
+
+
+  <seealso>
+    <category ref="external">
+      <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#api-groups">k8s API Group</a>
+      <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md">k8s API
+        Conventions</a>
+      <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/">k8s API Reference</a>
+    </category>
+  </seealso>
 </topic>

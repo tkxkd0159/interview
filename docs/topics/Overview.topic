@@ -1,86 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
-<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="Overview" id="Overview">
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic id="Overview"
+       title="Overview"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
 
-    <section-starting-page>
-        <title>Knowledge base for SE</title>
-        <description>
-            Aggregate resources to prepare future job interviews
-        </description>
+  <section-starting-page>
+    <title>Knowledge base for SE</title>
+    <description>
+      Aggregate resources to prepare future job interviews
+    </description>
 
-        <spotlight>
-            <a href="DS-Algo-Intro.topic" type="documents"
-               summary="Data structure is a data organization, management, and storage format that is usually chosen for efficient access to data.
-               Algorithm is a finite sequence of rigorous instructions, typically used to solve a class of specific problems or to perform a computation.">Data
-                Structures and Algorithms</a>
-            <a href="Operating-system.topic" type="documents"
-               summary="Operating system is system software that manages computer hardware and software resources, and provides common services for computer programs.">Operating
-                System</a>
-        </spotlight>
+    <spotlight>
+      <a href="DS-Algo-Intro.topic" summary="Data structure is a data organization, management, and storage format that is usually chosen for efficient access to data.
+               Algorithm is a finite sequence of rigorous instructions, typically used to solve a class of specific problems or to perform a computation."
+         type="documents">Data
+        Structures and Algorithms</a>
+      <a href="Operating-system.topic" summary="Operating system is system software that manages computer hardware and software resources, and provides common services for computer programs."
+         type="documents">Operating
+        System</a>
+    </spotlight>
 
-        <primary>
-            <title>Computer science</title>
-            <a href="Computer-architecture.topic"
-               summary="This discipline focuses on the study, design, implementation and operation of a computer system. Architecture focuses on how the design of hardware like computers, storage devices and network connection components store programs, transmit data and facilitate connections with other devices.">Computer
-                Architecture</a>
-            <a href="Database.topic"
-               summary="Database is an organized collection of data or a type of data store based on the use of a database management system, the software that interacts with end users, applications, and the database itself to capture and analyze the data.">Database</a>
-            <a href="Network.topic"
-               summary="Computer network is a set of computers sharing resources located on or provided by network nodes. Computers use common communication protocols over digital interconnections to communicate with each other. ">Network</a>
-            <a href="Compiler.topic"
-               summary="Compiler is a computer program that translates computer code written in one programming language into another language.">Compiler</a>
-            <a href="Software-engineering.topic"
-               summary="Software engineering is an engineering approach to software development. A practitioner, a software engineer, applies the engineering design process to develop software.">Software
-                Engineering</a>
-            <a href="Distributed-computing.topic"
-               summary="Distributed computing is a field of computer science that studies distributed systems, defined as computer systems whose inter-communicating components are located on different networked computers.">Distributed
-                Computing</a>
-            <a href="Cryptography.topic"
-               summary="Cryptography is about constructing and analyzing protocols that prevent third parties or the public from reading private messages.">Cryptography</a>
-        </primary>
+    <primary>
+      <title>Computer science</title>
+      <a href="Computer-architecture.topic"
+         summary="This discipline focuses on the study, design, implementation and operation of a computer system. Architecture focuses on how the design of hardware like computers, storage devices and network connection components store programs, transmit data and facilitate connections with other devices.">Computer
+        Architecture</a>
+      <a href="Database.topic"
+         summary="Database is an organized collection of data or a type of data store based on the use of a database management system, the software that interacts with end users, applications, and the database itself to capture and analyze the data.">Database</a>
+      <a href="Network.topic"
+         summary="Computer network is a set of computers sharing resources located on or provided by network nodes. Computers use common communication protocols over digital interconnections to communicate with each other. ">Network</a>
+      <a href="Compiler.topic"
+         summary="Compiler is a computer program that translates computer code written in one programming language into another language.">Compiler</a>
+      <a href="Software-engineering.topic"
+         summary="Software engineering is an engineering approach to software development. A practitioner, a software engineer, applies the engineering design process to develop software.">Software
+        Engineering</a>
+      <a href="Distributed-computing.topic"
+         summary="Distributed computing is a field of computer science that studies distributed systems, defined as computer systems whose inter-communicating components are located on different networked computers.">Distributed
+        Computing</a>
+      <a href="Cryptography.topic"
+         summary="Cryptography is about constructing and analyzing protocols that prevent third parties or the public from reading private messages.">Cryptography</a>
+    </primary>
 
-        <!--    Add several topics that are less important or are relevant only for advanced/experienced users.    -->
-        <secondary>
-            <title>Dev</title>
-            <a href="Dev-methodologies.topic"
-               summary="Software development methodology is a framework(paradigm) that is used to structure, plan, and control the process of developing an information system.">Dev
-                Methodologies</a>
-            <a href="Design-pattern.topic"
-               summary="Design pattern describes a relatively small, well-defined aspect of a computer program in terms of how to write the code.">Design
-                Patterns</a>
-            <a href="System-design.topic"
-               summary="Systems design is the application of systems theory to product development. There is some overlap with the disciplines of systems analysis, systems architecture and systems engineering.">System
-                Design</a>
-            <a href="Security.topic"
-               summary="The protection of computer systems and networks from attacks by malicious actors that may result in unauthorized information disclosure, theft of, or damage to hardware, software, or data, as well as from the disruption or misdirection of the services they provide">Computer
-                Security</a>
-        </secondary>
+    <!--    Add several topics that are less important or are relevant only for advanced/experienced users.    -->
+    <secondary>
+      <title>Dev</title>
+      <a href="Dev-methodologies.topic"
+         summary="Software development methodology is a framework(paradigm) that is used to structure, plan, and control the process of developing an information system.">Dev
+        Methodologies</a>
+      <a href="Design-pattern.topic"
+         summary="Design pattern describes a relatively small, well-defined aspect of a computer program in terms of how to write the code.">Design
+        Patterns</a>
+      <a href="System-design.topic"
+         summary="Systems design is the application of systems theory to product development. There is some overlap with the disciplines of systems analysis, systems architecture and systems engineering.">System
+        Design</a>
+      <a href="Security.topic"
+         summary="The protection of computer systems and networks from attacks by malicious actors that may result in unauthorized information disclosure, theft of, or damage to hardware, software, or data, as well as from the disruption or misdirection of the services they provide">Computer
+        Security</a>
+    </secondary>
 
-        <!--    Optionally add additional cards and links to topics that are not in this section but may be relevant.    -->
-        <misc>
-            <cards>
-                <title>DevOps</title>
-                <a href="devops-overview.topic"
-                   summary="DevOps is a set of practices that combines software development (Dev) and IT operations (Ops). It aims to shorten the systems development life cycle and provide continuous delivery with high software quality.">Overview</a>
-                <a href="Docker.topic"
-                   summary="Docker is a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers.">Docker</a>
-                <a href="Kubernetes.topic"
-                   summary="Kubernetes is an open-source container orchestration system for automating software deployment, scaling, and management.">Kubernetes</a>
-                <a href="IaC.topic" summary="Infrastructure as Code">IaC</a>
-                <a href="MLOps.topic"
-                   summary="MLOps is a paradigm that aims to deploy and maintain machine learning models in production reliably and efficiently.">MLOps</a>
-                <a href="SRE.topic"
-                   summary="Site reliability engineering is a set of principles and practices that applies aspects of software engineering to IT infrastructure and operations. SRE claims to create highly reliable and scalable IT systems.">Site Reliability Engineering</a>
-            </cards>
-            <cards>
-                <title>Others</title>
-                <a href="Interview.topic" summary="Tips for SE interview">Interviews</a>
-            </cards>
-        </misc>
-    </section-starting-page>
+    <!--    Optionally add additional cards and links to topics that are not in this section but may be relevant.    -->
+    <misc>
+      <cards>
+        <title>DevOps</title>
+        <a href="devops-overview.topic"
+           summary="DevOps is a set of practices that combines software development (Dev) and IT operations (Ops). It aims to shorten the systems development life cycle and provide continuous delivery with high software quality.">Overview</a>
+        <a href="Docker.topic"
+           summary="Docker is a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers.">Docker</a>
+        <a href="Kubernetes.topic"
+           summary="Kubernetes is an open-source container orchestration system for automating software deployment, scaling, and management.">Kubernetes</a>
+        <a href="IaC.topic" summary="Infrastructure as Code">IaC</a>
+        <a href="MLOps.topic"
+           summary="MLOps is a paradigm that aims to deploy and maintain machine learning models in production reliably and efficiently.">MLOps</a>
+        <a href="SRE.topic"
+           summary="Site reliability engineering is a set of principles and practices that applies aspects of software engineering to IT infrastructure and operations. SRE claims to create highly reliable and scalable IT systems.">Site
+          Reliability Engineering</a>
+      </cards>
+      <cards>
+        <title>Others</title>
+        <a href="Interview.topic" summary="Tips for SE interview">Interviews</a>
+      </cards>
+    </misc>
+  </section-starting-page>
 
 </topic>

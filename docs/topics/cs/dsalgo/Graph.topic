@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
-<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="Graph" id="Graph">
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic id="Graph"
+       title="Graph"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-    <p>Adjacency List, Adjacency Matrix</p>
+  <p>Adjacency List, Adjacency Matrix</p>
 
-    <chapter title="Matrix Depth-First Search" id="dfs">
-        
-    </chapter>
+  <chapter id="dfs" title="Matrix Depth-First Search">
 
-    <chapter title="Matrix Breadth-First Search" id="bfs">
-        
-    </chapter>
+  </chapter>
 
-    <chapter title="Dijkstra's Algorithm" id="dijkstra_s">
-        
-    </chapter>
+  <chapter id="bfs" title="Matrix Breadth-First Search">
 
-    <chapter title="Prim's Algorithm" id="prim_s_algorithm">
-        
-    </chapter>
+  </chapter>
 
-    <chapter title="Kruskal's Algorithm" id="kruskal_s_algorithm">
-        
-    </chapter>
+  <chapter id="dijkstra_s" title="Dijkstra's Algorithm">
 
-    <chapter title="Topological Sorting" id="topological_sorting">
-        
-    </chapter>
+  </chapter>
+
+  <chapter id="prim_s_algorithm" title="Prim's Algorithm">
+
+  </chapter>
+
+  <chapter id="kruskal_s_algorithm" title="Kruskal's Algorithm">
+
+  </chapter>
+
+  <chapter id="topological_sorting" title="Topological Sorting">
+
+  </chapter>
 </topic>

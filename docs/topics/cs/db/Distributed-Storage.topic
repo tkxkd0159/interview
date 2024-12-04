@@ -1,212 +1,264 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
-<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="Distributed Storage" id="Distributed-Storage">
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic id="Distributed-Storage"
+       title="Distributed Storage"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-    <show-structure for="chapter" depth="2"/>
+  <show-structure depth="2" for="chapter"/>
 
-    <chapter title="FLP Impossibility" id="flp_impossibility">
-        <note>Impossibility of Distributed Consensus with One Faulty Process</note>
-        어떤 합의 알고리즘이 네트워크에 통용되기 위해선 Safety와 Liveness 특성을 가지고 있어야 한다.
+  <chapter id="flp_impossibility" title="FLP Impossibility">
+    <note>Impossibility of Distributed Consensus with One Faulty Process</note>
+    어떤 합의 알고리즘이 네트워크에 통용되기 위해선 Safety와 Liveness 특성을 가지고 있어야 한다.
+    <list>
+      <li><b>Safety</b>: 노드간 합의가 발생했다면, 네트워크 어디에서 접근하든 합의된 그 값은 동일해야 한다.
+        문제없는 노드 사이에서는 잘못된 합의가 이루어지지 않는다.
+      </li>
+      <li>
+        <b>Liveness</b>: 합의 대상에 문제가 없다면, 네트워크 내에서 반드시 합의가 이루어진다. 문제 없는 노드는 반드시 합의를 한다.
+      </li>
+    </list>
+
+    <deflist collapsible="true">
+      <def id="syncnet" title="Synchronous Network">
+        노드가 메시지를 보내는 시간과 수신 노드가 메시지를 수신하는 시간 사이에 상한선이 존재하고, 그 시간 안에 반드시 메시지가 수신 노드에게 도착한다는 것을 보증하는 네트워크. 따라서 네트워크 사이에 데이터 통신이 ‘반드시’ 이루어져야 하는
+        경우에 사용. 단순하게 이해하자면, 어떤 메시지를 보내면, 정해진 시간 안에 반드시 응답이 도착하는 네트워크. 비행기나 우주선의 통신과 같이, 정해진 시간 안에 노드 간 통신이 반드시 필요한 네트워크에서 주로 사용.
+      </def>
+      <def id="asyncnet" title="Asynchronous Network">
+        노드가 메시지를 보내는 시간과 수신 노드가 메시지를 수신하는 시간 사이에 상한선이 없다. 즉 메시지가 수신 노드에게 제대로 도착했는지 여부를, 수신 노드가 응답하는 데 얼마나 시간이 걸리는지를 알 수 없다. 따라서 특정 노드가 임의로
+        메시지를 전송하지 않거나 거짓 데이터를 전송하는 배신행위가 가능한 네트워크. 인터넷이나 블록체인 네트워크가 여기에 해당.
+      </def>
+      <def id="syncasyncnet" title="Partial Synchronous Network">
+        노드가 메시지를 보내는 시간과 수신 노드가 메시지를 수신하는 시간 사이에 상한선이 존재하지만, 그 상한선이 얼마인지는 알 수 없는 네트워크. 단순히 표현하자면 ‘노드와 노드 사이에 메시지가 도달하는 것은 보증하지만, 언제 도달할지는 알
+        수 없다. 네트워크에서 메시지가 도달하는 시간의 상한선이 유한(finite)한 것이 부분 동기 네트워크이고, 무한(infinite)한 것이 비동기 네트워크. 로직의 경우 Global Stabilazation Time까지는 async,
+        이후는 sync처럼 동작하게 됨.
+      </def>
+    </deflist>
+
+    <b>Asynchronous network</b> 에서는 safety와 liveness를 모두 완벽히 만족하는 합의 알고리즘을 설계하는 것이 불가능하다는 것이 증명되었고 이것이 FLP impossibility.
+
+    <p>
+      Blockchain에서는 PoW 계열이 async에 liveness 보장. 일단 조건에 맞게 각자 블록 생성 후 경쟁. BFT 계열이 async에 safety 보장.
+      생성할 블록을 특정 그룹이 합의 후 생성 및 확정. 단, partial sync에서는 liveness도 보장되게 할 수 있지만 성능 이슈 발생. 2번의 투표를 통해 블록을 생성해야 되는데 라운드에서 정족수가 충족하지 못하면 언젠가 합의될 껀
+      알지만 연속적으로 라운드 진행. 이러한 문제를 해결하기 위해 ‘hot-stuff’라는 변형 알고리즘도 제안됨.
+    </p>
+  </chapter>
+
+  <chapter id="cap_theorem" title="CAP Theorem">
+    <note>Brewer, Eric A. "Towards robust distributed systems." In PODC, vol. 7, no. 10.1145, pp. 343477-343502. 2000.</note>
+    <list>
+      <li>아래 3가지 속성을 동시에 만족할 수 없음 (최대 2개 충족). CA는 주로 RDB에 사용되고 CP, AP는 NoSQL
         <list>
-            <li><b>Safety</b>: 노드간 합의가 발생했다면, 네트워크 어디에서 접근하든 합의된 그 값은 동일해야 한다.
-                문제없는 노드 사이에서는 잘못된 합의가 이루어지지 않는다.
-            </li>
-            <li>
-                <b>Liveness</b>: 합의 대상에 문제가 없다면, 네트워크 내에서 반드시 합의가 이루어진다. 문제 없는 노드는 반드시 합의를 한다.
-            </li>
+          <li><b>CA</b>: Traditional RDB [MySQL(Single-node or Master-Slave replication), PostgreSQL(Single-node or Master-Slave
+            replication), Oracle DB(Single-node or Real Application Cluster), Microsoft SQL Server(Single-node or Synchronous replication)]
+          </li>
+          <li><b>CP</b>: CockroachDB, Redis, HBase, MongoDB(Configured for strong consistency), Cassandra (Configured for strong
+            consistency)
+          </li>
+          <li><b>AP</b>: MongoDB(Default), Cassandra(Default), Riak, Amazon DynamoDB, Couchbase
+          </li>
         </list>
+      </li>
+      <li>FLP는 자기에게 전송된 메세지를 받지 않은 노드는 합의에서 배제함(failed node). CAP에서는 해당 노드가 자기에게 전송된 메세지를 받지 않더라도 어떤 요청이 들어왔을 때 처리할 수 있어야 함. 즉, 배제하지 않음</li>
+      <li><b>Limitation</b>: Network partition은 물리적인 분리 뿐만 아닌 통신 시 패킷 타임아웃, 방화벽 차단 등도 전부 포함하는 것. 따라서 CAP theorem은 일반적으로 CA보단 CP, AP를 우선적으로
+        고려(시스템 가동 내내 P 없는 상황은 현실적으로 힘듬)
+        <list>
+          <li><b>완벽한 CP시스템</b>: 완벽한 일관성을 갖는 분산 시스템에서는 하나의 트랜잭션에 대한 복사본을 모든 노드가 가져야 한다. 시스템의 전체 성능은 네트워크에서 가장 낮은 성능의 노드에 종속되며, 만일 단 하나의 노드라도
+            문제가 발생하면 트랜잭션 처리는 실패한다. 또한, 노드의 수가 많아질수록 지연시간이 길어진다.
+          </li>
+          <li><b>완벽한 AP시스템</b>: 완벽한 가용성을 갖는 시스템은 모든 노드가 어떤 상황에서라도 응답할 수 있어야 한다. 즉, 네트워크 분할로 인해 고립되 노드가 발생해도 서비스는 지속됨. 고립된 노드는 업데이트를 반영하지 못해
+            일관성이 결여된 잘못된 정보를 가지고 있음. 이 데이터는 쓸모가 없지만 어쨌든 응답한다면 완벽한 가용성을 갖게 된다. 이 고립된 노드와 연결된 사용자는 문제를 인지하지 못하고 요청을 보내고 응답받은 정보를 활용.
+          </li>
+          <li><b>완벽한 CA시스템</b>: CA 시스템은 모든 노드에서 일관성과 가용성을 제공한다. 다만 이건 시스템내의 모든 노드들이 어떠한 경로로든 서로 연결되었을 때만 보장됨. 즉, 네트워크 분리에 대한 내결함성이 없는 시스템.
+          </li>
+        </list>
+      </li>
+    </list>
 
-        <deflist collapsible="true">
-            <def title="Synchronous Network" id="syncnet">
-                노드가 메시지를 보내는 시간과 수신 노드가 메시지를 수신하는 시간 사이에 상한선이 존재하고, 그 시간 안에 반드시 메시지가 수신 노드에게 도착한다는 것을 보증하는 네트워크. 따라서 네트워크 사이에 데이터 통신이 ‘반드시’ 이루어져야 하는 경우에 사용. 단순하게 이해하자면, 어떤 메시지를 보내면, 정해진 시간 안에 반드시 응답이 도착하는 네트워크. 비행기나 우주선의 통신과 같이, 정해진 시간 안에 노드 간 통신이 반드시 필요한 네트워크에서 주로 사용.
-            </def>
-            <def title="Asynchronous Network" id="asyncnet">
-                노드가 메시지를 보내는 시간과 수신 노드가 메시지를 수신하는 시간 사이에 상한선이 없다. 즉 메시지가 수신 노드에게 제대로 도착했는지 여부를, 수신 노드가 응답하는 데 얼마나 시간이 걸리는지를 알 수 없다. 따라서 특정 노드가 임의로 메시지를 전송하지 않거나 거짓 데이터를 전송하는 배신행위가 가능한 네트워크. 인터넷이나 블록체인 네트워크가 여기에 해당.
-            </def>
-            <def title="Partial Synchronous Network" id="syncasyncnet">
-                노드가 메시지를 보내는 시간과 수신 노드가 메시지를 수신하는 시간 사이에 상한선이 존재하지만, 그 상한선이 얼마인지는 알 수 없는 네트워크. 단순히 표현하자면 ‘노드와 노드 사이에 메시지가 도달하는 것은 보증하지만, 언제 도달할지는 알 수 없다. 네트워크에서 메시지가 도달하는 시간의 상한선이 유한(finite)한 것이 부분 동기 네트워크이고, 무한(infinite)한 것이 비동기 네트워크. 로직의 경우 Global Stabilazation Time까지는 async, 이후는 sync처럼 동작하게 됨.
-            </def>
-        </deflist>
-        
-        <b>Asynchronous network</b> 에서는 safety와 liveness를 모두 완벽히 만족하는 합의 알고리즘을 설계하는 것이 불가능하다는 것이 증명되었고 이것이 FLP impossibility.
-
-        <p>
-            Blockchain에서는 PoW 계열이 async에 liveness 보장. 일단 조건에 맞게 각자 블록 생성 후 경쟁. BFT 계열이 async에 safety 보장.
-            생성할 블록을 특정 그룹이 합의 후 생성 및 확정. 단, partial sync에서는 liveness도 보장되게 할 수 있지만 성능 이슈 발생. 2번의 투표를 통해 블록을 생성해야 되는데 라운드에서 정족수가 충족하지 못하면 언젠가 합의될 껀 알지만 연속적으로 라운드 진행. 이러한 문제를 해결하기 위해 ‘hot-stuff’라는 변형 알고리즘도 제안됨.
-        </p>
+    <chapter id="consistency" title="Consistency">
+      시스템의 모든 노드는 시스템의 현재 상태에 대해 동의한다. 즉, 분산시스템 장애 시 특정 결과의 반영을 아예 배제함으로써 모든 노드가 일관된 데이터를 바라보게 함. 데이터베이스 관점에서는 모든 클라이언트는 DB 접근 시 동시에 같은 데이터를
+      얻어야 한다.
+      All clients see the same data at the same time, no matter which node they connect to. For this to happen, whenever data is written to
+      one node, it must be instantly forwarded or replicated to all the other nodes in the system before the write is deemed ‘successful.’
     </chapter>
 
-    <chapter title="CAP Theorem" id="cap_theorem">
-        <note>Brewer, Eric A. "Towards robust distributed systems." In PODC, vol. 7, no. 10.1145, pp. 343477-343502. 2000.</note>
-        <list>
-            <li>아래 3가지 속성을 동시에 만족할 수 없음 (최대 2개 충족). CA는 주로 RDB에 사용되고 CP, AP는 NoSQL
-                <list>
-                    <li><b>CA</b>: Traditional RDB [MySQL(Single-node or Master-Slave replication), PostgreSQL(Single-node or Master-Slave replication), Oracle DB(Single-node or Real Application Cluster), Microsoft SQL Server(Single-node or Synchronous replication)]</li>
-                    <li><b>CP</b>: CockroachDB, Redis, HBase, MongoDB(Configured for strong consistency), Cassandra (Configured for strong consistency)</li>
-                    <li><b>AP</b>: MongoDB(Default), Cassandra(Default), Riak, Amazon DynamoDB, Couchbase
-                    </li>
-                </list></li>
-            <li>FLP는 자기에게 전송된 메세지를 받지 않은 노드는 합의에서 배제함(failed node). CAP에서는 해당 노드가 자기에게 전송된 메세지를 받지 않더라도 어떤 요청이 들어왔을 때 처리할 수 있어야 함. 즉, 배제하지 않음</li>
-            <li><b>Limitation</b>: Network partition은 물리적인 분리 뿐만 아닌 통신 시 패킷 타임아웃, 방화벽 차단 등도 전부 포함하는 것. 따라서 CAP theorem은 일반적으로 CA보단 CP, AP를 우선적으로 고려(시스템 가동 내내 P 없는 상황은 현실적으로 힘듬)
-                <list>
-                    <li><b>완벽한 CP시스템</b>: 완벽한 일관성을 갖는 분산 시스템에서는 하나의 트랜잭션에 대한 복사본을 모든 노드가 가져야 한다. 시스템의 전체 성능은 네트워크에서 가장 낮은 성능의 노드에 종속되며, 만일 단 하나의 노드라도 문제가 발생하면 트랜잭션 처리는 실패한다. 또한, 노드의 수가 많아질수록 지연시간이 길어진다.</li>
-                    <li><b>완벽한 AP시스템</b>: 완벽한 가용성을 갖는 시스템은 모든 노드가 어떤 상황에서라도 응답할 수 있어야 한다. 즉, 네트워크 분할로 인해 고립되 노드가 발생해도 서비스는 지속됨. 고립된 노드는 업데이트를 반영하지 못해 일관성이 결여된 잘못된 정보를 가지고 있음. 이 데이터는 쓸모가 없지만 어쨌든 응답한다면 완벽한 가용성을 갖게 된다. 이 고립된 노드와 연결된 사용자는 문제를 인지하지 못하고 요청을 보내고 응답받은 정보를 활용.</li>
-                    <li><b>완벽한 CA시스템</b>: CA 시스템은 모든 노드에서 일관성과 가용성을 제공한다. 다만 이건 시스템내의 모든 노드들이 어떠한 경로로든 서로 연결되었을 때만 보장됨. 즉, 네트워크 분리에 대한 내결함성이 없는 시스템.</li>
-                </list>
-            </li>
-        </list>
 
-        <chapter title="Consistency" id="consistency">
-            시스템의 모든 노드는 시스템의 현재 상태에 대해 동의한다. 즉, 분산시스템 장애 시 특정 결과의 반영을 아예 배제함으로써 모든 노드가 일관된 데이터를 바라보게 함. 데이터베이스 관점에서는 모든 클라이언트는 DB 접근 시 동시에 같은 데이터를 얻어야 한다.
-            All clients see the same data at the same time, no matter which node they connect to. For this to happen, whenever data is written to one node, it must be instantly forwarded or replicated to all the other nodes in the system before the write is deemed ‘successful.’
-        </chapter>
-
-
-        <chapter title="Availability" id="availability">
-            시스템은 일부 노드가 멈춰도 정상 운영 가능하며 들어오는 요청을 즉시 처리할 수 있다. 즉, 분산시스템 장애 시에도 입력을 받은 노드들은 그 결과를 즉시 처리 및 반영함으로써 원할히 운영되게 함(이에 대한 트레이드오프로 모든 노드가 모든 순간에서 일관된 데이터를 바라보지는 못함).
-            Any client making a request for data gets a response, even if one or more nodes are down. Another way to state this—all working nodes in the distributed system return a valid response for any request, without exception.
-        </chapter>
-
-
-        <chapter title="Partition Tolerance" id="partition_tolerance">
-            해당 분산 시스템이 네트워크 분할 상황에서도 올바르게 동작을 지속한다. 즉, 노드간 통신이 실패하는 경우라도 시스템은 정상 동작 한다.
-            A partition is a communications break within a distributed system—a lost or temporarily delayed connection between two nodes. Partition tolerance means that the cluster must continue to work despite any number of communication breakdowns between nodes in the system
-        </chapter>
+    <chapter id="availability" title="Availability">
+      시스템은 일부 노드가 멈춰도 정상 운영 가능하며 들어오는 요청을 즉시 처리할 수 있다. 즉, 분산시스템 장애 시에도 입력을 받은 노드들은 그 결과를 즉시 처리 및 반영함으로써 원할히 운영되게 함(이에 대한 트레이드오프로 모든 노드가 모든
+      순간에서 일관된 데이터를 바라보지는 못함).
+      Any client making a request for data gets a response, even if one or more nodes are down. Another way to state this—all working nodes
+      in the distributed system return a valid response for any request, without exception.
     </chapter>
 
-    <chapter title="PACELC Theorem" id="pacelc_theorem">
-        <img src="$WRS_MODULE$/images/dev/db/pacelc.png" alt="PACELC" width="336"/>
-        <p>
-            network partitioning (P), availability (A), consistency (C), else (E), latency (L)
-        </p>
-        CAP theorem의 단점을 보완해서 확장한 이론. 장애(P), 정상(E)으로 나누어 분류하기 때문에 한번에 정의하려 했던 CAP보다 좀 더 유동적임(정상상황에 대해서도 기술 가능).
-        <list>
-            <li><b>Partitioned Network</b>: 분할 상황(P)에서는 단절된 노드에 접근할 수 없기 때문에 일관성을 포기하고 가용성을 제공할지(PA),가용성을 포기하고 일관성을 유지할지(PC)의 정도를 결정해야 한다.</li>
-            <li><b>Normal Network</b>: 정상 상황(E)에서는 모든 노드에 업데이트를 반영해 일관성을 유지하기 위한 긴 대기 및 응답시간을 가질지(EC), 일관성을 포기하고 짧은 지연시간을 가질지(EL)의 정도를 결정해야 한다.
-            즉, Consistency를 강화하면 그만큼 Latency는 증가. Consistency의 경우 strict하게 보면 모든 노드가 같은 데이터를 가질 때로 볼 수 있지만 특정 범위의 노드가 같은 데이터를 가질 때 등으로 좀 더 유연하게 설정할 수 있다.</li>
-        </list>
 
-        <p>
-            블록체인의 경우 네트워크 분할 상황에서 일관성보다는 가용성에 초점을 둔다. 즉, 채굴자는 자신이 참조하고 있는 블록이 네트워크 전체에서 합의를 이룬 사실에 확신없이도 그 블록을 기반으로 채굴.
-            네트워크 정상 상황에서는 일관성보다는 지연시간에 초점을 둔다. 블록을 전파 받을 때 그 상태가 나의 체인과 비교해 더 최신이면 이를 따름. 이 역시도 모든 시스템이 이 상태에 대해 일관적으로 동의했다는 확신은 없다.
-        </p>
+    <chapter id="partition_tolerance" title="Partition Tolerance">
+      해당 분산 시스템이 네트워크 분할 상황에서도 올바르게 동작을 지속한다. 즉, 노드간 통신이 실패하는 경우라도 시스템은 정상 동작 한다.
+      A partition is a communications break within a distributed system—a lost or temporarily delayed connection between two nodes.
+      Partition tolerance means that the cluster must continue to work despite any number of communication breakdowns between nodes in the
+      system
+    </chapter>
+  </chapter>
+
+  <chapter id="pacelc_theorem" title="PACELC Theorem">
+    <img alt="PACELC" src="$WRS_MODULE$/images/dev/db/pacelc.png" width="336"/>
+    <p>
+      network partitioning (P), availability (A), consistency (C), else (E), latency (L)
+    </p>
+    CAP theorem의 단점을 보완해서 확장한 이론. 장애(P), 정상(E)으로 나누어 분류하기 때문에 한번에 정의하려 했던 CAP보다 좀 더 유동적임(정상상황에 대해서도 기술 가능).
+    <list>
+      <li><b>Partitioned Network</b>: 분할 상황(P)에서는 단절된 노드에 접근할 수 없기 때문에 일관성을 포기하고 가용성을 제공할지(PA),가용성을 포기하고 일관성을 유지할지(PC)의 정도를 결정해야 한다.</li>
+      <li><b>Normal Network</b>: 정상 상황(E)에서는 모든 노드에 업데이트를 반영해 일관성을 유지하기 위한 긴 대기 및 응답시간을 가질지(EC), 일관성을 포기하고 짧은 지연시간을 가질지(EL)의 정도를 결정해야 한다.
+        즉, Consistency를 강화하면 그만큼 Latency는 증가. Consistency의 경우 strict하게 보면 모든 노드가 같은 데이터를 가질 때로 볼 수 있지만 특정 범위의 노드가 같은 데이터를 가질 때 등으로 좀 더 유연하게
+        설정할 수 있다.
+      </li>
+    </list>
+
+    <p>
+      블록체인의 경우 네트워크 분할 상황에서 일관성보다는 가용성에 초점을 둔다. 즉, 채굴자는 자신이 참조하고 있는 블록이 네트워크 전체에서 합의를 이룬 사실에 확신없이도 그 블록을 기반으로 채굴.
+      네트워크 정상 상황에서는 일관성보다는 지연시간에 초점을 둔다. 블록을 전파 받을 때 그 상태가 나의 체인과 비교해 더 최신이면 이를 따름. 이 역시도 모든 시스템이 이 상태에 대해 일관적으로 동의했다는 확신은 없다.
+    </p>
+  </chapter>
+
+  <chapter id="oltp" title="OLTP">
+    <img alt="ACID vs BASE" src="$WRS_MODULE$/images/dev/db/acidbase.png" width="616"/>
+    <chapter id="acid" title="ACID">
+      ACID stands for atomicity, consistency, isolation, and durability.
+      ACID로 하여금 트랜잭션이 안전하게 처리됨을 보장할 수 있다. 그러나 실제 서비스 환경에서는 성능 향상 등의 이유로 ACID를 유연하게 적용하곤 한다.
+      가령 Isolation level을 완화해 병행처리를 허용, TPS(Transaction Per Second)을 증대시킬 수 있다. Isolation level을 완화하면 Concurrency가 증가하는 것에 반해 Consistency이
+      저하된다. 다시 말해 병렬처리로 성능을 확보할 수 있지만, Dirty Read, Non-repeatable Read, Phantom Read 등 Consistency를 만족하지 못하는 현상들이 생긴다.
+      <p>
+        <i>Atomicity</i> ensures that all steps in a single database transaction are either fully-completed or reverted to their original
+        state.
+        For example, in a reservation system, both tasks—booking seats and updating customer details—must be completed in a single
+        transaction. You cannot have seats reserved for an incomplete customer profile. No changes are made to the data if any part of the
+        transaction fails.
+      </p>
+      <p>
+        <i>Consistency</i> guarantees that data meets predefined integrity constraints and business rules.
+        Even if multiple users perform similar operations simultaneously, data remains consistent for all. For example, consistency ensures
+        that when transferring funds from one account to another, the total balance before and after the transaction remains the same. If
+        Account A has $200 and Account B has $400, the total balance is $600. After A transfers $100 to B, A has $100 and B has $500. The
+        total balance is still $600.
+      </p>
+      <p>
+        <i>Isolation</i> ensures that a new transaction, accessing a particular record, waits until the previous transaction finishes before
+        it commences operation.
+        It ensures that concurrent transactions do not interfere with each other, maintaining the illusion that they are executing serially.
+        For another example, is a multi-user inventory management system. If one user updates the quantity of a product, another user
+        accessing the same product information will see a consistent and isolated view of the data, unaffected by the ongoing update until
+        it is committed.
+      </p>
+      <p>
+        <i>Durability</i> ensures that the database maintains all committed records, even if the system experiences failure.
+        It guarantees that when ACID transactions are committed, all changes are permanent and unimpacted by subsequent system failures.
+        For example, in a messaging application, when a user sends a message and receives a confirmation of successful delivery, the
+        durability property ensures that the message is never lost. This remains true even if the application or server encounters a
+        failure.
+      </p>
+
     </chapter>
 
-    <chapter title="OLTP" id="oltp">
-        <img src="$WRS_MODULE$/images/dev/db/acidbase.png" alt="ACID vs BASE" width="616"/>
-        <chapter title="ACID" id="acid">
-            ACID stands for atomicity, consistency, isolation, and durability.
-            ACID로 하여금 트랜잭션이 안전하게 처리됨을 보장할 수 있다. 그러나 실제 서비스 환경에서는 성능 향상 등의 이유로 ACID를 유연하게 적용하곤 한다.
-            가령 Isolation level을 완화해 병행처리를 허용, TPS(Transaction Per Second)을 증대시킬 수 있다. Isolation level을 완화하면 Concurrency가 증가하는 것에 반해 Consistency이 저하된다. 다시 말해 병렬처리로 성능을 확보할 수 있지만, Dirty Read, Non-repeatable Read, Phantom Read 등 Consistency를 만족하지 못하는 현상들이 생긴다.
-            <p>
-                <i>Atomicity</i> ensures that all steps in a single database transaction are either fully-completed or reverted to their original state.
-                For example, in a reservation system, both tasks—booking seats and updating customer details—must be completed in a single transaction. You cannot have seats reserved for an incomplete customer profile. No changes are made to the data if any part of the transaction fails.
-            </p>
-            <p>
-                <i>Consistency</i> guarantees that data meets predefined integrity constraints and business rules.
-                Even if multiple users perform similar operations simultaneously, data remains consistent for all. For example, consistency ensures that when transferring funds from one account to another, the total balance before and after the transaction remains the same. If Account A has $200 and Account B has $400, the total balance is $600. After A transfers $100 to B, A has $100 and B has $500. The total balance is still $600.
-            </p>
-            <p>
-                <i>Isolation</i> ensures that a new transaction, accessing a particular record, waits until the previous transaction finishes before it commences operation.
-                It ensures that concurrent transactions do not interfere with each other, maintaining the illusion that they are executing serially. For another example, is a multi-user inventory management system. If one user updates the quantity of a product, another user accessing the same product information will see a consistent and isolated view of the data, unaffected by the ongoing update until it is committed.
-            </p>
-            <p>
-                <i>Durability</i> ensures that the database maintains all committed records, even if the system experiences failure.
-                It guarantees that when ACID transactions are committed, all changes are permanent and unimpacted by subsequent system failures.
-                For example, in a messaging application, when a user sends a message and receives a confirmation of successful delivery, the durability property ensures that the message is never lost. This remains true even if the application or server encounters a failure.
-            </p>
-
-        </chapter>
-
-        <chapter title="BASE" id="base">
-            BASE stands for basically available, soft state, and eventually consistent. The acronym highlights that BASE is opposite of ACID, like their chemical equivalents.
-            BASE는 ACID와는 대조적으로 Consistency와 Isolation을 희생하고 Availability와 Performance를 중시한 속성들이다.
-            <p>
-                <i>Basically available</i> is the database’s concurrent accessibility by users at all times.
-                One user doesn’t need to wait for others to finish the transaction before updating the record. For example, during a sudden surge in traffic on an ecommerce platform, the system may prioritize serving product listings and accepting orders. Even if there is a slight delay in updating inventory quantities, users continue to check out items.
-            </p>
-            <p>
-                <i>Soft state</i> refers to the notion that data can have transient or temporary states that may change over time, even without external triggers or inputs.
-                It describes the record’s transitional state when several applications update it simultaneously. The record’s value is eventually finalized only after all transactions complete. For example, if users edit a social media post, the change may not be visible to other users immediately. However, later on, the post updates by itself (reflecting the older change) even though no user triggered it.
-            </p>
-            <p>
-                <i>Eventually consistent</i> means the record will achieve consistency when all the concurrent updates have been completed.
-                At this point, applications querying the record will see the same value. For example, consider a distributed document editing system where multiple users can simultaneously edit a document. If User A and User B both edit the same section of the document simultaneously, their local copies may temporarily differ until the changes are propagated and synchronized. However, over time, the system ensures eventual consistency by propagating and merging the changes made by different users.
-            </p>
-        </chapter>
-        
-        블록체인은 분산시스템이므로 기본적으로 BASE의 특성을 보임
-        <list>
-            <li><b>Basically Available</b>: 블록체인 네트워크의 노드들은 각기 원장(ledger)의 복사본을 저장한다. 일부 노드의 장애 상황을 허용한다.</li>
-            <li><b>Soft State</b>: 각 노드가 저장 중인 원장은 일관적이지 않을 수 있다. 그러나 ‘궁극적 일관성’에 의해 과거의 블록 및 트랜잭션은 하나의 상태로 합의하게 된다.</li>
-            <li><b>Eventually Consistency</b>: 트랜잭션과 블록은 송신자로부터 다른 노드들에게 브로드캐스트된다. 이 과정에서 상태는 일시적으로 불일치일 수 있으나, 궁극적으로는 일관성을 찾는다.
-            </li>
-        </list>
-
-        다만, 일부분은 ACID에 가까운 특성을 보임
-        <list>
-            <li><b>Strong Isolation</b>: 블록체인의 트랜잭션은 블록에 담긴 순서에 따라 순차적으로, 즉 직렬적으로 수행된다. 높은 수준의 고립성을 보인다.</li>
-            <li><b>Atomicity &amp; Consistency</b>: 트랜잭션은 순차적으로 수행되며 이전 트랜잭션의 처리가 완료되기 전까지 다음 트랜잭션은 수행될 수 없다.</li>
-            <li><b>Durability</b>: 트랜잭션은 블록에 담겨 모든 다음 블록들의 상태에 영구적으로 반영.</li>
-        </list>
-
-
-        <chapter title="ACID compared with BASE" id="acid_compared_with_base">
-            <table>
-                <tr>
-                    <td>_</td>
-                    <td>ACID</td>
-                    <td>BASE</td>
-                </tr>
-                <tr>
-                    <td>Scale</td>
-                    <td>Scales vertically</td>
-                    <td>Scales horizontally</td>
-                </tr>
-                <tr>
-                    <td>Flexibility</td>
-                    <td>Less flexible. Blocks specific records from other applications when processing.</td>
-                    <td>More flexible. Allows multiple applications to update the same record simultaneously.</td>
-                </tr>
-                <tr>
-                    <td>Performance</td>
-                    <td>Performance decreases when processing large volumes of data.</td>
-                    <td>Capable of handling large, unstructured data with high throughput.</td>
-                </tr>
-                <tr>
-                    <td>Synchronization</td>
-                    <td>Yes. Adds delay when synchronizing.</td>
-                    <td>No synchronization at the database level.</td>
-                </tr>
-            </table>
-
-            <p>
-                It’s harder to scale an ACID database transaction model because it focuses on consistency. Only one transaction is allowed for any record at any moment, which makes horizontal scaling more challenging.
-                Alternately, you can scale the BASE database model horizontally because it doesn’t need to maintain strict consistency. Adding multiple nodes across the database cluster allows the BASE model to improve its data availability.
-            </p>
-
-            <p>
-                ACID databases are less flexible when handling data. It must guarantee immediate consistency,
-                an ACID database may restrict access to some applications if it experiences network or power outages. Similarly, applications must wait for their turn to update data if other software modules are processing a particular record. Conversely, BASE databases are more flexible. Rather than imposing strict restrictions, BASE allows applications to modify records when they are available.
-            </p>
-
-            <p>
-                An ACID database needs a synchronization mechanism to commit changes from a transaction and reflect them in all associated records.
-                At the same time, it must lock the particular record from other parties until the transaction completes or is discarded.
-                Meanwhile, a BASE database runs without locking the records, synchronizing them eventually without time guarantees.
-                When working with BASE databases, developers know there might be inconsistencies when processing certain records and take the necessary precautions in the application.
-            </p>
-
-            <p>
-                ACID is the ideal option for enterprise applications that require data consistency, reliability, and predictability.
-                For example, banks use an ACID database to store customer transactions because data integrity is the top priority.
-                Meanwhile, BASE databases are a better option for online analytical processing of less structured, high-volume data.
-                For example, ecommerce websites use BASE databases to update product prices, which change frequently.
-                In this case, pricing accuracy is less vital than allowing all customers real-time access to the product price.
-            </p>
-        </chapter>
+    <chapter id="base" title="BASE">
+      BASE stands for basically available, soft state, and eventually consistent. The acronym highlights that BASE is opposite of ACID, like
+      their chemical equivalents.
+      BASE는 ACID와는 대조적으로 Consistency와 Isolation을 희생하고 Availability와 Performance를 중시한 속성들이다.
+      <p>
+        <i>Basically available</i> is the database’s concurrent accessibility by users at all times.
+        One user doesn’t need to wait for others to finish the transaction before updating the record. For example, during a sudden surge in
+        traffic on an ecommerce platform, the system may prioritize serving product listings and accepting orders. Even if there is a slight
+        delay in updating inventory quantities, users continue to check out items.
+      </p>
+      <p>
+        <i>Soft state</i> refers to the notion that data can have transient or temporary states that may change over time, even without
+        external triggers or inputs.
+        It describes the record’s transitional state when several applications update it simultaneously. The record’s value is eventually
+        finalized only after all transactions complete. For example, if users edit a social media post, the change may not be visible to
+        other users immediately. However, later on, the post updates by itself (reflecting the older change) even though no user triggered
+        it.
+      </p>
+      <p>
+        <i>Eventually consistent</i> means the record will achieve consistency when all the concurrent updates have been completed.
+        At this point, applications querying the record will see the same value. For example, consider a distributed document editing system
+        where multiple users can simultaneously edit a document. If User A and User B both edit the same section of the document
+        simultaneously, their local copies may temporarily differ until the changes are propagated and synchronized. However, over time, the
+        system ensures eventual consistency by propagating and merging the changes made by different users.
+      </p>
     </chapter>
+
+    블록체인은 분산시스템이므로 기본적으로 BASE의 특성을 보임
+    <list>
+      <li><b>Basically Available</b>: 블록체인 네트워크의 노드들은 각기 원장(ledger)의 복사본을 저장한다. 일부 노드의 장애 상황을 허용한다.</li>
+      <li><b>Soft State</b>: 각 노드가 저장 중인 원장은 일관적이지 않을 수 있다. 그러나 ‘궁극적 일관성’에 의해 과거의 블록 및 트랜잭션은 하나의 상태로 합의하게 된다.</li>
+      <li><b>Eventually Consistency</b>: 트랜잭션과 블록은 송신자로부터 다른 노드들에게 브로드캐스트된다. 이 과정에서 상태는 일시적으로 불일치일 수 있으나, 궁극적으로는 일관성을 찾는다.
+      </li>
+    </list>
+
+    다만, 일부분은 ACID에 가까운 특성을 보임
+    <list>
+      <li><b>Strong Isolation</b>: 블록체인의 트랜잭션은 블록에 담긴 순서에 따라 순차적으로, 즉 직렬적으로 수행된다. 높은 수준의 고립성을 보인다.</li>
+      <li><b>Atomicity &amp; Consistency</b>: 트랜잭션은 순차적으로 수행되며 이전 트랜잭션의 처리가 완료되기 전까지 다음 트랜잭션은 수행될 수 없다.</li>
+      <li><b>Durability</b>: 트랜잭션은 블록에 담겨 모든 다음 블록들의 상태에 영구적으로 반영.</li>
+    </list>
+
+
+    <chapter id="acid_compared_with_base" title="ACID compared with BASE">
+      <table>
+        <tr>
+          <td>_</td>
+          <td>ACID</td>
+          <td>BASE</td>
+        </tr>
+        <tr>
+          <td>Scale</td>
+          <td>Scales vertically</td>
+          <td>Scales horizontally</td>
+        </tr>
+        <tr>
+          <td>Flexibility</td>
+          <td>Less flexible. Blocks specific records from other applications when processing.</td>
+          <td>More flexible. Allows multiple applications to update the same record simultaneously.</td>
+        </tr>
+        <tr>
+          <td>Performance</td>
+          <td>Performance decreases when processing large volumes of data.</td>
+          <td>Capable of handling large, unstructured data with high throughput.</td>
+        </tr>
+        <tr>
+          <td>Synchronization</td>
+          <td>Yes. Adds delay when synchronizing.</td>
+          <td>No synchronization at the database level.</td>
+        </tr>
+      </table>
+
+      <p>
+        It’s harder to scale an ACID database transaction model because it focuses on consistency. Only one transaction is allowed for any
+        record at any moment, which makes horizontal scaling more challenging.
+        Alternately, you can scale the BASE database model horizontally because it doesn’t need to maintain strict consistency. Adding
+        multiple nodes across the database cluster allows the BASE model to improve its data availability.
+      </p>
+
+      <p>
+        ACID databases are less flexible when handling data. It must guarantee immediate consistency,
+        an ACID database may restrict access to some applications if it experiences network or power outages. Similarly, applications must
+        wait for their turn to update data if other software modules are processing a particular record. Conversely, BASE databases are more
+        flexible. Rather than imposing strict restrictions, BASE allows applications to modify records when they are available.
+      </p>
+
+      <p>
+        An ACID database needs a synchronization mechanism to commit changes from a transaction and reflect them in all associated records.
+        At the same time, it must lock the particular record from other parties until the transaction completes or is discarded.
+        Meanwhile, a BASE database runs without locking the records, synchronizing them eventually without time guarantees.
+        When working with BASE databases, developers know there might be inconsistencies when processing certain records and take the
+        necessary precautions in the application.
+      </p>
+
+      <p>
+        ACID is the ideal option for enterprise applications that require data consistency, reliability, and predictability.
+        For example, banks use an ACID database to store customer transactions because data integrity is the top priority.
+        Meanwhile, BASE databases are a better option for online analytical processing of less structured, high-volume data.
+        For example, ecommerce websites use BASE databases to update product prices, which change frequently.
+        In this case, pricing accuracy is less vital than allowing all customers real-time access to the product price.
+      </p>
+    </chapter>
+  </chapter>
 </topic>

@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
-<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="Software Design Patterns" id="Design-pattern">
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic id="Design-pattern"
+       title="Software Design Patterns"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-    <p>Design patterns differ by their complexity, level of detail and scale of applicability to the entire system being
-        designed. I like the analogy to road construction: you can make an intersection safer by either installing some
-        traffic lights or building an entire multi-level interchange with underground passages for pedestrians.
+  <p>Design patterns differ by their complexity, level of detail and scale of applicability to the entire system being
+    designed. I like the analogy to road construction: you can make an intersection safer by either installing some
+    traffic lights or building an entire multi-level interchange with underground passages for pedestrians.
 
-        The most basic and low-level patterns are often called <i>idioms</i>. They usually apply only to a single
-        programming
-        language.
+    The most basic and low-level patterns are often called <i>idioms</i>. They usually apply only to a single
+    programming
+    language.
 
-        The most universal and high-level patterns are <i>architectural patterns</i>. Developers can implement these
-        patterns
-        in virtually any language. Unlike other patterns, they can be used to design the architecture of an entire
-        application.
+    The most universal and high-level patterns are <i>architectural patterns</i>. Developers can implement these
+    patterns
+    in virtually any language. Unlike other patterns, they can be used to design the architecture of an entire
+    application.
 
-        In addition, all patterns can be categorized by their intent, or purpose. This book covers three main groups of
-        patterns:
-    </p>
-    <list>
-        <li>
-            <b>Creational patterns</b> provide object creation mechanisms that increase flexibility and reuse of
-            existing
-            code.
-        </li>
+    In addition, all patterns can be categorized by their intent, or purpose. This book covers three main groups of
+    patterns:
+  </p>
+  <list>
+    <li>
+      <b>Creational patterns</b> provide object creation mechanisms that increase flexibility and reuse of
+      existing
+      code.
+    </li>
 
-        <li>
-            <b>Structural patterns</b> explain how to assemble objects and classes into larger structures, while keeping these
-            structures flexible and efficient.
-        </li>
+    <li>
+      <b>Structural patterns</b> explain how to assemble objects and classes into larger structures, while keeping these
+      structures flexible and efficient.
+    </li>
 
-        <li> <b>Behavioral patterns</b> take care of effective communication and the assignment of responsibilities between
-            objects.
-        </li>
-    </list>
+    <li><b>Behavioral patterns</b> take care of effective communication and the assignment of responsibilities between
+      objects.
+    </li>
+  </list>
 
 </topic>
