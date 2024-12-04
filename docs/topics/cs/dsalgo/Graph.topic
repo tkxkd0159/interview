@@ -5,7 +5,15 @@
        title="Graph"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-  <p>Adjacency List, Adjacency Matrix</p>
+  <chapter title="Types" id="types">
+    <list>
+      <li>Directed / Undirected Graph</li>
+      <li>Cyclic / Acyclic Graph</li>
+      <li>Weighted / Unweighted Graph</li>
+    </list>
+  </chapter>
+
+  Implementation:
   <list>
     <li>Adjacency Matrix: represent a graph as n*n matrix. only use when the number of vertex is not too big. Time complexity: O(V^2)</li>
     <li>Adjacency List: retrieve faster than adjacency matrix. Time complexity: O(V+E)</li>

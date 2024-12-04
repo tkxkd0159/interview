@@ -11,8 +11,9 @@
     <toc-element topic="Computer-architecture.topic"/>
     <toc-element topic="DS-Algo-Intro.topic">
       <toc-element topic="Array.topic"/>
-      <toc-element topic="Tree.topic"/>
-      <toc-element topic="Graph.topic"/>
+      <toc-element topic="Graph.topic">
+        <toc-element topic="Tree.topic"/>
+      </toc-element>
       <toc-element topic="Sorting.topic"/>
       <toc-element topic="Search.topic"/>
       <toc-element topic="Greedy.topic"/>

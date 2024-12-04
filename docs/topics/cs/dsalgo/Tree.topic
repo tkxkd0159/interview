@@ -8,6 +8,11 @@
 
   <show-structure depth="2"/>
 
+  <p>
+    A tree is a special type of <b>graph</b> that is connected, directed and acyclic. Every node except root has exactly one parent, and each node can have zero or more children.
+    There is an unique path between the root and any other node.
+  </p>
+
   <chapter id="binary_tree" title="Binary Tree">
     <list>
       <li>Full Binary Tree: Every node has either 0 or 2 children</li>
@@ -31,6 +36,18 @@
     </chapter>
 
     <chapter id="bst_based_map" title="BST-based Map">
+
+    </chapter>
+
+    <chapter title="B-tree" id="b_tree">
+
+    </chapter>
+
+    <chapter title="AVL Tree" id="avl_tree">
+
+    </chapter>
+
+    <chapter title="Red-Black Tree" id="red_black_tree">
 
     </chapter>
   </chapter>
