@@ -3,7 +3,8 @@
   SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
 <topic id="Tree"
        title="Tree"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
   <show-structure depth="2"/>
 
@@ -19,9 +20,9 @@
     <p>
       Ordered/Sorted Binary Tree. Left subtree are smaller than right subtree.
     </p>
-    <code-block collapsed-title="Example" collapsible="true" lang="go" src="$WRS_MODULE$/code/dsalgo/bst-range.go"></code-block>
 
     <chapter id="search_range" title="Search Range">
+      <code-block collapsed-title="Example" collapsible="true" lang="go" src="$WRS_MODULE$/code/dsalgo/bst-range.go"></code-block>
 
     </chapter>
 
@@ -67,21 +68,5 @@
 
   <chapter id="segment_tree" title="Segment Tree">
 
-  </chapter>
-
-  <chapter id="depth_first_search" title="Depth-First Search">
-    <p>
-      DFS is an algorithm for traversing or searching tree or graph data structures.
-    </p>
-
-    <p>
-      <b>Iterative DFS</b>
-    </p>
-  </chapter>
-
-  <chapter id="breadth_first_search" title="Breadth-First Search">
-    <p>
-      BFS is an algorithm for traversing or searching tree or graph data structures.
-    </p>
   </chapter>
 </topic>

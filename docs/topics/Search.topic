@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Search" id="Search">
+
+  <chapter id="depth_first_search" title="Depth-First Search">
+    <p>
+      DFS is an algorithm for traversing or searching tree or graph data structures.
+    </p>
+
+    <p>
+      <b>Iterative DFS</b>
+    </p>
+
+    <chapter title="Matrix" id="matrix-dfs">
+
+    </chapter>
+  </chapter>
+
+  <chapter id="breadth_first_search" title="Breadth-First Search">
+    <p>
+      BFS is an algorithm for traversing or searching tree or graph data structures.
+    </p>
+
+    <chapter title="Matrix" id="matrix-bfs">
+
+    </chapter>
+  </chapter>
+
+  <chapter title="Backtracking" id="backtracking">
+    <chapter id="maze" title="Maze">
+
+    </chapter>
+
+    <chapter id="subsets" title="Subsets">
+
+    </chapter>
+
+    <chapter id="combination" title="Combination">
+
+    </chapter>
+
+    <chapter id="permutation" title="Permutation">
+
+    </chapter>
+  </chapter>
+</topic>

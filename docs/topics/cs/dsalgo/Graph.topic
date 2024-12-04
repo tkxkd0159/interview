@@ -6,14 +6,10 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
   <p>Adjacency List, Adjacency Matrix</p>
-
-  <chapter id="dfs" title="Matrix Depth-First Search">
-
-  </chapter>
-
-  <chapter id="bfs" title="Matrix Breadth-First Search">
-
-  </chapter>
+  <list>
+    <li>Adjacency Matrix: represent a graph as n*n matrix. only use when the number of vertex is not too big. Time complexity: O(V^2)</li>
+    <li>Adjacency List: retrieve faster than adjacency matrix. Time complexity: O(V+E)</li>
+  </list>
 
   <chapter id="dijkstra_s" title="Dijkstra's Algorithm">
 
@@ -24,10 +20,6 @@
   </chapter>
 
   <chapter id="kruskal_s_algorithm" title="Kruskal's Algorithm">
-
-  </chapter>
-
-  <chapter id="topological_sorting" title="Topological Sorting">
 
   </chapter>
 </topic>

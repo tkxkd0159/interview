@@ -5,5 +5,39 @@
        title="Sorting"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-  <p>Start typing here...</p>
+  <chapter title="Random Access" id="normal">
+    <chapter title="Selection sort" id="selection_sort">
+
+    </chapter>
+
+    <chapter title="Insertion sort" id="insertion_sort">
+
+    </chapter>
+
+    <chapter title="Bubble sort" id="bubble_sort">
+
+    </chapter>
+    <chapter title="Quick sort" id="quick_sort">
+
+    </chapter>
+
+    <chapter title="Heap sort" id="heap_sort">
+
+    </chapter>
+
+  </chapter>
+
+  <chapter title="Merge sort" id="merge_sort">
+
+  </chapter>
+  <chapter title="Counting sort" id="counting_sort">
+
+  </chapter>
+
+  <chapter title="Graph" id="graph">
+    <chapter title="Topological sort" id="topological_sort">
+
+    </chapter>
+  </chapter>
+
 </topic>

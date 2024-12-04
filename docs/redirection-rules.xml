@@ -10,4 +10,8 @@
     <description>Created after removal of "Extending Kubernetes " from interview</description>
     <accepts>Extending-Kubernetes.html</accepts>
   </rule>
+  <rule id="72df519c">
+    <description>Created after removal of "Backtracking" from interview</description>
+    <accepts>Backtracking.html</accepts>
+  </rule>
 </rules>
