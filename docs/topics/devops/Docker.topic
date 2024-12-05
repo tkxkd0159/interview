@@ -3,7 +3,76 @@
   SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
 <topic id="Docker"
        title="Docker"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-  <p>Start typing here...</p>
+
+  <chapter title="Container" id="container">
+    <chapter title="VM vs Container" id="vm_vs_container">
+      <img src="$WRS_MODULE$/images/devops/docker-vm.png" alt="VM vs Container"/>
+      <deflist collapsible="true">
+        <def title="CPU Privilege Ring" id="cpu-privilege-ring">
+          <list>
+            <li>Ring 0: This is called as <b>kernel mode.</b> It has direct access to all hardware and can execute any CPU instruction.
+              Typically used by the OS system kernel
+            </li>
+            <li>Ring 1: Less privileged than Ring 0. Used for device drivers and other low-level operations that do not require full kernel
+              privileges.
+            </li>
+            <li>Ring 2: Less privileged than Ring 1. Often used for services and operations that require more privileges than user
+              applications but less than device drivers
+            </li>
+            <li>Ring 3: The least privileged level, often called <b>user mode.</b> It has restricted access to hardware and must use system
+              calls to request servies from the OS.
+            </li>
+          </list>
+        </def>
+        <def title="Virtualization" id="virtualization">
+          <img src="$WRS_MODULE$/images/devops/devops-vmtypes.jpeg" alt="vm types"/>
+          <list>
+            <li><b>Paravirtualization</b> is virtualization in which the guest operating system (the one being virtualized) is aware that it
+              is a
+              guest and accordingly has drivers that, instead of issuing hardware commands, simply issue commands directly to the host
+              operating system. This also includes memory and thread management as well, which usually require unavailable privileged
+              instructions in the processor.
+            </li>
+            <li><b>Full Virtualization</b> is virtualization in which the guest operating system is unaware that it is in a virtualized
+              environment, and therefore hardware is virtualized by the host operating system so that the guest can issue commands to what
+              it thinks is actual hardware, but really are just simulated hardware devices created by the host.
+            </li>
+            <li><b>Hardware-Assisted Virtualization</b> is a type of Full Virtualization where the microprocessor architecture has special
+              instructions to aid the virtualization of hardware(e.g. Intel VT-x, AMD-V). These instructions might allow a virtual context
+              to be setup so that the
+              guest can execute privileged instructions directly on the processor without affecting the host. Such a feature set is often
+              called a Hypervisor. <u>it reduces overhead compared to traditional full virtualization, as the CPU natively supports
+                virtualization tasks</u>.
+            </li>
+          </list>
+        </def>
+      </deflist>
+
+      <p>
+        Virtualization은 물리적인 컴퓨팅 자원 (CPU, Disk, Network 등)을 가상화하여 여러개의 실행환경(Tenant)이 공유하여 자원을 효율적으로 사용할 수 있게 해주는 것이다. 물리적인 컴퓨팅 자원을 가상화한다는 것은
+        각 tenant들이 서로의 존재를 모르도록 격리되어야 함을 의미한다. 일반적이고 쉽게 이해할 수 있는 가상화 기술로는 Virtual Machine이 있다. VM은 Hypervisor 같은 가상머신을 관리하는 소프트웨어가 돌아가고, 해당
+        소프트웨어가 제공하는 가상 하드웨어에 Guest OS를 설치해서 사용하는 방식이다.
+      </p>
+      <p>
+        VM 생성 없이 Host OS에 Application을 같이 수행하면 어떨까? Application을 하나의 OS에 같이 수행을 하는 경우엔 Application들이 Storage, Network, CPU, Memory 등을 공유하게되어
+        자원 활용과 보안 문제를 야기한다. 애플리케이션의 실행환경을 가상화하기 위해서는 애플리케이션이 사용하는 CPU, 메모리 등의 자원에 대한 쿼터(Quota)를 설정하고 관리할 수 있어야하며, 서로의 실행환경이 격리되어 있어야 한다.
+        가상머신을 사용하는 경우엔 하드웨어들이 가상화되기 때문에 자연스럽게 실행환경이 격리되고, 각 가상 하드웨어를 제공할 때 쿼터를 제공할 수 있어 간단하다는 장점이 있다. 하지만 다음의 단점들이 있다.
+      </p>
+      <p>
+        우선, 완전한 OS가 설치되기 때문에 최소한으로 필요한 resource quota가 높다. 우분투 리눅스 서버를 올리려고 할 때, 메모리상에 로드되는 내용만해도 500MB 정도가 소모된다. 예를 들어, VM 10개에 똑같이 우분투 리눅스 서버를 올리려고 할 때, 5GB 정도의 메모리가 사용될 수 있다. 물리적인 메모리의 양이 작은 경우 Thrashing을 초래해서 성능 저하가 발생할 수도 있다.
+        또한, virtualization layer를 통하기 때문에 host OS만 사용할 때 대비 I/O같은 동작에 overhead가 발생. 또한, boot time이 길고 guest OS가 늘어날수록 관리가 어렵다.
+      </p>
+      <p>
+        Container의 경우 host OS kernel을 공유하기 때문에 storage, memory usage가 낮다. 또한, 별도의 OS로 booting하지 않기 때문에 실행속도가 빠르다. Hypervisor나 기타 virtualization layer를 거치지 않기 때문에 동작 오버헤드도 적다.
+        단, host OS에 실행환경이 묶이기 때문에 Linux에서 Windows server container같은 것을 실행하려면 역시 VM을 통해 Windows 환경을 띄워줘야 함.
+      </p>
+    </chapter>
+
+    <chapter title="Lifecycle" id="lifecycle">
+      <img src="$WRS_MODULE$/images/devops/docker-lifecycle.png" alt="docker lifecycle"/>
+    </chapter>
+  </chapter>
 </topic>
