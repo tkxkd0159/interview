@@ -72,6 +72,7 @@
     <toc-element topic="Kubernetes.topic">
       <toc-element topic="k8s-cluster.topic"/>
       <toc-element topic="k8s-workload.topic"/>
+      <toc-element topic="k8s-network.topic"/>
       <toc-element topic="k8s-API.topic">
       </toc-element>
       <toc-element topic="k8s-security.topic"/>

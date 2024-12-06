@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Networking" id="k8s-network">
+
+  <show-structure depth="2"/>
+
+  <chapter title="Cluster Networking" id="cluster_networking">
+    <list>
+      <li><b>Highly-coupled container-to-container communications:</b>
+        <p>
+          All containers within a pod behave as if they are on the same host
+          with
+          regard to networking. They can all reach each other's ports on localhost(virtual host). This offers simplicity (static ports know
+          a
+          priori),
+          security (ports bound to localhost are visible within the pod but never outside it), and performance. This also reduces friction
+          for
+          applications moving from the world of uncontainerized apps on physical or virtual hosts. People running application stacks
+          together
+          on the same host have already figured out how to make ports not conflict and have arranged for clients to find them. The approach
+          does reduce isolation between containers within a pod. Besides, the premise of pods is that
+          containers within a pod share some resources (volumes, cpu, ram, etc.) and therefore expect and tolerate reduced isolation.
+          Additionally, the user can control what containers belong to the same pod whereas, in general, they don't control what pods land
+          together on a host.
+        </p>
+      </li>
+      <li><b>Pod-to-Pod communications:</b>
+        <p>
+          each pod is assigned an IP address that is unique and routable within the cluster's virtual network. This is in contrast to a
+          traditional Docker setup where containers get private IPs that are only accessible within the host machine.
+          Kubernetes employs a flat networking model where every pod in the cluster can communicate directly with any other pod using its IP
+          address. This eliminates the need for service discovery tools like Consul or Etcd just for pod-to-pod communication.
+          Running "ip addr show" should work as expected. This would enable all existing naming/discovery mechanisms to work out of the box,
+          including self-registration mechanisms and applications that distribute IP addresses.
+          Publishing pod ports to the host node’s interfaces is still possible (e.g., with NodePort), Kubernetes’s robust networking model
+          significantly reduces the need for such practices.
+          While service discovery is not needed for pod-to-pod communication via IP, Kubernetes provides DNS-based service discovery for
+          accessing a group of pods (e.g., a Service). This is used when applications need to address dynamic or load-balanced sets of pods.
+        </p>
+      </li>
+      <li><b>Pod-to-Service communications: covered by service section:</b>
+        <p>
+          The service abstraction provides a way to group pods under a common access policy (e.g. load-balanced). The implementation of this
+          creates a virtual IP which clients can access and which is transparently proxied to the pods in a Service. Each node runs a
+          kube-proxy process which programs iptables rules to trap access to service IPs and redirect them to the correct backends. This
+          provides a highly-available load-balancing solution with low performance overhead by balancing client traffic from a node on that
+          same node.
+        </p>
+      </li>
+      <li><b>External-to-Service communications: covered by service section:</b>
+        <p>
+          Cloud-Native Kubernetes Load Balancers: Providers like AWS, GCP, and Azure offer managed Kubernetes services (e.g., EKS, GKE, AKS)
+          with native support for LoadBalancer type services:
+          Services of type LoadBalancer now create an external load balancer that targets backend pods directly, bypassing the
+          "double-bounce" issue. So, Traffic does not need to pass through intermediate nodes if the cloud provider supports direct pod
+          networking.
+        </p>
+        <p>
+          Service meshes (e.g., Istio, Linkerd) provide sophisticated ways to expose services externally, integrating with cloud-native load
+          balancers while optimizing traffic routing and security.
+        </p>
+        <p>
+          Ingress controllers (e.g., NGINX, Traefik) and cloud-native ingress solutions (e.g., AWS ALB Ingress Controller, GCP HTTP(S) Load
+          Balancer) handle external traffic more intelligently.
+          These tools offer direct pod routing, SSL termination, and other features, reducing reliance on legacy double-bounce setups.
+        </p>
+      </li>
+    </list>
+
+    <chapter title="The k8s network model" id="the_k_8_s_network_model">
+      <tldr>
+        <p> The network model is implemented by the container runtime on each node. The most common container runtimes use Container Network
+          Interface (CNI) plugins to manage their network and security capabilities. CNI defines a basic execution flow and configuration
+          format for network operations.
+          Many different CNI plugins exist from many different vendors. Some of these provide only basic features of adding and removing
+          network interfaces, while others provide more sophisticated solutions, such as integration with other container orchestration
+          systems, running multiple CNI plugins, advanced IPAM(IP Address Management) features etc.</p>
+      </tldr>
+      <a href="https://kubernetes.io/docs/concepts/services-networking/#the-kubernetes-network-model">Offical Ref.</a>
+
+      <p>
+        Kubernetes is all about sharing machines among applications. Typically, sharing machines requires ensuring that two applications do
+        not try to use the same ports. Coordinating ports across multiple developers is very difficult to do at scale. Dynamic port
+        allocation brings a lot of complications to the system - every application has to take ports as flags, the API servers have to know
+        how to
+        insert dynamic port numbers into configuration blocks, services have to know how to find each other, etc. Rather than deal with
+        this,
+        Kubernetes takes a different approach.
+      </p>
+
+      <p>
+        Kubernetes uses CNI plugins to implement the networking for containers. These plugins define how the
+        container network is implemented and how routing happens across pods and nodes. In other words, it creates the necessary virtual
+        network overlays between pods and across nodes, enabling pod-to-pod communication regardless of where the pods are running.
+      </p>
+      <img src="$WRS_MODULE$/images/devops/k8s-cni-fit.png" alt="k8s cni"/>
+      <p>
+        The ADD command is used to set up the network for a container. When a container is started, the container runtime invokes this
+        command to configure the container's network interface.
+        The CNI plugin receives the ADD command along with JSON configuration file fed by stdin. After successful execution, the plugin returns
+        a result to stdout, typically containing network configuration details such as the IP address assigned to the container.
+      </p>
+
+      <chapter title="k8s IP address ranges" id="k_8_s_ip_address_ranges">
+        <img src="$WRS_MODULE$/images/devops/k8s-cluster.png" alt="k8s cluster"/>
+        <p>
+          Kubernetes clusters require to allocate non-overlapping IP addresses for Pods, Services and Nodes, from a range of available
+          addresses configured in the following components:
+        </p>
+        <list>
+          <li>The network plugin is configured to assign IP addresses to Pods.</li>
+          <li>The kube-apiserver is configured to assign IP addresses to Services.</li>
+          <li>The kubelet or the cloud-controller-manager is configured to assign IP addresses to Nodes.</li>
+        </list>
+        <p>
+          Kubernetes clusters only consider the IP families present on the Pods, Services and Nodes objects, independently of the existing
+          IPs of the represented objects. Per example, a server or a pod can have multiple IP addresses on its interfaces, but only the IP
+          addresses in <b>node.status.addresses</b> or <b>pod.status.ips</b> are considered for implementing the Kubernetes network model
+          and defining the type of the cluster.
+        </p>
+      </chapter>
+    </chapter>
+  </chapter>
+
+  <seealso>
+    <category ref="external">
+      <a href="https://kubernetes.io/docs/concepts/services-networking/">Services, Load Balancing, and Networking</a>
+      <a href="https://www.cni.dev/">The Container Network Interface</a>
+    </category>
+  </seealso>
+</topic>
