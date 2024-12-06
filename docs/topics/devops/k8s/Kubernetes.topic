@@ -8,6 +8,7 @@
   <show-structure depth="2" for="chapter"/>
 
   <chapter id="architecture" title="Architecture">
+    <note><a href="https://kubernetes.io/docs/concepts/architecture/">Cluter Architecture(official)</a></note>
     <img alt="app-env" src="$WRS_MODULE$/images/devops/k8s-intro.svg" width="700"/>
     <p>
       Kubernetes is a portable, extensible platform for managing containerized workloads and
