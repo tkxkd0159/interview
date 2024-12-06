@@ -35,8 +35,8 @@
           address. This eliminates the need for service discovery tools like Consul or Etcd just for pod-to-pod communication.
           Running "ip addr show" should work as expected. This would enable all existing naming/discovery mechanisms to work out of the box,
           including self-registration mechanisms and applications that distribute IP addresses.
-          Publishing pod ports to the host node’s interfaces is still possible (e.g., with NodePort), Kubernetes’s robust networking model
-          significantly reduces the need for such practices.
+          Publishing pod ports to the host node’s interfaces is still possible (e.g., Pod with hostPort, Service with NodePort),
+          Kubernetes’s robust networking model significantly reduces the need for such practices.
           While service discovery is not needed for pod-to-pod communication via IP, Kubernetes provides DNS-based service discovery for
           accessing a group of pods (e.g., a Service). This is used when applications need to address dynamic or load-balanced sets of pods.
         </p>
@@ -100,7 +100,8 @@
       <p>
         The ADD command is used to set up the network for a container. When a container is started, the container runtime invokes this
         command to configure the container's network interface.
-        The CNI plugin receives the ADD command along with JSON configuration file fed by stdin. After successful execution, the plugin returns
+        The CNI plugin receives the ADD command along with JSON configuration file fed by stdin. After successful execution, the plugin
+        returns
         a result to stdout, typically containing network configuration details such as the IP address assigned to the container.
       </p>
 
