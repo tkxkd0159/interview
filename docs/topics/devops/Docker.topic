@@ -82,7 +82,7 @@
         <li>docker0 is default network interface to bridge container(veth) and host machine(eth0)</li>
         <li>To access host from container, Mac and Window can use <code>host.docker.internal</code>. Linux need to add <code>-add-host
           host.docker.internal:host-gateway</code> at run command to use this url.
-          Otherwise, you have to access it directly via the host machine IP.
+          Otherwise, you have to access it directly via the host machine IP or Docker gateway IP(e.g. 172.17.0.1).
         </li>
       </list>
       <img src="$WRS_MODULE$/images/devops/docker-network.png" alt=""/>
