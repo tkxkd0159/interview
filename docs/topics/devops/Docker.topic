@@ -62,17 +62,30 @@
         가상머신을 사용하는 경우엔 하드웨어들이 가상화되기 때문에 자연스럽게 실행환경이 격리되고, 각 가상 하드웨어를 제공할 때 쿼터를 제공할 수 있어 간단하다는 장점이 있다. 하지만 다음의 단점들이 있다.
       </p>
       <p>
-        우선, 완전한 OS가 설치되기 때문에 최소한으로 필요한 resource quota가 높다. 우분투 리눅스 서버를 올리려고 할 때, 메모리상에 로드되는 내용만해도 500MB 정도가 소모된다. 예를 들어, VM 10개에 똑같이 우분투 리눅스 서버를 올리려고 할 때, 5GB 정도의 메모리가 사용될 수 있다. 물리적인 메모리의 양이 작은 경우 Thrashing을 초래해서 성능 저하가 발생할 수도 있다.
+        우선, 완전한 OS가 설치되기 때문에 최소한으로 필요한 resource quota가 높다. 우분투 리눅스 서버를 올리려고 할 때, 메모리상에 로드되는 내용만해도 500MB 정도가 소모된다. 예를 들어, VM 10개에 똑같이 우분투 리눅스
+        서버를 올리려고 할 때, 5GB 정도의 메모리가 사용될 수 있다. 물리적인 메모리의 양이 작은 경우 Thrashing을 초래해서 성능 저하가 발생할 수도 있다.
         또한, virtualization layer를 통하기 때문에 host OS만 사용할 때 대비 I/O같은 동작에 overhead가 발생. 또한, boot time이 길고 guest OS가 늘어날수록 관리가 어렵다.
       </p>
       <p>
-        Container의 경우 host OS kernel을 공유하기 때문에 storage, memory usage가 낮다. 또한, 별도의 OS로 booting하지 않기 때문에 실행속도가 빠르다. Hypervisor나 기타 virtualization layer를 거치지 않기 때문에 동작 오버헤드도 적다.
+        Container의 경우 host OS kernel을 공유하기 때문에 storage, memory usage가 낮다. 또한, 별도의 OS로 booting하지 않기 때문에 실행속도가 빠르다. Hypervisor나 기타
+        virtualization layer를 거치지 않기 때문에 동작 오버헤드도 적다.
         단, host OS에 실행환경이 묶이기 때문에 Linux에서 Windows server container같은 것을 실행하려면 역시 VM을 통해 Windows 환경을 띄워줘야 함.
       </p>
     </chapter>
 
     <chapter title="Lifecycle" id="lifecycle">
       <img src="$WRS_MODULE$/images/devops/docker-lifecycle.png" alt="docker lifecycle"/>
+    </chapter>
+
+    <chapter title="Network" id="network">
+      <list>
+        <li>docker0 is default network interface to bridge container(veth) and host machine(eth0)</li>
+        <li>To access host from container, Mac and Window can use <code>host.docker.internal</code>. Linux need to add <code>-add-host
+          host.docker.internal:host-gateway</code> at run command to use this url.
+          Otherwise, you have to access it directly via the host machine IP.
+        </li>
+      </list>
+      <img src="$WRS_MODULE$/images/devops/docker-network.png" alt=""/>
     </chapter>
   </chapter>
 </topic>
