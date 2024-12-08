@@ -73,6 +73,16 @@
       </p>
     </chapter>
 
+
+    <chapter title="Docker Image Layer" id="docker_image_layer">
+      <img src="$WRS_MODULE$/images/devops/docker-layers.png" alt="docker layer"/>
+      <p>
+        Layers let you extend images of others by reusing their base layers, allowing you to add only the data that your application needs.
+        This will make builds faster and reduce the amount of storage and bandwidth required to distribute the images.
+        The layer will be stored at <code>/var/lib/docker/overlay2</code> if you use docker default storage driver(OverlayFS).
+      </p>
+    </chapter>
+
     <chapter title="Lifecycle" id="lifecycle">
       <img src="$WRS_MODULE$/images/devops/docker-lifecycle.png" alt="docker lifecycle"/>
     </chapter>
