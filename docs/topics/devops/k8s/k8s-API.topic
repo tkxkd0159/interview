@@ -3,7 +3,8 @@
   SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
 <topic id="k8s-API"
        title="Kubernetes API"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
   <show-structure depth="2" for="chapter"/>
 
@@ -79,7 +80,7 @@
     </chapter>
   </chapter>
 
-  <chapter id="extend_the_kubernetes_api" title="Extend the Kubernetes API">
+  <chapter id="extend_the_kubernetes_api" title="Extend the Kubernetes">
     <list>
       <li><a
         href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#should-i-add-a-custom-resource-to-my-kubernetes-cluster">API
@@ -110,65 +111,67 @@
       </p>
     </chapter>
 
-    <chapter id="api_service" title="API Server Aggregation">
-      Refer to the <a href="https://github.com/kubernetes/sample-apiserver/blob/master/README.md">sample-apiserver</a>
-      Unless you absolutely need apiserver-aggregation, recommend using CRD(e.g., Kubebuilder, operator-sdk) instead of apiserver-builder
-      for building Kubernetes APIs.
-      This approach addresses limitations and feedback from apiserver-builder.
-      Aggregated apiserver empowers you to customize your apiserver to do the following things cannot be achieved by CRD:
-      <list>
-        <li>Makes your apiserver adopt different storage APIs rather than etcdV3</li>
-        <li>Extends long-running subresources/endpoints like websocket for your own resources</li>
-        <li>Integrate your apiserver with whatever other external systems</li>
-      </list>
+    <chapter title="API Extension" id="api_extension">
+      <chapter id="api_service" title="API Server Aggregation">
+        Refer to the <a href="https://github.com/kubernetes/sample-apiserver/blob/master/README.md">sample-apiserver</a>
+        Unless you absolutely need apiserver-aggregation, recommend using CRD(e.g., Kubebuilder, operator-sdk) instead of apiserver-builder
+        for building Kubernetes APIs.
+        This approach addresses limitations and feedback from apiserver-builder.
+        Aggregated apiserver empowers you to customize your apiserver to do the following things cannot be achieved by CRD:
+        <list>
+          <li>Makes your apiserver adopt different storage APIs rather than etcdV3</li>
+          <li>Extends long-running subresources/endpoints like websocket for your own resources</li>
+          <li>Integrate your apiserver with whatever other external systems</li>
+        </list>
 
-      This is my <a href="https://github.com/tkxkd0159/k8s-api-agg">API Aggregation example</a>
+        This is my <a href="https://github.com/tkxkd0159/k8s-api-agg">API Aggregation example</a>
 
-    </chapter>
+      </chapter>
 
-    <chapter id="crd" title="Custom Resource">
-      <p>
-        In Kubernetes, a <a
-        href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#should-i-use-a-configmap-or-a-custom-resource">Custom
-        Resource (CR)</a> is an extension of the Kubernetes API that stores and retrieves
-        structured data.
-        When you create a Custom Resource, you are adding a new endpoint in your Kubernetes API that allows you to manage
-        custom objects.
-      </p>
-      <p>
-        <b>Standard Kubernetes Resources</b> are the built-in resource types that come with Kubernetes out of the
-        box, like Pod,
-        Service, Volume, Namespace, Deployment, and so on(<code>kubectl api-resources -o wide</code>).
-        They have predefined behavior in the Kubernetes API, and the Kubernetes control plane is aware of how to
-        interact with them.
-        For example, when you create a <i>Deployment</i>, the Kubernetes API knows that it should create a <i>ReplicaSet</i>,
-        and the
-        <i>ReplicaSet</i>
-        controller knows that it should create <i>Pods</i>.
-      </p>
-      <p>
-        <b>Custom Resources</b> are user-defined extensions to the Kubernetes API. They let you store and manipulate
-        additional kinds of
-        objects. Custom Resources give you all the power of the Kubernetes API to handle your custom objects.
-        For example, you might create a <b>Database</b> custom resource if you are deploying databases via
-        Kubernetes and want to
-        represent them in your cluster. When you create, update, or delete Custom Resources, you can have a custom
-        controller watching
-        these events and taking action. This combination of a Custom Resource and a custom controller is often used
-        to implement
-        Operators in Kubernetes.
-      </p>
-      <p>
-        In summary, while standard resources are predefined resource types with specific behaviors understood by
-        Kubernetes, Custom Resources are extensions of the Kubernetes API that you define to represent custom objects, often used in
-        conjunction with custom controllers to automate complex application management tasks.
-      </p>
-      <p>
-        You can call your custom resources via the Kubernetes API without any additional configuration.
-        The API endpoint for your custom resource is <b>/apis/GROUP/VERSION/PLURALNAME</b>, which is based on
-        <code>CustomResourceDefinition</code> spec.
-        (e.g., <code>kubectl get --raw /apis/ljs.com/v1alpha1/virtualmachines</code>)
-      </p>
+      <chapter id="crd" title="Custom Resource">
+        <p>
+          In Kubernetes, a <a
+          href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#should-i-use-a-configmap-or-a-custom-resource">Custom
+          Resource (CR)</a> is an extension of the Kubernetes API that stores and retrieves
+          structured data.
+          When you create a Custom Resource, you are adding a new endpoint in your Kubernetes API that allows you to manage
+          custom objects.
+        </p>
+        <p>
+          <b>Standard Kubernetes Resources</b> are the built-in resource types that come with Kubernetes out of the
+          box, like Pod,
+          Service, Volume, Namespace, Deployment, and so on(<code>kubectl api-resources -o wide</code>).
+          They have predefined behavior in the Kubernetes API, and the Kubernetes control plane is aware of how to
+          interact with them.
+          For example, when you create a <i>Deployment</i>, the Kubernetes API knows that it should create a <i>ReplicaSet</i>,
+          and the
+          <i>ReplicaSet</i>
+          controller knows that it should create <i>Pods</i>.
+        </p>
+        <p>
+          <b>Custom Resources</b> are user-defined extensions to the Kubernetes API. They let you store and manipulate
+          additional kinds of
+          objects. Custom Resources give you all the power of the Kubernetes API to handle your custom objects.
+          For example, you might create a <b>Database</b> custom resource if you are deploying databases via
+          Kubernetes and want to
+          represent them in your cluster. When you create, update, or delete Custom Resources, you can have a custom
+          controller watching
+          these events and taking action. This combination of a Custom Resource and a custom controller is often used
+          to implement
+          Operators in Kubernetes.
+        </p>
+        <p>
+          In summary, while standard resources are predefined resource types with specific behaviors understood by
+          Kubernetes, Custom Resources are extensions of the Kubernetes API that you define to represent custom objects, often used in
+          conjunction with custom controllers to automate complex application management tasks.
+        </p>
+        <p>
+          You can call your custom resources via the Kubernetes API without any additional configuration.
+          The API endpoint for your custom resource is <b>/apis/GROUP/VERSION/PLURALNAME</b>, which is based on
+          <code>CustomResourceDefinition</code> spec.
+          (e.g., <code>kubectl get --raw /apis/ljs.com/v1alpha1/virtualmachines</code>)
+        </p>
+      </chapter>
     </chapter>
   </chapter>
 
