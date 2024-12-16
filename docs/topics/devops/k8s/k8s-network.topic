@@ -129,7 +129,8 @@
   <seealso>
     <category ref="external">
       <a href="https://kubernetes.io/docs/concepts/services-networking/">Services, Load Balancing, and Networking</a>
-      <a href="https://www.cni.dev/">The Container Network Interface</a>
+      <a href="https://www.cni.dev/">Container Network Interface</a>
+      <a href="https://kubernetes.io/docs/reference/networking/">k8s Networking Reference</a>
     </category>
   </seealso>
 </topic>
