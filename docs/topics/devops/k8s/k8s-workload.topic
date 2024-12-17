@@ -257,6 +257,7 @@
     <category ref="external">
       <a href="https://www.notion.so/ljswiki/Kubernetes-2961367d9cd7482bbe141ffc8073eef5#150eacd3298d806da113f3603c5381d5">Managing
         Workloads</a>
+      <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/">k8s API Reference</a>
     </category>
   </seealso>
 </topic>

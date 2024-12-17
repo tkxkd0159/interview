@@ -71,8 +71,9 @@
     <toc-element topic="Docker.topic"/>
     <toc-element topic="Kubernetes.topic">
       <toc-element topic="k8s-workload.topic"/>
-      <toc-element topic="k8s-storage.topic"/>
+      <toc-element topic="k8s-service.topic"/>
       <toc-element topic="k8s-network.topic"/>
+      <toc-element topic="k8s-storage.topic"/>
       <toc-element topic="k8s-scheduling.topic"/>
       <toc-element topic="k8s-security.topic"/>
       <toc-element topic="k8s-API.topic"/>
