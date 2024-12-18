@@ -3,7 +3,65 @@
   SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
 <topic id="k8s-scheduling"
        title="Scheduling"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-  <p>Start typing here...</p>
+  <show-structure depth="2" for="chapter"/>
+
+  <chapter title="Assigning Pods to Nodes" id="assigning_pods_to_nodes">
+    <note>Pod-centric</note>
+    <p>
+      Normally, the scheduler will automatically do a reasonable placement (for example, spreading your Pods across nodes so as not place
+      Pods on a
+      node with insufficient free resources). However, there are some circumstances where you may want to control which node the Pod deploys
+      to, for example, to ensure that a Pod ends up on a node with an SSD attached to it, or to co-locate Pods from two different services
+      that communicate a lot into the same availability zone.
+    </p>
+
+    <list>
+      <li>
+        <a href="https://kubernetes.io/docs/tasks/configure-pod-container/assign-pods-nodes/">nodeSelector</a>:
+        the simplest recommended form of node selection constraint. You can add the nodeSelector field to your Pod specification and
+        specify the node labels you want the target node to have. Kubernetes only schedules the Pod onto nodes that have each of the
+        labels you specify.
+      </li>
+      <li>
+        <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity">Affinity and
+          anti-affinity</a>:
+        nodeSelector only selects nodes with all the specified labels. Affinity/anti-affinity gives you more control over the selection
+        logic.
+        You can indicate that a rule is preferred, so that the scheduler still schedules the Pod even if it can't find a matching node.
+        <list>
+          <li><code>nodeAffinity</code>: Node affinity is conceptually similar to nodeSelector, allowing you to constrain which nodes your
+            Pod can be
+            scheduled on based on node labels.
+          </li>
+          <li><code>podAffinity</code>, <code>podAntiAffinity</code>: Inter-pod affinity and anti-affinity allow you to constrain which
+            nodes your Pods can be
+            scheduled on based on the labels of Pods already running on that node, instead of the node labels.
+            So, it allows you to define rules for which Pods can be co-located on a node.
+          </li>
+        </list>
+      </li>
+      <li><a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename">nodeName</a>:
+        <code>nodeName</code> is a more direct form of node selection than <code>affinity</code> or <code>nodeSelector</code>.
+        If the <code>nodeName</code> field is not empty, the scheduler ignores the Pod and the kubelet on the named node tries to place the
+        Pod on that node. Using <code>nodeName</code> overrules using <code>nodeSelector</code> or affinity and anti-affinity rules.
+      </li>
+      <li><a href="https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/">Pod topology spread constraints</a>:
+        You can use topology spread constraints to control how Pods are spread across your cluster among failure-domains such as regions,
+        zones, nodes, or among any other topology domains that you define. You might do this to improve performance, expected availability,
+        or overall utilization.
+      </li>
+    </list>
+  </chapter>
+  <chapter title="Taints &amp; Tolerations" id="taints_amp_tolerations">
+    <note>Node-centric</note>
+    <p>
+      Node affinity is a property of Pods that attracts them to a set of nodes (either as a preference or a hard requirement). On the
+      contrary,
+      <i>Taints</i> allow a node to repel a set of pods. <i>Tolerations</i> are applied to pods. Tolerations allow the scheduler to schedule
+      pods with matching taints. Tolerations allow scheduling but don't guarantee scheduling
+    </p>
+  </chapter>
 </topic>
