@@ -9,7 +9,7 @@
   <show-structure depth="2" for="chapter"/>
 
   <chapter title="Assigning Pods to Nodes" id="assigning_pods_to_nodes">
-    <note>Pod-centric</note>
+    <note>Pod-centric (PodSpec v1 core)</note>
     <p>
       Normally, the scheduler will automatically do a reasonable placement (for example, spreading your Pods across nodes so as not place
       Pods on a
@@ -56,12 +56,44 @@
     </list>
   </chapter>
   <chapter title="Taints &amp; Tolerations" id="taints_amp_tolerations">
-    <note>Node-centric</note>
+    <note>Node-centric (NodeSpec v1 core)</note>
     <p>
       Node affinity is a property of Pods that attracts them to a set of nodes (either as a preference or a hard requirement). On the
       contrary,
       <i>Taints</i> allow a node to repel a set of pods. <i>Tolerations</i> are applied to pods. Tolerations allow the scheduler to schedule
       pods with matching taints. Tolerations allow scheduling but don't guarantee scheduling
     </p>
+    <code-block lang="shell">
+      <![CDATA[
+          kubectl taint nodes <nodename> key1=value1:<effect>
+      ]]>
+    </code-block>
+    <list>
+      <li>Operator:
+        <list>
+          <li><code>Exists</code>: Key and effect must match, in which case no value should be specified.</li>
+          <li><code>Equal</code>: Key, value and effect must match</li>
+        </list>
+      </li>
+      <li>Effect:
+        <list>
+          <li><code>NoExecute</code>:
+            Pods that do not tolerate the taint are evicted immediately.
+            Pods that tolerate the taint without specifying tolerationSeconds in their toleration specification remain bound forever.
+            Pods that tolerate the taint with a specified tolerationSeconds remain bound for the specified amount of time. After that time
+            elapses, the node lifecycle controller evicts the Pods from the node.
+          </li>
+          <li><code>NoSchedule</code>:
+            No new Pods will be scheduled on the tainted node unless they have a matching toleration.
+            <u>Pods currently running on the node are not evicted.</u>
+          </li>
+          <li><code>PereferNoSchedule</code>:
+            PreferNoSchedule is a "soft" version of NoSchedule.
+            The control plane will try to avoid placing a Pod that does not tolerate the taint on the node, but it is not guaranteed.
+          </li>
+        </list>
+      </li>
+    </list>
+    <code-block lang="YAML" src="$WRS_MODULE$/code/k8s/taint.yml" collapsible="true" collapsed-title="pod.spec.tolerations"/>
   </chapter>
 </topic>

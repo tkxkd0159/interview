@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    env: test
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      imagePullPolicy: IfNotPresent
+  tolerations:
+    - operator: Exists   # match any key, value, or effect. In other words, it tolerates any taint
+    - operator: Exists   # match any key, but effect still needs to be matched
+      effect: "NoSchedule"
+    - key: "all-effect-dummy" # match any effect, but key still needs to be matched
+      operator: Exists
+    - key: "example-key"
+      operator: "Exists"
+      effect: "NoSchedule"
+    - key: "key1"
+      operator: "Equal"
+      value: "value1"
+      effect: "NoExecute"
+    - key: "key2"
+      operator: "Equal"
+      value: "value2"
+      effect: "NoExecute"
+      tolerationSeconds: 3600 #  if this pod is running and a matching taint is added to the node, then the pod will stay bound to the node for 3600 seconds, and then be evicted.
