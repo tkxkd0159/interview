@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Debugging" id="k8s-debugging">
+
+    <show-structure depth="2" for="chapter"/>
+
+  <chapter title="Debugging an application" id="debugging_an_application">
+    <a href="https://kubernetes.io/docs/tasks/debug/debug-application/">Official Docs</a>
+    <chapter title="Pod" id="pod">
+
+      <chapter title="Running Pod" id="running_pod">
+        <code-block lang="yaml" src="$WRS_MODULE$/code/k8s/debug-running-pod.yml" collapsed-title="example.yaml" collapsible="true"/>
+        <code-block lang="shell">
+          <![CDATA[
+          kubectl apply -f debug-running-pod.yml
+          kubectl describe pod <deployed-pod-name> # status one of the following: Waiting, Running, Terminated
+
+          # Checking reachable status of the pod
+          kubectl get pod <deployed-pod-name> -o jsonpath='{.status.podIP}'
+          curl <pod-ip>:<port> # in any k8s node
+
+          kubectl run -it --rm debugger --image=alpine --restart=Never sh
+          curl <pod-ip>:<port> # in the debugger pod
+
+
+          # Examining pod logs
+          # --previous flag to see previous container's crash logs
+          kubectl logs [--previous] <deployed-pod-name> <container-name>
+
+          # Executing commands in a running container
+          kubectl exec -it <deployed-pod-name> -c <container-name> -- /bin/bash
+
+          # Debugging using ephemeral containers (network, mounted volumes, process namespace)
+          k debug -it <target-pod-name> --image=busybox --target=<container-name> # you can see nginx process in ephemeral container
+
+          # Debugging using a copy of the Pod
+          kubectl debug <taget-pod> -it --image=alpine --share-processes --copy-to=<debug-pod-name>
+
+          # Debugging a pod with replacing previous container image
+          kubectl debug <taget-pod> --copy-to=<debug-pod-name> --set-image=*=alpine # change the image of all containers to ubuntu
+
+          # Debugging a k8s node
+          kubectl debug node/<node-name> -it --image=ubuntu
+          ]]>
+        </code-block>
+      </chapter>
+    </chapter>
+
+    <chapter title="Init Container" id="init_container">
+
+    </chapter>
+
+    <chapter title="Service" id="service">
+
+    </chapter>
+
+    <chapter title="StatefulSet" id="stateful_set">
+
+    </chapter>
+  </chapter>
+
+  <chapter title="Debugging a cluster" id="debugging_a_cluster">
+
+  </chapter>
+</topic>
