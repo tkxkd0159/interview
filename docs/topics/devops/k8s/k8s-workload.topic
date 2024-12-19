@@ -180,7 +180,12 @@
       of the right kind of pod are running, to match the state you specified.
     </p>
     <chapter id="deployments" title="Deployments">
-      <note>Do not manage ReplicaSets owned by a Deployment.</note>
+      <note>
+        Do not manage ReplicaSets owned by a Deployment.
+        <p>
+          Deployment == ReplicaSet + Rollout(rollback, automatic rolling update)
+        </p>
+      </note>
       <p>
         A Deployment provides declarative updates for Pods and ReplicaSets.
         Deployment is a good fit for managing a stateless application workload on your cluster, where any Pod in
