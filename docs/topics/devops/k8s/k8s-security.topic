@@ -3,7 +3,51 @@
   SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
 <topic id="k8s-security"
        title="Security"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
-  <p>Start typing here...</p>
+  <chapter title="4cs of cloud native security" id="4_cs_of_cloud_native_security">
+    <p>
+      Each layer of the cloud native security model builds on the layers above it. The Code layer benefits from strong base (Cloud,
+      Cluster, Container) security layers. You cannot safeguard against poor security standards in the base layers by addressing security at
+      the Code level.
+    </p>
+    <list>
+      <li>Cloud
+        <list>
+          <li>The foundational layer where your cloud infrastructure resides</li>
+          <li>Includes cloud provider security controls, IAM policies, network security, and encryption at rest</li>
+          <li>Focus on secure configuration of cloud accounts, securing APIs, managing access controls, resource policies, and compliance
+            requirements
+          </li>
+        </list>
+      </li>
+      <li>Cluster
+        <list>
+          <li>The container orchestration layer, typically Kubernetes clusters</li>
+          <li>Involves securing cluster components like control plane, nodes, and network policies</li>
+          <li>Focus on hardening the cluster against unauthorized access and attacks - RBAC, pod security policies, and secure cluster
+            configurations
+          </li>
+        </list>
+      </li>
+      <li>Container
+        <list>
+          <li>The application packaging layer where code runs</li>
+          <li>Encompasses container image security, runtime security, and vulnerability management (e.g. minimal base images, scanning for
+            vulnerabilities, signing images, running as non-root, read-only root filesystems)
+          </li>
+        </list>
+      </li>
+      <li>Code
+        <list>
+          <li>The innermost layer where application code and dependencies live</li>
+          <li>Focuses on secure coding practices, dependency management(+SCA), and SAST/DAST</li>
+          <li>Includes secure API design, input validation, proper error handling, supply chain security, secrets management, and secure
+            CI/CD pipelines
+          </li>
+        </list>
+      </li>
+    </list>
+  </chapter>
 </topic>
