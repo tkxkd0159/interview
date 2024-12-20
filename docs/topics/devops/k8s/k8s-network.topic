@@ -124,6 +124,71 @@
         </p>
       </chapter>
     </chapter>
+
+    <chapter title="DNS" id="dns">
+      <p>
+        k8s set default domain name for host in a pod. Interpreting in the order of <code>{namespace}.svc.cluster.local</code>, <code>svc.cluster.local</code>,
+        <code>cluster.local</code>
+      </p>
+      <code-block lang="Shell" collapsed-title="Service DNS resolution" collapsible="true">
+<![CDATA[
+kubectl create deployment test-deploy --image=nginx --replicas=3 --port=80
+# check the DNS config in /etc/resolv.conf
+
+# check the DNS resolution
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: test-svc-headless
+  name: test-svc-headless
+spec:
+  clusterIP: None
+  ports:
+  - name: 80-80
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: test-deploy
+  type: ClusterIP
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: test-svc
+  name: test-svc
+spec:
+  ports:
+  - name: 80-80
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: test-deploy
+  type: ClusterIP
+status:
+  loadBalancer: {}
+EOF
+
+
+### Test DNS resolution
+kubectl run -it --rm nstest --image=alpine --restart=Never -- sh
+nslookup test-svc-headless # return the pod IPs of Service
+nslookup test-svc          # return the clusterIP of Service
+
+# compare IPs
+kubectl get pods -o jsonpath='{.items[*].status.podIP}'
+kubectl get svc test-svc -o jsonpath='{.spec.clusterIP}'
+]]>
+      </code-block>
+    </chapter>
   </chapter>
 
   <seealso>
