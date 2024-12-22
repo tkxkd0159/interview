@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  # Unique key of the ReplicaSet instance
+  name: replicaset-example
+spec:
+  # 4 Pods should exist at all times.
+  # check how the pods are placed between nodes after cordon or edit the node as unschedulable
+  replicas: 4
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
