@@ -70,7 +70,7 @@
       </li>
     </list>
 
-    <chapter title="The k8s network model" id="the_k_8_s_network_model">
+    <chapter title="K8s Network Model" id="the_k_8_s_network_model">
       <tldr>
         <p> The network model is implemented by the container runtime on each node. The most common container runtimes use Container Network
           Interface (CNI) plugins to manage their network and security capabilities. CNI defines a basic execution flow and configuration
@@ -128,8 +128,28 @@
     <chapter title="DNS" id="dns">
       <p>
         k8s set default domain name for host in a pod. Interpreting in the order of <code>{namespace}.svc.cluster.local</code>, <code>svc.cluster.local</code>,
-        <code>cluster.local</code>
+        <code>cluster.local</code>. Pod's default DNS config set like below. Because of <code>ndots:5</code>, the DNS client will append the
+        search
+        suffix unless it has at least 5 dots in domain name. For example, <code>nslookup my-service.default.svc.cluster.local</code> will
+        look for in the order of
       </p>
+      <list>
+        <li><code>my-service.default.svc.cluster.local.{namespace}.svc.cluster.local</code></li>
+        <li><code>my-service.default.svc.cluster.local.svc.cluster.local</code></li>
+        <li><code>my-service.default.svc.cluster.local.cluster.local</code></li>
+        <li><code>my-service.default.svc.cluster.local</code></li>
+      </list>
+      <p>
+        To avoid meaningless DNS queries, it is recommended to set <code>ndots</code> properly in pod template or add trailing dot in the domain name to
+        use it as FQDN.
+      </p>
+      <code-block lang="yaml">
+<![CDATA[
+nameserver 10.96.0.10
+search default.svc.cluster.local svc.cluster.local cluster.local
+options ndots:5
+]]>
+      </code-block>
       <code-block lang="Shell" collapsed-title="Service DNS resolution" collapsible="true">
 <![CDATA[
 kubectl create deployment test-deploy --image=nginx --replicas=3 --port=80
