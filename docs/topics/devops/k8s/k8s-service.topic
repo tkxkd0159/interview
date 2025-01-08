@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
 <topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
        title="Service" id="k8s-service" help-id="Service">
 
-    <p>Start typing here...</p>
+  <tldr>
+    In Kubernetes, nodes, pods and services all have their own IPs. In many cases, the node IPs, pod IPs, and some service IPs on a cluster
+    will not be routable, so they will not be reachable from a machine outside the cluster, such as your desktop machine.
+  </tldr>
+
+  <list>
+    <li><a href="https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster-services/">Ways</a> to connect to nodes, pods
+      and services from outside the cluster:
+      <list>
+        <li>Access services through public IPs</li>
+        <li>Access services, nodes, or pods using the Proxy Verb -> <a
+          href="https://raw.githubusercontent.com/tkxkd0159/interview/refs/heads/main/docs/code/k8s/svc-apiserver-proxy.sh">Ref.</a></li>
+        <li>Access from a node or pod in the cluster</li>
+      </list>
+    </li>
+  </list>
 
   <seealso>
     <category ref="related">

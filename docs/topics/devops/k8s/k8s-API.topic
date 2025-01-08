@@ -58,6 +58,12 @@
     </tab>
   </tabs>
 
+  <p>
+    There are other URLs not related to resources called <i>non-resource URLs</i> such as <code>/api</code>, <code>/version</code>, <code>/healthz</code>,
+    <code>/livez</code>, <code>/readyz</code>, <code>/metrics</code>.
+  </p>
+
+
   <chapter id="detection_of_changes" title="Detection of Changes">
     <p>
       The Kubernetes API allows clients to make an initial request for an object or a collection,

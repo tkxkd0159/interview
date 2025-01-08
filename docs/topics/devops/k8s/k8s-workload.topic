@@ -244,7 +244,42 @@
     </chapter>
 
     <chapter id="stateful_set" title="StatefulSet">
+      <tldr>
+        A StatefulSet runs a group of Pods, and maintains a sticky identity for each of those Pods. This is useful for managing stateful
+        applications that need persistent storage or a stable, unique network identity.
+      </tldr>
+      <p>
+        <a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSets</a> are valuable for applications that
+        require one or more of the following:
+      </p>
+      <list>
+        <li>Stable, unique network identifiers
+          <code-block lang="shell"><![CDATA[
+<statefulset name>-<ordinal index> # pod name format of statefulset
+<pod name>.<service name>.<namespace>.svc.cluster.local # domain name format of statefulset's pod
+]]></code-block>
+        </li>
+        <li>Stable, persistent storage.
+          <code-block lang="shell"><![CDATA[
+<volume-claim-name>-<statefulset name>-<ordinal index> # pvc name format of statefulset
+]]></code-block>
+        </li>
+        <li>Ordered, graceful deployment and scaling.</li>
+        <li>Ordered, automated rolling updates.</li>
+      </list>
 
+      <code-block lang="yaml" src="$WRS_MODULE$/code/k8s/sts-create.yml" collapsible="true" collapsed-title="Statefulset Basic"/>
+      <p>
+        In the above example, the pods are created i order(web-0, web-1, ...). If you increase <code>replica</code>, it scale out in order(4
+        to 6 pods). If you scale in or delete a StatefulSet, the control plane deleted one Pod at a time, in reverse order with respect to
+        its ordinal index, and it waited for each Pod to be completely shut down before deleting the next one. In addition, The Pods in the
+        StatefulSet are updated in reverse ordinal order under <code>updateStrategy</code>.
+      </p>
+      <p>
+        StatefulSet also provides a staable storage for each pod using <code>volumeClaimTemplates</code>. The <code>PersistentVolumes</code>
+        mounted to the Pods of a StatefulSet are not deleted when the StatefulSet's Pods are deleted. This is still true when Pod deletion
+        is caused by scaling the StatefulSet down.
+      </p>
     </chapter>
 
     <chapter id="daemon_set" title="DaemonSet">
