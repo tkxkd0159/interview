@@ -11,7 +11,8 @@
     - [ ] Introduction to Algorithms 4th (2022)
     - [ ] Algorithms 4th (2011)
 * Platforms
-    * [Algo Expert](https://www.algoexpert.io/product) : USA
+    * [Hello Interview](https://www.hellointerview.com/) : System Design
+    * [Algo Expert](https://www.algoexpert.io/product) : USA - $119
     * [LeetCode](https://leetcode.com/) : USA
       * [Leetcode 75](https://leetcode.com/studyplan/leetcode-75/) 
       * [Blind 75](https://leetcode.com/problem-list/oizxjoit/)
