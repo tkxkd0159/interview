@@ -54,7 +54,7 @@
       <toc-element topic="web-dp.topic"/>
     </toc-element>
     <toc-element topic="System-design.topic">
-      <toc-element topic="MSA.topic">
+      <toc-element topic="msa-intro.topic">
         <toc-element topic="msa-data-persistence.topic"/>
       </toc-element>
     </toc-element>

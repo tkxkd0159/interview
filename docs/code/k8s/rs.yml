@@ -3,17 +3,19 @@ kind: ReplicaSet
 metadata:
   # Unique key of the ReplicaSet instance
   name: replicaset-example
+  labels:
+    type: nginx-rs
 spec:
   # 4 Pods should exist at all times.
   # check how the pods are placed between nodes after cordon or edit the node as unschedulable
   replicas: 4
   selector:
     matchLabels:
-      app: nginx
+      app: nginx-pod
   template:
     metadata:
       labels:
-        app: nginx
+        app: nginx-pod
     spec:
       containers:
         - name: nginx

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic id="msa-data-persistence"
+       title="Patterns for Data Persistence"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
+
+  <show-structure depth="2"/>
+
+  <chapter id="shared_database_per_service" title="Shared-database-per-service">
+    <p>
+      In the shared-database-per-service pattern, the same database is shared by several microservices. Make sure that you avoid hot
+      tables (single tables that are shared among multiple microservices). This pattern does not reduce dependencies between development
+      teams, and introduces runtime coupling because all microservices share the same database. For example, long-running "Sales"
+      transactions can lock the "Customer" table and this blocks the "Customer" transactions. And, every service has a potential entry point
+      to all parts of the database, increasing the risk of accidental or malicious data access beyond the service's domain.
+    </p>
+  </chapter>
+
+  <chapter id="database_per_service" title="Database-per-service">
+    <p>
+      Keep each microservice’s persistent data private to that service and accessible only via its API. A service’s transactions only
+      involve its database.
+      There are a few different ways to keep a service’s persistent data private. You do not need to provision a database server for each
+      service. For example, if you are using a relational database then the options are:
+    </p>
+    <list>
+      <li>Private-tables-per-service – each service owns a set of tables that must only be accessed by that service</li>
+      <li>Schema-per-service – each service has a database schema that’s private to that service</li>
+      <li>Database-server-per-service – each service has it’s own database server.</li>
+    </list>
+    <p>
+      Private-tables-per-service and schema-per-service have the lowest overhead. Using a schema per service is appealing since it makes
+      ownership clearer. Some high throughput services might need their own database server.
+      It is a good idea to create barriers that enforce this modularity. You could, for example, assign a different database user id to each
+      service and use a database access control mechanism such as grants. Without some kind of barrier to enforce encapsulation, developers
+      will always be tempted to bypass a service’s API and access it’s data directly.
+    </p>
+
+    <b> Restrictions:</b>
+    <list>
+      <li>Services must be loosely coupled so that they can be developed, deployed and scaled independently</li>
+      <li>Some business transactions must enforce invariants that span multiple services. For example, the Place Order use case must verify
+        that a new Order will not exceed the customer’s credit limit. Other business transactions, must update data owned by multiple
+        services.
+      </li>
+      <li>Some business transactions need to query data that is owned by multiple services. For example, the View Available Credit use must
+        query the Customer to find the creditLimit and Orders to calculate the total amount of the open orders.
+      </li>
+      <li>Some queries must join data that is owned by multiple services. For example, finding customers in a particular region and their
+        recent orders requires a join between customers and orders.
+      </li>
+      <li>Databases must sometimes be replicated and sharded in order to scale.</li>
+      <li>Different services have different data storage requirements. For some services, a relational database is the best choice. Other
+        services might need a NoSQL database such as MongoDB, which is good at storing complex, unstructured data, or Neo4J, which is
+        designed to efficiently store and query graph data.
+      </li>
+    </list>
+
+    <chapter id="saga_pattern" title="Saga">
+      <p>
+        You have applied the <b>Database per Service pattern</b>. Each service has its own database. Some business transactions,
+        however, span
+        multiple service so you need a mechanism to implement transactions that span services. For example, let’s imagine that you are
+        building an e-commerce store where customers have a credit limit. The application must ensure that a new order will not exceed the
+        customer’s credit limit. Since Orders and Customers are in different databases owned by different services the application cannot
+        simply use a local ACID transaction.
+      </p>
+      <p>
+        A <b>saga</b> is a sequence of local transactions. Each local transaction updates the database and publishes a message or event to
+        trigger
+        the next local transaction in the saga. If a local transaction fails because it violates a business rule then the saga executes a
+        series of compensating transactions that undo the changes that were made by the preceding local transactions.
+      </p>
+      There are two ways of coordination sagas:
+      <list>
+        <li>Choreography - each local transaction publishes domain events that trigger local transactions in other services</li>
+        <li>Orchestration - an orchestrator (object) tells the participants what local transactions to execute</li>
+      </list>
+
+      <img src="$WRS_MODULE$/images/dev/msa/saga-chore.png" alt=""/>
+      <img src="$WRS_MODULE$/images/dev/msa/saga-orche.png" alt=""/>
+    </chapter>
+
+    <chapter title="2PC" id="2_pc">
+      <p>
+        You can use Two-Phase Commit (2PC) to maintain data consistency across multiple services.
+        For example, condiser a financial application where a transaction involves debiting an amount from one account in one service and
+        crediting it to another account in a different service.
+        Both operations must succeed or fail together to maintain data consistency.
+      </p>
+      <b>Prepare Phase:</b>
+      <p>
+        The coordinator sends a prepare request to all participants, asking them to prepare to commit the transaction.
+        Each participant performs the necessary checks and operations to determine if it can commit the transaction. This may involve
+        locking resources, validating constraints, ensuring data integrity.
+        if a participant can commit, it sends a "vote to commit" message back to the coordinator. If not, it sends a "vote to abort"
+        message.
+      </p>
+      <p>
+        If the coordinator receives a "vote to commit" message from all participants, it sends a "commit" message to all participants,
+        instructing them to finalize the transaction.
+        Each participant commits the changes to its local database. If any participant votes to abort, or if there is a failure in
+        communication, the coordinator sends an "abort" message to all participants, instructing them to roll back any changes.
+      </p>
+      <p>
+        2PC guarantess atomicity and data consistency, but it has some drawbacks:
+      </p>
+      <list>
+        <li>Performance Overhead: the protocol can introduce significant latency due to the need for multiple rounds of communication and
+          waiting for responses from all participants. The process even can be blocked if a participant or the coordinator fails during the
+          process.
+        </li>
+        <li>Scalability: As the number of participants increases, the complexity oand potential for delays also increase</li>
+      </list>
+    </chapter>
+  </chapter>
+
+
+  <chapter id="api_composition" title="API Composition">
+
+  </chapter>
+
+  <chapter id="cqrs" title="CQRS">
+    <tldr>
+      <p>Command Query Responsibility Segregation</p>
+      <p>The event sourcing pattern is typically used with the CQRS to decouple read from write workloads</p>
+    </tldr>
+  </chapter>
+
+  <seealso>
+    <category ref="external">
+      <a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/welcome.html">AWS- Patterns for
+        enabling data persistence</a>
+    </category>
+  </seealso>
+</topic>
