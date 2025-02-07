@@ -67,17 +67,21 @@
   <chapter id="detection_of_changes" title="Detection of Changes">
     <p>
       The Kubernetes API allows clients to make an initial request for an object or a collection,
-      and then to track changes since that initial request: <code>watch</code>.
-    </p>
-    <p>
-      To make this change tracking possible, every Kubernetes object has a <code>resourceVersion</code> field representing the version of
-      that resource as stored in the underlying persistence layer.
-      The client can use that <code>resourceVersion</code> to initiate a watch against the API server.
+      and then to track changes since that initial request: <code>watch</code>. To make this change tracking possible, every Kubernetes
+      object has a <code>resourceVersion</code> field representing the version of that resource as stored in the underlying persistence
+      layer. The client can use that <code>resourceVersion</code> to initiate a watch against the API server.
     </p>
     <chapter id="resource_version" title="Resource Version">
-
       <p>
-        <code>generation</code>
+        <code>resourceVersion</code> is an opaque value that represents the internal version of this object that can be used by clients to determine when objects have
+        changed. May be used for optimistic concurrency, change detection, and the watch operation on a resource or set of resources.
+        Clients must treat these values as opaque and passed unmodified back to the server. They may only be valid for a particular resource
+        or set of resources. Populated by the system. Read-only. Value must be treated as opaque by clients
+      </p>
+      <p>
+        <b>generation</b> is a field that is incremented each time the object <code>spec</code> is modified. It's a sequence number
+        representing a specific generation of the desired state. Populated by the system. Read-only.
+        <b>observedGeneration</b> is the most recent generation observed by the controller.
       </p>
     </chapter>
 
