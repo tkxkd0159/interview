@@ -3,7 +3,7 @@
   SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
 <topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-       title="Access Control" id="k8s-Access-Control">
+       title="Access Control" id="k8s-security-Access-Control" help-id="k8s-Access-Control">
 
   <show-structure depth="2" for="chapter"/>
 
@@ -11,20 +11,35 @@
     <list>
       <li><a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/#referring-to-subjects">Subject</a>
         <list>
-          <li>Users are authenticated based on the Common Name (CN) field in a client certificate.</li>
-          <li>Group in Kubernetes is a logical way to manage permissions for multiple users at once. Users can belong to one or more
+          <li><code>Users</code> are authenticated based on the Common Name (CN) field in a client certificate.</li>
+          <li><code>Group</code> in Kubernetes is a logical way to manage permissions for multiple users at once. Users can belong to one or
+            more
             groups. Groups are specified in the Organization (O) field of the certificate.
           </li>
-          <li>ServiceAccount is a special type of Kubernetes account used to provide identity for processes running in Pods. If you don't
-            specify a service account when creating a Pod, it will use the <code>default</code> service account in the namespace.
-            Every namespace has a default service account, and Kubernetes automatically associates it with Pods in that namespace. The
-            <code>default</code> service accounts in each namespace get no permissions by default other than the default API discovery
-            permissions that Kubernetes grants to all authenticated principals.
+          <li>
+            <p>
+              <code>ServiceAccount</code> is a special type of Kubernetes account used to provide identity for processes running in Pods. If
+              you don't specify a service account when creating a Pod, it will use the <code>default</code> service account in the
+              namespace. Every namespace has a default service account, and Kubernetes automatically associates it with Pods in that namespace.
+            </p>
+            <p>
+              The
+              <code>default</code> service accounts in each namespace get no permissions by default other than the default API discovery
+              permissions that Kubernetes grants to all authenticated principals. However, it only scopes the permissions against Kubernetes
+              API. The ability for pods to communicate with each other over thet network is independent of the <code>ServiceAccount</code>.
+              Kubernetes allows all pods to communicate with each other by default. If you need to control this, you would use <code>NetworkPolicy</code>
+              or third-party sidecar like <code>Istio</code>, <code>Envoy</code>, <code>kube-rbac-proxy</code>.
+            </p>
+            <list>
+              <li><code>kubelet</code> mount a default ServiceAccount credential automatically on <code>/var/run/secrets/kubernetes.io/serviceaccount/token</code>
+                of the pod unless you set <code>automountServiceAccountToken: false</code></li>
+            </list>
           </li>
         </list>
       </li>
-      <li>A Role always sets permissions within a particular namespace</li>
-      <li>ClusterRole is a non-namespaced resource. A ClusterRole can be used to grant the same permissions as a Role. Because ClusterRoles
+      <li>A <code>Role</code> always sets permissions within a particular namespace</li>
+      <li><code>ClusterRole</code> is a non-namespaced resource. A ClusterRole can be used to grant the same permissions as a Role. Because
+        ClusterRoles
         are cluster-scoped, you can also use them to grant access to cluster-scoped resources (like nodes), non-resource endpoints (like
         /healthz), namespaced resources (like Pods), across all namespaces
       </li>
