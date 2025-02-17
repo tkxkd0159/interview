@@ -103,24 +103,6 @@
         VS ConfigMap</a></li>
     </list>
 
-    <chapter id="operator_pattern" title="Operator Pattern">
-      <note>While all Operators are controllers, not all controllers are Operators</note>
-
-      <p>
-        An <i>Operator</i> is a pattern for extending the Kubernetes API that was developed by CoreOS in 2016. It
-        includes one or more custom resources and a controller which manages those resources. The Operator pattern aims to capture the
-        key aim of a human operator who is managing a service or set of services. In essence, an Operator is a way of building a custom
-        controller and packaging it with the <i>CRDs (Custom Resource Definitions)</i> that the controller watches. It's a higher level
-        concept
-        that uses controllers as building blocks.
-      </p>
-      <p>
-        For example, a Prometheus Operator creates, configures, and manages Prometheus monitoring instances. It
-        includes a custom resource (the Prometheus server) and a custom controller. The controller watches for changes to Prometheus
-        custom resources, then creates, updates, or deletes Prometheus instances as needed.
-      </p>
-    </chapter>
-
     <chapter title="API Extension" id="api_extension">
       <chapter id="api_service" title="API Server Aggregation">
         Refer to the <a href="https://github.com/kubernetes/sample-apiserver/blob/master/README.md">sample-apiserver</a>

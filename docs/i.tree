@@ -75,7 +75,9 @@
       <toc-element topic="k8s-network.topic"/>
       <toc-element topic="k8s-storage.topic"/>
       <toc-element topic="k8s-scheduling.topic"/>
-        <toc-element topic="k8s-API.topic"/>
+        <toc-element topic="k8s-API.topic">
+            <toc-element topic="k8s-Operator.topic"/>
+        </toc-element>
         <toc-element topic="k8s-security.topic">
           <toc-element topic="k8s-security-Access-Control.topic"/>
       </toc-element>

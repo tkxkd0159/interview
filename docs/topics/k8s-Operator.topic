@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Operator" id="k8s-Operator">
+
+  <p>
+    An <i>Operator</i> is a pattern for extending the Kubernetes API and make use of custom resources to manage applications and their
+    components. It includes one or more custom resources and a controller which manages those resources. The Operator pattern aims to
+    capture the key aim of a human operator who is managing a service or set of services.
+    In essence, an Operator is a way of building a custom controller and packaging it with the <i>CRDs (Custom Resource Definitions)</i>
+    that the controller watches. It's a higher level concept that uses controllers as building blocks.
+  </p>
+  <p>
+    For example, a Prometheus Operator creates, configures, and manages Prometheus monitoring instances. It
+    includes a custom resource (the Prometheus server) and a custom controller. The controller watches for changes to Prometheus
+    custom resources, then creates, updates, or deletes Prometheus instances as needed.
+  </p>
+
+  <chapter title="Controller Pattern" id="controller_pattern">
+    <p>
+      Controllers are control loops that watch the state of your cluster, then make or request changes where needed. Each controller tries
+      to move the current cluster state(<code>status</code> closer to the desired state(<code>spec</code>.
+    </p>
+
+    <tabs>
+      <tab title="Control via API server" id="control-via-api-server">
+        <p>
+          Controllers manage state by interacting with the cluster API server. The Job controller is an example of a Kubernetes built-in
+          controller. Built-in controllers manage state by interacting with the cluster API server.
+        </p>
+        <p>
+          When the Job controller sees a new task it makes sure that, somewhere in your cluster, the kubelets on a set of Nodes are running
+          the right number of Pods to get the work done. The Job controller does not run any Pods or containers itself. Instead, the Job
+          controller tells the API server to create or remove Pods. Other components in the control plane act on the new information (there
+          are new Pods to schedule and run), and eventually the work is done.
+        </p>
+      </tab>
+      <tab title="Direct control" id="direct-control">
+        <p>
+          Some controllers need to make changes to things outside your cluster. For example, if you use a control loop to make sure there
+          are enough Nodes in your cluster, then that controller needs something outside the current cluster to set up new Nodes when
+          needed. The important point here is that the controller makes some changes to bring about your desired state, and then reports the
+          current state back to your cluster's API server. Other control loops can observe that reported data and take their own actions.
+        </p>
+      </tab>
+    </tabs>
+
+    <chapter title="client-go under the hood" id="client_go_under_the_hood">
+      <img src="$WRS_MODULE$/images/devops/k8s-client-go.png" alt="client-go" width="736"/>
+      <list>
+        <li>
+          <b>Reflector</b>: A reflector, which is defined in type Reflector inside package cache, watches the Kubernetes API for the specified
+          resource type (kind). The function in which this is done is <i>ListAndWatch</i>. The watch could be for an in-built resource, or it could
+          be for a custom resource. When the reflector receives notification about existence of new resource instance through the watch API,
+          it gets the newly created object using the corresponding listing API and puts it in the Delta Fifo queue inside the watchHandler
+          function.
+        </li>
+        <li>
+          <b>Informer</b>: An informer defined in the base controller inside package cache pops objects from the Delta Fifo queue. The function in
+          which this is done is <i>processLoop</i>. The job of this base controller is to save the object for later retrieval, and to invoke our
+          controller passing it the object.
+        </li>
+        <li>
+          <b>Indexer</b>: An indexer provides indexing functionality over objects. It is defined in type Indexer inside package cache. A typical
+          indexing use-case is to create an index based on object labels. Indexer can maintain indexes based on several indexing functions.
+          Indexer uses a thread-safe data store to store objects and their keys. There is a default function named <i>MetaNamespaceKeyFunc</i>
+          defined in type Store inside package cache that generates an object’s key as <code><![CDATA[<namespace>/<name>]]></code>
+          combination for that object.
+        </li>
+      </list>
+    </chapter>
+  </chapter>
+</topic>
