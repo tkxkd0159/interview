@@ -245,6 +245,9 @@
         You can also control how and when garbage collection deletes resources that have owner references using Kubernetes <a
         href="https://kubernetes.io/docs/concepts/overview/working-with-objects/finalizers/">finalizers</a>.
       </p>
+      <p>
+        There are three standrad finalizers in k8s: <code>orphan</code>, <code>foregroundDeletion</code>, and <code>kubernetes</code>. Custom finalizer format must be like <code>domain.like/my-finalizer</code>
+      </p>
     </chapter>
   </chapter>
 
