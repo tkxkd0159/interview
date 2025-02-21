@@ -3,7 +3,8 @@
   SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
 <topic id="Kubernetes"
        title="Kubernetes"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd">
 
   <show-structure depth="2" for="chapter"/>
   <chapter id="architecture" title="Architecture">
@@ -145,7 +146,8 @@
         <li><b>kube-proxy</b>: A network proxy that runs on each node in the cluster. It maintains network rules on nodes, allowing network
           communication to your Pods from network sessions inside or outside your cluster.
         </li>
-        <li><b><a href="https://kubernetes.io/docs/setup/production-environment/container-runtimes/">Container runtime</a></b>: The software that is responsible for running containers. Kubernetes supports several container
+        <li><b><a href="https://kubernetes.io/docs/setup/production-environment/container-runtimes/">Container runtime</a></b>: The software
+          that is responsible for running containers. Kubernetes supports several container
           runtimes,
           including Docker, containerd, and CRI-O.
         </li>
@@ -214,6 +216,20 @@
 
   <chapter id="objects" title="Objects">
     <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/">Objects In Kubernetes</a>
+
+    <list>
+      <li>
+        <code>resourceVersion</code>: a string that identifies the internal version of this object that can be used by clients to determine when objects have changed. It increases every time a resource object is modified, whether through an update or patch operation. This value MUST be treated as <b>opaque</b> by clients and passed unmodified back to the server (Read-only). Clients should not assume that the resource version has meaning across namespaces, different kinds of resources, or different servers.
+      </li>
+      <li>
+        <code>generation</code>: a sequence number representing a specific generation of the desired state. Any changes to the <code>spec</code>
+        increment the generation. Any changes to the <code>status</code> should reflect the generation of the corresponding object. So, many
+        resources introduce an <code>observedGeneration</code> in their <code>status</code> to track most recent generation observed by the
+        controller.
+      </li>
+      <li><code>creationTimestamp</code>: RFC3339 date(e.g. 2006-01-02T15:04:05Z07:00) an object was created.</li>
+      <li><code>deletionTimestamp</code>: RFC3339 date an object will be deleted.</li>
+    </list>
 
     <chapter id="label_selector_" title="Label(+Selector)">
       <p>
@@ -367,13 +383,13 @@ guestbook-redis-replica-qgazl
 
   <seealso>
     <category ref="external">
+      <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md">k8s API
+        Conventions</a>
+      <a href="https://kubernetes.io/docs/concepts/">k8s Concepts</a>
       <a href="https://www.notion.so/ljswiki/Production-cluster-setup-153eacd3298d80ba8d20f92c5b42d6c5">
         k8s cluter setup
       </a>
-      <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md">k8s API
-        Conventions</a>
       <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/">k8s API Reference</a>
-      <a href="https://kubernetes.io/docs/concepts/">k8s Concepts</a>
     </category>
   </seealso>
 </topic>
