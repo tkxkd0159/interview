@@ -212,6 +212,40 @@
         and one run of this loop is a <b>reconciliation loop</b> or <b>reconciliation run</b>.
       </p>
     </chapter>
+
+    <chapter title="Garbage Collection" id="garbage_collection">
+      <p>
+        Kubernetes checks for and deletes objects that no longer have owner references, like the pods left behind when you delete a
+        ReplicaSet. When you delete an object, you can control whether Kubernetes deletes the object's dependents automatically (a.k.a.
+        cascading deletion). In other words, you can choose <code>PropagationPolicy</code> when you delete a k8s resource. If you select
+        <code>Orphan</code>, k8s API server set <code>orphan</code> finalizer. So, k8s garbage collector will not remove the dependents even
+        if the owner is removed. Also, There are two types of cascading deletion:
+      </p>
+      <list>
+        <li>
+          <p>
+            Foreground cascading deletion: If you select <code>Foreground</code>, k8s API server set metadata.deletionTimestamp and <code>foregroundDeletion</code>
+            finalizer. And then, the controller deletes dependents it knows about. <b>After deleting all the dependent objects it knows
+            about</b>, the controller deletes the owner object.
+          </p>
+          <p>
+            Please note that all dependents must set <code>ownerReference.blockOwnerDeletion=true</code> for successful foreground cascading
+            deletion. If not, the owner can be deleted while garbage collection controller is removing its dependents.
+          </p>
+        </li>
+        <li>
+          <p>
+            Background cascading deletion (default): If you select <code>Background</code>, k8s API server deletes the owner object
+            immediately and garbage collector controller cleans up the dependent objects in the background. If a finalizer exists, it
+            ensures that objects are not deleted until all necessary clean-up tasks are completed.
+          </p>
+        </li>
+      </list>
+      <p>
+        You can also control how and when garbage collection deletes resources that have owner references using Kubernetes <a
+        href="https://kubernetes.io/docs/concepts/overview/working-with-objects/finalizers/">finalizers</a>.
+      </p>
+    </chapter>
   </chapter>
 
   <chapter id="objects" title="Objects">
@@ -219,10 +253,14 @@
 
     <list>
       <li>
-        <code>resourceVersion</code>: a string that identifies the internal version of this object that can be used by clients to determine when objects have changed. It increases every time a resource object is modified, whether through an update or patch operation. This value MUST be treated as <b>opaque</b> by clients and passed unmodified back to the server (Read-only). Clients should not assume that the resource version has meaning across namespaces, different kinds of resources, or different servers.
+        <code>resourceVersion</code>: a string that identifies the internal version of this object that can be used by clients to determine
+        when objects have changed. It increases every time a resource object is modified, whether through an update or patch operation. This
+        value MUST be treated as <b>opaque</b> by clients and passed unmodified back to the server (Read-only). Clients should not assume
+        that the resource version has meaning across namespaces, different kinds of resources, or different servers.
       </li>
       <li>
-        <code>generation</code>: a sequence number representing a specific generation of the desired state. Any changes to the <code>spec</code>
+        <code>generation</code>: a sequence number representing a specific generation of the desired state. Any changes to the
+        <code>spec</code>
         increment the generation. Any changes to the <code>status</code> should reflect the generation of the corresponding object. So, many
         resources introduce an <code>observedGeneration</code> in their <code>status</code> to track most recent generation observed by the
         controller.
