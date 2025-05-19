@@ -79,8 +79,8 @@
         <li>Orchestration - an orchestrator (object) tells the participants what local transactions to execute</li>
       </list>
 
-      <img src="$WRS_MODULE$/images/dev/msa/saga-chore.png" alt=""/>
-      <img src="$WRS_MODULE$/images/dev/msa/saga-orche.png" alt=""/>
+      <img src="$WRS_MODULE$/images/dev/msa/saga-chore.png" alt="choreography-based saga"/>
+      <img src="$WRS_MODULE$/images/dev/msa/saga-orche.png" alt="orchestration-based saga"/>
     </chapter>
 
     <chapter title="2PC" id="2_pc">
