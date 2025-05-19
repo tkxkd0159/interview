@@ -164,6 +164,77 @@
                 </code-block>
       </chapter>
     </chapter>
+
+    <chapter title="Configuration" id="configuration">
+      <chapter title="ConfigMap" id="config_map">
+        tbu
+      </chapter>
+
+      <chapter title="Secret" id="secret">
+        <note>
+          A container using a Secret as a subPath volume mount does not receive automated Secret updates.
+        </note>
+        <code-block lang="yaml" collapsible="true" collapsed-title="multiple secret files in a Secret">
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-secret
+  namespace: default
+data:
+  config.json: >-
+    eyJ3aWRnZXQiOiB7CiAgICAiZGVidWciOiAib24iLAogICAgIndpbmRvdyI6IHsKICAgICAgICAidGl0bGUiOiAiU2FtcGxlIEtvbmZhYnVsYXRvciBXaWRnZXQiLAogICAgICAgICJuYW1lIjogIm1haW5fd2luZG93IiwKICAgICAgICAid2lkdGgiOiA1MDAsCiAgICAgICAgImhlaWdodCI6IDUwMAogICAgfSwKICAgICJpbWFnZSI6IHsgCiAgICAgICAgInNyYyI6ICJJbWFnZXMvU3VuLnBuZyIsCiAgICAgICAgIm5hbWUiOiAic3VuMSIsCiAgICAgICAgImhPZmZzZXQiOiAyNTAsCiAgICAgICAgInZPZmZzZXQiOiAyNTAsCiAgICAgICAgImFsaWdubWVudCI6ICJjZW50ZXIiCiAgICB9LAogICAgInRleHQiOiB7CiAgICAgICAgImRhdGEiOiAiQ2xpY2sgSGVyZSIsCiAgICAgICAgInNpemUiOiAzNiwKICAgICAgICAic3R5bGUiOiAiYm9sZCIsCiAgICAgICAgIm5hbWUiOiAidGV4dDEiLAogICAgICAgICJoT2Zmc2V0IjogMjUwLAogICAgICAgICJ2T2Zmc2V0IjogMTAwLAogICAgICAgICJhbGlnbm1lbnQiOiAiY2VudGVyIiwKICAgICAgICAib25Nb3VzZVVwIjogInN1bjEub3BhY2l0eSA9IChzdW4xLm9wYWNpdHkgLyAxMDApICogOTA7IgogICAgfQp9fQo=
+  mycert.pem: QkFTRTY0X0VOQ09ERURfQ0VSVElGSUNBVEVfREFUQQo=
+  mykey.pem: QkFTRTY0X0VOQ09ERURfQ0VSVElGSUNBVEVfREFUQTEK
+type: Opaque
+        </code-block>
+
+        <p>
+          The secret above can be mounted as follows:
+        </p>
+        <code>config.json</code>, <code>mycert.pem</code>, <code>mykey.pem</code> are located in <code>/etc/config</code>
+        <code-block lang="yaml" collapsible="true" collapsed-title="Mount all at once">
+spec:
+  containers:
+    - name: app-container
+      image: my-app-image
+      volumeMounts:
+        - name: cert-volume
+          mountPath: /etc/config
+  volumes:
+    - name: cert-volume
+      secret:
+        secretName: my-secret
+        </code-block>
+
+        Each secret data field(subPath) is located in specific <code>mountPath</code>
+        <code-block lang="yaml" collapsible="true" collapsed-title="Mount seperately">
+spec:
+  containers:
+    - name: app-container
+      image: my-app-image
+      volumeMounts:
+        - name: cert-volume
+          mountPath: /etc/ssl/certs/mycert.pem
+          subPath: mycert.pem
+        - name: cert-volume
+          mountPath: /etc/ssl/certs/mykey.pem
+          subPath: mykey.pem
+        - name: cert-volume
+          mountPath: /etc/config/config.json
+          subPath: config.json
+  volumes:
+    - name: cert-volume
+      secret:
+        secretName: my-secret
+        </code-block>
+      </chapter>
+
+      <chapter title="Resource Management" id="resource_management">
+        <p>
+          <code>requests</code> and <code>limits</code> for cpu, memory, hugepages
+        </p>
+      </chapter>
+    </chapter>
   </chapter>
 
   <chapter id="workload_management" title="Workload Management">
