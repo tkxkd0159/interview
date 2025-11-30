@@ -12,6 +12,7 @@
     - [ ] Algorithms 4th (2011)
 * Platforms
     * [Hello Interview](https://www.hellointerview.com/) : System Design
+    * [ByteByteGo 101](https://bytebytego.com/exercises/coding-patterns) 
     * [Algo Expert](https://www.algoexpert.io/product) : USA - $119
     * [LeetCode](https://leetcode.com/) : USA
       * [Leetcode 75](https://leetcode.com/studyplan/leetcode-75/) 
@@ -20,10 +21,10 @@
         * [Ref](https://www.techinterviewhandbook.org/grind75?weeks=26&hours=40) 
       * [Neetcode 150](https://neetcode.io/)
       * [SQL 45](https://leetcode.com/problem-list/o2qifkts/)
+    * [Educative 99](https://www.educative.io/path/educative-99-in-java-accelerate-your-coding-interview-prep) 
     * [Interview Cake](https://www.interviewcake.com/) : USA
     * [AlgoMonster](https://algo.monster/?sscid=11k8_6n0eu&) : Canada
     * [InterviewBit](https://www.interviewbit.com/) : India
-    * [NeetCode](https://neetcode.io/) : subset of LeetCode
     * [Grokking the Coding Interview: Patterns for Coding Questions](https://www.designgurus.io/course/grokking-the-coding-interview?aff=kJSIoU)
       
 
