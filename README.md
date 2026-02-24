@@ -51,7 +51,7 @@
 - [ ] System Design Interview – An insider's guide (2020)
 - [ ] System Design Interview – An Insider's Guide: Volume 2 (2022)
 - [ ] Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems 1st (2017)
-- [ ] [Most Popular System Design Questions](https://medium.com/coders-mojo/most-popular-system-design-questions-mega-compilation-45218129fe26)
+- [ ] [Most Popular System Design Questions](https://www.systemdesignhandbook.com/system-design-interview-handbook/)
 
 ------
 
